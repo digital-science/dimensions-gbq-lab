@@ -1,6 +1,7 @@
 #standardSQL
 -- [Title:Find journals with title matching a string value]
 -- [Desc:]
+-- [Tags:journal, publisher, text-search]
 
 SELECT
     DISTINCT journal.id,

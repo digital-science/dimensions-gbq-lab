@@ -2,7 +2,7 @@
 
 -- [Title:Statistics about publications with corresponding authors, segmented by publisher]
 -- [Desc:]
-
+-- [Tags:corresponding-authors, publisher]
 
 SELECT
     count(DISTINCT id) AS tot,

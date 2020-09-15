@@ -1,6 +1,7 @@
 #standardSQL
 -- [Title:Journal funding sources and number of grants]
 -- [Desc:]
+-- [Tags:journal, funding]
 
 WITH funding AS (
     SELECT
