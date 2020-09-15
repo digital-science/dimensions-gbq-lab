@@ -28,7 +28,9 @@ For a detailed breakdown of the Dimensions API language, see the [API documentat
 
 ## Running the examples
 
-Try this:
+You can copy/paste the queries directly in the [GBQ console](https://cloud.google.com/bigquery/docs/bigquery-web-ui). 
+
+Alternatively, after installing the [bq tool](https://cloud.google.com/bigquery/docs/quickstarts/quickstart-command-line) you can run them directly from the command line:
 
 ```
 bq query --flagfile=[your file with absolute path]
