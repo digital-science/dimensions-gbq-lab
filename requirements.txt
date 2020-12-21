@@ -1,0 +1,9 @@
+ipython
+jupyter
+jupyterlab
+dimcli
+plotly
+google-cloud-bigquery
+pandas
+pandas-gbq
+tqdm 
