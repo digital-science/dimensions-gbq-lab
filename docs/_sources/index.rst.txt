@@ -1,0 +1,49 @@
+.. Dimensions GBQ Lab documentation master file.
+
+.. image:: _static/img/dimensions-header-image-jupyter.png
+   :width: 100%
+   :alt: Dimensions GBQ Homepage https://www.dimensions.ai/products/bigquery/
+   :target: #
+
+
+Welcome to the Dimensions BigQuery Lab!
+==============================================
+
+This site contains a collection of `open source <https://github.com/digital-science/dimensions-gbq-lab>`_  Jupyter notebooks showing how to carry out common research data analytics tasks using `Dimensions on Google BigQuery <https://www.dimensions.ai/products/bigquery/>`_.
+
+
+.. note::
+  The Dimensions on Google BigQuery product is **subscription-only**, so your Dimensions account needs to be activated for this service and is subject to restrictions on use. Please get in touch to discuss the best option for you how to get access. For one-off academic research projects we can also grant free access to our APIs. `Contact us <https://www.dimensions.ai/contact-us/>`_ 
+
+
+
+
+BigQuery Cookbooks
+========================
+
+
+.. toctree::
+   :caption: Getting Started
+   :maxdepth: 1
+   :glob:
+
+   cookbooks/1-getting-started/1-Verifying-your-connection.ipynb
+
+
+
+
+Finding Out More
+==================
+
+Find out more about Dimensions on BigQuery with the following resources:
+
+* The `Dimensions on BigQuery official documentation <https://docs.dimensions.ai/bigquery/index.html>`_ is a must-read if you want to become an GBQ guru. 
+* The `GBQ Lab Github repository <https://github.com/digital-science/dimensions-gbq-lab>`_ contains the source code for all the notebooks on this website, and more.  
+* The `Dimensions BigQuery homepage <https://www.dimensions.ai/products/bigquery/>`_  is the place to start from if you've never heard about Dimensions on GBQ.
+
+
+Changelog
+==================
+
+See the `CHANGELOG.md <https://github.com/digital-science/dimensions-gbq-lab/blob/master/CHANGELOG.md>`_ file on Github. 
+

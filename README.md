@@ -2,12 +2,12 @@
 
 This GitHub repository contains code samples and reusable **Jupyter notebooks** for scholarly data analytics using the [Dimensions on Google BigQuery](https://www.dimensions.ai/products/bigquery/).
 
-A companion website including [browsable HTML versions of these tutorials](https://digital-science.github.io/dimensions-bigquery-lab/) is also available. 
+A companion website including [browsable HTML versions of these tutorials](https://digital-science.github.io/dimensions-gbq-lab/) is also available. 
 
 Note: please use the notebooks in the `cookbook` folder for up-to-date examples and templates (see below for more details).
 
 [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/digital-science/dimensions-bigquery-lab/master) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/digital-science/dimensions-bigquery-lab/)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/digital-science/dimensions-gbq-lab/master) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/digital-science/dimensions-gbq-lab/)
 
  
 ## Background
@@ -44,8 +44,8 @@ If you are already familiar with Python and Jupyter, then you probably know what
 
 There are two main folders:
 
-* The [cookbooks](https://github.com/digital-science/dimensions-bigquery-lab/tree/master/cookbooks) folder contains the **latest version** of notebooks providing reusable, simple solutions to common scholarly analytics problems. The notebooks in this folder are regularly tested and kept up to date. If any of these do not work, please [open an issue](https://github.com/digital-science/dimensions-bigquery-lab/issues/new) to let us know. 
-* The [archive](https://github.com/digital-science/dimensions-bigquery-lab/tree/master/archive) folder contains **historical copies** of notebooks used for workshops and tutorials. Most often, these are customized versions of the generic notebook templates (in the `cookbooks` folder), adapted for a specific institution or audience. Please note that the notebooks in this folder are simply *archived* for future reference and **not maintained** afterwards. So use the materials in the `cookbooks` folder for up to date examples and reusable templates.
+* The [cookbooks](https://github.com/digital-science/dimensions-gbq-lab/tree/master/cookbooks) folder contains the **latest version** of notebooks providing reusable, simple solutions to common scholarly analytics problems. The notebooks in this folder are regularly tested and kept up to date. If any of these do not work, please [open an issue](https://github.com/digital-science/dimensions-gbq-lab/issues/new) to let us know. 
+* The [archive](https://github.com/digital-science/dimensions-gbq-lab/tree/master/archive) folder contains **historical copies** of notebooks used for workshops and tutorials. Most often, these are customized versions of the generic notebook templates (in the `cookbooks` folder), adapted for a specific institution or audience. Please note that the notebooks in this folder are simply *archived* for future reference and **not maintained** afterwards. So use the materials in the `cookbooks` folder for up to date examples and reusable templates.
 
 
 ### Using Google Colab
@@ -54,12 +54,12 @@ There are two main folders:
 
 By using Google Colab on can write and execute code, save and share your analyses, and access powerful computing resources, all for free from your browser.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/digital-science/dimensions-bigquery-lab/)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/digital-science/dimensions-gbq-lab/)
 
 
 ## Comments, bug reports
 
-This project lives on [Github](https://github.com/digital-science/dimensions-bigquery-lab). You can file [issues]([issues](https://github.com/digital-science/dimensions-bigquery-lab/issues/new)) or ask questions there. Suggestions and improvements welcome!
+This project lives on [Github](https://github.com/digital-science/dimensions-gbq-lab). You can file [issues]([issues](https://github.com/digital-science/dimensions-gbq-lab/issues/new)) or ask questions there. Suggestions and improvements welcome!
 
 
 ## See also
