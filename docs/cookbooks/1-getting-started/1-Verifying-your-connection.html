@@ -105,13 +105,13 @@
               <p class="caption"><span class="caption-text">Getting Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Verifying your connection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#A.-Choosing-what-connection-method-to-use">A. Choosing what connection method to use</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#A.-Connection-methods">A. Connection methods</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Option-1:-Connecting-using-Google-Colaboratory">Option 1: Connecting using Google Colaboratory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Option-2:-Connecting-using-a-Google-user-account">Option 2: Connecting using a Google user account</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Option-3:-Connecting-using-a-Service-Account">Option 3: Connecting using a Service Account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Option-2:-Connecting-using-Jupyter-and-a-User-account">Option 2: Connecting using Jupyter and a User account</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Option-3:-Connecting-using-a-Jupyter-and-a-Service-account">Option 3: Connecting using a Jupyter and a Service account</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#B.-Let’s-try-to-run-some-queries">B. Let’s try to run some queries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#B.-Running-queries">B. Running queries</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Using-the-BigQuery-magic-command-and-dynamic-parameters">Using the BigQuery magic command and dynamic parameters</a></li>
 </ul>
 </li>
@@ -455,8 +455,8 @@ div.rendered_html tbody tr:hover {
 <li><p>You have a valid Dimensions on Google BigQuery <a class="reference external" href="https://www.dimensions.ai/products/bigquery/">account</a></p></li>
 <li><p>You have configured your Google Cloud Platform environment (see the <a class="reference external" href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">official docs</a> on how to do that)</p></li>
 </ul>
-<div class="section" id="A.-Choosing-what-connection-method-to-use">
-<h2>A. Choosing what connection method to use<a class="headerlink" href="#A.-Choosing-what-connection-method-to-use" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="A.-Connection-methods">
+<h2>A. Connection methods<a class="headerlink" href="#A.-Connection-methods" title="Permalink to this headline">¶</a></h2>
 <p>There are a few options available:</p>
 <ol class="arabic simple">
 <li><p><strong>Use Google Colaboratory and your personal credentials.</strong> This option is the simplest of all, as it doesn’t require you to install anything on your computer. It is normally ok for small to mid-sized projects that can live in the cloud.</p></li>
@@ -495,8 +495,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
-<div class="section" id="Option-2:-Connecting-using-a-Google-user-account">
-<h3>Option 2: Connecting using a Google user account<a class="headerlink" href="#Option-2:-Connecting-using-a-Google-user-account" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Option-2:-Connecting-using-Jupyter-and-a-User-account">
+<h3>Option 2: Connecting using Jupyter and a User account<a class="headerlink" href="#Option-2:-Connecting-using-Jupyter-and-a-User-account" title="Permalink to this headline">¶</a></h3>
 <p>A Google Account represents a developer, an administrator, or any other person who interacts with Google Cloud. This is normally the Google account one has used to get access to the Dimensions on BigQuery product.</p>
 <p>In order to configure programmatic access for local development, the easiest way is to authenticate using the <a class="reference external" href="https://googleapis.dev/python/google-api-core/latest/auth.html">Google Cloud SDK</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gcloud auth application-default login
@@ -527,8 +527,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
-<div class="section" id="Option-3:-Connecting-using-a-Service-Account">
-<h3>Option 3: Connecting using a Service Account<a class="headerlink" href="#Option-3:-Connecting-using-a-Service-Account" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Option-3:-Connecting-using-a-Jupyter-and-a-Service-account">
+<h3>Option 3: Connecting using a Jupyter and a Service account<a class="headerlink" href="#Option-3:-Connecting-using-a-Jupyter-and-a-Service-account" title="Permalink to this headline">¶</a></h3>
 <p>A <a class="reference external" href="https://cloud.google.com/iam/docs/service-accounts">service account</a> is a special kind of account used by an application or a virtual machine (VM) instance, not a person.</p>
 <p>Each service account is associated with two sets of public/private RSA key pairs that are used to authenticate to Google: Google-managed keys, and user-managed keys.</p>
 <p>When using a service account you’d just have to point your client object to the a key file.</p>
@@ -548,8 +548,8 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </div>
-<div class="section" id="B.-Let’s-try-to-run-some-queries">
-<h2>B. Let’s try to run some queries<a class="headerlink" href="#B.-Let’s-try-to-run-some-queries" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="B.-Running-queries">
+<h2>B. Running queries<a class="headerlink" href="#B.-Running-queries" title="Permalink to this headline">¶</a></h2>
 <p>Once the connection is set up, all you have to do is to type in a SQL query and run it using the <code class="docutils literal notranslate"><span class="pre">client</span></code> object.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:

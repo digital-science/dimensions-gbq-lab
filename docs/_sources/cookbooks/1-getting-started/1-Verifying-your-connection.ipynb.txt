@@ -22,7 +22,7 @@
     "Collapsed": "false"
    },
    "source": [
-    "## A. Choosing what connection method to use\n",
+    "## A. Connection methods\n",
     "\n",
     "There are a few options available: \n",
     "\n",
@@ -82,7 +82,7 @@
     "Collapsed": "false"
    },
    "source": [
-    "### Option 2: Connecting using a Google user account\n",
+    "### Option 2: Connecting using Jupyter and a User account\n",
     "\n",
     "A Google Account represents a developer, an administrator, or any other person who interacts with Google Cloud. \n",
     "This is normally the Google account one has used to get access to the Dimensions on BigQuery product. \n",
@@ -129,7 +129,7 @@
     "Collapsed": "false"
    },
    "source": [
-    "### Option 3: Connecting using a Service Account\n",
+    "### Option 3: Connecting using a Jupyter and a Service account\n",
     "\n",
     "A [service account](https://cloud.google.com/iam/docs/service-accounts) is a special kind of account used by an application or a virtual machine (VM) instance, not a person. \n",
     "\n",
@@ -160,7 +160,7 @@
     "Collapsed": "false"
    },
    "source": [
-    "## B. Let's try to run some queries\n",
+    "## B. Running queries\n",
     "\n",
     "Once the connection is set up, all you have to do is to type in a SQL query and run it using the `client` object."
    ]
