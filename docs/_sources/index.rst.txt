@@ -27,7 +27,8 @@ BigQuery Cookbooks
    :maxdepth: 1
    :glob:
 
-   cookbooks/1-getting-started/1-Verifying-your-connection.ipynb
+   cookbooks/1-Verifying-your-connection.ipynb
+   cookbooks/2-Publications-queries.ipynb
 
 
 
