@@ -121,30 +121,38 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Publication queries</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#Prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Top-publications-by-Altmetric-score-and-research-organization">1. Top publications by Altmetric score and research organization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#2.-Working-with-Publications-dates">2. Working with Publications dates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#1.-Working-with-Publications-dates">1. Working with Publications dates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Comparing-date-fields">Comparing date fields</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Number-of-publications-added-to-Dimensions-by-month">Number of publications added to Dimensions by month</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#2.-Working-with-NESTED-fields">2. Working with NESTED fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#3.-Generate-a-list-of-publication-authors-by-flattening/concatenating-nested-data">3. Generate a list of publication authors by flattening/concatenating nested data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#4.-Generate-a-list-of-publication-categories-by-flattening/concatenating-nested-data">4. Generate a list of publication categories by flattening/concatenating nested data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#5.-Number-of-publications-per-SDG-category">5. Number of publications per SDG category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#6.-Publications-count-per-FoR-category,-total-and-percentage-against-total">6. Publications count per FoR category, total and percentage against total</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#7.-Finding-Journals-using-string-matching">7. Finding Journals using string matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#8.-Finding-articles-matching-a-specific-affiliation-string">8. Finding articles matching a specific affiliation string</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#8.1-Variant:-get-unique-publication-records-with-affiliation-count">8.1 Variant: get unique publication records with affiliation count</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#9.-Select-publications-matching-selected-concepts">9. Select publications matching selected concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#10.-Count-of-corresponding-authors-by-publisher">10. Count of corresponding authors by publisher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#11.-Counting-new-vs-recurring-authors,-for-a-specific-journal">11. Counting new vs recurring authors, for a specific journal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Citations-queries">Citations queries</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Top-N-publications-by-citations-percentile">Top N publications by citations percentile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Citations-by-journal,-for-a-specific-publisher">Citations by journal, for a specific publisher</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">Researchers related to a selected GRID and category [REVIEW]</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Generate-list-of-authors-for-a-publication-by-flattening/concatenating">Generate list of authors for a publication by flattening/concatenating</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Generate-list-of-categories-for-a-publication-by-flattening/concatenating">Generate list of categories for a publication by flattening/concatenating</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#One-degree-citation-network-for-a-single-publication">One-degree citation network for a single publication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Publications-per-category,-total-and-percentage-against-total">Publications per category, total and percentage against total</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Heads-up---about-UNNEST">Heads up - about UNNEST</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Find-articles-mathcing-a-specific-affiliation-string">Find articles mathcing a specific affiliation string</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Publications-with-corresponding-authors-by-publisher">Publications with corresponding authors by publisher</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Funding-by-journal">Funding by journal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Articles-with-SDGs">Articles with SDGs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Journals-with-LIKE-string-matching">Journals with LIKE string matching</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#New-vs-recurring-authors,-for-a-specific-journal">New vs recurring authors, for a specific journal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#incoming-citations-for-a-journal">incoming citations for a journal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Outgoing-citations-to-a-journal">Outgoing citations to a journal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Concepts:-select-publications-matching-selected-concepts">Concepts: select publications matching selected concepts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#REVIEW-REVIEW-REVIEW">REVIEW REVIEW REVIEW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">Researchers related to a selected GRID and category [REVIEW]</a></li>
 </ul>
 </li>
 </ul>
@@ -483,7 +491,8 @@ div.rendered_html tbody tr:hover {
 <p>For more background, see also the <a class="reference external" href="https://docs.dimensions.ai/bigquery/datasource-publications.html">publications data model</a>.</p>
 <div class="section" id="Prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#Prerequisites" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial assumed that you have access to Dimensions on Google BigQuery and are familiar with the <a class="reference external" href="https://digital-science.github.io/dimensions-gbq-lab/cookbooks/1-Verifying-your-connection.html">Verifying your connection</a> notebook. If so, run the following code to authenticate and load the Python bigquery library.</p>
+<p>This notebook assumes that you have <a class="reference external" href="https://digital-science.github.io/dimensions-gbq-lab/cookbooks/1-Verifying-your-connection.html">verifed your connection</a> to Dimensions on Google BigQuery and have basic familiarity with the <a class="reference external" href="https://docs.dimensions.ai/bigquery/gcp-setup.html">Google Cloud Platform</a> concepts.</p>
+<p>The following code will load the Python BigQuery library and authenticate you as a valid user.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -642,26 +651,36 @@ Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  1.99rows
 </div></div>
 </div>
 </div>
-<div class="section" id="2.-Working-with-Publications-dates">
-<h2>2. Working with Publications dates<a class="headerlink" href="#2.-Working-with-Publications-dates" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="1.-Working-with-Publications-dates">
+<h2>1. Working with Publications dates<a class="headerlink" href="#1.-Working-with-Publications-dates" title="Permalink to this headline">¶</a></h2>
 <p>Each publication has various dates available.</p>
 <ul class="simple">
-<li><p>date, year, date_normal, date_online, date_print refer to the publication object. See the <a class="reference external" href="https://docs.dimensions.ai/bigquery/datasource-publications.html">documentation</a> to find out more about their meaning.</p></li>
-<li><p>date_imported_gbq refers to when this record was last added to GBQ - this date can be handy if you want to synchronize an external data source to GBQ.</p></li>
-<li><p>date_inserted: this refers to when this records was originally added to Dimensions (if the records gets adjusted later, it doesn’t change).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date</span></code>, <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">date_normal</span></code>, <code class="docutils literal notranslate"><span class="pre">date_online</span></code>, <code class="docutils literal notranslate"><span class="pre">date_print</span></code> refer to the publication object. See the <a class="reference external" href="https://docs.dimensions.ai/bigquery/datasource-publications.html">documentation</a> to find out more about their meaning.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_imported_gbq</span></code> refers to when this record was last added to GBQ - this date can be handy if you want to synchronize an external data source to GBQ.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">date_inserted</span></code>: this refers to when this records was originally added to Dimensions (if the records gets adjusted later, it doesn’t change).</p></li>
 </ul>
+<div class="section" id="Comparing-date-fields">
+<h3>Comparing date fields<a class="headerlink" href="#Comparing-date-fields" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
 
-select doi, date, date_normal, year, date_online, date_print, date_imported_gbq, date_inserted
-from `dimensions-ai.data_analytics.publications`
-where year = 2010 and journal.id = &quot;jour.1115214&quot;
-order by citations_count desc
-limit 10
+SELECT doi,
+       date,
+       date_normal,
+       year,
+       date_online,
+       date_print,
+       date_imported_gbq,
+       date_inserted
+FROM   `dimensions-ai.data_analytics.publications`
+WHERE  year = 2010
+       AND journal.id = &quot;jour.1115214&quot;
+ORDER  BY citations_count DESC
+LIMIT  10
 </pre></div>
 </div>
 </div>
@@ -670,12 +689,12 @@ limit 10
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 2/2 [00:00&lt;00:00, 905.80query/s]
-Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.10rows/s]
+Query complete after 0.10s: 100%|██████████| 2/2 [00:00&lt;00:00, 859.84query/s]
+Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  3.86rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -822,10 +841,11 @@ Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.10ro
 </table>
 </div></div>
 </div>
+</div>
 <div class="section" id="Number-of-publications-added-to-Dimensions-by-month">
 <h3>Number of publications added to Dimensions by month<a class="headerlink" href="#Number-of-publications-added-to-Dimensions-by-month" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -850,12 +870,12 @@ LIMIT 5
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2546.63query/s]
-Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  1.99rows/s]
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 970.90query/s]
+Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  2.13rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -911,6 +931,1573 @@ Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  1.99rows
 </table>
 </div></div>
 </div>
+</div>
+</div>
+<div class="section" id="2.-Working-with-NESTED-fields">
+<h2>2. Working with NESTED fields<a class="headerlink" href="#2.-Working-with-NESTED-fields" title="Permalink to this headline">¶</a></h2>
+<p>UNNEST are implicit ‘cross-join’ queries, hence only records that have some value in the nested column are represented</p>
+<p>For example, the query below return less publications that then ones available, because only the ones with <code class="docutils literal notranslate"><span class="pre">research_org_country_names</span></code> are included (= cross join)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  COUNT(DISTINCT p.id) AS tot_articles
+FROM
+  `dimensions-ai.data_analytics.publications` p,
+  UNNEST(research_org_country_names) AS research_org_country_names
+WHERE
+  year = 2000
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2579.52query/s]
+Downloading: 100%|██████████| 1/1 [00:04&lt;00:00,  4.60s/rows]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tot_articles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1060342</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>As a test, we can run the query without the UNNEST clause</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  COUNT(DISTINCT p.id) AS tot_articles
+FROM
+  `dimensions-ai.data_analytics.publications` p
+WHERE
+  year = 2000
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2101.00query/s]
+Downloading: 100%|██████████| 1/1 [00:02&lt;00:00,  2.97s/rows]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tot_articles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1759389</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>So how can we get all the records out?</p>
+<p>If you want to get all records, then <strong>LEFT JOIN is the way to go</strong> in this case</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  COUNT(DISTINCT p.id) AS tot_articles
+FROM
+  `dimensions-ai.data_analytics.publications` p
+LEFT JOIN
+  UNNEST(research_org_country_names) AS research_org_country_names
+WHERE
+  year = 2000
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1364.45query/s]
+Downloading: 100%|██████████| 1/1 [00:02&lt;00:00,  2.56s/rows]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tot_articles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1759389</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="3.-Generate-a-list-of-publication-authors-by-flattening/concatenating-nested-data">
+<h2>3. Generate a list of publication authors by flattening/concatenating nested data<a class="headerlink" href="#3.-Generate-a-list-of-publication-authors-by-flattening/concatenating-nested-data" title="Permalink to this headline">¶</a></h2>
+<p>IE Flattening an array of objects into a string</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT p.id,
+       ARRAY_TO_STRING(
+       (
+              SELECT ARRAY
+                     (
+                            select CONCAT(first_name, &quot; &quot;, last_name)
+                            from   UNNEST(p.authors)) ), &#39;; &#39;) AS authors_list
+FROM   `dimensions-ai.data_analytics.publications` p
+WHERE  p.id = &#39;pub.1132070778&#39;
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 1/1 [00:00&lt;00:00, 680.67query/s]
+Downloading: 100%|██████████| 1/1 [00:02&lt;00:00,  2.53s/rows]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>authors_list</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1132070778</td>
+      <td>O Grånäs; A Mocellin; E S Cardoso; F Burmeiste...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="4.-Generate-a-list-of-publication-categories-by-flattening/concatenating-nested-data">
+<h2>4. Generate a list of publication categories by flattening/concatenating nested data<a class="headerlink" href="#4.-Generate-a-list-of-publication-categories-by-flattening/concatenating-nested-data" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT p.id,
+       ARRAY_TO_STRING(
+       (
+              SELECT ARRAY
+                     (
+                            SELECT name
+                            FROM   UNNEST(p.category_for.first_level.FULL)) ), &#39;; &#39;) AS categories_list
+FROM   `dimensions-ai.data_analytics.publications` p
+WHERE  p.id = &#39;pub.1132070778&#39;
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 1/1 [00:00&lt;00:00, 413.56query/s]
+Downloading: 100%|██████████| 1/1 [00:02&lt;00:00,  2.55s/rows]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>categories_list</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1132070778</td>
+      <td>Physical Sciences; Chemical Sciences</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="5.-Number-of-publications-per-SDG-category">
+<h2>5. Number of publications per SDG category<a class="headerlink" href="#5.-Number-of-publications-per-SDG-category" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  COUNT(DISTINCT p.id) AS tot,
+  sdg.name
+FROM `dimensions-ai.data_analytics.publications` p,
+  UNNEST(category_sdg.full) sdg
+GROUP BY sdg.name
+LIMIT
+  5
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 4/4 [00:00&lt;00:00, 2150.37query/s]
+Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  2.11rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tot</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>184789</td>
+      <td>Reduced Inequalities</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>610656</td>
+      <td>Quality Education</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>137256</td>
+      <td>Zero Hunger</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24975</td>
+      <td>Gender Equality</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11830</td>
+      <td>Partnerships for the Goals</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="6.-Publications-count-per-FoR-category,-total-and-percentage-against-total">
+<h2>6. Publications count per FoR category, total and percentage against total<a class="headerlink" href="#6.-Publications-count-per-FoR-category,-total-and-percentage-against-total" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  cat.name,
+  COUNT(DISTINCT p.id) AS pubs_global,
+  ROUND ((COUNT(DISTINCT p.id) * 100 /(
+      SELECT
+        COUNT(*)
+      FROM
+        `dimensions-ai.data_analytics.publications`)), 2 ) AS pubs_global_pc
+FROM
+  `dimensions-ai.data_analytics.publications` p,
+  UNNEST(category_for.first_level.full) cat
+GROUP BY
+  cat.name
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 5/5 [00:00&lt;00:00, 2593.56query/s]
+Downloading: 100%|██████████| 22/22 [00:02&lt;00:00,  9.38rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>pubs_global</th>
+      <th>pubs_global_pc</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Language, Communication and Culture</td>
+      <td>2494744</td>
+      <td>2.15</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Earth Sciences</td>
+      <td>2027739</td>
+      <td>1.75</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Agricultural and Veterinary Sciences</td>
+      <td>2085752</td>
+      <td>1.80</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Philosophy and Religious Studies</td>
+      <td>1662674</td>
+      <td>1.43</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Medical and Health Sciences</td>
+      <td>29853801</td>
+      <td>25.74</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Economics</td>
+      <td>1722795</td>
+      <td>1.49</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Commerce, Management, Tourism and Services</td>
+      <td>1792537</td>
+      <td>1.55</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>History and Archaeology</td>
+      <td>2333998</td>
+      <td>2.01</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Technology</td>
+      <td>1932511</td>
+      <td>1.67</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Biological Sciences</td>
+      <td>8922205</td>
+      <td>7.69</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Psychology and Cognitive Sciences</td>
+      <td>3822870</td>
+      <td>3.30</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Studies in Human Society</td>
+      <td>3362309</td>
+      <td>2.90</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Mathematical Sciences</td>
+      <td>4979926</td>
+      <td>4.29</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Environmental Sciences</td>
+      <td>1349369</td>
+      <td>1.16</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Studies in Creative Arts and Writing</td>
+      <td>639952</td>
+      <td>0.55</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Built Environment and Design</td>
+      <td>480440</td>
+      <td>0.41</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Chemical Sciences</td>
+      <td>7766182</td>
+      <td>6.70</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Law and Legal Studies</td>
+      <td>883855</td>
+      <td>0.76</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Information and Computing Sciences</td>
+      <td>5118832</td>
+      <td>4.41</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Physical Sciences</td>
+      <td>6092552</td>
+      <td>5.25</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Engineering</td>
+      <td>12168683</td>
+      <td>10.49</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Education</td>
+      <td>1804004</td>
+      <td>1.56</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="7.-Finding-Journals-using-string-matching">
+<h2>7. Finding Journals using string matching<a class="headerlink" href="#7.-Finding-Journals-using-string-matching" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT COUNT(*) AS pubs,
+  journal.id,
+  journal.title,
+  journal.issn,
+  journal.eissn,
+  publisher.name
+FROM
+  `dimensions-ai.data_analytics.publications`
+WHERE
+  LOWER( journal.title ) LIKE CONCAT(&#39;%medicine%&#39;)
+GROUP BY 2, 3, 4, 5, 6
+ORDER BY pubs DESC
+LIMIT 20
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1307.32query/s]
+Downloading: 100%|██████████| 20/20 [00:02&lt;00:00,  8.17rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pubs</th>
+      <th>id</th>
+      <th>title</th>
+      <th>issn</th>
+      <th>eissn</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>168620</td>
+      <td>jour.1014075</td>
+      <td>New England Journal of Medicine</td>
+      <td>0028-4793</td>
+      <td>1533-4406</td>
+      <td>Massachusetts Medical Society</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>83860</td>
+      <td>jour.1011551</td>
+      <td>Medicine &amp; Science in Sports &amp; Exercise</td>
+      <td>0195-9131</td>
+      <td>1530-0315</td>
+      <td>Wolters Kluwer</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>58617</td>
+      <td>jour.1017222</td>
+      <td>Annals of Internal Medicine</td>
+      <td>0003-4819</td>
+      <td>1539-3704</td>
+      <td>American College of Physicians</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>52792</td>
+      <td>jour.1312267</td>
+      <td>Journal of the Royal Society of Medicine</td>
+      <td>0141-0768</td>
+      <td>1758-1095</td>
+      <td>SAGE Publications</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>52248</td>
+      <td>jour.1017256</td>
+      <td>JAMA Internal Medicine</td>
+      <td>2168-6106</td>
+      <td>2168-6114</td>
+      <td>American Medical Association (AMA)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>47104</td>
+      <td>jour.1027092</td>
+      <td>Experimental Biology and Medicine</td>
+      <td>1535-3702</td>
+      <td>1535-3699</td>
+      <td>SAGE Publications</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>46274</td>
+      <td>jour.1016342</td>
+      <td>Critical Care Medicine</td>
+      <td>0090-3493</td>
+      <td>1530-0293</td>
+      <td>Wolters Kluwer</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>37632</td>
+      <td>jour.1057918</td>
+      <td>Journal of Molecular Medicine</td>
+      <td>0946-2716</td>
+      <td>1432-1440</td>
+      <td>Springer Nature</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>34891</td>
+      <td>jour.1017275</td>
+      <td>Arizona Medicine</td>
+      <td>0093-0415</td>
+      <td>1476-2978</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>31068</td>
+      <td>jour.1014535</td>
+      <td>The American Journal of Medicine</td>
+      <td>0002-9343</td>
+      <td>1555-7162</td>
+      <td>Elsevier</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>29708</td>
+      <td>jour.1017863</td>
+      <td>Oral Surgery Oral Medicine Oral Pathology and ...</td>
+      <td>2212-4403</td>
+      <td>2212-4411</td>
+      <td>Elsevier</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>28472</td>
+      <td>jour.1090935</td>
+      <td>Annals of Emergency Medicine</td>
+      <td>0196-0644</td>
+      <td>1097-6760</td>
+      <td>Elsevier</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>26224</td>
+      <td>jour.1077253</td>
+      <td>Medicine</td>
+      <td>0025-7974</td>
+      <td>1536-5964</td>
+      <td>Wolters Kluwer</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>25653</td>
+      <td>jour.1017316</td>
+      <td>Bulletin of Experimental Biology and Medicine</td>
+      <td>0007-4888</td>
+      <td>1573-8221</td>
+      <td>Springer Nature</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>24781</td>
+      <td>jour.1077126</td>
+      <td>Journal of Experimental Medicine</td>
+      <td>0022-1007</td>
+      <td>1540-9538</td>
+      <td>Rockefeller University Press</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>24339</td>
+      <td>jour.1319882</td>
+      <td>Journal of Internal Medicine</td>
+      <td>0954-6820</td>
+      <td>1365-2796</td>
+      <td>Wiley</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>23511</td>
+      <td>jour.1017748</td>
+      <td>Academic Medicine</td>
+      <td>1040-2446</td>
+      <td>1938-808X</td>
+      <td>Wolters Kluwer</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>22601</td>
+      <td>jour.1017031</td>
+      <td>American Journal of Respiratory and Critical C...</td>
+      <td>1073-449X</td>
+      <td>1535-4970</td>
+      <td>American Thoracic Society</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>22220</td>
+      <td>jour.1036793</td>
+      <td>Military Medicine</td>
+      <td>0026-4075</td>
+      <td>1930-613X</td>
+      <td>Oxford University Press (OUP)</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>21695</td>
+      <td>jour.1017021</td>
+      <td>American Journal of Tropical Medicine and Hygiene</td>
+      <td>0002-9637</td>
+      <td>1476-1645</td>
+      <td>American Society of Tropical Medicine and Hygiene</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="8.-Finding-articles-matching-a-specific-affiliation-string">
+<h2>8. Finding articles matching a specific affiliation string<a class="headerlink" href="#8.-Finding-articles-matching-a-specific-affiliation-string" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT id,
+       aff.grid_id,
+       aff.raw_affiliation
+FROM   `dimensions-ai.data_analytics.publications`,
+       UNNEST(authors) auth,
+       UNNEST(auth.affiliations_address) AS aff
+WHERE  year = 2020
+AND    aff.grid_id = &quot;grid.69566.3a&quot;
+AND    LOWER(aff.raw_affiliation) LIKE &quot;%school of medicine%&quot;
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 2/2 [00:00&lt;00:00, 758.74query/s]
+Downloading: 100%|██████████| 5920/5920 [00:02&lt;00:00, 2233.04rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>grid_id</th>
+      <th>raw_affiliation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1112041600</td>
+      <td>grid.69566.3a</td>
+      <td>5Department of Neurosurgery, Tohoku University...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1112041600</td>
+      <td>grid.69566.3a</td>
+      <td>6Division of Epidemiology, Department of Healt...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1117164397</td>
+      <td>grid.69566.3a</td>
+      <td>Division of Cardiovascular Surgery, Tohoku Uni...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1119863526</td>
+      <td>grid.69566.3a</td>
+      <td>Division of Emergency and Critical Care Medici...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1122526898</td>
+      <td>grid.69566.3a</td>
+      <td>Department of Neurological Science, Tohoku Uni...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>5915</th>
+      <td>pub.1128974183</td>
+      <td>grid.69566.3a</td>
+      <td>Department of Organ Anatomy, Tohoku University...</td>
+    </tr>
+    <tr>
+      <th>5916</th>
+      <td>pub.1128974183</td>
+      <td>grid.69566.3a</td>
+      <td>Department of Organ Anatomy, Tohoku University...</td>
+    </tr>
+    <tr>
+      <th>5917</th>
+      <td>pub.1128974183</td>
+      <td>grid.69566.3a</td>
+      <td>Department of Organ Anatomy, Tohoku University...</td>
+    </tr>
+    <tr>
+      <th>5918</th>
+      <td>pub.1128977047</td>
+      <td>grid.69566.3a</td>
+      <td>Department of Molecular Pathology, Tohoku Univ...</td>
+    </tr>
+    <tr>
+      <th>5919</th>
+      <td>pub.1128977047</td>
+      <td>grid.69566.3a</td>
+      <td>Department of Molecular Pathology, Tohoku Univ...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5920 rows × 3 columns</p>
+</div></div>
+</div>
+<div class="section" id="8.1-Variant:-get-unique-publication-records-with-affiliation-count">
+<h3>8.1 Variant: get unique publication records with affiliation count<a class="headerlink" href="#8.1-Variant:-get-unique-publication-records-with-affiliation-count" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  COUNT(aff) AS matching_affiliations,
+  id,
+  title.preferred AS title
+FROM
+  `dimensions-ai.data_analytics.publications`,
+  UNNEST(authors) auth,
+  UNNEST(auth.affiliations_address) AS aff
+WHERE
+  year = 2020
+  AND aff.grid_id = &quot;grid.69566.3a&quot;
+  AND LOWER(aff.raw_affiliation) LIKE &quot;%school of medicine%&quot;
+GROUP BY
+  id,
+  title
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 2/2 [00:00&lt;00:00, 701.04query/s]
+Downloading: 100%|██████████| 1492/1492 [00:02&lt;00:00, 531.33rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>matching_affiliations</th>
+      <th>id</th>
+      <th>title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9</td>
+      <td>pub.1124154670</td>
+      <td>P822 Genetic analysis of ulcerative colitis in...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>pub.1124073702</td>
+      <td>Exploring the Novel Susceptibility Gene Varian...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>pub.1124562761</td>
+      <td>Prediction of the Probability of Malignancy in...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>pub.1124468935</td>
+      <td>Usefulness of a Kampo Medicine on Stress-Induc...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>pub.1124922689</td>
+      <td>Qualitative investigation of the factors that ...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1487</th>
+      <td>5</td>
+      <td>pub.1131095571</td>
+      <td>Hypoketotic hypoglycemia in citrin deficiency:...</td>
+    </tr>
+    <tr>
+      <th>1488</th>
+      <td>2</td>
+      <td>pub.1133151054</td>
+      <td>Electronic phenotyping of heart failure from a...</td>
+    </tr>
+    <tr>
+      <th>1489</th>
+      <td>1</td>
+      <td>pub.1132062513</td>
+      <td>Retrospective details of false-positive and fa...</td>
+    </tr>
+    <tr>
+      <th>1490</th>
+      <td>12</td>
+      <td>pub.1132032426</td>
+      <td>Identification of the Novel Variants in Patien...</td>
+    </tr>
+    <tr>
+      <th>1491</th>
+      <td>1</td>
+      <td>pub.1132020326</td>
+      <td>Radiographic features and poor prognostic fact...</td>
+    </tr>
+  </tbody>
+</table>
+<p>1492 rows × 3 columns</p>
+</div></div>
+</div>
+</div>
+</div>
+<div class="section" id="9.-Select-publications-matching-selected-concepts">
+<h2>9. Select publications matching selected concepts<a class="headerlink" href="#9.-Select-publications-matching-selected-concepts" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+WITH tropical_diseases AS
+(
+       SELECT *
+       FROM   `dimensions-ai.data_analytics.publications` )
+SELECT   publisher.NAME AS publisher,
+         year,
+         count(*) AS num_pub
+FROM     tropical_diseases,
+         UNNEST(tropical_diseases.concepts) c
+WHERE    (
+                  LOWER(c.concept) IN UNNEST([&quot;buruli ulcer&quot;, &quot;mycobacterium&quot;, &quot;mycolactone&quot;, &quot;bairnsdale ulcer&quot;])
+         OR       REGEXP_CONTAINS(title.preferred, r&quot;(?i)/buruli ulcer|mycobacterium|mycolactone|bairnsdale ulcer/&quot;))
+AND      year &gt;= 2010
+AND      publisher IS NOT NULL
+GROUP BY publisher, year
+ORDER BY num_pub DESC,
+         year,
+         publisher LIMIT 10
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1390.68query/s]
+Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  3.98rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>publisher</th>
+      <th>year</th>
+      <th>num_pub</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Elsevier</td>
+      <td>2020</td>
+      <td>31812</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Elsevier</td>
+      <td>2018</td>
+      <td>29580</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Elsevier</td>
+      <td>2019</td>
+      <td>28941</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Elsevier</td>
+      <td>2017</td>
+      <td>28415</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Elsevier</td>
+      <td>2015</td>
+      <td>27301</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Elsevier</td>
+      <td>2011</td>
+      <td>25758</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Elsevier</td>
+      <td>2016</td>
+      <td>25149</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Elsevier</td>
+      <td>2013</td>
+      <td>23209</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Elsevier</td>
+      <td>2014</td>
+      <td>23100</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Springer Nature</td>
+      <td>2019</td>
+      <td>22072</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="10.-Count-of-corresponding-authors-by-publisher">
+<h2>10. Count of corresponding authors by publisher<a class="headerlink" href="#10.-Count-of-corresponding-authors-by-publisher" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+SELECT
+  COUNT(DISTINCT id) AS tot,
+  publisher.name
+FROM
+  `dimensions-ai.data_analytics.publications`,
+  UNNEST(authors) aff
+WHERE
+  aff.corresponding IS TRUE
+  AND publisher.name IS NOT NULL
+GROUP BY
+  publisher.name
+ORDER BY
+  tot DESC
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 4/4 [00:00&lt;00:00, 1306.84query/s]
+Downloading: 100%|██████████| 421/421 [00:02&lt;00:00, 208.14rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tot</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8733776</td>
+      <td>Elsevier</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5885408</td>
+      <td>Springer Nature</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>813007</td>
+      <td>Institute of Electrical and Electronics Engine...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>683093</td>
+      <td>SAGE Publications</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>380636</td>
+      <td>MDPI</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>416</th>
+      <td>1</td>
+      <td>New York Entomological Society</td>
+    </tr>
+    <tr>
+      <th>417</th>
+      <td>1</td>
+      <td>Kansas Academy of Science</td>
+    </tr>
+    <tr>
+      <th>418</th>
+      <td>1</td>
+      <td>Gorgias Press LLC</td>
+    </tr>
+    <tr>
+      <th>419</th>
+      <td>1</td>
+      <td>Journal of the North Atlantic</td>
+    </tr>
+    <tr>
+      <th>420</th>
+      <td>1</td>
+      <td>Institute of Lifestyle Medicine</td>
+    </tr>
+  </tbody>
+</table>
+<p>421 rows × 2 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="11.-Counting-new-vs-recurring-authors,-for-a-specific-journal">
+<h2>11. Counting new vs recurring authors, for a specific journal<a class="headerlink" href="#11.-Counting-new-vs-recurring-authors,-for-a-specific-journal" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+
+WITH
+  authoryear AS (
+  SELECT pubs.year, author.researcher_id, COUNT(pubs.id) AS numpubs
+  FROM
+    `dimensions-ai.data_analytics.publications` AS pubs
+  CROSS JOIN
+    UNNEST(pubs.authors) AS author
+  WHERE
+    author.researcher_id IS NOT NULL
+    AND journal.id= &quot;jour.1115214&quot;
+  GROUP BY
+    author.researcher_id, pubs.year ),
+
+authorfirst AS (
+  SELECT researcher_id, MIN(year) AS minyear
+  FROM
+    authoryear
+  GROUP BY
+    researcher_id ),
+
+authorsummary AS (
+  SELECT ay.*,
+  IF
+    (ay.year=af.minyear,
+      TRUE,
+      FALSE) AS firstyear
+  FROM
+    authoryear ay
+  JOIN
+    authorfirst af
+  ON
+    af.researcher_id=ay.researcher_id
+  ORDER BY
+    ay.researcher_id, year ),
+
+numauthors AS (
+  SELECT year, firstyear, COUNT(DISTINCT researcher_id) AS numresearchers
+  FROM
+    authorsummary
+  WHERE
+    year&gt;2010
+  GROUP BY year, firstyear )
+
+SELECT
+  year,
+  SUM(CASE
+      WHEN firstyear THEN numresearchers
+    ELSE
+    0
+  END
+    ) AS num_first,
+  SUM(CASE
+      WHEN NOT firstyear THEN numresearchers
+    ELSE
+    0
+  END
+    ) AS num_recurring
+FROM numauthors
+GROUP BY year
+ORDER BY year
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 10/10 [00:00&lt;00:00, 5414.10query/s]
+Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.29rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>num_first</th>
+      <th>num_recurring</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2011</td>
+      <td>1040</td>
+      <td>352</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2012</td>
+      <td>858</td>
+      <td>373</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2013</td>
+      <td>926</td>
+      <td>345</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2014</td>
+      <td>1088</td>
+      <td>338</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2015</td>
+      <td>1044</td>
+      <td>392</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2016</td>
+      <td>1313</td>
+      <td>350</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2017</td>
+      <td>1072</td>
+      <td>404</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2018</td>
+      <td>1104</td>
+      <td>419</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2019</td>
+      <td>1184</td>
+      <td>442</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2020</td>
+      <td>1579</td>
+      <td>568</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
 </div>
 </div>
 <div class="section" id="Citations-queries">
@@ -1189,172 +2776,6 @@ Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.11ro
 </div>
 </div>
 </div>
-<div class="section" id="Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">
-<h2>Researchers related to a selected GRID and category [REVIEW]<a class="headerlink" href="#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Using publications to identify researchers of interest</p></li>
-<li><p>Using researchers db to get more infos about them</p></li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-WITH researchers AS
-(
-  SELECT DISTINCT res_id
-  from `dimensions-ai.data_analytics.publications`, UNNEST(researcher_ids) res_id
-  where &quot;grid.4991.5&quot; in UNNEST(research_orgs)
-  AND &quot;2204&quot; in UNNEST(category_for.second_level.codes)
-  AND year = 2020
-)
-
-
-SELECT id, current_research_org, last_publication_year, total_grants
-from `dimensions-ai.data_analytics.researchers`r1
-join researchers r2
-on r1.id = r2.res_id
-order by total_publications desc
-limit 10
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="Generate-list-of-authors-for-a-publication-by-flattening/concatenating">
-<h2>Generate list of authors for a publication by flattening/concatenating<a class="headerlink" href="#Generate-list-of-authors-for-a-publication-by-flattening/concatenating" title="Permalink to this headline">¶</a></h2>
-<p>IE Flattening an array of objects into a string</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select
-  p.id,
-  ARRAY_TO_STRING((
-    SELECT ARRAY(SELECT CONCAT(first_name, &quot; &quot;, last_name) FROM UNNEST(p.authors))
-   ), &#39;; &#39;) as authors_list
-from `dimensions-ai.data_analytics.publications` p
-where p.id = &#39;pub.1132070778&#39;
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.01s: 100%|██████████| 1/1 [00:00&lt;00:00, 86.44query/s]
-Downloading: 100%|██████████| 1/1 [00:02&lt;00:00,  2.49s/rows]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>authors_list</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>pub.1132070778</td>
-      <td>O Grånäs; A Mocellin; E S Cardoso; F Burmeiste...</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
-<div class="section" id="Generate-list-of-categories-for-a-publication-by-flattening/concatenating">
-<h2>Generate list of categories for a publication by flattening/concatenating<a class="headerlink" href="#Generate-list-of-categories-for-a-publication-by-flattening/concatenating" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select
-  p.id,
-  ARRAY_TO_STRING((
-    SELECT ARRAY(SELECT name FROM UNNEST(p.category_for.first_level.full))
-   ), &#39;; &#39;) as categories_list
-from `dimensions-ai.data_analytics.publications` p
-where p.id = &#39;pub.1132070778&#39;
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 1/1 [00:00&lt;00:00, 721.54query/s]
-Downloading: 100%|██████████| 1/1 [00:04&lt;00:00,  4.17s/rows]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>categories_list</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>pub.1132070778</td>
-      <td>Physical Sciences; Chemical Sciences</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
 <div class="section" id="One-degree-citation-network-for-a-single-publication">
 <h2>One-degree citation network for a single publication<a class="headerlink" href="#One-degree-citation-network-for-a-single-publication" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
@@ -1501,773 +2922,6 @@ Downloading: 100%|██████████| 187/187 [00:02&lt;00:00, 80.92
   </tbody>
 </table>
 <p>187 rows × 4 columns</p>
-</div></div>
-</div>
-</div>
-<div class="section" id="Publications-per-category,-total-and-percentage-against-total">
-<h2>Publications per category, total and percentage against total<a class="headerlink" href="#Publications-per-category,-total-and-percentage-against-total" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-SELECT
-  cat.name,
-  COUNT(DISTINCT p.id) AS pubs_global,
-  ROUND ((COUNT(DISTINCT p.id) * 100 /(
-      SELECT
-        COUNT(*)
-      FROM
-        `dimensions-ai.data_analytics.publications`)), 2 ) AS pubs_global_pc
-FROM
-  `dimensions-ai.data_analytics.publications` p,
-  UNNEST(category_for.first_level.full) cat
-GROUP BY
-  cat.name
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 5/5 [00:00&lt;00:00, 2172.99query/s]
-Downloading: 100%|██████████| 22/22 [00:02&lt;00:00,  8.67rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>name</th>
-      <th>pubs_global</th>
-      <th>pubs_global_pc</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Biological Sciences</td>
-      <td>8922205</td>
-      <td>7.69</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Medical and Health Sciences</td>
-      <td>29853801</td>
-      <td>25.74</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Economics</td>
-      <td>1722795</td>
-      <td>1.49</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Engineering</td>
-      <td>12168683</td>
-      <td>10.49</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Education</td>
-      <td>1804004</td>
-      <td>1.56</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Information and Computing Sciences</td>
-      <td>5118832</td>
-      <td>4.41</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>History and Archaeology</td>
-      <td>2333998</td>
-      <td>2.01</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Technology</td>
-      <td>1932511</td>
-      <td>1.67</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Commerce, Management, Tourism and Services</td>
-      <td>1792537</td>
-      <td>1.55</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Studies in Creative Arts and Writing</td>
-      <td>639952</td>
-      <td>0.55</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>Physical Sciences</td>
-      <td>6092552</td>
-      <td>5.25</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>Mathematical Sciences</td>
-      <td>4979926</td>
-      <td>4.29</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>Environmental Sciences</td>
-      <td>1349369</td>
-      <td>1.16</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Psychology and Cognitive Sciences</td>
-      <td>3822870</td>
-      <td>3.30</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Chemical Sciences</td>
-      <td>7766182</td>
-      <td>6.70</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>Law and Legal Studies</td>
-      <td>883855</td>
-      <td>0.76</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>Earth Sciences</td>
-      <td>2027739</td>
-      <td>1.75</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>Agricultural and Veterinary Sciences</td>
-      <td>2085752</td>
-      <td>1.80</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>Philosophy and Religious Studies</td>
-      <td>1662674</td>
-      <td>1.43</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>Built Environment and Design</td>
-      <td>480440</td>
-      <td>0.41</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>Language, Communication and Culture</td>
-      <td>2494744</td>
-      <td>2.15</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>Studies in Human Society</td>
-      <td>3362309</td>
-      <td>2.90</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
-<div class="section" id="Heads-up---about-UNNEST">
-<h2>Heads up - about UNNEST<a class="headerlink" href="#Heads-up---about-UNNEST" title="Permalink to this headline">¶</a></h2>
-<p>UNNEST are implicit ‘cross-join’ queries, hence only records that have some value in the nested column are represented</p>
-<p>For example, the query below return less publications that then ones available, because only the ones with <code class="docutils literal notranslate"><span class="pre">research_org_country_names</span></code> are included (= cross join)</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-SELECT count(distinct p.id) as tot_articles
-FROM `dimensions-ai.data_analytics.publications` p
-    , UNNEST(research_org_country_names) as research_org_country_names
-WHERE year = 2000
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2579.52query/s]
-Downloading: 100%|██████████| 1/1 [00:04&lt;00:00,  4.60s/rows]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tot_articles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1060342</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<p>As a test, we can run the query without the UNNEST clause</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-SELECT count(distinct p.id) as tot_articles
-FROM `dimensions-ai.data_analytics.publications` p
-WHERE year = 2000
-
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2101.00query/s]
-Downloading: 100%|██████████| 1/1 [00:02&lt;00:00,  2.97s/rows]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tot_articles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1759389</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<p>If you want to get all records, then LEFT JOIN is the way to go in this case</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-
-SELECT count(distinct p.id) as tot_articles
-FROM `dimensions-ai.data_analytics.publications` p
-LEFT JOIN UNNEST(research_org_country_names) as research_org_country_names
-WHERE year = 2000
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1973.48query/s]
-Downloading: 100%|██████████| 1/1 [00:03&lt;00:00,  3.90s/rows]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tot_articles</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1759389</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
-<div class="section" id="Find-articles-mathcing-a-specific-affiliation-string">
-<h2>Find articles mathcing a specific affiliation string<a class="headerlink" href="#Find-articles-mathcing-a-specific-affiliation-string" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-
-SELECT
-  id, aff.grid_id, aff.raw_affiliation
-FROM
-  `dimensions-ai.data_analytics.publications`,
-  UNNEST(authors) auth,
-  UNNEST(auth.affiliations_address) AS aff
-WHERE
-  year = 2020
-  AND aff.grid_id = &quot;grid.69566.3a&quot;
-  AND LOWER(aff.raw_affiliation) LIKE &quot;%school of medicine%&quot;
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 2/2 [00:00&lt;00:00, 1575.33query/s]
-Downloading: 100%|██████████| 5920/5920 [00:02&lt;00:00, 2237.13rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>grid_id</th>
-      <th>raw_affiliation</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>pub.1121839087</td>
-      <td>grid.69566.3a</td>
-      <td>Evidence-based Cardiovascular Medicine, Tohoku...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pub.1121839087</td>
-      <td>grid.69566.3a</td>
-      <td>Evidence-based Cardiovascular Medicine, Tohoku...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>pub.1121837499</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Molecular Endocrinology, Tohoku ...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>pub.1121837499</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Molecular Endocrinology, Tohoku ...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>pub.1121837499</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Molecular Endocrinology, Tohoku ...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>5915</th>
-      <td>pub.1131102254</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Neurosurgery, Tohoku University ...</td>
-    </tr>
-    <tr>
-      <th>5916</th>
-      <td>pub.1131102254</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Neurosurgery, Tohoku University ...</td>
-    </tr>
-    <tr>
-      <th>5917</th>
-      <td>pub.1131102254</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Neurosurgical Engineering and Tr...</td>
-    </tr>
-    <tr>
-      <th>5918</th>
-      <td>pub.1131102254</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Neurosurgery, Tohoku University ...</td>
-    </tr>
-    <tr>
-      <th>5919</th>
-      <td>pub.1131102254</td>
-      <td>grid.69566.3a</td>
-      <td>Department of Neurosurgery, Tohoku University ...</td>
-    </tr>
-  </tbody>
-</table>
-<p>5920 rows × 3 columns</p>
-</div></div>
-</div>
-<p>variant, to get unique publication records with affiliation count</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-
-
-SELECT
-  COUNT(aff) AS matching_affiliations,
-  id,
-  title.preferred AS title
-FROM
-  `dimensions-ai.data_analytics.publications`,
-  UNNEST(authors) auth,
-  UNNEST(auth.affiliations_address) AS aff
-WHERE
-  year = 2020
-  AND aff.grid_id = &quot;grid.69566.3a&quot;
-  AND LOWER(aff.raw_affiliation) LIKE &quot;%school of medicine%&quot;
-GROUP BY
-  id,
-  title
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 2/2 [00:00&lt;00:00, 1722.51query/s]
-Downloading: 100%|██████████| 1492/1492 [00:02&lt;00:00, 543.31rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>matching_affiliations</th>
-      <th>id</th>
-      <th>title</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>1</td>
-      <td>pub.1120113207</td>
-      <td>Renal damage in primary aldosteronism: a syste...</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>47</td>
-      <td>pub.1124019204</td>
-      <td>Study profile of The Tohoku Medical Megabank C...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>1</td>
-      <td>pub.1123669309</td>
-      <td>CD4+ T Cells as Key Players in the Immunopatho...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>5</td>
-      <td>pub.1123675210</td>
-      <td>Effects of Long-Term Exercise on Liver Cyst in...</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1</td>
-      <td>pub.1123793958</td>
-      <td>Degenerative rotator cuff tear, repair or not ...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>1487</th>
-      <td>1</td>
-      <td>pub.1132236309</td>
-      <td>Protracted rosiglitazone treatment exacerbates...</td>
-    </tr>
-    <tr>
-      <th>1488</th>
-      <td>3</td>
-      <td>pub.1132927290</td>
-      <td>Benefits of eculizumab in AQP4+ neuromyelitis ...</td>
-    </tr>
-    <tr>
-      <th>1489</th>
-      <td>2</td>
-      <td>pub.1133258481</td>
-      <td>RARE-26. RETROSPECTIVE ANALYSIS OF PEDIATRIC C...</td>
-    </tr>
-    <tr>
-      <th>1490</th>
-      <td>12</td>
-      <td>pub.1133397887</td>
-      <td>Echolalia in patients with primary progressive...</td>
-    </tr>
-    <tr>
-      <th>1491</th>
-      <td>2</td>
-      <td>pub.1133346233</td>
-      <td>BEX2 suppresses mitochondrial activity and is ...</td>
-    </tr>
-  </tbody>
-</table>
-<p>1492 rows × 3 columns</p>
-</div></div>
-</div>
-</div>
-<div class="section" id="Publications-with-corresponding-authors-by-publisher">
-<h2>Publications with corresponding authors by publisher<a class="headerlink" href="#Publications-with-corresponding-authors-by-publisher" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select count(distinct id) as tot , publisher.name
-from `dimensions-ai.data_analytics.publications`, unnest(authors) aff
-where aff.corresponding is true and publisher.name is not null
-group by publisher.name
-order by tot desc
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 4/4 [00:00&lt;00:00, 1715.81query/s]
-Downloading: 100%|██████████| 421/421 [00:03&lt;00:00, 134.06rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tot</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>8733776</td>
-      <td>Elsevier</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5885408</td>
-      <td>Springer Nature</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>813007</td>
-      <td>Institute of Electrical and Electronics Engine...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>683093</td>
-      <td>SAGE Publications</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>380636</td>
-      <td>MDPI</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>416</th>
-      <td>1</td>
-      <td>Society for Sedimentary Geology</td>
-    </tr>
-    <tr>
-      <th>417</th>
-      <td>1</td>
-      <td>Scientific Archives LLC</td>
-    </tr>
-    <tr>
-      <th>418</th>
-      <td>1</td>
-      <td>Museum of Comparative Zoology, Harvard University</td>
-    </tr>
-    <tr>
-      <th>419</th>
-      <td>1</td>
-      <td>Institute of Lifestyle Medicine</td>
-    </tr>
-    <tr>
-      <th>420</th>
-      <td>1</td>
-      <td>Christ University Bangalore</td>
-    </tr>
-  </tbody>
-</table>
-<p>421 rows × 2 columns</p>
 </div></div>
 </div>
 </div>
@@ -2504,474 +3158,6 @@ Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  1.96rows
       <td>10.1056/nejm184601140332401</td>
       <td>2017-08-31 12:50:56+00:00</td>
       <td>Good Health and Well Being</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<p>Count how many pubs per SDG</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select COUNT(DISTINCT p.id) as tot, sdg.name
-from `dimensions-ai.data_analytics.publications` p, unnest(category_sdg.full) sdg
-GROUP BY sdg.name
-limit 5
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 4/4 [00:00&lt;00:00, 1851.18query/s]
-Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  1.98rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>tot</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>748342</td>
-      <td>Peace, Justice and Strong Institutions</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>49065</td>
-      <td>No Poverty</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>184789</td>
-      <td>Reduced Inequalities</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>260191</td>
-      <td>Decent Work and Economic Growth</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>230736</td>
-      <td>Sustainable Cities and Communities</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
-<div class="section" id="Journals-with-LIKE-string-matching">
-<h2>Journals with LIKE string matching<a class="headerlink" href="#Journals-with-LIKE-string-matching" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select COUNT(*) as pubs, journal.id, journal.title, journal.issn, journal.eissn, publisher.name
-from `dimensions-ai.data_analytics.publications`
-where  LOWER( journal.title ) LIKE  CONCAT(&#39;%medicine%&#39;)
-group by 2, 3, 4, 5, 6
-order by pubs desc
-limit 20
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1209.20query/s]
-Downloading: 100%|██████████| 20/20 [00:02&lt;00:00,  7.83rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[71]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>pubs</th>
-      <th>id</th>
-      <th>title</th>
-      <th>issn</th>
-      <th>eissn</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>168620</td>
-      <td>jour.1014075</td>
-      <td>New England Journal of Medicine</td>
-      <td>0028-4793</td>
-      <td>1533-4406</td>
-      <td>Massachusetts Medical Society</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>83860</td>
-      <td>jour.1011551</td>
-      <td>Medicine &amp; Science in Sports &amp; Exercise</td>
-      <td>0195-9131</td>
-      <td>1530-0315</td>
-      <td>Wolters Kluwer</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>58617</td>
-      <td>jour.1017222</td>
-      <td>Annals of Internal Medicine</td>
-      <td>0003-4819</td>
-      <td>1539-3704</td>
-      <td>American College of Physicians</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>52792</td>
-      <td>jour.1312267</td>
-      <td>Journal of the Royal Society of Medicine</td>
-      <td>0141-0768</td>
-      <td>1758-1095</td>
-      <td>SAGE Publications</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>52248</td>
-      <td>jour.1017256</td>
-      <td>JAMA Internal Medicine</td>
-      <td>2168-6106</td>
-      <td>2168-6114</td>
-      <td>American Medical Association (AMA)</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>47104</td>
-      <td>jour.1027092</td>
-      <td>Experimental Biology and Medicine</td>
-      <td>1535-3702</td>
-      <td>1535-3699</td>
-      <td>SAGE Publications</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>46274</td>
-      <td>jour.1016342</td>
-      <td>Critical Care Medicine</td>
-      <td>0090-3493</td>
-      <td>1530-0293</td>
-      <td>Wolters Kluwer</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>37632</td>
-      <td>jour.1057918</td>
-      <td>Journal of Molecular Medicine</td>
-      <td>0946-2716</td>
-      <td>1432-1440</td>
-      <td>Springer Nature</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>34891</td>
-      <td>jour.1017275</td>
-      <td>Arizona Medicine</td>
-      <td>0093-0415</td>
-      <td>1476-2978</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>31068</td>
-      <td>jour.1014535</td>
-      <td>The American Journal of Medicine</td>
-      <td>0002-9343</td>
-      <td>1555-7162</td>
-      <td>Elsevier</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>29708</td>
-      <td>jour.1017863</td>
-      <td>Oral Surgery Oral Medicine Oral Pathology and ...</td>
-      <td>2212-4403</td>
-      <td>2212-4411</td>
-      <td>Elsevier</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>28472</td>
-      <td>jour.1090935</td>
-      <td>Annals of Emergency Medicine</td>
-      <td>0196-0644</td>
-      <td>1097-6760</td>
-      <td>Elsevier</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>26224</td>
-      <td>jour.1077253</td>
-      <td>Medicine</td>
-      <td>0025-7974</td>
-      <td>1536-5964</td>
-      <td>Wolters Kluwer</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>25653</td>
-      <td>jour.1017316</td>
-      <td>Bulletin of Experimental Biology and Medicine</td>
-      <td>0007-4888</td>
-      <td>1573-8221</td>
-      <td>Springer Nature</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>24781</td>
-      <td>jour.1077126</td>
-      <td>Journal of Experimental Medicine</td>
-      <td>0022-1007</td>
-      <td>1540-9538</td>
-      <td>Rockefeller University Press</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>24339</td>
-      <td>jour.1319882</td>
-      <td>Journal of Internal Medicine</td>
-      <td>0954-6820</td>
-      <td>1365-2796</td>
-      <td>Wiley</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>23511</td>
-      <td>jour.1017748</td>
-      <td>Academic Medicine</td>
-      <td>1040-2446</td>
-      <td>1938-808X</td>
-      <td>Wolters Kluwer</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>22601</td>
-      <td>jour.1017031</td>
-      <td>American Journal of Respiratory and Critical C...</td>
-      <td>1073-449X</td>
-      <td>1535-4970</td>
-      <td>American Thoracic Society</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>22220</td>
-      <td>jour.1036793</td>
-      <td>Military Medicine</td>
-      <td>0026-4075</td>
-      <td>1930-613X</td>
-      <td>Oxford University Press (OUP)</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>21695</td>
-      <td>jour.1017021</td>
-      <td>American Journal of Tropical Medicine and Hygiene</td>
-      <td>0002-9637</td>
-      <td>1476-1645</td>
-      <td>American Society of Tropical Medicine and Hygiene</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
-<div class="section" id="New-vs-recurring-authors,-for-a-specific-journal">
-<h2>New vs recurring authors, for a specific journal<a class="headerlink" href="#New-vs-recurring-authors,-for-a-specific-journal" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-
-WITH authoryear AS (
-  select pubs.year, author.researcher_id, COUNT(pubs.id) AS numpubs
-  FROM `dimensions-ai.data_analytics.publications` as pubs
-  CROSS JOIN UNNEST(pubs.authors) AS author
-  WHERE author.researcher_id IS NOT NULL AND journal.id= &quot;jour.1115214&quot;
-  GROUP BY author.researcher_id, pubs.year
-), authorfirst AS (
-  select researcher_id, MIN(year) AS minyear
-  FROM authoryear
-  GROUP BY researcher_id
-), authorsummary AS (
-  SELECT ay.*, IF(ay.year=af.minyear, TRUE, FALSE) AS firstyear
-  FROM authoryear ay
-  JOIN authorfirst af ON af.researcher_id=ay.researcher_id
-  ORDER BY ay.researcher_id, year
-), numauthors AS (
-  SELECT year, firstyear, COUNT(DISTINCT researcher_id) AS numresearchers
-  FROM authorsummary
-  WHERE year&gt;2010
-  GROUP BY year, firstyear
-)
-SELECT year, SUM(CASE when firstyear then numresearchers else 0 end) as num_first,
-             SUM(CASE when NOT firstyear then numresearchers else 0 end) as num_recurring
-from numauthors
-group by year
-order by year;
-
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 10/10 [00:00&lt;00:00, 5324.75query/s]
-Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.04rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[73]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>year</th>
-      <th>num_first</th>
-      <th>num_recurring</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2011</td>
-      <td>1040</td>
-      <td>352</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2012</td>
-      <td>858</td>
-      <td>373</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2013</td>
-      <td>926</td>
-      <td>345</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2014</td>
-      <td>1088</td>
-      <td>338</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2015</td>
-      <td>1044</td>
-      <td>392</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>2016</td>
-      <td>1313</td>
-      <td>350</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>2017</td>
-      <td>1072</td>
-      <td>404</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>2018</td>
-      <td>1104</td>
-      <td>419</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>2019</td>
-      <td>1184</td>
-      <td>442</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>2020</td>
-      <td>1579</td>
-      <td>568</td>
     </tr>
   </tbody>
 </table>
@@ -3240,132 +3426,40 @@ Downloading: 100%|██████████| 356/356 [00:02&lt;00:00, 139.6
 </div></div>
 </div>
 </div>
-<div class="section" id="Concepts:-select-publications-matching-selected-concepts">
-<h2>Concepts: select publications matching selected concepts<a class="headerlink" href="#Concepts:-select-publications-matching-selected-concepts" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[86]:
+</div>
+<div class="section" id="REVIEW-REVIEW-REVIEW">
+<h1>REVIEW REVIEW REVIEW<a class="headerlink" href="#REVIEW-REVIEW-REVIEW" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">
+<h2>Researchers related to a selected GRID and category [REVIEW]<a class="headerlink" href="#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using publications to identify researchers of interest</p></li>
+<li><p>Using researchers db to get more infos about them</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
 
-WITH tropical_diseases AS (
-    select * from `dimensions-ai.data_analytics.publications`
+WITH researchers AS
+(
+  SELECT DISTINCT res_id
+  from `dimensions-ai.data_analytics.publications`, UNNEST(researcher_ids) res_id
+  where &quot;grid.4991.5&quot; in UNNEST(research_orgs)
+  AND &quot;2204&quot; in UNNEST(category_for.second_level.codes)
+  AND year = 2020
 )
-SELECT publisher.name as publisher, year, count(*) as num_pub
-FROM tropical_diseases, UNNEST(tropical_diseases.concepts) c
-WHERE
-  (lower(c.concept) in UNNEST([&quot;buruli ulcer&quot;, &quot;mycobacterium&quot;, &quot;mycolactone&quot;, &quot;bairnsdale ulcer&quot;])
-  OR REGEXP_CONTAINS(title.preferred, r&quot;(?i)/buruli ulcer|mycobacterium|mycolactone|bairnsdale ulcer/&quot;))
-  AND year &gt;= 2010
-  AND publisher IS NOT NULL
-GROUP BY publisher,year
-ORDER BY num_pub DESC, year, publisher
+
+
+SELECT id, current_research_org, last_publication_year, total_grants
+from `dimensions-ai.data_analytics.researchers`r1
+join researchers r2
+on r1.id = r2.res_id
+order by total_publications desc
 limit 10
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2063.11query/s]
-Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.21rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[86]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>publisher</th>
-      <th>year</th>
-      <th>num_pub</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Elsevier</td>
-      <td>2020</td>
-      <td>31812</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Elsevier</td>
-      <td>2018</td>
-      <td>29580</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Elsevier</td>
-      <td>2019</td>
-      <td>28941</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Elsevier</td>
-      <td>2017</td>
-      <td>28415</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Elsevier</td>
-      <td>2015</td>
-      <td>27301</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Elsevier</td>
-      <td>2011</td>
-      <td>25758</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Elsevier</td>
-      <td>2016</td>
-      <td>25149</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Elsevier</td>
-      <td>2013</td>
-      <td>23209</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Elsevier</td>
-      <td>2014</td>
-      <td>23100</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Springer Nature</td>
-      <td>2019</td>
-      <td>22072</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

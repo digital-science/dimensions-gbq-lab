@@ -1,0 +1,2927 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dimensions Google BigQuery &amp; API - an introduction &mdash; GBQ Lab - reusable notebooks for research data analytics - powered by Dimensions on Google BigQuery</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/js/custom.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    
+
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149959808-1"></script>
+   <!-- <script src="_static/js/custom.js"></script> -->
+
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Dimensions GBQ LAB
+          
+
+          
+            
+            <img src="../_static/dimensions-logo@2x.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+
+   <p class="">
+      <h3 id="cookbooks_title">GBQ COOKBOOKS</h3>
+   </p>
+
+
+   
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="1-Verifying-your-connection.html">Verifying your connection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="1-Verifying-your-connection.html#Connection-methods">Connection methods</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-Verifying-your-connection.html#Option-1:-using-Google-Colaboratory-and-your-personal-credentials">Option 1: using Google Colaboratory and your personal credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-Verifying-your-connection.html#Option-2:-using-a-local-Jupyter-and-your-personal-credentials">Option 2: using a local Jupyter and your personal credentials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="1-Verifying-your-connection.html#Option-3:-using-a-local-Jupyter-and-a-service-account">Option 3: using a local Jupyter and a service account</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1-Verifying-your-connection.html#Running-queries">Running queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="1-Verifying-your-connection.html#Advanced:-BigQuery-magic-command-and-dynamic-parameters">Advanced: BigQuery magic command and dynamic parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="1-Verifying-your-connection.html#Troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2-Publications-queries.html">Publication queries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#Prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#1.-Top-publications-by-Altmetric-score-and-research-organization">1. Top publications by Altmetric score and research organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#1.-Working-with-Publications-dates">1. Working with Publications dates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2-Publications-queries.html#Comparing-date-fields">Comparing date fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-Publications-queries.html#Number-of-publications-added-to-Dimensions-by-month">Number of publications added to Dimensions by month</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#2.-Working-with-NESTED-fields">2. Working with NESTED fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#3.-Generate-a-list-of-publication-authors-by-flattening/concatenating-nested-data">3. Generate a list of publication authors by flattening/concatenating nested data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#4.-Generate-a-list-of-publication-categories-by-flattening/concatenating-nested-data">4. Generate a list of publication categories by flattening/concatenating nested data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#5.-Number-of-publications-per-SDG-category">5. Number of publications per SDG category</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#6.-Publications-count-per-FoR-category,-total-and-percentage-against-total">6. Publications count per FoR category, total and percentage against total</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#7.-Finding-Journals-using-string-matching">7. Finding Journals using string matching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#8.-Finding-articles-matching-a-specific-affiliation-string">8. Finding articles matching a specific affiliation string</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2-Publications-queries.html#8.1-Variant:-get-unique-publication-records-with-affiliation-count">8.1 Variant: get unique publication records with affiliation count</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#9.-Select-publications-matching-selected-concepts">9. Select publications matching selected concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#10.-Count-of-corresponding-authors-by-publisher">10. Count of corresponding authors by publisher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#11.-Counting-new-vs-recurring-authors,-for-a-specific-journal">11. Counting new vs recurring authors, for a specific journal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#Citations-queries">Citations queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="2-Publications-queries.html#Top-N-publications-by-citations-percentile">Top N publications by citations percentile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="2-Publications-queries.html#Citations-by-journal,-for-a-specific-publisher">Citations by journal, for a specific publisher</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#One-degree-citation-network-for-a-single-publication">One-degree citation network for a single publication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#Funding-by-journal">Funding by journal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#Articles-with-SDGs">Articles with SDGs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#incoming-citations-for-a-journal">incoming citations for a journal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#Outgoing-citations-to-a-journal">Outgoing citations to a journal</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="2-Publications-queries.html#REVIEW-REVIEW-REVIEW">REVIEW REVIEW REVIEW</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="2-Publications-queries.html#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">Researchers related to a selected GRID and category [REVIEW]</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+
+
+   <div id="sidebar_github" style="margin-top: 12px;">
+   <h3>Github Source</h3>
+
+      <div style="margin: 10px 20px;">
+      
+         <iframe src="https://ghbtns.com/github-btn.html?user=digital-science&repo=dimensions-gbq-lab&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+
+         <iframe src="https://ghbtns.com/github-btn.html?user=digital-science&repo=dimensions-gbq-lab&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe> 
+      
+      </div>
+
+   </div>
+
+
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dimensions GBQ LAB</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+
+    
+
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js'></script>
+<script>require=requirejs;</script><a class="reference external image-reference" href="https://colab.research.google.com/github/digital-science/dimensions-gbq-lab/blob/master/cookbooks/2020_11_05_API_GBQ_Training.ipynb"><img alt="../_images/badge-colab.svg" src="../_images/badge-colab.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/digital-science/dimensions-gbq-lab/blob/master/cookbooks/2020_11_05_API_GBQ_Training.ipynb"><img alt="../_images/badge-github-custom.svg" src="../_images/badge-github-custom.svg" /></a>
+<hr class="docutils" />
+<div class="section" id="Dimensions-Google-BigQuery-&amp;-API---an-introduction">
+<h1>Dimensions Google BigQuery &amp; API - an introduction<a class="headerlink" href="#Dimensions-Google-BigQuery-&-API---an-introduction" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we’ll show some GBQ queries on the Dimensions BigQuery dataset</p>
+<p>Background materials:</p>
+<ul class="simple">
+<li><p>The public <a class="reference external" href="https://console.cloud.google.com/marketplace/product/digitalscience-public/covid-19-dataset-dimensions">COVID-19 dataset</a> and the Building a COVID-19 dashboard <a class="reference external" href="https://docs.dimensions.ai/bigquery/tutorials-covid.html">tutorial</a></p></li>
+<li><p>Dimensions on GBQ <a class="reference external" href="https://docs.dimensions.ai/bigquery/">documentation</a>, in particular the</p></li>
+</ul>
+<div class="section" id="1.-Connecting-to-GBQ">
+<h2>1. Connecting to GBQ<a class="headerlink" href="#1.-Connecting-to-GBQ" title="Permalink to this headline">¶</a></h2>
+<p>First, let’s authenticate with Google Cloud.</p>
+<p>PS make sure you update your project ID value using the specific project you set up in Google BigQuery during the sign up process. For more background, see the <a class="reference external" href="https://docs.dimensions.ai/bigquery/gcp-setup.html">Google Cloud Platform Setup documentation page</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>from google.colab import auth
+auth.authenticate_user()
+print(&#39;Authenticated&#39;)
+PROJECTID = &quot;ds-data-solutions-gbq&quot; # CHANGE BASED ON YOUR SETUP
+%load_ext google.cloud.bigquery
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Authenticated
+The google.cloud.bigquery extension is already loaded. To reload it, use:
+  %reload_ext google.cloud.bigquery
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="2.-A-couple-of-test-queries">
+<h2>2. A couple of test queries<a class="headerlink" href="#2.-A-couple-of-test-queries" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>NOTE try running the queries also in the <a class="reference external" href="https://console.cloud.google.com/bigquery">online GBQ console</a></p>
+</div></blockquote>
+<p>Count how many objects in the publications table</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT COUNT(*) as total_pubs
+FROM
+  `covid-19-dimensions-ai.data.publications`
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_pubs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>191462</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Let’s make another query. This time we want to get a feeling for how many publications enter the Dimensions database each month. This can be achieved by using the field <code class="docutils literal notranslate"><span class="pre">date_inserted</span></code> (see the <a class="reference external" href="https://docs.dimensions.ai/bigquery/datasource-publications.html">docs</a> for more info):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+# Number of pubs each month in 2020
+
+SELECT COUNT(*) AS total_pubs,
+EXTRACT(MONTH FROM date_inserted) AS month
+FROM
+  `covid-19-dimensions-ai.data.publications`
+WHERE EXTRACT(YEAR FROM date_inserted) = 2020
+GROUP BY month
+ORDER BY month DESC
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_pubs</th>
+      <th>month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1330</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32301</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>28311</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>26833</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>28889</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>24860</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>24804</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>16733</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>5315</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1201</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>371</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="3.-Extracting-basic-publications-metadata">
+<h2>3. Extracting basic publications metadata<a class="headerlink" href="#3.-Extracting-basic-publications-metadata" title="Permalink to this headline">¶</a></h2>
+<p>First, let’s extract some standard publications metadata</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT
+ p.id,
+ p.title.preferred AS title,
+ p.doi,
+ p.year,
+ p.journal.title as journal,
+ p.type,
+ p.date AS date_publication,
+ p.date_inserted,
+FROM
+ `covid-19-dimensions-ai.data.publications` p
+WHERE
+ EXTRACT(YEAR
+ FROM
+   date_inserted) &gt;= 2020
+
+LIMIT 100
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>title</th>
+      <th>doi</th>
+      <th>year</th>
+      <th>journal</th>
+      <th>type</th>
+      <th>date_publication</th>
+      <th>date_inserted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1126698756</td>
+      <td>Stepping Out of Isolation: Autistic People and...</td>
+      <td>10.1089/aut.2020.29012.jdh</td>
+      <td>2020</td>
+      <td>Autism in Adulthood</td>
+      <td>article</td>
+      <td>2020-06-01</td>
+      <td>2020-04-17 22:54:24+00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1131229230</td>
+      <td>Wacker's new silicone products for shampoos an...</td>
+      <td>10.1016/j.fos.2020.09.016</td>
+      <td>2020</td>
+      <td>Focus on Surfactants</td>
+      <td>article</td>
+      <td>2020-07</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1131210174</td>
+      <td>Laboratory Diagnosis of Coronavirus Disease 19...</td>
+      <td>10.15324/kjcls.2020.52.3.284</td>
+      <td>2020</td>
+      <td>Korean Journal of Clinical Laboratory Science</td>
+      <td>article</td>
+      <td>2020-09-30</td>
+      <td>2020-09-28 18:59:48+00:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1131241527</td>
+      <td>SOMALIA: Elections Deal</td>
+      <td>10.1111/j.1467-825x.2020.09603.x</td>
+      <td>2020</td>
+      <td>Africa Research Bulletin Political Social and ...</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1131265240</td>
+      <td>Interpretation of Machine Learning Models for ...</td>
+      <td>10.25046/aj050558</td>
+      <td>2020</td>
+      <td>Advances in Science Technology and Engineering...</td>
+      <td>article</td>
+      <td>2020</td>
+      <td>2020-09-30 21:29:55+00:00</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>pub.1128271359</td>
+      <td>Strategi Kebijakan Fiskal Pemerintah Indonesia...</td>
+      <td>10.36778/jesya.v3i2.193</td>
+      <td>2020</td>
+      <td>Jesya (Jurnal Ekonomi &amp; Ekonomi Syariah)</td>
+      <td>article</td>
+      <td>2020-05-31</td>
+      <td>2020-06-07 21:33:07+00:00</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>pub.1130531542</td>
+      <td>SALUD AUTOPERCIBIDA EN TRABAJADORES DE ENFERME...</td>
+      <td>10.35563/rmp.v9i2.330</td>
+      <td>2020</td>
+      <td>Revista Médica Panacea</td>
+      <td>article</td>
+      <td>2020-08-28</td>
+      <td>2020-09-03 21:44:09+00:00</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>pub.1130556299</td>
+      <td>The Future of Tobacco Industry Amidst of COVID...</td>
+      <td>10.26717/bjstr.2020.27.004566</td>
+      <td>2020</td>
+      <td>Biomedical Journal of Scientific &amp; Technical R...</td>
+      <td>article</td>
+      <td>2020-05-22</td>
+      <td>2020-09-04 21:23:54+00:00</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>pub.1130563637</td>
+      <td>The FDA De Novo medical device pathway, patent...</td>
+      <td>10.1038/s41587-020-0653-6</td>
+      <td>2020</td>
+      <td>Nature Biotechnology</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-05 19:50:44+00:00</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>pub.1130542554</td>
+      <td>Nanopore Sequencing Looks to the Long Haul</td>
+      <td>10.1089/gen.40.09.12</td>
+      <td>2020</td>
+      <td>Genetic Engineering &amp; Biotechnology News</td>
+      <td>article</td>
+      <td>2020-09-01</td>
+      <td>2020-09-04 19:48:40+00:00</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 8 columns</p>
+</div></div>
+</div>
+<p>Update the query so to deal better with multiple publication types</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT
+ p.id,
+ p.title.preferred AS title,
+ p.doi,
+ p.year,
+ # journals, books etc..
+ COALESCE(p.journal.title, p.proceedings_title.preferred, p.book_title.preferred, p.book_series_title.preferred) AS venue,
+ p.type,
+ p.date AS date_publication,
+ p.date_inserted,
+ p.altmetrics.score AS altmetrics_score,
+ p.metrics.times_cited,
+FROM
+ `covid-19-dimensions-ai.data.publications` p
+WHERE
+ EXTRACT(YEAR
+ FROM
+   date_inserted) &gt;= 2020
+
+LIMIT 100
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>title</th>
+      <th>doi</th>
+      <th>year</th>
+      <th>venue</th>
+      <th>type</th>
+      <th>date_publication</th>
+      <th>date_inserted</th>
+      <th>altmetrics_score</th>
+      <th>times_cited</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1126698756</td>
+      <td>Stepping Out of Isolation: Autistic People and...</td>
+      <td>10.1089/aut.2020.29012.jdh</td>
+      <td>2020</td>
+      <td>Autism in Adulthood</td>
+      <td>article</td>
+      <td>2020-06-01</td>
+      <td>2020-04-17 22:54:24+00:00</td>
+      <td>64.0</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1131229230</td>
+      <td>Wacker's new silicone products for shampoos an...</td>
+      <td>10.1016/j.fos.2020.09.016</td>
+      <td>2020</td>
+      <td>Focus on Surfactants</td>
+      <td>article</td>
+      <td>2020-07</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1131210174</td>
+      <td>Laboratory Diagnosis of Coronavirus Disease 19...</td>
+      <td>10.15324/kjcls.2020.52.3.284</td>
+      <td>2020</td>
+      <td>Korean Journal of Clinical Laboratory Science</td>
+      <td>article</td>
+      <td>2020-09-30</td>
+      <td>2020-09-28 18:59:48+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1131241527</td>
+      <td>SOMALIA: Elections Deal</td>
+      <td>10.1111/j.1467-825x.2020.09603.x</td>
+      <td>2020</td>
+      <td>Africa Research Bulletin Political Social and ...</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1131265240</td>
+      <td>Interpretation of Machine Learning Models for ...</td>
+      <td>10.25046/aj050558</td>
+      <td>2020</td>
+      <td>Advances in Science Technology and Engineering...</td>
+      <td>article</td>
+      <td>2020</td>
+      <td>2020-09-30 21:29:55+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>pub.1128271359</td>
+      <td>Strategi Kebijakan Fiskal Pemerintah Indonesia...</td>
+      <td>10.36778/jesya.v3i2.193</td>
+      <td>2020</td>
+      <td>Jesya (Jurnal Ekonomi &amp; Ekonomi Syariah)</td>
+      <td>article</td>
+      <td>2020-05-31</td>
+      <td>2020-06-07 21:33:07+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>pub.1130531542</td>
+      <td>SALUD AUTOPERCIBIDA EN TRABAJADORES DE ENFERME...</td>
+      <td>10.35563/rmp.v9i2.330</td>
+      <td>2020</td>
+      <td>Revista Médica Panacea</td>
+      <td>article</td>
+      <td>2020-08-28</td>
+      <td>2020-09-03 21:44:09+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>pub.1130556299</td>
+      <td>The Future of Tobacco Industry Amidst of COVID...</td>
+      <td>10.26717/bjstr.2020.27.004566</td>
+      <td>2020</td>
+      <td>Biomedical Journal of Scientific &amp; Technical R...</td>
+      <td>article</td>
+      <td>2020-05-22</td>
+      <td>2020-09-04 21:23:54+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>pub.1130563637</td>
+      <td>The FDA De Novo medical device pathway, patent...</td>
+      <td>10.1038/s41587-020-0653-6</td>
+      <td>2020</td>
+      <td>Nature Biotechnology</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-05 19:50:44+00:00</td>
+      <td>12.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>pub.1130542554</td>
+      <td>Nanopore Sequencing Looks to the Long Haul</td>
+      <td>10.1089/gen.40.09.12</td>
+      <td>2020</td>
+      <td>Genetic Engineering &amp; Biotechnology News</td>
+      <td>article</td>
+      <td>2020-09-01</td>
+      <td>2020-09-04 19:48:40+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 10 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="4.-Using-‘UNNEST’-with-research-organizations">
+<h2>4. Using ‘UNNEST’ with research organizations<a class="headerlink" href="#4.-Using-‘UNNEST’-with-research-organizations" title="Permalink to this headline">¶</a></h2>
+<p>Google BigQuery permits to include structured and <a class="reference external" href="https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays">repeated fields</a> within tables. You’ll find examples of this approach throughout the Dimensions database, for example with the field <code class="docutils literal notranslate"><span class="pre">research_orgs</span></code>, which contains a list of all the author affiliations of publications, as <a class="reference external" href="https://grid.ac/">GRID</a> identifier (eg <code class="docutils literal notranslate"><span class="pre">grid.4991.5</span></code>).</p>
+<p>In order to work with repeated fields, we must use a special command: the <a class="reference external" href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest">UNNEST</a> operator. This is simply a way of ‘unpacking’ the contents of a repeated field into separate rows, so that they can be used in the query e.g. for counting or grouping. This is what it looks like:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT research_orgs
+FROM
+ `covid-19-dimensions-ai.data.publications` p,
+  UNNEST(research_orgs) AS research_orgs
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>research_orgs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>grid.1004.5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>grid.255588.7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>grid.412480.b</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>grid.452706.2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>grid.452450.2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>248637</th>
+      <td>grid.7840.b</td>
+    </tr>
+    <tr>
+      <th>248638</th>
+      <td>grid.137628.9</td>
+    </tr>
+    <tr>
+      <th>248639</th>
+      <td>grid.416016.4</td>
+    </tr>
+    <tr>
+      <th>248640</th>
+      <td>grid.21729.3f</td>
+    </tr>
+    <tr>
+      <th>248641</th>
+      <td>grid.263156.5</td>
+    </tr>
+  </tbody>
+</table>
+<p>248642 rows × 1 columns</p>
+</div></div>
+</div>
+<p>Let’s get more information about research organizations by using the GRID table</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT grid.id, grid.name
+FROM
+ `covid-19-dimensions-ai.data.publications` p
+LEFT JOIN
+  UNNEST(research_orgs) AS research_orgs_grids
+LEFT JOIN
+ `covid-19-dimensions-ai.data.grid` grid
+ON
+ grid.id=research_orgs_grids
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>grid.1004.5</td>
+      <td>Macquarie University</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>grid.255588.7</td>
+      <td>Eulji University</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>grid.412480.b</td>
+      <td>Seoul National University Bundang Hospital</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>grid.452706.2</td>
+      <td>New York Consortium in Evolutionary Primatology</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>grid.452450.2</td>
+      <td>Georgian National Museum</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>328052</th>
+      <td>grid.38142.3c</td>
+      <td>Harvard University</td>
+    </tr>
+    <tr>
+      <th>328053</th>
+      <td>grid.38142.3c</td>
+      <td>Harvard University</td>
+    </tr>
+    <tr>
+      <th>328054</th>
+      <td>grid.38142.3c</td>
+      <td>Harvard University</td>
+    </tr>
+    <tr>
+      <th>328055</th>
+      <td>grid.38142.3c</td>
+      <td>Harvard University</td>
+    </tr>
+    <tr>
+      <th>328056</th>
+      <td>grid.38142.3c</td>
+      <td>Harvard University</td>
+    </tr>
+  </tbody>
+</table>
+<p>328057 rows × 2 columns</p>
+</div></div>
+</div>
+<p>Let’s put it all togethern with the main query now</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT
+ p.id,
+ p.title.preferred AS title,
+ p.doi,
+ p.year,
+ COALESCE(p.journal.title, p.proceedings_title.preferred, p.book_title.preferred, p.book_series_title.preferred) AS venue,
+ p.type,
+ p.date AS date_publication,
+ p.date_inserted,
+ p.altmetrics.score AS altmetrics_score,
+ p.metrics.times_cited,
+ grid.id AS gridid,
+ grid.name AS gridname,
+ grid.address.country AS gridcountry,
+ grid.address.city AS gridcity,
+FROM
+ `covid-19-dimensions-ai.data.publications` p
+LEFT JOIN
+  UNNEST(research_orgs) AS research_orgs_grids
+LEFT JOIN
+ `covid-19-dimensions-ai.data.grid` grid
+ON
+ grid.id=research_orgs_grids
+WHERE
+ EXTRACT(YEAR
+ FROM
+   date_inserted) &gt;= 2020
+
+
+LIMIT 100
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>title</th>
+      <th>doi</th>
+      <th>year</th>
+      <th>venue</th>
+      <th>type</th>
+      <th>date_publication</th>
+      <th>date_inserted</th>
+      <th>altmetrics_score</th>
+      <th>times_cited</th>
+      <th>gridid</th>
+      <th>gridname</th>
+      <th>gridcountry</th>
+      <th>gridcity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1126698756</td>
+      <td>Stepping Out of Isolation: Autistic People and...</td>
+      <td>10.1089/aut.2020.29012.jdh</td>
+      <td>2020</td>
+      <td>Autism in Adulthood</td>
+      <td>article</td>
+      <td>2020-06-01</td>
+      <td>2020-04-17 22:54:24+00:00</td>
+      <td>64.0</td>
+      <td>6.0</td>
+      <td>grid.1004.5</td>
+      <td>Macquarie University</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1131229230</td>
+      <td>Wacker's new silicone products for shampoos an...</td>
+      <td>10.1016/j.fos.2020.09.016</td>
+      <td>2020</td>
+      <td>Focus on Surfactants</td>
+      <td>article</td>
+      <td>2020-07</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1131210174</td>
+      <td>Laboratory Diagnosis of Coronavirus Disease 19...</td>
+      <td>10.15324/kjcls.2020.52.3.284</td>
+      <td>2020</td>
+      <td>Korean Journal of Clinical Laboratory Science</td>
+      <td>article</td>
+      <td>2020-09-30</td>
+      <td>2020-09-28 18:59:48+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>grid.255588.7</td>
+      <td>Eulji University</td>
+      <td>South Korea</td>
+      <td>Daejeon</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1131210174</td>
+      <td>Laboratory Diagnosis of Coronavirus Disease 19...</td>
+      <td>10.15324/kjcls.2020.52.3.284</td>
+      <td>2020</td>
+      <td>Korean Journal of Clinical Laboratory Science</td>
+      <td>article</td>
+      <td>2020-09-30</td>
+      <td>2020-09-28 18:59:48+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>grid.412480.b</td>
+      <td>Seoul National University Bundang Hospital</td>
+      <td>South Korea</td>
+      <td>Seongnam-si</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1131241527</td>
+      <td>SOMALIA: Elections Deal</td>
+      <td>10.1111/j.1467-825x.2020.09603.x</td>
+      <td>2020</td>
+      <td>Africa Research Bulletin Political Social and ...</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>pub.1130923883</td>
+      <td>Poster 22 Electronic Urology Handover – A Qual...</td>
+      <td>10.1016/s2666-1683(20)35234-4</td>
+      <td>2020</td>
+      <td>None</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-19 19:45:47+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>pub.1130962019</td>
+      <td>Amoxicillin/cefdinir</td>
+      <td>10.1007/s40278-020-83384-y</td>
+      <td>2020</td>
+      <td>Reactions Weekly</td>
+      <td>article</td>
+      <td>2020-09</td>
+      <td>2020-09-20 19:33:55+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>pub.1126262567</td>
+      <td>BCG is a Good Immunotherapeutic Agent for Vira...</td>
+      <td>10.29333/ejgm/7892</td>
+      <td>2020</td>
+      <td>Electronic Journal of General Medicine</td>
+      <td>article</td>
+      <td>2020-04-06</td>
+      <td>2020-04-08 13:19:54+00:00</td>
+      <td>NaN</td>
+      <td>8.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>pub.1130228469</td>
+      <td>Demographic and clinical features of Covid-19 ...</td>
+      <td>10.5455/medscience.2020.07.124</td>
+      <td>2020</td>
+      <td>Medicine Science | International Medical Journal</td>
+      <td>article</td>
+      <td>2020</td>
+      <td>2020-08-21 21:21:05+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>pub.1127411897</td>
+      <td>2019冠状病毒病(COVID-19)与粮食供应链面临的风险:如何应对?</td>
+      <td>10.4060/ca8388zh</td>
+      <td>2020</td>
+      <td>2019冠状病毒病(COVID-19)与粮食供应链面临的风险:如何应对?</td>
+      <td>book</td>
+      <td>2020</td>
+      <td>2020-05-07 18:48:56+00:00</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 14 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="5.-Adding-categories-&amp;-open-access-information">
+<h2>5. Adding categories &amp; open access information<a class="headerlink" href="#5.-Adding-categories-&-open-access-information" title="Permalink to this headline">¶</a></h2>
+<p>Now that we know how to use UNNEST, there are two more fields of type ‘repeated’ that we want to bring into the mix:</p>
+<ul class="simple">
+<li><p>FOR Categories - this is a categorization system that covers all areas of research and is used extensively in Dimensions.</p></li>
+<li><p>Open access status - this field tells us whether a publication is behind a paywall, or not, in particular by including detailed information about its OA status</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+SELECT
+ p.id,
+ p.title.preferred AS title,
+ p.doi,
+ p.year,
+ COALESCE(p.journal.title, p.proceedings_title.preferred, p.book_title.preferred, p.book_series_title.preferred) AS venue,
+ p.type,
+ p.date AS date_publication,
+ p.date_inserted,
+ p.altmetrics.score AS altmetrics_score,
+ p.metrics.times_cited,
+ grid.id AS gridid,
+ grid.name AS gridname,
+ grid.address.country AS gridcountry,
+ grid.address.city AS gridcity,
+ ## ==&gt; the new fields
+ open_access_categories,
+ cat_for.name AS category_for,
+FROM
+ `covid-19-dimensions-ai.data.publications` p
+LEFT JOIN
+  UNNEST(research_orgs) AS research_orgs_grids
+LEFT JOIN
+ `covid-19-dimensions-ai.data.grid` grid
+ON
+ grid.id=research_orgs_grids
+  ##  ==&gt; the new joins
+LEFT JOIN
+ UNNEST(p.open_access_categories) AS open_access_categories
+LEFT JOIN
+ UNNEST(p.category_for.first_level.full) AS cat_for
+WHERE
+ EXTRACT(YEAR
+ FROM
+   date_inserted) &gt;= 2020
+
+LIMIT 100
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>title</th>
+      <th>doi</th>
+      <th>year</th>
+      <th>venue</th>
+      <th>type</th>
+      <th>date_publication</th>
+      <th>date_inserted</th>
+      <th>altmetrics_score</th>
+      <th>times_cited</th>
+      <th>gridid</th>
+      <th>gridname</th>
+      <th>gridcountry</th>
+      <th>gridcity</th>
+      <th>open_access_categories</th>
+      <th>category_for</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1126698756</td>
+      <td>Stepping Out of Isolation: Autistic People and...</td>
+      <td>10.1089/aut.2020.29012.jdh</td>
+      <td>2020</td>
+      <td>Autism in Adulthood</td>
+      <td>article</td>
+      <td>2020-06-01</td>
+      <td>2020-04-17 22:54:24+00:00</td>
+      <td>64.0</td>
+      <td>6.0</td>
+      <td>grid.1004.5</td>
+      <td>Macquarie University</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>oa_all</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1126698756</td>
+      <td>Stepping Out of Isolation: Autistic People and...</td>
+      <td>10.1089/aut.2020.29012.jdh</td>
+      <td>2020</td>
+      <td>Autism in Adulthood</td>
+      <td>article</td>
+      <td>2020-06-01</td>
+      <td>2020-04-17 22:54:24+00:00</td>
+      <td>64.0</td>
+      <td>6.0</td>
+      <td>grid.1004.5</td>
+      <td>Macquarie University</td>
+      <td>Australia</td>
+      <td>Sydney</td>
+      <td>gold_bronze</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1131229230</td>
+      <td>Wacker's new silicone products for shampoos an...</td>
+      <td>10.1016/j.fos.2020.09.016</td>
+      <td>2020</td>
+      <td>Focus on Surfactants</td>
+      <td>article</td>
+      <td>2020-07</td>
+      <td>2020-09-29 19:55:25+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1131210174</td>
+      <td>Laboratory Diagnosis of Coronavirus Disease 19...</td>
+      <td>10.15324/kjcls.2020.52.3.284</td>
+      <td>2020</td>
+      <td>Korean Journal of Clinical Laboratory Science</td>
+      <td>article</td>
+      <td>2020-09-30</td>
+      <td>2020-09-28 18:59:48+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>grid.255588.7</td>
+      <td>Eulji University</td>
+      <td>South Korea</td>
+      <td>Daejeon</td>
+      <td>oa_all</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1131210174</td>
+      <td>Laboratory Diagnosis of Coronavirus Disease 19...</td>
+      <td>10.15324/kjcls.2020.52.3.284</td>
+      <td>2020</td>
+      <td>Korean Journal of Clinical Laboratory Science</td>
+      <td>article</td>
+      <td>2020-09-30</td>
+      <td>2020-09-28 18:59:48+00:00</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>grid.255588.7</td>
+      <td>Eulji University</td>
+      <td>South Korea</td>
+      <td>Daejeon</td>
+      <td>gold_bronze</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>pub.1129232392</td>
+      <td>Lait et produits laitiers</td>
+      <td>10.1787/d63fcf9a-fr</td>
+      <td>2020</td>
+      <td>Perspectives agricoles de l'OCDE et de la FAO ...</td>
+      <td>chapter</td>
+      <td>2020-07-16</td>
+      <td>2020-07-12 23:14:36+00:00</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>gold_bronze</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>pub.1127258110</td>
+      <td>Mending broken hearts</td>
+      <td>10.1126/science.368.6490.485-a</td>
+      <td>2020</td>
+      <td>Science</td>
+      <td>article</td>
+      <td>2020-05-01</td>
+      <td>2020-05-02 14:28:34+00:00</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>oa_all</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>pub.1127258110</td>
+      <td>Mending broken hearts</td>
+      <td>10.1126/science.368.6490.485-a</td>
+      <td>2020</td>
+      <td>Science</td>
+      <td>article</td>
+      <td>2020-05-01</td>
+      <td>2020-05-02 14:28:34+00:00</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>gold_bronze</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>pub.1127253600</td>
+      <td>A COVID-19 recovery for climate</td>
+      <td>10.1126/science.abc4887</td>
+      <td>2020</td>
+      <td>Science</td>
+      <td>article</td>
+      <td>2020-05-01</td>
+      <td>2020-05-02 14:28:34+00:00</td>
+      <td>150.0</td>
+      <td>15.0</td>
+      <td>grid.5801.c</td>
+      <td>ETH Zurich</td>
+      <td>Switzerland</td>
+      <td>Zurich</td>
+      <td>oa_all</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>pub.1127253600</td>
+      <td>A COVID-19 recovery for climate</td>
+      <td>10.1126/science.abc4887</td>
+      <td>2020</td>
+      <td>Science</td>
+      <td>article</td>
+      <td>2020-05-01</td>
+      <td>2020-05-02 14:28:34+00:00</td>
+      <td>150.0</td>
+      <td>15.0</td>
+      <td>grid.5801.c</td>
+      <td>ETH Zurich</td>
+      <td>Switzerland</td>
+      <td>Zurich</td>
+      <td>gold_bronze</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 16 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="6.-From-the-DSL-to-Google-BigQuery">
+<h2>6. From the DSL to Google BigQuery<a class="headerlink" href="#6.-From-the-DSL-to-Google-BigQuery" title="Permalink to this headline">¶</a></h2>
+<p>Goal:</p>
+<ul class="simple">
+<li><p>Running a full-text search using the DSL API, then creating a corpus in GBQ based on this search (eg see this <a class="reference external" href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">search</a>)</p></li>
+</ul>
+<p>Usecase:</p>
+<ul class="simple">
+<li><p><strong>More data.</strong> The DSL return facets eg <code class="docutils literal notranslate"><span class="pre">researchers</span></code>, but that’s limited to 1000 results</p></li>
+<li><p><strong>Easier integration.</strong>I want to use the data in GBQ to build a dashboard</p></li>
+<li><p><strong>Richer data</strong>. I want to enrich the results using ad-hoc metrics (eg more <code class="docutils literal notranslate"><span class="pre">researchers</span></code> metadata including citations &amp; altmetric) and want to achieve that in one single step</p></li>
+</ul>
+</div>
+<div class="section" id="7.-Connecting-to-the-DSL-API">
+<h2>7. Connecting to the DSL API<a class="headerlink" href="#7.-Connecting-to-the-DSL-API" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>!pip install dimcli --quiet
+
+import dimcli
+from dimcli.utils import *
+import json
+import sys
+import pandas as pd
+#
+
+ENDPOINT = &quot;https://app.dimensions.ai&quot;
+USERNAME, PASSWORD  = &quot;&quot;, &quot;&quot;
+dimcli.login(USERNAME, PASSWORD, ENDPOINT)
+dsl = dimcli.Dsl()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Dimcli - Dimensions API Client (v0.8.1)
+Connected to: https://app.dimensions.ai - DSL v1.28
+Method: manual login
+</pre></div></div>
+</div>
+<p><strong>TIP</strong> Remember about the full text search rules with the DSL <a class="reference external" href="https://docs.dimensions.ai/dsl/language.html#full-text-searching">https://docs.dimensions.ai/dsl/language.html#full-text-searching</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%dsldf
+
+search publications for
+  &quot; \&quot;moon landing\&quot; AND Moon AND \&quot;lunar surface\&quot; &quot;
+return researchers limit 1000 skip 50
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Returned Errors: 1
+Time: 0.24s
+Semantic Error
+Semantic errors found:
+        Offset is not supported for facet results
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="8.-Exporting-DSL-results-to-GBQ">
+<h2>8. Exporting DSL results to GBQ<a class="headerlink" href="#8.-Exporting-DSL-results-to-GBQ" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Pandas provides a handy command to move data to GBQ: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_gbq.html">DataFrame.to_gbq</a></p></li>
+</ul>
+<p>NOTE all you need to export to GBQ is a list of publications IDs!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%dslloopdf
+
+search publications for
+  &quot; \&quot;moon landing\&quot; AND Moon AND \&quot;lunar surface\&quot; &quot;
+return publications[id]
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Starting iteration with limit=1000 skip=0 ...
+0-1000 / 11201 (0.43s)
+1000-2000 / 11201 (1.01s)
+2000-3000 / 11201 (0.69s)
+3000-4000 / 11201 (1.03s)
+4000-5000 / 11201 (1.30s)
+5000-6000 / 11201 (1.58s)
+6000-7000 / 11201 (0.33s)
+7000-8000 / 11201 (0.25s)
+8000-9000 / 11201 (0.27s)
+9000-10000 / 11201 (0.64s)
+10000-11000 / 11201 (1.05s)
+11000-11201 / 11201 (1.80s)
+===
+Records extracted: 11201
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1128771471</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1130814402</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1131658726</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1124123379</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1131232278</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>11196</th>
+      <td>pub.1061739351</td>
+    </tr>
+    <tr>
+      <th>11197</th>
+      <td>pub.1025947790</td>
+    </tr>
+    <tr>
+      <th>11198</th>
+      <td>pub.1091822752</td>
+    </tr>
+    <tr>
+      <th>11199</th>
+      <td>pub.1025757974</td>
+    </tr>
+    <tr>
+      <th>11200</th>
+      <td>pub.1023928923</td>
+    </tr>
+  </tbody>
+</table>
+<p>11201 rows × 1 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>df = dsl_last_results
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>DATASET = &quot;demo_dsl&quot;
+table_id = DATASET + &quot;.moonlanding&quot;
+df.to_gbq(table_id, project_id = PROJECTID, if_exists=&quot;replace&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+1it [00:05,  5.05s/it]
+</pre></div></div>
+</div>
+<p>That’s it - you should now be able to go to the <a class="reference external" href="https://console.cloud.google.com/bigquery">online GBQ console</a> and see the new <code class="docutils literal notranslate"><span class="pre">demo_dsl.moonlanding</span></code> dataset.</p>
+</div>
+<div class="section" id="9.-Querying-your-new-dataset-using-a-JOIN-on-Dimensions">
+<h2>9. Querying your new dataset using a JOIN on Dimensions<a class="headerlink" href="#9.-Querying-your-new-dataset-using-a-JOIN-on-Dimensions" title="Permalink to this headline">¶</a></h2>
+<p>GOAL: Results should be the same as the ‘publication year’ facet in the <a class="reference external" href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+WITH mypubs AS (
+  SELECT dim_pubs.*
+  FROM
+    `dimensions-ai.data_analytics.publications` dim_pubs
+  JOIN
+    `ds-data-solutions-gbq.demo_dsl.moonlanding` dslexport
+  ON
+    dim_pubs.id = dslexport.id
+)
+
+SELECT
+  COUNT(id) as tot,
+  year
+FROM mypubs
+GROUP BY year
+ORDER BY tot DESC
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tot</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10052</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>133</td>
+      <td>2020</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>97</td>
+      <td>2019</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>70</td>
+      <td>2015</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>66</td>
+      <td>2017</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>65</td>
+      <td>2018</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>63</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>59</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>52</td>
+      <td>2016</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>49</td>
+      <td>2012</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>48</td>
+      <td>2008</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>47</td>
+      <td>2014</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>45</td>
+      <td>2010</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>42</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>36</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>30</td>
+      <td>2005</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>21</td>
+      <td>2006</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>20</td>
+      <td>1969</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>18</td>
+      <td>1970</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>16</td>
+      <td>1993</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>15</td>
+      <td>2004</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>10</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>9</td>
+      <td>1998</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>9</td>
+      <td>2002</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>9</td>
+      <td>1994</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>8</td>
+      <td>1966</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>8</td>
+      <td>1999</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>7</td>
+      <td>1963</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>7</td>
+      <td>1992</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>6</td>
+      <td>2001</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>6</td>
+      <td>1995</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>6</td>
+      <td>1989</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>6</td>
+      <td>1973</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>5</td>
+      <td>1974</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>5</td>
+      <td>1967</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>5</td>
+      <td>1996</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>5</td>
+      <td>1971</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>4</td>
+      <td>1997</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>4</td>
+      <td>1990</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>3</td>
+      <td>1979</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>3</td>
+      <td>1988</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>3</td>
+      <td>1991</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>3</td>
+      <td>1972</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>3</td>
+      <td>1975</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>2</td>
+      <td>1978</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>2</td>
+      <td>1965</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>2</td>
+      <td>1968</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>2</td>
+      <td>1986</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>2</td>
+      <td>1983</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>2</td>
+      <td>1977</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>2</td>
+      <td>1958</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>1</td>
+      <td>1981</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>1</td>
+      <td>1961</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>1</td>
+      <td>1984</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>1</td>
+      <td>1960</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>1</td>
+      <td>1980</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>1</td>
+      <td>1962</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>1</td>
+      <td>1964</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>1</td>
+      <td>1982</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>1</td>
+      <td>1976</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="10.-Using-GBQ-to-generate-researcher-statistics">
+<h2>10. Using GBQ to generate researcher statistics<a class="headerlink" href="#10.-Using-GBQ-to-generate-researcher-statistics" title="Permalink to this headline">¶</a></h2>
+<p>The goal is to generate a table just like the one in the ‘researchers’ analytical view in the <a class="reference external" href="https://app.dimensions.ai/analytics/publication/author/aggregated?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+WITH mypubs AS (
+  SELECT dim_pubs.*
+  FROM
+    `dimensions-ai.data_analytics.publications` dim_pubs
+  JOIN
+    `ds-data-solutions-gbq.demo_dsl.moonlanding` dslexport
+  ON
+    dim_pubs.id = dslexport.id
+),
+
+researchers_metrics AS (
+  SELECT researcher_id,
+    COUNT(id) as publications_count,
+    SUM(citations_count) as citations_count,
+    SUM(altmetrics.score) as altmetric_sum
+  FROM
+    mypubs,
+    UNNEST( researcher_ids ) as researcher_id
+  GROUP BY researcher_id
+)
+
+SELECT * FROM researchers_metrics
+ORDER BY publications_count DESC
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>researcher_id</th>
+      <th>publications_count</th>
+      <th>citations_count</th>
+      <th>altmetric_sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ur.01056354465.10</td>
+      <td>11</td>
+      <td>21.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ur.014402173273.44</td>
+      <td>6</td>
+      <td>42.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ur.012373502003.54</td>
+      <td>4</td>
+      <td>63.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ur.010534421371.14</td>
+      <td>4</td>
+      <td>63.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ur.015145367415.34</td>
+      <td>4</td>
+      <td>44.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1080</th>
+      <td>ur.0767272510.86</td>
+      <td>1</td>
+      <td>5.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1081</th>
+      <td>ur.07637166751.28</td>
+      <td>1</td>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1082</th>
+      <td>ur.012762707227.21</td>
+      <td>1</td>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1083</th>
+      <td>ur.010101533313.52</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1084</th>
+      <td>ur.016406136233.64</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>16.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>1085 rows × 4 columns</p>
+</div></div>
+</div>
+<p><strong>Final step</strong>: let’s add researchers names and current organization details:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>%%bigquery --project $PROJECTID
+
+WITH mypubs AS (
+
+  SELECT dim_pubs.*
+  FROM
+    `dimensions-ai.data_analytics.publications` dim_pubs
+  JOIN
+    `ds-data-solutions-gbq.demo_dsl.moonlanding` dslexport
+  ON
+    dim_pubs.id = dslexport.id
+
+),
+
+researchers_metrics AS (
+
+  SELECT researcher_id,
+    COUNT(id) as publications_count,
+    SUM(citations_count) as citations_count,
+    SUM(altmetrics.score) as altmetric_sum
+  FROM
+    mypubs,
+    UNNEST( researcher_ids ) as researcher_id
+  GROUP BY researcher_id
+
+),
+
+researchers_full AS (
+
+  SELECT researchers_metrics.*,
+    r.first_name, r.last_name, r.total_grants,
+    grid.id as grid_id,
+    grid.name as grid_name,
+    grid.address.city as grid_city,
+    grid.address.country as grid_country
+  FROM
+    researchers_metrics
+  JOIN
+    `dimensions-ai.data_analytics.researchers` r
+    ON researchers_metrics.researcher_id = r.id
+  JOIN
+    `dimensions-ai.data_analytics.grid` grid
+    ON grid.id = r.current_research_org
+
+)
+
+
+
+SELECT * FROM researchers_full
+ORDER BY publications_count DESC
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>researcher_id</th>
+      <th>publications_count</th>
+      <th>citations_count</th>
+      <th>altmetric_sum</th>
+      <th>first_name</th>
+      <th>last_name</th>
+      <th>total_grants</th>
+      <th>grid_id</th>
+      <th>grid_name</th>
+      <th>grid_city</th>
+      <th>grid_country</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ur.01056354465.10</td>
+      <td>11</td>
+      <td>21.0</td>
+      <td>49.0</td>
+      <td>Roger D</td>
+      <td>Launius</td>
+      <td>4</td>
+      <td>grid.1214.6</td>
+      <td>Smithsonian Institution</td>
+      <td>Washington D.C.</td>
+      <td>United States</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ur.014402173273.44</td>
+      <td>6</td>
+      <td>42.0</td>
+      <td>10.0</td>
+      <td>Joseph N</td>
+      <td>Pelton</td>
+      <td>0</td>
+      <td>grid.33224.34</td>
+      <td>International Space University</td>
+      <td>Illkirch-Graffenstaden</td>
+      <td>France</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ur.010243405673.63</td>
+      <td>4</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>Sachiko</td>
+      <td>Wakabayashi</td>
+      <td>1</td>
+      <td>grid.62167.34</td>
+      <td>Japan Aerospace Exploration Agency</td>
+      <td>Tokyo</td>
+      <td>Japan</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ur.012503545245.69</td>
+      <td>4</td>
+      <td>12.0</td>
+      <td>1.0</td>
+      <td>Stephan</td>
+      <td>Theil</td>
+      <td>2</td>
+      <td>grid.7551.6</td>
+      <td>German Aerospace Center</td>
+      <td>Cologne</td>
+      <td>Germany</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ur.0720745255.73</td>
+      <td>4</td>
+      <td>8.0</td>
+      <td>28.0</td>
+      <td>Chun-Lai</td>
+      <td>Li</td>
+      <td>3</td>
+      <td>grid.450302.0</td>
+      <td>National Astronomical Observatories</td>
+      <td>Beijing</td>
+      <td>China</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>886</th>
+      <td>ur.011430662526.22</td>
+      <td>1</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>Gang</td>
+      <td>Lei</td>
+      <td>0</td>
+      <td>grid.458502.e</td>
+      <td>Technical Institute of Physics and Chemistry</td>
+      <td>Beijing</td>
+      <td>China</td>
+    </tr>
+    <tr>
+      <th>887</th>
+      <td>ur.015477605337.38</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>Olivier</td>
+      <td>Dubois-Matra</td>
+      <td>0</td>
+      <td>grid.424669.b</td>
+      <td>European Space Research and Technology Centre</td>
+      <td>Noordwijk-Binnen</td>
+      <td>Netherlands</td>
+    </tr>
+    <tr>
+      <th>888</th>
+      <td>ur.013214745135.53</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Catherine L</td>
+      <td>Newell</td>
+      <td>0</td>
+      <td>grid.26790.3a</td>
+      <td>University of Miami</td>
+      <td>Coral Gables</td>
+      <td>United States</td>
+    </tr>
+    <tr>
+      <th>889</th>
+      <td>ur.014464032227.37</td>
+      <td>1</td>
+      <td>41.0</td>
+      <td>141.0</td>
+      <td>Andrew M</td>
+      <td>Carton</td>
+      <td>0</td>
+      <td>grid.25879.31</td>
+      <td>University of Pennsylvania</td>
+      <td>Philadelphia</td>
+      <td>United States</td>
+    </tr>
+    <tr>
+      <th>890</th>
+      <td>ur.010610572173.89</td>
+      <td>1</td>
+      <td>10.0</td>
+      <td>NaN</td>
+      <td>Zhan</td>
+      <td>Liu</td>
+      <td>0</td>
+      <td>grid.411510.0</td>
+      <td>China University of Mining and Technology</td>
+      <td>Xuzhou</td>
+      <td>China</td>
+    </tr>
+  </tbody>
+</table>
+<p>891 rows × 11 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://www.dimensions.ai/products/bigquery/">Dimensions on BigQuery</a> allows to carry out sophisticated research data analytics tasks like the ones described on this website. Check out also the associated <a class="reference external" href="https://github.com/digital-science/dimensions-gbq-lab">Github repository</a> for examples, the source code of these tutorials and much more.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+
+    </p>
+  </div>
+    <p>© Copyright 2020 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a></p>
+     
+
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+  
+    
+
+    <!-- Adds target=_blank to external links -->
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('a[href^="http://"], a[href^="https://"]').not('a[class*=internal]').attr('target', '_blank');
+    });
+  </script>
+  
+
+
+</body>
+</html>
