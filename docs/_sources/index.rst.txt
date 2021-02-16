@@ -29,6 +29,7 @@ BigQuery Cookbooks
 
    cookbooks/1-Verifying-your-connection.ipynb
    cookbooks/2-Publications-queries.ipynb
+   cookbooks/3-Using-the-API-with-GBQ.ipynb
 
 
 

@@ -41,6 +41,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="From the DSL API to Google BigQuery" href="3-Using-the-API-with-GBQ.html" />
     <link rel="prev" title="Verifying your connection" href="1-Verifying-your-connection.html" />
     
 
@@ -139,20 +140,24 @@
 <li class="toctree-l2"><a class="reference internal" href="#9.-Select-publications-matching-selected-concepts">9. Select publications matching selected concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#10.-Count-of-corresponding-authors-by-publisher">10. Count of corresponding authors by publisher</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#11.-Counting-new-vs-recurring-authors,-for-a-specific-journal">11. Counting new vs recurring authors, for a specific journal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Citations-queries">Citations queries</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Top-N-publications-by-citations-percentile">Top N publications by citations percentile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Citations-by-journal,-for-a-specific-publisher">Citations by journal, for a specific publisher</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#12.-Funding-by-journal">12. Funding by journal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#13.-Citations-queries">13. Citations queries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#13.1-Top-N-publications-by-citations-percentile">13.1 Top N publications by citations percentile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#13.2-Citations-by-journal,-for-a-specific-publisher">13.2 Citations by journal, for a specific publisher</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#13.3-One-degree-citation-network-for-a-single-publication">13.3 One-degree citation network for a single publication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#13.4-Incoming-citations-for-a-journal">13.4 Incoming citations for a journal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#13.5-Outgoing-citations-to-a-journal">13.5 Outgoing citations to a journal</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#One-degree-citation-network-for-a-single-publication">One-degree citation network for a single publication</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Funding-by-journal">Funding by journal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Articles-with-SDGs">Articles with SDGs</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#incoming-citations-for-a-journal">incoming citations for a journal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Outgoing-citations-to-a-journal">Outgoing citations to a journal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#14.-Extracting-complex-publications-records">14. Extracting complex publications records</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#REVIEW-REVIEW-REVIEW">REVIEW REVIEW REVIEW</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">Researchers related to a selected GRID and category [REVIEW]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3-Using-the-API-with-GBQ.html">From the DSL API to Google BigQuery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="3-Using-the-API-with-GBQ.html#Prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-Using-the-API-with-GBQ.html#1.-Connecting-to-the-DSL-API">1. Connecting to the DSL API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-Using-the-API-with-GBQ.html#2.-Exporting-DSL-results-to-GBQ">2. Exporting DSL results to GBQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-Using-the-API-with-GBQ.html#3.-Querying-your-new-dataset-using-a-JOIN-on-Dimensions">3. Querying your new dataset using a JOIN on Dimensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3-Using-the-API-with-GBQ.html#4.-Using-GBQ-to-generate-researcher-statistics">4. Using GBQ to generate researcher statistics</a></li>
 </ul>
 </li>
 </ul>
@@ -494,7 +499,7 @@ div.rendered_html tbody tr:hover {
 <p>This notebook assumes that you have <a class="reference external" href="https://digital-science.github.io/dimensions-gbq-lab/cookbooks/1-Verifying-your-connection.html">verifed your connection</a> to Dimensions on Google BigQuery and have basic familiarity with the <a class="reference external" href="https://docs.dimensions.ai/bigquery/gcp-setup.html">Google Cloud Platform</a> concepts.</p>
 <p>The following code will load the Python BigQuery library and authenticate you as a valid user.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2500,12 +2505,156 @@ Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.29ro
 </div></div>
 </div>
 </div>
-<div class="section" id="Citations-queries">
-<h2>Citations queries<a class="headerlink" href="#Citations-queries" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="Top-N-publications-by-citations-percentile">
-<h3>Top N publications by citations percentile<a class="headerlink" href="#Top-N-publications-by-citations-percentile" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="12.-Funding-by-journal">
+<h2>12. Funding by journal<a class="headerlink" href="#12.-Funding-by-journal" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
+
+WITH funding AS
+(
+         SELECT   funding.grid_id         AS funders,
+                  COUNT(id)               AS pubs,
+                  COUNT(funding.grant_id) AS grants
+         FROM     `dimensions-ai.data_analytics.publications`,
+                  UNNEST(funding_details) AS funding
+         WHERE    journal.id = &quot;jour.1113716&quot; -- nature medicine
+         GROUP BY funders)
+
+SELECT   funding.*,
+         grid.NAME
+FROM     funding
+JOIN     `dimensions-ai.data_analytics.grid` grid
+ON       funding.funders = grid.id
+ORDER BY pubs DESC,
+         grants DESC
+LIMIT 10
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 5/5 [00:00&lt;00:00, 2520.01query/s]
+Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.11rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>funders</th>
+      <th>pubs</th>
+      <th>grants</th>
+      <th>NAME</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>grid.48336.3a</td>
+      <td>2699</td>
+      <td>2484</td>
+      <td>National Cancer Institute</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>grid.419681.3</td>
+      <td>2008</td>
+      <td>1878</td>
+      <td>National Institute of Allergy and Infectious D...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>grid.419635.c</td>
+      <td>1620</td>
+      <td>1564</td>
+      <td>National Institute of Diabetes and Digestive a...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>grid.279885.9</td>
+      <td>1612</td>
+      <td>1525</td>
+      <td>National Heart Lung and Blood Institute</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>grid.416870.c</td>
+      <td>712</td>
+      <td>668</td>
+      <td>National Institute of Neurological Disorders a...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>grid.419475.a</td>
+      <td>569</td>
+      <td>537</td>
+      <td>National Institute on Aging</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>grid.54432.34</td>
+      <td>510</td>
+      <td>447</td>
+      <td>Japan Society for the Promotion of Science</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>grid.280785.0</td>
+      <td>460</td>
+      <td>441</td>
+      <td>National Institute of General Medical Sciences</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>grid.14105.31</td>
+      <td>452</td>
+      <td>344</td>
+      <td>Medical Research Council</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>grid.270680.b</td>
+      <td>400</td>
+      <td>183</td>
+      <td>European Commission</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="13.-Citations-queries">
+<h2>13. Citations queries<a class="headerlink" href="#13.-Citations-queries" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="13.1-Top-N-publications-by-citations-percentile">
+<h3>13.1 Top N publications by citations percentile<a class="headerlink" href="#13.1-Top-N-publications-by-citations-percentile" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2538,12 +2687,12 @@ ORDER BY citation_percentile asc
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 2074.33query/s]
-Downloading: 100%|██████████| 7034/7034 [00:02&lt;00:00, 2580.02rows/s]
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1800.65query/s]
+Downloading: 100%|██████████| 7034/7034 [00:02&lt;00:00, 2555.04rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2616,36 +2765,36 @@ Downloading: 100%|██████████| 7034/7034 [00:02&lt;00:00, 258
     </tr>
     <tr>
       <th>7029</th>
-      <td>pub.1126789618</td>
-      <td>First Successful Treatment of Coronavirus Dise...</td>
+      <td>pub.1127509406</td>
+      <td>Hydrothermal carbonization of sewage digestate...</td>
       <td>14</td>
       <td>0.008954</td>
     </tr>
     <tr>
       <th>7030</th>
-      <td>pub.1126819649</td>
-      <td>Advanced Matrixes for Binder‐Free Nanostructur...</td>
+      <td>pub.1127507337</td>
+      <td>Flow and heat transfer of hybrid nanofluid ove...</td>
       <td>14</td>
       <td>0.008954</td>
     </tr>
     <tr>
       <th>7031</th>
-      <td>pub.1128192899</td>
-      <td>A hybrid multi-scale model of COVID-19 transmi...</td>
+      <td>pub.1127511048</td>
+      <td>Reinforcement learning for building controls: ...</td>
       <td>14</td>
       <td>0.008954</td>
     </tr>
     <tr>
       <th>7032</th>
-      <td>pub.1128190805</td>
-      <td>Z-scheme In2O3/WO3 heterogeneous photocatalyst...</td>
+      <td>pub.1126596495</td>
+      <td>Integrated Multi-satellite Retrievals for the ...</td>
       <td>14</td>
       <td>0.008954</td>
     </tr>
     <tr>
       <th>7033</th>
-      <td>pub.1128158289</td>
-      <td>Properties of fresh and hardened fly ash/slag ...</td>
+      <td>pub.1125954927</td>
+      <td>An Innovative Air Conditioning System for Chan...</td>
       <td>14</td>
       <td>0.008954</td>
     </tr>
@@ -2655,10 +2804,10 @@ Downloading: 100%|██████████| 7034/7034 [00:02&lt;00:00, 258
 </div></div>
 </div>
 </div>
-<div class="section" id="Citations-by-journal,-for-a-specific-publisher">
-<h3>Citations by journal, for a specific publisher<a class="headerlink" href="#Citations-by-journal,-for-a-specific-publisher" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="13.2-Citations-by-journal,-for-a-specific-publisher">
+<h3>13.2 Citations by journal, for a specific publisher<a class="headerlink" href="#13.2-Citations-by-journal,-for-a-specific-publisher" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2688,12 +2837,12 @@ LIMIT 10
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 5/5 [00:00&lt;00:00, 3541.29query/s]
-Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.11rows/s]
+Query complete after 0.00s: 100%|██████████| 5/5 [00:00&lt;00:00, 2635.28query/s]
+Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  3.92rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2775,11 +2924,10 @@ Downloading: 100%|██████████| 10/10 [00:02&lt;00:00,  4.11ro
 </div></div>
 </div>
 </div>
-</div>
-<div class="section" id="One-degree-citation-network-for-a-single-publication">
-<h2>One-degree citation network for a single publication<a class="headerlink" href="#One-degree-citation-network-for-a-single-publication" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="13.3-One-degree-citation-network-for-a-single-publication">
+<h3>13.3 One-degree citation network for a single publication<a class="headerlink" href="#13.3-One-degree-citation-network-for-a-single-publication" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -2808,12 +2956,12 @@ SELECT * from level2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 4/4 [00:00&lt;00:00, 1477.65query/s]
-Downloading: 100%|██████████| 187/187 [00:02&lt;00:00, 80.92rows/s]
+Query complete after 0.00s: 100%|██████████| 4/4 [00:00&lt;00:00, 1554.02query/s]
+Downloading: 100%|██████████| 187/187 [00:02&lt;00:00, 79.75rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -2851,31 +2999,31 @@ Downloading: 100%|██████████| 187/187 [00:02&lt;00:00, 80.92
     </tr>
     <tr>
       <th>1</th>
-      <td>pub.1106819031</td>
-      <td>pub.1116024231</td>
+      <td>pub.1023754996</td>
+      <td>pub.1111137794</td>
       <td>2</td>
       <td>2019</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>pub.1106819031</td>
-      <td>pub.1110011840</td>
+      <td>pub.1023754996</td>
+      <td>pub.1119901753</td>
       <td>2</td>
-      <td>2018</td>
+      <td>2019</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>pub.1106819031</td>
-      <td>pub.1106383928</td>
+      <td>pub.1023754996</td>
+      <td>pub.1020574513</td>
       <td>2</td>
-      <td>2018</td>
+      <td>2010</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>pub.1106819031</td>
-      <td>pub.1127419935</td>
+      <td>pub.1023754996</td>
+      <td>pub.1022815437</td>
       <td>2</td>
-      <td>2020</td>
+      <td>2010</td>
     </tr>
     <tr>
       <th>...</th>
@@ -2887,37 +3035,37 @@ Downloading: 100%|██████████| 187/187 [00:02&lt;00:00, 80.92
     <tr>
       <th>182</th>
       <td>pub.1043374025</td>
-      <td>pub.1028868656</td>
+      <td>pub.1110816413</td>
       <td>2</td>
-      <td>2006</td>
+      <td>2019</td>
     </tr>
     <tr>
       <th>183</th>
       <td>pub.1043374025</td>
-      <td>pub.1084164363</td>
+      <td>pub.1090432296</td>
       <td>2</td>
       <td>2017</td>
     </tr>
     <tr>
       <th>184</th>
-      <td>pub.1053387944</td>
-      <td>pub.1104020017</td>
+      <td>pub.1043374025</td>
+      <td>pub.1112307407</td>
       <td>2</td>
-      <td>2018</td>
+      <td>2019</td>
     </tr>
     <tr>
       <th>185</th>
-      <td>pub.1053387944</td>
-      <td>pub.1013860913</td>
+      <td>pub.1043374025</td>
+      <td>pub.1028868656</td>
       <td>2</td>
-      <td>2007</td>
+      <td>2006</td>
     </tr>
     <tr>
       <th>186</th>
-      <td>pub.1053387944</td>
-      <td>pub.1049073580</td>
+      <td>pub.1043374025</td>
+      <td>pub.1084164363</td>
       <td>2</td>
-      <td>2016</td>
+      <td>2017</td>
     </tr>
   </tbody>
 </table>
@@ -2925,25 +3073,28 @@ Downloading: 100%|██████████| 187/187 [00:02&lt;00:00, 80.92
 </div></div>
 </div>
 </div>
-<div class="section" id="Funding-by-journal">
-<h2>Funding by journal<a class="headerlink" href="#Funding-by-journal" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="13.4-Incoming-citations-for-a-journal">
+<h3>13.4 Incoming citations for a journal<a class="headerlink" href="#13.4-Incoming-citations-for-a-journal" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
 
-with funding as (
-SELECT funding.grid_id as funders, count(id) as pubs,  count(funding.grant_id) as grants
-FROM `dimensions-ai.data_analytics.publications`, unnest(funding_details) as funding
-where journal.id = &quot;jour.1113716&quot; -- nature medicine
-GROUP BY funders)
-select funding.*, grid.name
-from funding
-join `dimensions-ai.data_analytics.grid` grid on funding.funders = grid.id
-ORDER BY pubs DESC, grants DESC
-
+SELECT
+  COUNT(DISTINCT id) AS totcount,  year, type
+FROM
+  `dimensions-ai.data_analytics.publications`
+WHERE
+  id IN (
+  SELECT citing_pubs.id
+  FROM
+    `dimensions-ai.data_analytics.publications`,
+    UNNEST(citations) AS citing_pubs
+  WHERE journal.id = &quot;jour.1115214&quot; )  -- Nature Biotechnology
+GROUP BY year, type
+ORDER BY year, type
 </pre></div>
 </div>
 </div>
@@ -2952,250 +3103,12 @@ ORDER BY pubs DESC, grants DESC
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 5/5 [00:00&lt;00:00, 2062.70query/s]
-Downloading: 100%|██████████| 831/831 [00:03&lt;00:00, 262.38rows/s]
+Query complete after 0.00s: 100%|██████████| 7/7 [00:00&lt;00:00, 3549.77query/s]
+Downloading: 100%|██████████| 201/201 [00:02&lt;00:00, 82.07rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>funders</th>
-      <th>pubs</th>
-      <th>grants</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>grid.48336.3a</td>
-      <td>2699</td>
-      <td>2484</td>
-      <td>National Cancer Institute</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>grid.419681.3</td>
-      <td>2008</td>
-      <td>1878</td>
-      <td>National Institute of Allergy and Infectious D...</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>grid.419635.c</td>
-      <td>1620</td>
-      <td>1564</td>
-      <td>National Institute of Diabetes and Digestive a...</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>grid.279885.9</td>
-      <td>1612</td>
-      <td>1525</td>
-      <td>National Heart Lung and Blood Institute</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>grid.416870.c</td>
-      <td>712</td>
-      <td>668</td>
-      <td>National Institute of Neurological Disorders a...</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>826</th>
-      <td>grid.453131.1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>Yorkshire Cancer Research</td>
-    </tr>
-    <tr>
-      <th>827</th>
-      <td>grid.467619.b</td>
-      <td>1</td>
-      <td>0</td>
-      <td>W.W Grainger (United States)</td>
-    </tr>
-    <tr>
-      <th>828</th>
-      <td>grid.467239.d</td>
-      <td>1</td>
-      <td>0</td>
-      <td>Zimmer Biomet (United States)</td>
-    </tr>
-    <tr>
-      <th>829</th>
-      <td>grid.280878.d</td>
-      <td>1</td>
-      <td>0</td>
-      <td>New York State Office of Mental Health</td>
-    </tr>
-    <tr>
-      <th>830</th>
-      <td>grid.454756.1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>Reumafonds</td>
-    </tr>
-  </tbody>
-</table>
-<p>831 rows × 4 columns</p>
-</div></div>
-</div>
-</div>
-<div class="section" id="Articles-with-SDGs">
-<h2>Articles with SDGs<a class="headerlink" href="#Articles-with-SDGs" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select p.id, p.doi, p.date_inserted, sdg.name
-from `dimensions-ai.data_analytics.publications` p, unnest(category_sdg.full) sdg
-where sdg is not null
-limit 5
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 2/2 [00:00&lt;00:00, 795.51query/s]
-Downloading: 100%|██████████| 5/5 [00:02&lt;00:00,  1.96rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[64]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>id</th>
-      <th>doi</th>
-      <th>date_inserted</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>pub.1013334466</td>
-      <td>10.1017/s0261340900021950</td>
-      <td>2017-08-31 12:50:56+00:00</td>
-      <td>Peace, Justice and Strong Institutions</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>pub.1025550519</td>
-      <td>10.1017/s0261340900021780</td>
-      <td>2017-08-31 12:50:56+00:00</td>
-      <td>Peace, Justice and Strong Institutions</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>pub.1106406142</td>
-      <td>None</td>
-      <td>2018-09-01 10:48:57+00:00</td>
-      <td>Good Health and Well Being</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>pub.1104914054</td>
-      <td>None</td>
-      <td>2018-06-20 15:35:59+00:00</td>
-      <td>Good Health and Well Being</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>pub.1038799356</td>
-      <td>10.1056/nejm184601140332401</td>
-      <td>2017-08-31 12:50:56+00:00</td>
-      <td>Good Health and Well Being</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</div>
-<div class="section" id="incoming-citations-for-a-journal">
-<h2>incoming citations for a journal<a class="headerlink" href="#incoming-citations-for-a-journal" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
-
-select COUNT(distinct id) as totcount, year, type
-from `dimensions-ai.data_analytics.publications`
-where id in
-  ( select citing_pubs.id
-    from `dimensions-ai.data_analytics.publications`, UNNEST(citations) as citing_pubs
-    where  journal.id = &quot;jour.1115214&quot;
-  )
-group by year, type
-order by year, type
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 7/7 [00:00&lt;00:00, 3743.00query/s]
-Downloading: 100%|██████████| 201/201 [00:02&lt;00:00, 79.73rows/s]
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[77]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -3295,24 +3208,30 @@ Downloading: 100%|██████████| 201/201 [00:02&lt;00:00, 79.73
 </div></div>
 </div>
 </div>
-<div class="section" id="Outgoing-citations-to-a-journal">
-<h2>Outgoing citations to a journal<a class="headerlink" href="#Outgoing-citations-to-a-journal" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="13.5-Outgoing-citations-to-a-journal">
+<h3>13.5 Outgoing citations to a journal<a class="headerlink" href="#13.5-Outgoing-citations-to-a-journal" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
 
-select COUNT(distinct id) as totcount, year, type
-from `dimensions-ai.data_analytics.publications`
-where id in
-  ( select distinct reference_pubs
-    from `dimensions-ai.data_analytics.publications`, UNNEST(reference_ids) as reference_pubs
-    where  journal.id = &quot;jour.1115214&quot;
-  )
-group by year, type
-order by year, type
+SELECT
+  COUNT(DISTINCT id) AS totcount,  year, type
+FROM
+  `dimensions-ai.data_analytics.publications`
+WHERE
+  id IN (
+  SELECT
+    DISTINCT reference_pubs
+  FROM
+    `dimensions-ai.data_analytics.publications`,
+    UNNEST(reference_ids) AS reference_pubs
+  WHERE
+    journal.id = &quot;jour.1115214&quot; ) -- Nature Biotechnology
+GROUP BY year, type
+ORDER BY year, type
 </pre></div>
 </div>
 </div>
@@ -3321,12 +3240,12 @@ order by year, type
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Query complete after 0.00s: 100%|██████████| 8/8 [00:00&lt;00:00, 2721.81query/s]
-Downloading: 100%|██████████| 356/356 [00:02&lt;00:00, 139.64rows/s]
+Query complete after 0.00s: 100%|██████████| 8/8 [00:00&lt;00:00, 3442.19query/s]
+Downloading: 100%|██████████| 356/356 [00:02&lt;00:00, 141.93rows/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -3427,39 +3346,319 @@ Downloading: 100%|██████████| 356/356 [00:02&lt;00:00, 139.6
 </div>
 </div>
 </div>
-<div class="section" id="REVIEW-REVIEW-REVIEW">
-<h1>REVIEW REVIEW REVIEW<a class="headerlink" href="#REVIEW-REVIEW-REVIEW" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="Researchers-related-to-a-selected-GRID-and-category-[REVIEW]">
-<h2>Researchers related to a selected GRID and category [REVIEW]<a class="headerlink" href="#Researchers-related-to-a-selected-GRID-and-category-[REVIEW]" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Using publications to identify researchers of interest</p></li>
-<li><p>Using researchers db to get more infos about them</p></li>
-</ul>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="section" id="14.-Extracting-complex-publications-records">
+<h2>14. Extracting complex publications records<a class="headerlink" href="#14.-Extracting-complex-publications-records" title="Permalink to this headline">¶</a></h2>
+<p>The query below combines various techniques presented in this notebook in order to extract full publication records that include both single-value metadata and unpacked lists.</p>
+<p>We use LEFT JOIN in order to ensure we obtain all records, not just the ones that have some value in the nested objects.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="o">%%</span><span class="k">bigquery</span> --project $MY_PROJECT_ID
 
-WITH researchers AS
-(
-  SELECT DISTINCT res_id
-  from `dimensions-ai.data_analytics.publications`, UNNEST(researcher_ids) res_id
-  where &quot;grid.4991.5&quot; in UNNEST(research_orgs)
-  AND &quot;2204&quot; in UNNEST(category_for.second_level.codes)
-  AND year = 2020
-)
+SELECT
+ p.id,
+ p.title.preferred AS title,
+ p.doi,
+ p.year,
+ COALESCE(p.journal.title, p.proceedings_title.preferred, p.book_title.preferred, p.book_series_title.preferred) AS venue,
+ p.type,
+ p.date AS date_publication,
+ p.date_inserted,
+ p.altmetrics.score AS altmetrics_score,
+ p.metrics.times_cited,
+ grid.id AS gridid,
+ grid.name AS gridname,
+ grid.address.country AS gridcountry,
+ grid.address.city AS gridcity,
+ open_access_categories,
+ cat_for.name AS category_for,
+FROM
+ `dimensions-ai.data_analytics.publications` p
+LEFT JOIN
+  UNNEST(research_orgs) AS research_orgs_grids
+LEFT JOIN
+ `dimensions-ai.data_analytics.grid` grid
+ON
+ grid.id=research_orgs_grids
+LEFT JOIN
+ UNNEST(p.open_access_categories) AS open_access_categories
+LEFT JOIN
+ UNNEST(p.category_for.first_level.full) AS cat_for
+WHERE
+ EXTRACT(YEAR
+ FROM
+   date_inserted) &gt;= 2020
 
-
-SELECT id, current_research_org, last_publication_year, total_grants
-from `dimensions-ai.data_analytics.researchers`r1
-join researchers r2
-on r1.id = r2.res_id
-order by total_publications desc
-limit 10
+LIMIT 100
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Query complete after 0.00s: 100%|██████████| 3/3 [00:00&lt;00:00, 1729.37query/s]
+Downloading: 100%|██████████| 100/100 [00:02&lt;00:00, 41.14rows/s]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>title</th>
+      <th>doi</th>
+      <th>year</th>
+      <th>venue</th>
+      <th>type</th>
+      <th>date_publication</th>
+      <th>date_inserted</th>
+      <th>altmetrics_score</th>
+      <th>times_cited</th>
+      <th>gridid</th>
+      <th>gridname</th>
+      <th>gridcountry</th>
+      <th>gridcity</th>
+      <th>open_access_categories</th>
+      <th>category_for</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1124854815</td>
+      <td>Chanoyu sandenshū</td>
+      <td>10.5479/sil.893207.39088019038405</td>
+      <td>1691</td>
+      <td>None</td>
+      <td>monograph</td>
+      <td>1691</td>
+      <td>2020-02-15 01:10:52+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1124853520</td>
+      <td>Mag[istr]i Arn[al]di Devillan[ov]a Liber dictu...</td>
+      <td>10.5479/sil.169309.39088003312089</td>
+      <td>1666</td>
+      <td>None</td>
+      <td>monograph</td>
+      <td>1666</td>
+      <td>2020-02-15 01:10:52+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>oa_all</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1124853520</td>
+      <td>Mag[istr]i Arn[al]di Devillan[ov]a Liber dictu...</td>
+      <td>10.5479/sil.169309.39088003312089</td>
+      <td>1666</td>
+      <td>None</td>
+      <td>monograph</td>
+      <td>1666</td>
+      <td>2020-02-15 01:10:52+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>gold_bronze</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1127222143</td>
+      <td>A New Method of a Common-Place-Book</td>
+      <td>10.1093/oseo/instance.00263866</td>
+      <td>1706</td>
+      <td>The Clarendon Edition of the Works of John Loc...</td>
+      <td>chapter</td>
+      <td>1706</td>
+      <td>2020-04-30 18:45:39+00:00</td>
+      <td>NaN</td>
+      <td>2</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1127222159</td>
+      <td>A Letter from the First Earl of Shaftesbury to...</td>
+      <td>10.1093/oseo/instance.00263882</td>
+      <td>1706</td>
+      <td>The Clarendon Edition of the Works of John Loc...</td>
+      <td>chapter</td>
+      <td>1706</td>
+      <td>2020-04-30 18:45:39+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>pub.1124464089</td>
+      <td>ESSCIRC '88 Program Committee</td>
+      <td>10.1109/esscirc.1988.5468234</td>
+      <td>1988</td>
+      <td>ESSCIRC '88: Fourteenth European Solid-State C...</td>
+      <td>proceeding</td>
+      <td>1988-09</td>
+      <td>2020-02-02 00:24:01+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>pub.1124464093</td>
+      <td>Fourteenth European Solid-State Circuits Confe...</td>
+      <td>10.1109/esscirc.1988.5468246</td>
+      <td>1988</td>
+      <td>ESSCIRC '88: Fourteenth European Solid-State C...</td>
+      <td>proceeding</td>
+      <td>1988-09</td>
+      <td>2020-02-02 00:24:01+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>pub.1124464091</td>
+      <td>ESSDERC/ESSCIRC Organising Committee</td>
+      <td>10.1109/esscirc.1988.5468240</td>
+      <td>1988</td>
+      <td>ESSCIRC '88: Fourteenth European Solid-State C...</td>
+      <td>proceeding</td>
+      <td>1988-09</td>
+      <td>2020-02-02 00:24:01+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>pub.1124464130</td>
+      <td>Integrated Circuits Digital Network (ISDN)</td>
+      <td>10.1109/esscirc.1988.5468346</td>
+      <td>1988</td>
+      <td>ESSCIRC '88: Fourteenth European Solid-State C...</td>
+      <td>proceeding</td>
+      <td>1988-09</td>
+      <td>2020-02-02 00:24:01+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>pub.1124464167</td>
+      <td>1 Micron CMOS Technology</td>
+      <td>10.1109/esscirc.1988.5468459</td>
+      <td>1988</td>
+      <td>ESSCIRC '88: Fourteenth European Solid-State C...</td>
+      <td>proceeding</td>
+      <td>1988-09</td>
+      <td>2020-02-02 00:24:01+00:00</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>closed</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 16 columns</p>
+</div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
