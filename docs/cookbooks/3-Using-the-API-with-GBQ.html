@@ -561,7 +561,7 @@ Total publications in Dimensions:  115963650
 <div class="section" id="1.-Connecting-to-the-DSL-API">
 <h2>1. Connecting to the DSL API<a class="headerlink" href="#1.-Connecting-to-the-DSL-API" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -586,14 +586,14 @@ Total publications in Dimensions:  115963650
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Dimcli - Dimensions API Client (v0.8.1)
-Connected to: https://app.dimensions.ai - DSL v1.28
-Method: manual login
+Dimcli - Dimensions API Client (v0.8.2.2)
+Connected to: https://app.dimensions.ai - DSL v1.29
+Method: dsl.ini file
 </pre></div></div>
 </div>
 <p><strong>TIP</strong> Remember about the full text search rules with the DSL <a class="reference external" href="https://docs.dimensions.ai/dsl/language.html#full-text-searching">https://docs.dimensions.ai/dsl/language.html#full-text-searching</a></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -601,21 +601,188 @@ Method: manual login
 
 search publications for
   &quot; \&quot;moon landing\&quot; AND Moon AND \&quot;lunar surface\&quot; &quot;
-return publications limit 50
+return publications limit 10
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Returned Errors: 1
-Time: 0.24s
-Semantic Error
-Semantic errors found:
-        Offset is not supported for facet results
+Returned Publications: 10 (total = 11305)
+Time: 0.72s
 </pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>volume</th>
+      <th>pages</th>
+      <th>id</th>
+      <th>year</th>
+      <th>author_affiliations</th>
+      <th>title</th>
+      <th>journal.id</th>
+      <th>journal.title</th>
+      <th>issue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>article</td>
+      <td>122</td>
+      <td>100692</td>
+      <td>pub.1134954138</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Department of Aerospac...</td>
+      <td>Review of space habitat designs for long term ...</td>
+      <td>jour.1139377</td>
+      <td>Progress in Aerospace Sciences</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>article</td>
+      <td>181</td>
+      <td>167-189</td>
+      <td>pub.1130384298</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['U.S. Naval War College...</td>
+      <td>Joseph G. Gavin, Jr. and MIT’s contribution to...</td>
+      <td>jour.1134138</td>
+      <td>Acta Astronautica</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>article</td>
+      <td>180</td>
+      <td>650-678</td>
+      <td>pub.1134475636</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Skolkovo Institute of ...</td>
+      <td>Regolith-based additive manufacturing for sust...</td>
+      <td>jour.1134138</td>
+      <td>Acta Astronautica</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>article</td>
+      <td>NaN</td>
+      <td>1-13</td>
+      <td>pub.1135101079</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Centre for Teaching an...</td>
+      <td>Looking at Gail Jones’s “The Man in the Moon” ...</td>
+      <td>jour.1137860</td>
+      <td>Journal of Australian Studies</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>article</td>
+      <td>21</td>
+      <td>959</td>
+      <td>pub.1135057882</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['School of Artificial I...</td>
+      <td>Three-Dimensional Model of the Moon with Seman...</td>
+      <td>jour.1033312</td>
+      <td>Sensors</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>article</td>
+      <td>54</td>
+      <td>115-124</td>
+      <td>pub.1135020195</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Saskia Vermeylen (acad...</td>
+      <td>Space Art as a Critique of Space Law</td>
+      <td>jour.1123469</td>
+      <td>Leonardo</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>article</td>
+      <td>988</td>
+      <td>164919</td>
+      <td>pub.1133101464</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Johns Hopkins Universi...</td>
+      <td>Space-based measurements of neutron lifetime: ...</td>
+      <td>jour.1312241</td>
+      <td>Nuclear Instruments and Methods in Physics Res...</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>article</td>
+      <td>NaN</td>
+      <td>1-9</td>
+      <td>pub.1134584114</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Mechanical Engineering...</td>
+      <td>Excavation and Conveying Technologies for Spac...</td>
+      <td>jour.1136840</td>
+      <td>BHM Berg- und Hüttenmännische Monatshefte</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>proceeding</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>pub.1134354057</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['Astrobotic Technology'...</td>
+      <td>Development of a Signature-based Terrain Relat...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>proceeding</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>pub.1134359867</td>
+      <td>2021</td>
+      <td>[[{'raw_affiliation': ['German Aerospace Cente...</td>
+      <td>Apollo 11 Reloaded: Optimization-based Traject...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
 </div>
 </div>
 <div class="section" id="2.-Exporting-DSL-results-to-GBQ">
