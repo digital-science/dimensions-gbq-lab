@@ -152,6 +152,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">From the DSL API to Google BigQuery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Example:-profiling-researchers-linked-to-a-topic">Example: profiling researchers linked to a topic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#Prerequisites">Prerequisites</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#1.-Connecting-to-the-DSL-API">1. Connecting to the DSL API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#2.-Exporting-DSL-results-to-GBQ">2. Exporting DSL results to GBQ</a></li>
@@ -491,16 +492,17 @@ div.rendered_html tbody tr:hover {
 <hr class="docutils" />
 <div class="section" id="From-the-DSL-API-to-Google-BigQuery">
 <h1>From the DSL API to Google BigQuery<a class="headerlink" href="#From-the-DSL-API-to-Google-BigQuery" title="Permalink to this headline">¶</a></h1>
-<p>Goal:</p>
+<p>This tutorial demonstrates how to perform a full-text search in Dimensions using the Analytics API and then export the data to Google BigQuery for further analysis.</p>
+<p>This technique allows to take advantage of the strengths of each of these data products:</p>
 <ul class="simple">
-<li><p>Running a full-text search using the DSL API, then creating a corpus in GBQ based on this search (eg see this <a class="reference external" href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">search</a>)</p></li>
+<li><p>The <a class="reference external" href="https://docs.dimensions.ai/dsl">Analytics API</a> allows to run <a class="reference external" href="https://docs.dimensions.ai/dsl/language.html#full-text-searching">full-text searches</a> over the tens of millions documents stored in the Dimensions database. This makes it an ideal tool for identifying a corpus of documents using collections of keywords and/or other filters (note: this is the same functionality available when you search on app.dimensions.ai)</p></li>
+<li><p>The <a class="reference external" href="https://docs.dimensions.ai/bigquery/">Dimensions on Google BigQuery</a> database allows to run SQL queries of any complexity using a cloud-based environment containing all of the metadata available in Dimensions, thus removing the need to download/analyse the data offline first. This makes is the perfect solution for advanced analytics tasks such as benchmarking, metrics calculations or impact analyses.</p></li>
 </ul>
-<p>Usecase:</p>
-<ul class="simple">
-<li><p><strong>More data.</strong> The DSL return facets eg <code class="docutils literal notranslate"><span class="pre">researchers</span></code>, but that’s limited to 1000 results</p></li>
-<li><p><strong>Easier integration.</strong>I want to use the data in GBQ to build a dashboard</p></li>
-<li><p><strong>Richer data</strong>. I want to enrich the results using ad-hoc metrics (eg more <code class="docutils literal notranslate"><span class="pre">researchers</span></code> metadata including citations &amp; altmetric) and want to achieve that in one single step</p></li>
-</ul>
+<div class="section" id="Example:-profiling-researchers-linked-to-a-topic">
+<h2>Example: profiling researchers linked to a topic<a class="headerlink" href="#Example:-profiling-researchers-linked-to-a-topic" title="Permalink to this headline">¶</a></h2>
+<p>The concrete usecase we’ll be looking at involves running a full-text search for “moon landing” publications using the DSL API, then creating a corpus in GBQ based on this search (eg see this <a class="reference external" href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">search</a>).</p>
+<p>Once we have the publication corpus available in GBQ, we will extract all associated researchers (=authors). At the same time, we are going to use SQL in order to enrich the results using other metrics (eg more <code class="docutils literal notranslate"><span class="pre">researchers</span></code> metadata including citations &amp; altmetric).</p>
+</div>
 <div class="section" id="Prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#Prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>This notebook assumes that you have <a class="reference external" href="https://digital-science.github.io/dimensions-gbq-lab/cookbooks/1-Verifying-your-connection.html">verifed your connection</a> to Dimensions on Google BigQuery and have basic familiarity with the <a class="reference external" href="https://docs.dimensions.ai/bigquery/gcp-setup.html">Google Cloud Platform</a> concepts.</p>
@@ -560,6 +562,7 @@ Total publications in Dimensions:  115963650
 </div>
 <div class="section" id="1.-Connecting-to-the-DSL-API">
 <h2>1. Connecting to the DSL API<a class="headerlink" href="#1.-Connecting-to-the-DSL-API" title="Permalink to this headline">¶</a></h2>
+<p>For more background on the Analytics API and how to work with it, see this <a class="reference external" href="https://docs.dimensions.ai/dsl/tour.html">tutorial</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -591,6 +594,7 @@ Connected to: https://app.dimensions.ai - DSL v1.29
 Method: dsl.ini file
 </pre></div></div>
 </div>
+<p>Let’s try running a sample query.</p>
 <p><strong>TIP</strong> Remember about the full text search rules with the DSL <a class="reference external" href="https://docs.dimensions.ai/dsl/language.html#full-text-searching">https://docs.dimensions.ai/dsl/language.html#full-text-searching</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -787,10 +791,8 @@ Time: 0.72s
 </div>
 <div class="section" id="2.-Exporting-DSL-results-to-GBQ">
 <h2>2. Exporting DSL results to GBQ<a class="headerlink" href="#2.-Exporting-DSL-results-to-GBQ" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Pandas provides a handy command to move data to GBQ: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_gbq.html">DataFrame.to_gbq</a></p></li>
-</ul>
-<p>NOTE all you need to export to GBQ is a list of publications IDs!</p>
+<p>First off, we want to run the full-text search so to extract <em>all</em> relevant publications IDs.</p>
+<p>Second, we will export the publications IDs to GBQ. NOTE: Pandas provides a handy command to move data to GBQ: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_gbq.html">DataFrame.to_gbq</a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -910,6 +912,8 @@ Records extracted: 11201
 </pre></div>
 </div>
 </div>
+<p>The command below will add a new table <code class="docutils literal notranslate"><span class="pre">moonlanding</span></code> to the <code class="docutils literal notranslate"><span class="pre">demo_dsl</span></code> dataset in GQB.</p>
+<p>That destination table is entirely up to you of course, so you need to make sure you have <em>write</em> access to the database.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -933,7 +937,8 @@ Records extracted: 11201
 </div>
 <div class="section" id="3.-Querying-your-new-dataset-using-a-JOIN-on-Dimensions">
 <h2>3. Querying your new dataset using a JOIN on Dimensions<a class="headerlink" href="#3.-Querying-your-new-dataset-using-a-JOIN-on-Dimensions" title="Permalink to this headline">¶</a></h2>
-<p>GOAL: Results should be the same as the ‘publication year’ facet in the <a class="reference external" href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a></p>
+<p>We can now use the publications IDs we imported in order to create a JOIN query on the main Dimensions dataset. This is a bit like creating a ‘view’ of Dimensions corresponding to the full-text search we have done above.</p>
+<p>GOAL: Roughly, the results should be the same as the ‘publication year’ facet in the <a class="reference external" href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1294,7 +1299,13 @@ ORDER BY tot DESC
 </div>
 <div class="section" id="4.-Using-GBQ-to-generate-researcher-statistics">
 <h2>4. Using GBQ to generate researcher statistics<a class="headerlink" href="#4.-Using-GBQ-to-generate-researcher-statistics" title="Permalink to this headline">¶</a></h2>
-<p>The goal is to generate a table just like the one in the ‘researchers’ analytical view in the <a class="reference external" href="https://app.dimensions.ai/analytics/publication/author/aggregated?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a></p>
+<p>The goal is to generate a table just like the one in the ‘researchers’ analytical view in the <a class="reference external" href="https://app.dimensions.ai/analytics/publication/author/aggregated?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a>.</p>
+<p>For each researcher we want to display some extra information:</p>
+<ul class="simple">
+<li><p>the total number of publications</p></li>
+<li><p>the citations count</p></li>
+<li><p>the total Altmetric Attention Score</p></li>
+</ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -1439,7 +1450,7 @@ ORDER BY publications_count DESC
 <p>1085 rows × 4 columns</p>
 </div></div>
 </div>
-<p><strong>Final step</strong>: let’s add researchers names and current organization details:</p>
+<p><strong>Final step</strong>: let’s add researchers names and current organization details by joining up data from the <a class="reference external" href="https://docs.dimensions.ai/bigquery/datasource-organizations.html">GRID table</a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
