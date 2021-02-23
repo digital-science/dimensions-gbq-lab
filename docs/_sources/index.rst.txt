@@ -12,8 +12,6 @@ Welcome to the Dimensions BigQuery Lab!
 This site and its related `Github repository <https://github.com/digital-science/dimensions-gbq-lab>`_  contain a collection of Jupyter notebooks showing how to carry out common research data analytics tasks using the `Dimensions on Google BigQuery <https://www.dimensions.ai/products/bigquery/>`_ database.
 
 
-https://docs.dimensions.ai/bigquery/sandbox.html
-
 
 .. note::
   The Dimensions on Google BigQuery product is **subscription-only**, so your Dimensions account needs to be activated for this service and is subject to restrictions on use. Please get in touch to discuss the best option for you to get access. For one-off academic research projects we can also grant free access to our APIs. `Contact us <https://www.dimensions.ai/contact-us/>`_ 
