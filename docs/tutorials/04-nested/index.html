@@ -1,0 +1,1854 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+    
+    
+      
+        <title>Working with nested and repeated fields - Dimensions BigQuery Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#working-with-nested-and-repeated-fields" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-header__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dimensions BigQuery Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Working with nested and repeated fields
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-nav__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    Dimensions BigQuery Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        About Tutorials
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-connection/" class="md-nav__link">
+        Verifying your connection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-dates/" class="md-nav__link">
+        Working with dates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Working with nested and repeated fields
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Working with nested and repeated fields
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-they" class="md-nav__link">
+    What are they?
+  </a>
+  
+    <nav class="md-nav" aria-label="What are they?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repeated-fields" class="md-nav__link">
+    Repeated fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-fields" class="md-nav__link">
+    Nested fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeated-nested-fields" class="md-nav__link">
+    Repeated nested fields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#querying-nested-fields" class="md-nav__link">
+    Querying nested fields
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#querying-repeated-fields" class="md-nav__link">
+    Querying repeated fields
+  </a>
+  
+    <nav class="md-nav" aria-label="Querying repeated fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-checking-contents-of-array" class="md-nav__link">
+    Example 1: Checking contents of array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-joining-tables-using-a-repeated-field" class="md-nav__link">
+    Example 2: Joining tables using a repeated field
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-querying-repeated-nested-fields" class="md-nav__link">
+    Example 3: Querying repeated nested fields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#be-careful" class="md-nav__link">
+    Be careful
+  </a>
+  
+    <nav class="md-nav" aria-label="Be careful">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-4-repeated-fields-with-null-values" class="md-nav__link">
+    Example 4: Repeated fields with null values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-5-counting-entries-too-many-times" class="md-nav__link">
+    Example 5: Counting entries too many times
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-dsl/" class="md-nav__link">
+        From the DSL API to Google BigQuery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-topic_clusters/" class="md-nav__link">
+        Basic Topic Clustering using TensorFlow and BigQuery ML
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Collections
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Collections" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Collections
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/" class="md-nav__link">
+        About Collections
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/01-publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/02-citations/" class="md-nav__link">
+        Citations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/03-authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/04-funding/" class="md-nav__link">
+        Funding & Grants
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Queries
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Queries" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Queries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/" class="md-nav__link">
+        About Queries
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/01/" class="md-nav__link">
+        1. Number of publications added to Dimensions each month
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/02/" class="md-nav__link">
+        2. Number of Publications by Type
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/03/" class="md-nav__link">
+        3. Generate a list of publication authors by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/04/" class="md-nav__link">
+        4. Generate a list of publication categories by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/05/" class="md-nav__link">
+        5. Number of publications per SDG category
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/06/" class="md-nav__link">
+        6. Publications count per FoR category, total and percentage against total
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/07/" class="md-nav__link">
+        7. Finding Journals using string matching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/08/" class="md-nav__link">
+        8. Finding articles matching a specific affiliation string
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/09/" class="md-nav__link">
+        9. Top publications by Altmetric score and research organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/10/" class="md-nav__link">
+        10. Select publications matching selected concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/11/" class="md-nav__link">
+        11. Count of corresponding authors by publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/12/" class="md-nav__link">
+        12. Counting new vs recurring authors, for a specific journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/13/" class="md-nav__link">
+        13. Funding by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/14/" class="md-nav__link">
+        14. Extracting complex publications records
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/15/" class="md-nav__link">
+        15. Top N publications by citations percentile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/16/" class="md-nav__link">
+        16. Citations by journal, for a specific publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/17/" class="md-nav__link">
+        17. One-degree citation network for a single publication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/18/" class="md-nav__link">
+        18. Incoming citations for a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/19/" class="md-nav__link">
+        19. Outgoing citations from a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/20/" class="md-nav__link">
+        20. International collaboration of an organisation in a field
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/21/" class="md-nav__link">
+        21. International collaboration rate of individuals, with context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/22/" class="md-nav__link">
+        22. Incoming citations for a single publication, by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/23/" class="md-nav__link">
+        23. Citing authors by country
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/24/" class="md-nav__link">
+        24. Organizations and sub-organizations
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-they" class="md-nav__link">
+    What are they?
+  </a>
+  
+    <nav class="md-nav" aria-label="What are they?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repeated-fields" class="md-nav__link">
+    Repeated fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-fields" class="md-nav__link">
+    Nested fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#repeated-nested-fields" class="md-nav__link">
+    Repeated nested fields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#querying-nested-fields" class="md-nav__link">
+    Querying nested fields
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#querying-repeated-fields" class="md-nav__link">
+    Querying repeated fields
+  </a>
+  
+    <nav class="md-nav" aria-label="Querying repeated fields">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-checking-contents-of-array" class="md-nav__link">
+    Example 1: Checking contents of array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-joining-tables-using-a-repeated-field" class="md-nav__link">
+    Example 2: Joining tables using a repeated field
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-querying-repeated-nested-fields" class="md-nav__link">
+    Example 3: Querying repeated nested fields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#be-careful" class="md-nav__link">
+    Be careful
+  </a>
+  
+    <nav class="md-nav" aria-label="Be careful">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-4-repeated-fields-with-null-values" class="md-nav__link">
+    Example 4: Repeated fields with null values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-5-counting-entries-too-many-times" class="md-nav__link">
+    Example 5: Counting entries too many times
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="working-with-nested-and-repeated-fields">Working with nested and repeated fields</h1>
+<p>A prominent features of Google BigQuery is their addition of nested and repeated fields to what may otherwise be a familiar SQL paradigm. Both present opportunities to reorganize data within single tables in novel ways, but they can be difficult to get used to. Below, we explain the basics of nested and repeated fields, work through several examples, and provide links to external resources that we've found helpful.</p>
+<div class="admonition warning">
+<p class="admonition-title">Prerequisites</p>
+<p>In order to run this tutorial, please ensure that: </p>
+<ul>
+<li>You have a valid <a href="https://www.dimensions.ai/products/bigquery/">Dimensions on Google BigQuery account</a> and have <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">configured a Google Cloud project</a>.</li>
+</ul>
+<p>The online <a href="https://console.cloud.google.com/bigquery">GBQ console</a> can be used to test the queries below.</p>
+</div>
+<h2 id="what-are-they">What are they?</h2>
+<h3 id="repeated-fields">Repeated fields</h3>
+<p>Repeated fields approximate a "one-to-many" relationship and provide an opportunity to define <strong>a field that can hold multiple values per row</strong>. We can demonstrate this by running a query against <a href="https://docs.dimensions.ai/bigquery/datasource-publications.html">the <code>publications</code> table</a> for values in the <code>clinical_trial_ids</code> field:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="n">id</span><span class="p">,</span> <span class="k">LEFT</span><span class="p">(</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="k">AS</span> <span class="n">title</span><span class="p">,</span> <span class="n">clinical_trial_ids</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span> <span class="n">ARRAY_LENGTH</span><span class="p">(</span><span class="n">clinical_trial_ids</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="k">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<p>The (heavily truncated) results look something like this:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>id</th>
+            <th>title</th>
+            <th>clinical_trial_ids</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>pub.1003360568</td>
+            <td>A Randomized, Controlled...</td>
+            <td>NCT00014989</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>pub.1003935609</td>
+            <td>8568 Prophylactic swallow...</td>
+            <td>NCT00332865</td>
+        </tr>
+        <tr>
+            <td rowspan=5>3</td>
+            <td>pub.1004269292</td>
+            <td>Clinical Trial Alert...</td>
+            <td>NCT00953940</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>NCT00970073</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>NCT00994253</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>NCT00987103</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>NCT00974636</td>
+        </tr>
+        <tr>
+            <td rowspan=2>4</td>
+            <td>pub.1004095142</td>
+            <td>6502 A double-blinded, pl...</td>
+            <td>NCT00219557</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>NCT00428597</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>pub.1004119511</td>
+            <td>Intrathecal morphine in a...</td>
+            <td>NCT00119184</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>You can see that rows 3 and 4 have multiple values in the <code>clinical_trial_ids</code> field, despite all values getting listed <strong>within a single row number</strong>.</p>
+<p>UNNEST are implicit 'cross-join' queries, hence only records that have some value in the nested column are represented</p>
+<p>For example, the query below return less publications that then ones available, because only the ones with <code>research_org_country_names</code> are included (= cross join)</p>
+<h3 id="nested-fields">Nested fields</h3>
+<p>Nested fields, on their own, are much simpler: They are fields that are linked together as a single entity, like a struct or an object. The <code>title</code> field in the <code>publications</code> table is a good example of this: Rather than a single string indicating the title of the publication, it is a nested field that has two strings within it: <code>"original"</code> and <code>"preferred"</code>, mostly to accommodate titles expressed in multiple languages. Querying nested fields looks almost identical to querying more conventional ones. For example, with the title field:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">title</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span> <span class="mi">4</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>id</th>
+<th>title.preferred</th>
+<th>title.original</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>pub.1123921006</td>
+<td>Effects of "1+N" extended nursing on medication comp...</td>
+<td>"1+N"延伸护理模式对2型糖尿病患者用药依从性及自我管理能力的影响</td>
+</tr>
+<tr>
+<td>2</td>
+<td>pub.1123897378</td>
+<td>Clinical observation of the prevention of pressu...</td>
+<td>龙血竭预防恶性肿瘤强迫体位患者压疮的临床观察</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pub.1039091814</td>
+<td>IV. A new improved silk-reel.</td>
+<td><em>null</em></td>
+</tr>
+<tr>
+<td>4</td>
+<td>pub.1123920716</td>
+<td>Effect of resina draconis for external applica...</td>
+<td>龙血竭胶囊粉外敷治疗压疮疗效的Meta分析</td>
+</tr>
+</tbody>
+</table>
+<h3 id="repeated-nested-fields">Repeated nested fields</h3>
+<p>This is where things get a little more complicated: One of the main ways nested fields make themselves useful is when they're <em>repeated</em>: So while a repeated field might be an array of strings (clinical trial IDs, for example), they can also be an array of objects. The <code>authors</code> field of the publications table is a good example of this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span> <span class="n">authors</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span> <span class="mi">3</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>id</th>
+            <th>title.preferred</th>
+            <th>authors.first_name</th>
+            <th>authors.last_name</th>
+            <th>authors.researcher_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=4>1</td>
+            <td>pub.1001350088</td>
+            <td>The T-120/130-12.8 and PT...</td>
+            <td>G.D.</td>
+            <td>Barinberg</td>
+            <td>ur.012510636551.40</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>A.E.</td>
+          <td>Valamin</td>
+          <td>ur.012211770163.32</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Yu. A.</td>
+          <td>Sakhnin</td>
+          <td>ur.010306240353.29</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>A. Yu.</td>
+          <td>Kultyshev</td>
+          <td>ur.014402311563.25</td>
+        </tr>
+        <tr>
+            <td rowspan=2>2</td>
+            <td>pub.1000116807</td>
+            <td>Application of Electrorhe...</td>
+            <td>Ken'ichi</td>
+            <td>Koyanagi</td>
+            <td>ur.013307555250.87</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Yasuhiro</td>
+          <td>Kakinuma</td>
+          <td>ur.013275435603.18</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>You can see here that the author information appears the same way as the clinical trial IDs above, except each repeated entry within a row has multiple fields about each author. (There are many more fields that will appear if you query authors; they've been removed here for clarity.) The useful part about using nested fields for the authors, rather than a bunch of repeated fields alone (one for <code>first_name</code>, another repeated field for <code>last_name</code>, etc) is because <em>those nested fields will stay together</em>: For the publication in row 1, the <code>"A.E."</code> first name will always appear alongside the <code>"Valamin"</code> last name, rather than shuffling them around like what may happen if you queried them separately.</p>
+<h2 id="querying-nested-fields">Querying nested fields</h2>
+<p>We'll start writing queries with nested fields alone first, since it's the simplest to do. We actually did it several times in the above examples: The <code>title</code> field in the publications table is a nested field with two fields in it: <code>original</code> and <code>preferred</code>. If you don't specify which values you want, <em>you'll get them all</em>, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">title</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span> <span class="mi">4</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>id</th>
+<th>title.preferred</th>
+<th>title.original</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>pub.1123921006</td>
+<td>Effects of "1+N" extended nursing on medication comp...</td>
+<td>"1+N"延伸护理模式对2型糖尿病患者用药依从性及自我管理能力的影响</td>
+</tr>
+<tr>
+<td>2</td>
+<td>pub.1123897378</td>
+<td>Clinical observation of the prevention of pressu...</td>
+<td>龙血竭预防恶性肿瘤强迫体位患者压疮的临床观察</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pub.1039091814</td>
+<td>IV. A new improved silk-reel.</td>
+<td><em>null</em></td>
+</tr>
+<tr>
+<td>4</td>
+<td>pub.1123920716</td>
+<td>Effect of resina draconis for external applica...</td>
+<td>龙血竭胶囊粉外敷治疗压疮疗效的Meta分析</td>
+</tr>
+</tbody>
+</table>
+<p>If you wanted only the <code>preferred</code> field of the <code>title</code>, you can specify that using periods. Nested fields can have <em>more</em> nested fields within them, so there may be multiple entries. Luckily, we only need one period for the title:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">title</span><span class="p">.</span><span class="n">preferred</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span> <span class="mi">4</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>id</th>
+<th>title.preferred</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>pub.1123921006</td>
+<td>Effects of "1+N" extended nursing on medication comp...</td>
+</tr>
+<tr>
+<td>2</td>
+<td>pub.1123897378</td>
+<td>Clinical observation of the prevention of pressu...</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pub.1039091814</td>
+<td>IV. A new improved silk-reel.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>pub.1123920716</td>
+<td>Effect of resina draconis for external applica...</td>
+</tr>
+</tbody>
+</table>
+<h2 id="querying-repeated-fields">Querying repeated fields</h2>
+<p>Repeated fields are where we need to start using more exotic patterns to extract information. <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays">The <code>UNNEST</code> function</a> is the primary tool for the job here—it converts an array of values into rows in a table, which, if necessary, can then be joined to the original table you're querying.</p>
+<h3 id="example-1-checking-contents-of-array">Example 1: Checking contents of array</h3>
+<p>We'll start with a simple one: the <code>funder_orgs</code> field in the <code>publications</code> table, which lists GRID IDs indicating which organizations funded the research in the publication. IF we wanted to find publications funded by the Brazilian Agricultural Research Corporation, for example, we can use its GRID ID (grid.460200.0) in a <code>WHERE</code> clause:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="k">type</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">funded_pubs</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span> <span class="s1">&#39;grid.460200.0&#39;</span> <span class="k">IN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">type</span>
+</code></pre></div>
+<p>Results</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>type</th>
+<th>funded_pubs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>preceeding</td>
+<td>23</td>
+</tr>
+<tr>
+<td>2</td>
+<td>article</td>
+<td>6042</td>
+</tr>
+<tr>
+<td>3</td>
+<td>preprint</td>
+<td>21</td>
+</tr>
+<tr>
+<td>4</td>
+<td>chapter</td>
+<td>33</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-2-joining-tables-using-a-repeated-field">Example 2: Joining tables using a repeated field</h3>
+<p>Queries can also return the contents of repeated fields. Using a <code>CROSS JOIN</code>, the information can be distributed into separate rows, rather than arrays inside single rows. For this example, we'll look at organizations that have funded recent articles published in <em>eLife</em>, a life sciences journal. We'll start by selecting the information we can get from the publications table:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">forg</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="k">AS</span> <span class="n">p</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span> <span class="k">AS</span> <span class="n">forg</span> <span class="c1">-- This is the important line</span>
+<span class="k">WHERE</span> <span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span>
+  <span class="k">AND</span> <span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span> <span class="c1">-- eLife</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>id</th>
+<th>forg</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>pub.1000035854</td>
+<td>grid.14105.31</td>
+</tr>
+<tr>
+<td>2</td>
+<td>pub.1000321327</td>
+<td>grid.48336.3a</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pub.1000131550</td>
+<td>grid.422384.b</td>
+</tr>
+<tr>
+<td>4</td>
+<td>pub.1000131550</td>
+<td>grid.419475.a</td>
+</tr>
+<tr>
+<td>5</td>
+<td>pub.1000131550</td>
+<td>grid.453152.4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>pub.1000131550</td>
+<td>grid.280362.d</td>
+</tr>
+<tr>
+<td>7</td>
+<td>pub.1000131550</td>
+<td>grid.416870.c</td>
+</tr>
+</tbody>
+</table>
+<p>There are a few things to point out here: First, notice that we're querying a nested field within the <code>journal</code> field on the final line—we want only publications in which the <code>journal</code> field lists an <code>id</code> that matches the one assigned to <em>eLife</em>. We're also using a <code>CROSS JOIN</code> with the <code>funder_orgs</code> field. A cross join <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join">returns the Cartesian product</a> of the two tables being joined—to wit, every value on one side of the join (in this case, the <code>publications</code> table) will appear with every matching value from the right side of the join (the "table" created by the call to <code>UNNEST(funder_orgs)</code>). This is demonstrated in lines 3 through 7 of the results above—publication id "pub.1000131550" has five different strings in its <code>funder_orgs</code> field, so when we unnest that field, <strong>the results contain multiple rows for "pub.1000131550," one for each value unnested from <code>funder_orgs</code>.</strong></p>
+<p>We're not done yet, however—we have a table that associates every <em>eLife</em> paper with each of its funders, but that's not really useful on its own. If we use group by the <code>forg</code> field (the values unnested from <code>funder_orgs</code>), we can get a count for each organization, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">forg</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">funded_pubs</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="k">AS</span> <span class="n">p</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span> <span class="k">AS</span> <span class="n">forg</span> <span class="c1">-- This is the important line</span>
+<span class="k">WHERE</span> <span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span>
+  <span class="k">AND</span> <span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span> <span class="c1">-- eLife</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">forg</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">funded_pubs</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>forg</th>
+<th>funded_pubs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>grid.280785.0</td>
+<td>2329</td>
+</tr>
+<tr>
+<td>2</td>
+<td>grid.416870.c</td>
+<td>1090</td>
+</tr>
+<tr>
+<td>3</td>
+<td>grid.413575.1</td>
+<td>1078</td>
+</tr>
+<tr>
+<td>4</td>
+<td>grid.452896.4</td>
+<td>976</td>
+</tr>
+<tr>
+<td>5</td>
+<td>grid.48336.3a</td>
+<td>893</td>
+</tr>
+</tbody>
+</table>
+<p>This is getting better! Now we have the GRID ID of each funder, paired with the number of <em>eLife</em> publications it's funded. However, GRID IDs aren't very readable. We can get organization names by pulling them in from <a href="https://docs.dimensions.ai/bigquery/datasource-organizations.html">the <code>grid</code> table of organizations data</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">forg</span><span class="p">,</span> <span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">funded_pubs</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="k">AS</span> <span class="n">p</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span> <span class="k">AS</span> <span class="n">forg</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="k">AS</span> <span class="n">grid</span> <span class="c1">-- THIS IS NEW!</span>
+  <span class="k">ON</span> <span class="n">forg</span><span class="o">=</span><span class="n">grid</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span> <span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span>
+  <span class="k">AND</span> <span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">forg</span><span class="p">,</span> <span class="n">grid</span><span class="p">.</span><span class="n">name</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">funded_pubs</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>forg</th>
+<th>name</th>
+<th>funded_pubs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>grid.280785.0</td>
+<td>National Institute of General Medical Sciences</td>
+<td>2329</td>
+</tr>
+<tr>
+<td>2</td>
+<td>grid.416870.c</td>
+<td>National Institute of Neurological Disorders and Stroke</td>
+<td>1090</td>
+</tr>
+<tr>
+<td>3</td>
+<td>grid.413575.1</td>
+<td>Howard Hughes Medical Institute</td>
+<td>1078</td>
+</tr>
+<tr>
+<td>4</td>
+<td>grid.452896.4</td>
+<td>European Research Council</td>
+<td>976</td>
+</tr>
+<tr>
+<td>5</td>
+<td>grid.48336.3a</td>
+<td>National Cancer Institute</td>
+<td>893</td>
+</tr>
+</tbody>
+</table>
+<p>Now we have the table we wanted: We unnest the values in the <code>funder_orgs</code> field, use those to join the <code>grid</code> table, and return the name of each funder and how many publications it's funded in <em>eLife</em>.</p>
+<h3 id="example-3-querying-repeated-nested-fields">Example 3: Querying repeated nested fields</h3>
+<p>Let's pull everything together using the task outlined in <a href="../../queries/03/">example 3 from the query library</a>: combining all author names of a paper into a single string. As described above, the <code>authors</code> field is complicated because it's a repeated field in which each value is a nested field: Each repeat of <code>authors</code> has its own <code>first_name</code> field, its own <code>last_name</code>, and so on. It's easier to see the structure if we start with a simpler query:</p>
+<div class="highlight"><pre><span></span><code>  <span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">authors</span>
+  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+  <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;pub.1132070778&#39;</span>
+</code></pre></div>
+<p>Results (truncated for simplicity):</p>
+<table>
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>id</th>
+            <th>authors.first_name</th>
+            <th>authors.last_name</th>
+            <th>authors.researcher_id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=7>1</td>
+            <td>pub.1132070778</td>
+            <td>O</td>
+            <td>Grånäs</td>
+            <td>ur.01027021415.21</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>A</td>
+            <td>Mocellin</td>
+            <td>ur.01316620417.40</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>E S</td>
+            <td>Cardoso</td>
+            <td><i>null</i></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>F</td>
+            <td>Burmeister</td>
+            <td>ur.0631574677.49</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>C</td>
+            <td>Caleman</td>
+            <td>ur.0745346134.45</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>O</td>
+            <td>Björneholm</td>
+            <td>ur.0603171002.99</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>A Naves</td>
+            <td>de Brito</td>
+            <td>ur.01206174227.82</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>So if we want to bring all the authors together into a single string, there are a lot of discrete steps to take care of:</p>
+<ol>
+<li>Pull out the <code>first_name</code> and <code>last_name</code> fields for each author in the <code>authors</code> repeated field.</li>
+<li>Make a new string for each author that combines their first and last name together.</li>
+<li>Pull together each of these full author names <em>into a new array</em> we'll call <code>author_names</code>. So we go from an array of <code>author</code> objects, each with its own collection of nested fields, into <strong>an array of strings</strong>, each one representing a single author.</li>
+<li>Combine all elements in the <code>author_names</code> into <strong>one long string</strong>.</li>
+</ol>
+<p>First, we try to make things more readable by using a <code>WITH</code> clause to emulate a temporary table: Within this query, there's a "table" called <code>author_array</code> filled with the results of this subquery:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="n">id</span><span class="p">,</span>
+  <span class="nb">ARRAY</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="ss">&quot; &quot;</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+    <span class="k">FROM</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+  <span class="p">)</span> <span class="k">AS</span> <span class="n">authors</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;pub.1132070778&#39;</span>
+</code></pre></div>
+<p>This is important, because it's where most of the work happens. We start in the middle and work our way outward.</p>
+<p>This piece takes an array (<code>authors</code>) and uses the <code>UNNEST</code> function to create a new table in which each row is a separate author. Then, we take each row of this temporary "authors" table and combine each first name with each last name:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="ss">&quot; &quot;</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+</code></pre></div>
+<p>So we now have a table with a single field—a full name—and each row is one author. We then convert this <em>back into an array</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">ARRAY</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="ss">&quot; &quot;</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+    <span class="k">FROM</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+<span class="p">)</span> <span class="k">AS</span> <span class="n">authors</span>
+</code></pre></div>
+<p>The outermost piece of this subquery is just to tie each array of author names to the publication that they authored:
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="n">author_array</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span>
+    <span class="n">id</span><span class="p">,</span>
+    <span class="nb">ARRAY</span><span class="p">(</span>
+      <span class="k">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="ss">&quot; &quot;</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+      <span class="k">FROM</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">author_names</span>
+  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+  <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;pub.1132070778&#39;</span>
+<span class="p">)</span>
+</code></pre></div></p>
+<p>So now we have a table called <code>author_array</code> in which each publication ID is associated with an array of author names. It looks like this):</p>
+<table>
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>id</th>
+            <th>author_names</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=7>1</td>
+            <td>pub.1132070778</td>
+            <td>O Grånäs</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>A Mocellin</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>E S Cardoso</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>F Burmeister</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>C Caleman</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>O Björneholm</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>A Naves de Brito</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>Now that we have the author names pulled out of the author objects, we're almost done. The last step is to iterate through each publication ID, take each entry in the <code>author_names</code> array, and push them all together using <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_to_string">the <code>ARRAY_TO_STRING</code> function</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="n">id</span><span class="p">,</span>
+  <span class="n">ARRAY_TO_STRING</span><span class="p">(</span><span class="n">author_names</span><span class="p">,</span> <span class="s1">&#39;; &#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">authors_list</span>
+<span class="k">FROM</span> <span class="n">author_array</span>
+</code></pre></div>
+<p>Results</p>
+<table>
+    <thead>
+        <tr>
+            <th>Row</th>
+            <th>id</th>
+            <th>authors_list</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>pub.1132070778</td>
+            <td>O Grånäs; A Mocellin; E S Cardoso; F Burmeister; C Caleman; O Björneholm; A Naves de Brito</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="be-careful">Be careful</h2>
+<p>There are a few pitfalls to be aware of when working with nested and repeated fields; we outline some of the most common below.</p>
+<h3 id="example-4-repeated-fields-with-null-values">Example 4: Repeated fields with null values</h3>
+<p>The trouble with using <code>CROSS JOIN</code> clauses in queries is that <em>they omit all records for which the repeated field has no values</em>: If a paper has zero authors listed, for example, including <code>CROSS JOIN UNNEST(authors)</code> in your query means there won't be any rows for that paper. We can examine this further using the <code>research_org_country_names</code> repeated field:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">tot_articles</span>
+<span class="k">FROM</span>
+  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span><span class="p">,</span>
+  <span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_country_names</span><span class="p">)</span> <span class="k">AS</span> <span class="n">unnested_countries</span>
+<span class="k">WHERE</span> <span class="k">year</span> <span class="o">=</span> <span class="mi">2000</span>
+</code></pre></div>
+<p>Results</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>tot_articles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1063394</td>
+</tr>
+</tbody>
+</table>
+<p>We then run the same query without the <code>UNNEST</code> clause:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">tot_articles</span>
+<span class="k">FROM</span>
+  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+<span class="k">WHERE</span> <span class="k">year</span> <span class="o">=</span> <span class="mi">2000</span>
+</code></pre></div>
+<p>Results</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>tot_articles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1760397</td>
+</tr>
+</tbody>
+</table>
+<p>So without the <code>UNNEST</code>, the total publication count is just over 1.7 million. With the unnest, however, it's less than 1.1 million. The gap is explained by publications that have an ID (that's what we're counting), but that do not have any values in the <code>research_org_country_names</code> field.</p>
+<p>So how can we be sure we aren't excluding records we actually want? In this case, a <strong><code>LEFT JOIN</code> is the way to go</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">tot_articles</span>
+<span class="k">FROM</span>
+  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span>
+  <span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_country_names</span><span class="p">)</span> <span class="k">AS</span> <span class="n">unnested_countries</span>
+<span class="k">WHERE</span> <span class="k">year</span> <span class="o">=</span> <span class="mi">2000</span>
+</code></pre></div>
+<p>Results</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>tot_articles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1760397</td>
+</tr>
+</tbody>
+</table>
+<p>Using <code>LEFT JOIN UNNEST(x)</code> instead of <code>CROSS JOIN UNNEST(x)</code> ensures that entries in which <code>x</code> is <code>NULL</code> will still be returned—those will simply have <em>null</em> listed in the <code>unnested_countries</code> field.</p>
+<h3 id="example-5-counting-entries-too-many-times">Example 5: Counting entries too many times</h3>
+<p>While it's helpful that <code>CROSS JOIN UNNEST()</code> gives us all relevant combinations of the selected fields, it can also present hazards if you don't account for which fields may have multiple entries. For this example, we want to examine how many papers were published in <em>PLOS ONE</em> that include an author with the surname "Smith."</p>
+<p>This query will get us most of the way there:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">totcount</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span> <span class="n">author</span>
+<span class="k">WHERE</span>
+  <span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1037553&#39;</span> <span class="c1">-- PLOS ONE</span>
+  <span class="k">AND</span> <span class="k">year</span> <span class="o">&gt;=</span> <span class="mi">2018</span>
+  <span class="k">AND</span> <span class="k">year</span> <span class="o">&lt;=</span> <span class="mi">2020</span>
+  <span class="k">AND</span> <span class="n">author</span><span class="p">.</span><span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Smith&#39;</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">year</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">year</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>year</th>
+<th>totcount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2018</td>
+<td>196</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2019</td>
+<td>151</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2020</td>
+<td>155</td>
+</tr>
+</tbody>
+</table>
+<p>We start with all publications published in <em>PLOS ONE</em> between 2018 and 2020, then unnest the <code>authors</code> field so we can get to the <code>last_name</code> field. We then include only entries in which <code>last_name='Smith'</code>.</p>
+<p>However, these yearly totals aren't correct: We're counting the number of entries in the table, and we only have entries in which an author's last name is "Smith." But <strong>some papers may have been written by more than one Smith</strong>. We can account for this by adding a <code>DISTINCT</code> clause, like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">totcount</span> <span class="c1">-- CHANGE IS HERE!</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span> <span class="n">author</span>
+<span class="k">WHERE</span>
+  <span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1037553&#39;</span>
+  <span class="k">AND</span> <span class="k">year</span> <span class="o">&gt;=</span> <span class="mi">2018</span>
+  <span class="k">AND</span> <span class="k">year</span> <span class="o">&lt;=</span> <span class="mi">2020</span>
+  <span class="k">AND</span> <span class="n">author</span><span class="p">.</span><span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Smith&#39;</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">year</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">year</span>
+</code></pre></div>
+<p>Results:</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>year</th>
+<th>totcount</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2018</td>
+<td>189</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2019</td>
+<td>144</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2020</td>
+<td>154</td>
+</tr>
+</tbody>
+</table>
+<p>Comparing these results to the previous ones, we can see that there are usually more than 140 papers published with "Smith" authors every year, and several papers per year authored by multiple Smiths. This was a straightforward example, but <code>DISTINCT</code> clauses can be a valuable check in more convoluted queries in which you may have multiple cross joins, or you have a cross join in a subquery that is later joined to another table.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../03-dates/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Working with dates
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../02-dsl/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              From the DSL API to Google BigQuery
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      
+    
+  </body>
+</html>

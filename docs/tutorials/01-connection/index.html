@@ -1,0 +1,1213 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+    
+    
+      
+        <title>Verifying your connection - Dimensions BigQuery Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#verifying-your-connection" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-header__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dimensions BigQuery Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Verifying your connection
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-nav__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    Dimensions BigQuery Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        About Tutorials
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Verifying your connection
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Verifying your connection
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connection-methods" class="md-nav__link">
+    Connection methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Connection methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-using-google-colaboratory-and-your-personal-credentials" class="md-nav__link">
+    Option 1: using Google Colaboratory and your personal credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-using-a-local-jupyter-and-your-personal-credentials" class="md-nav__link">
+    Option 2: using a local Jupyter and your personal credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-3-using-a-local-jupyter-and-a-service-account" class="md-nav__link">
+    Option 3: using a local Jupyter and a service account
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-queries" class="md-nav__link">
+    Running queries
+  </a>
+  
+    <nav class="md-nav" aria-label="Running queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advanced-bigquery-magic-command-and-dynamic-parameters" class="md-nav__link">
+    Advanced: BigQuery magic command and dynamic parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-dates/" class="md-nav__link">
+        Working with dates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-nested/" class="md-nav__link">
+        Working with nested and repeated fields
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-dsl/" class="md-nav__link">
+        From the DSL API to Google BigQuery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-topic_clusters/" class="md-nav__link">
+        Basic Topic Clustering using TensorFlow and BigQuery ML
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Collections
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Collections" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Collections
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/" class="md-nav__link">
+        About Collections
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/01-publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/02-citations/" class="md-nav__link">
+        Citations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/03-authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/04-funding/" class="md-nav__link">
+        Funding & Grants
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Queries
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Queries" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Queries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/" class="md-nav__link">
+        About Queries
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/01/" class="md-nav__link">
+        1. Number of publications added to Dimensions each month
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/02/" class="md-nav__link">
+        2. Number of Publications by Type
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/03/" class="md-nav__link">
+        3. Generate a list of publication authors by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/04/" class="md-nav__link">
+        4. Generate a list of publication categories by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/05/" class="md-nav__link">
+        5. Number of publications per SDG category
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/06/" class="md-nav__link">
+        6. Publications count per FoR category, total and percentage against total
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/07/" class="md-nav__link">
+        7. Finding Journals using string matching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/08/" class="md-nav__link">
+        8. Finding articles matching a specific affiliation string
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/09/" class="md-nav__link">
+        9. Top publications by Altmetric score and research organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/10/" class="md-nav__link">
+        10. Select publications matching selected concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/11/" class="md-nav__link">
+        11. Count of corresponding authors by publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/12/" class="md-nav__link">
+        12. Counting new vs recurring authors, for a specific journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/13/" class="md-nav__link">
+        13. Funding by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/14/" class="md-nav__link">
+        14. Extracting complex publications records
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/15/" class="md-nav__link">
+        15. Top N publications by citations percentile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/16/" class="md-nav__link">
+        16. Citations by journal, for a specific publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/17/" class="md-nav__link">
+        17. One-degree citation network for a single publication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/18/" class="md-nav__link">
+        18. Incoming citations for a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/19/" class="md-nav__link">
+        19. Outgoing citations from a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/20/" class="md-nav__link">
+        20. International collaboration of an organisation in a field
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/21/" class="md-nav__link">
+        21. International collaboration rate of individuals, with context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/22/" class="md-nav__link">
+        22. Incoming citations for a single publication, by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/23/" class="md-nav__link">
+        23. Citing authors by country
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/24/" class="md-nav__link">
+        24. Organizations and sub-organizations
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connection-methods" class="md-nav__link">
+    Connection methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Connection methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-using-google-colaboratory-and-your-personal-credentials" class="md-nav__link">
+    Option 1: using Google Colaboratory and your personal credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-using-a-local-jupyter-and-your-personal-credentials" class="md-nav__link">
+    Option 2: using a local Jupyter and your personal credentials
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-3-using-a-local-jupyter-and-a-service-account" class="md-nav__link">
+    Option 3: using a local Jupyter and a service account
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-queries" class="md-nav__link">
+    Running queries
+  </a>
+  
+    <nav class="md-nav" aria-label="Running queries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#advanced-bigquery-magic-command-and-dynamic-parameters" class="md-nav__link">
+    Advanced: BigQuery magic command and dynamic parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="verifying-your-connection">Verifying your connection</h1>
+<p>In this tutorial we will show how to connect to the Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.</p>
+<div class="admonition warning">
+<p class="admonition-title">Prerequisites</p>
+<p>In order to run this tutorial, please ensure that: </p>
+<ul>
+<li>You have a valid <a href="https://www.dimensions.ai/products/bigquery/">Dimensions on Google BigQuery account</a> and have <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">configured a Google Cloud project</a>.</li>
+<li>You have some basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
+</ul>
+</div>
+<h2 id="connection-methods">Connection methods</h2>
+<p>There are a few options available:</p>
+<ol>
+<li><strong>Use Google Colaboratory and your personal credentials.</strong> This option is the simplest of all, as it doesn't require you to install anything on your computer. It is normally ok for small to mid-sized projects that can live in the cloud.</li>
+<li><strong>Use a local Jupyter environment and your personal credentials.</strong> This option requires you to install the Google Cloud SDK in order to authenticate. It is the best option if you want to work locally and/or have other Python libraries or services that you need to access.</li>
+<li><strong>Use a local Jupyter environment and a service account.</strong> This option is really a variance on the option 2, for those users that must use a service account.</li>
+</ol>
+<p>NOTE All of these options require you to first set up a <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#projects">GCP project</a> (as you haven't done it already) and provide your project ID. E.g.:</p>
+<div class="highlight"><pre><span></span><code><span class="n">MY_PROJECT_ID</span> <span class="o">=</span> <span class="s2">&quot;my-cool-gbq-project&quot;</span>
+</code></pre></div>
+<h3 id="option-1-using-google-colaboratory-and-your-personal-credentials">Option 1: using Google Colaboratory and your personal credentials</h3>
+<p><a href="https://colab.research.google.com/">Google Colaboratory</a> is a free cloud-based Jupyter environment from Google. This option provides an easy service allowing you to get started with notebooks.</p>
+<p>Using your Google Account you can create notebooks, execute BigQuery queries and share these with other Google Accounts quickly and easily.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># authentication happens via your browser</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+
+<span class="n">MY_PROJECT_ID</span> <span class="o">=</span> <span class="s2">&quot;my-cool-gbq-project&quot;</span>
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">MY_PROJECT_ID</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="option-2-using-a-local-jupyter-and-your-personal-credentials">Option 2: using a local Jupyter and your personal credentials</h3>
+<p>A Google Account represents a developer, an administrator, or any other person who interacts with Google Cloud.
+This is normally the Google account one has used to get access to the Dimensions on BigQuery product.</p>
+<p>In order to configure programmatic access for local development, the easiest way is to authenticate using the <a href="https://googleapis.dev/python/google-api-core/latest/auth.html">Google Cloud SDK</a>.</p>
+<div class="highlight"><pre><span></span><code>$ gcloud auth application-default login
+</code></pre></div>
+<p>Note: the command above should be run from a Terminal or console. This will generate a JSON file that is used as the default application credentials for the account that was selected in the above login process. When using the default Client for each Google provided package (such as BigQuery) they should automatically authenticate using these default credentials.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># install python client library</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">bigquery</span> <span class="o">-</span><span class="n">U</span> <span class="o">--</span><span class="n">quiet</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+
+<span class="n">MY_PROJECT_ID</span> <span class="o">=</span> <span class="s2">&quot;my-cool-gbq-project&quot;</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">MY_PROJECT_ID</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="option-3-using-a-local-jupyter-and-a-service-account">Option 3: using a local Jupyter and a service account</h3>
+<p>A <a href="https://cloud.google.com/iam/docs/service-accounts">service account</a> is a special kind of account used by an application or a virtual machine (VM) instance, not a person.</p>
+<p>Each service account is associated with two sets of public/private RSA key pairs that are used to authenticate to Google: Google-managed keys, and user-managed keys.</p>
+<p>When using a service account you'd just have to point your client object to the a key file.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+<span class="n">credentials_file</span> <span class="o">=</span> <span class="s1">&#39;my-awesome-gbq-project-47616836.json&#39;</span>
+
+<span class="n">MY_PROJECT_ID</span> <span class="o">=</span> <span class="s2">&quot;my-cool-gbq-project&quot;</span>
+
+<span class="c1"># Explicitly use service account credentials by specifying the private key file</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="o">.</span><span class="n">from_service_account_json</span><span class="p">(</span><span class="n">credentials_file</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="running-queries">Running queries</h2>
+<p>Once the connection is set up, all you have to do is to type in a SQL query and run it using the <code>client</code> object.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Query: Top publications from Oxford univ. by Altmetric Score in 2020</span>
+
+<span class="n">query_1</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT</span>
+<span class="s2">    id,</span>
+<span class="s2">    title.preferred as title,</span>
+<span class="s2">    ARRAY_LENGTH(authors) as authors_count,</span>
+<span class="s2">    CAST(altmetrics.score as INT64) as altmetric_score</span>
+<span class="s2">FROM</span>
+<span class="s2">    `dimensions-ai.data_analytics.publications`</span>
+<span class="s2">WHERE</span>
+<span class="s2">    year = 2020 AND &#39;grid.4991.5&#39; in UNNEST(research_orgs)</span>
+<span class="s2">ORDER BY</span>
+<span class="s2">    altmetric_score DESC</span>
+<span class="s2">LIMIT 5&quot;&quot;&quot;</span>
+
+<span class="c1"># 1 - main syntax</span>
+
+<span class="n">query_job</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_1</span><span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">query_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>  <span class="c1"># Waits for job to complete.</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt; </span><span class="si">{}</span><span class="s2"> : </span><span class="si">{}</span><span class="se">\n\t</span><span class="s2">Authors: </span><span class="si">{}</span><span class="se">\n\t</span><span class="s2">Altmetric Score: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">authors_count</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">altmetric_score</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&gt; pub.1129493369 : Safety and immunogenicity of the ChAdOx1 nCoV-19 vaccine against SARS-CoV-2: a preliminary report of a phase 1/2, single-blind, randomised controlled trial
+    Authors: 366
+    Altmetric Score: 15451
+&gt; pub.1130340155 : Two metres or one: what is the evidence for physical distancing in covid-19?
+    Authors: 6
+    Altmetric Score: 15125
+&gt; pub.1127239818 : Remdesivir in adults with severe COVID-19: a randomised, double-blind, placebo-controlled, multicentre trial
+    Authors: 46
+    Altmetric Score: 12675
+&gt; pub.1131721397 : Scientific consensus on the COVID-19 pandemic: we need to act now
+    Authors: 31
+    Altmetric Score: 10192
+&gt; pub.1126016857 : Quantifying SARS-CoV-2 transmission suggests epidemic control with digital contact tracing
+    Authors: 9
+    Altmetric Score: 8320
+</code></pre></div>
+<p>An slighly alternative syntax is also possible</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 2 - omit calling result()</span>
+
+<span class="n">query_job</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">query_job</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Row((&#39;pub.1129493369&#39;, &#39;Safety and immunogenicity of the ChAdOx1 nCoV-19 vaccine against SARS-CoV-2: a preliminary report of a phase 1/2, single-blind, randomised controlled trial&#39;, 366, 15451), {&#39;id&#39;: 0, &#39;title&#39;: 1, &#39;authors_count&#39;: 2, &#39;altmetric_score&#39;: 3})
+Row((&#39;pub.1130340155&#39;, &#39;Two metres or one: what is the evidence for physical distancing in covid-19?&#39;, 6, 15125), {&#39;id&#39;: 0, &#39;title&#39;: 1, &#39;authors_count&#39;: 2, &#39;altmetric_score&#39;: 3})
+Row((&#39;pub.1127239818&#39;, &#39;Remdesivir in adults with severe COVID-19: a randomised, double-blind, placebo-controlled, multicentre trial&#39;, 46, 12675), {&#39;id&#39;: 0, &#39;title&#39;: 1, &#39;authors_count&#39;: 2, &#39;altmetric_score&#39;: 3})
+Row((&#39;pub.1131721397&#39;, &#39;Scientific consensus on the COVID-19 pandemic: we need to act now&#39;, 31, 10192), {&#39;id&#39;: 0, &#39;title&#39;: 1, &#39;authors_count&#39;: 2, &#39;altmetric_score&#39;: 3})
+Row((&#39;pub.1126016857&#39;, &#39;Quantifying SARS-CoV-2 transmission suggests epidemic control with digital contact tracing&#39;, 9, 8320), {&#39;id&#39;: 0, &#39;title&#39;: 1, &#39;authors_count&#39;: 2, &#39;altmetric_score&#39;: 3})
+</code></pre></div>
+<p>Another quite handy feature is to transform data direclty into <a href="https://pandas.pydata.org/pandas-docs/">Pandas dataframes</a></p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># 3 - return a dataframe</span>
+
+<span class="n">query_job</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_1</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+<span class="n">query_job</span>
+</code></pre></div>
+| Row | id    | title | authors_count | altmetric_score |
+| --- | ----- | ----- | ------------- | --------------- |
+| 1 | pub.1129493369 | Safety and immunogenicity of the ChAdOx1 nCoV-... | 366 | 15451 |
+| 2 | pub.1130340155 | Two metres or one: what is the evidence for ph... | 6 | 15125 |
+| 3 | pub.1127239818 | Remdesivir in adults with severe COVID-19: a r... | 46 | 12675 |
+| 4 | pub.1131721397 | Scientific consensus on the COVID-19 pandemic:... | 31 | 10192 |
+| 5 | pub.1126016857 | Quantifying SARS-CoV-2 transmission suggests e... | 9 | 8320 |</p>
+<h3 id="advanced-bigquery-magic-command-and-dynamic-parameters">Advanced: BigQuery magic command and dynamic parameters</h3>
+<p>The GBQ library comes with a <a href="https://googleapis.dev/python/bigquery/latest/magics.html">magic command</a> that is essentially a nice shortcut method for running queries.</p>
+<p>This extensions needs to be loaded sepately e.g.:</p>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">google</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">bigquery</span>
+</code></pre></div>
+<p>We can then set up a couple of query parameters for the query itself, as well as the usual project ID value.</p>
+<div class="highlight"><pre><span></span><code><span class="n">project_id</span> <span class="o">=</span> <span class="n">MY_PROJECT_ID</span>
+<span class="n">bq_params</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">bq_params</span><span class="p">[</span><span class="s2">&quot;journal_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;jour.1115214&quot;</span>
+</code></pre></div>
+<p>Finally we can query by starting a cell with the command <code>%%bigquery ...</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">params</span> <span class="err">$</span><span class="n">bq_params</span> <span class="o">--</span><span class="n">project</span> <span class="err">$</span><span class="n">project_id</span>
+
+<span class="c1"># Publications per year for Nature Biotechnology</span>
+
+<span class="n">SELECT</span>
+    <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">pubs</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">journal</span><span class="o">.</span><span class="n">title</span>
+<span class="n">FROM</span>
+    <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">.</span><span class="n">data_analytics</span><span class="o">.</span><span class="n">publications</span><span class="err">`</span>
+<span class="n">WHERE</span>
+    <span class="n">year</span> <span class="o">&gt;=</span> <span class="mi">2010</span>
+    <span class="n">AND</span> <span class="n">journal</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nd">@journal_id</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+    <span class="n">year</span><span class="p">,</span> <span class="n">journal</span><span class="o">.</span><span class="n">title</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+    <span class="n">year</span> <span class="n">DESC</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query complete after 0.02s: 100%|██████████| 1/1 [00:00&lt;00:00, 699.28query/s]
+Downloading: 100%|██████████| 11/11 [00:02&lt;00:00,  4.31rows/s]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>pubs</th>
+<th>year</th>
+<th>title</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>438</td>
+<td>2020</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>2</td>
+<td>386</td>
+<td>2019</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>3</td>
+<td>374</td>
+<td>2018</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>4</td>
+<td>380</td>
+<td>2017</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>5</td>
+<td>436</td>
+<td>2016</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>6</td>
+<td>467</td>
+<td>2015</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>7</td>
+<td>475</td>
+<td>2014</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>8</td>
+<td>462</td>
+<td>2013</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>9</td>
+<td>507</td>
+<td>2012</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>10</td>
+<td>459</td>
+<td>2011</td>
+<td>Nature Biotechnology</td>
+</tr>
+<tr>
+<td>11</td>
+<td>486</td>
+<td>2010</td>
+<td>Nature Biotechnology</td>
+</tr>
+</tbody>
+</table>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Query fails wit <code>to_dataframe() ArrowNotImplementedError</code><ul>
+<li>Try reinstalling pyarrow ie <code>pip install pyarrow -U</code></li>
+</ul>
+</li>
+<li>Query fails with <code>AttributeError: 'NoneType' object has no attribute 'transport'</code><ul>
+<li>Try <code>pip install google-cloud-bigquery-storage -U</code> and restarting the notebook</li>
+</ul>
+</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              About Tutorials
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../03-dates/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Working with dates
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      
+    
+  </body>
+</html>

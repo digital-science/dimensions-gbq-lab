@@ -1,0 +1,36 @@
+
+
+# awesome-pages copy of YAML settings
+# pages are loaded dynamically
+
+site_name: Dimensions BigQuery Lab
+docs_dir: src-docs
+site_dir: ../docs
+
+# repo_url: https://github.com/digital-science/dimensions-gbq-lab
+
+nav:
+    - Home: index.md
+    - Tutorials: 
+        - tutorials/index.md
+        - tutorials/01-connection.md
+        - tutorials/03-dates.md
+        - tutorials/04-nested.md
+        - tutorials/02-dsl.md
+        - tutorials/05-topic_clusters.md
+    - ...
+
+theme: 
+    name: material
+    favicon: assets/img/favicon.ico
+    logo: assets/img/apple-touch-icon.png
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+plugins:
+    - search
+    - awesome-pages
