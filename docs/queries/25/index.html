@@ -14,7 +14,7 @@
     
     
       
-        <title>17. One-degree citation network for a single publication - Dimensions BigQuery Lab</title>
+        <title>25. Grants for an organization - Dimensions BigQuery Lab</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#17-one-degree-citation-network-for-a-single-publication" class="md-skip">
+        <a href="#25-grants-for-an-organization" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              17. One-degree citation network for a single publication
+              25. Grants for an organization
             
           </span>
         </div>
@@ -599,63 +599,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          17. One-degree citation network for a single publication
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../17/" class="md-nav__link">
         17. One-degree citation network for a single publication
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query" class="md-nav__link">
-    Query
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
-    Results
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -747,11 +695,63 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../25/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          25. Grants for an organization
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         25. Grants for an organization
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Query
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -820,68 +820,30 @@
               
                 
                 
-                <h1 id="17-one-degree-citation-network-for-a-single-publication">17. One-degree citation network for a single publication</h1>
-<div class="admonition warning">
-<p class="admonition-title">Level: Advanced</p>
-<p>This query requires a good understanding of SQL and the Dimensions data model</p>
+                <h1 id="25-grants-for-an-organization">25. Grants for an organization</h1>
+<div class="admonition success">
+<p class="admonition-title">Level: Easy</p>
+<p>This query is suitable for new users of Dimensions on Google BigQuery</p>
 </div>
 <h2 id="description">Description</h2>
-<p>This query generates a basic citation network for a single publication (the "root node"). </p>
-<p>"Level 1" publications in the query are publications that are cited directly by the root publication. "Level 2" publications are cited by Level 1 publications. Each row describes a vertex in the network and what year the citation occurred.</p>
+<p>This query counts all grants received by a selected GRID organization and sums up the total amount of funding received, based on the grants <code>start_year</code>.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="n">level1</span> <span class="k">AS</span> <span class="p">(</span>
-  <span class="k">SELECT</span> <span class="ss">&quot;pub.1099396382&quot;</span> <span class="k">as</span> <span class="n">citation_from</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">citation_to</span><span class="p">,</span>
-    <span class="mi">1</span> <span class="k">AS</span> <span class="k">level</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="k">year</span> <span class="k">as</span> <span class="n">citation_year</span>
-  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span><span class="p">,</span>
-    <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span> <span class="k">AS</span> <span class="n">citations</span>
-  <span class="k">WHERE</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;pub.1099396382&quot;</span> <span class="c1">-- starting node defined here</span>
-<span class="p">),</span>
-
-<span class="n">level2</span> <span class="k">AS</span> <span class="p">(</span>
-  <span class="k">SELECT</span> <span class="n">l</span><span class="p">.</span><span class="n">citation_to</span> <span class="k">AS</span> <span class="n">citation_from</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">citation_to</span><span class="p">,</span>
-    <span class="mi">2</span> <span class="k">AS</span> <span class="k">level</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="k">year</span> <span class="k">AS</span> <span class="n">citation_year</span>
-  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span><span class="p">,</span>
-    <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span> <span class="k">as</span> <span class="n">citations</span><span class="p">,</span> <span class="n">level1</span> <span class="n">l</span>
-  <span class="k">where</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">l</span><span class="p">.</span><span class="n">citation_to</span>
-<span class="p">)</span>
-
-<span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">level1</span>
-<span class="k">UNION</span> <span class="k">ALL</span>
-<span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">level2</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_grants</span><span class="p">,</span>
+  <span class="k">SUM</span><span class="p">(</span><span class="n">funding_usd</span><span class="p">)</span> <span class="k">AS</span> <span class="n">total_grants_amount_usd</span>
+<span class="k">FROM</span>
+  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grants</span><span class="o">`</span>
+<span class="k">WHERE</span>
+  <span class="ss">&quot;grid.10837.3d&quot;</span> <span class="k">IN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span>
+  <span class="k">AND</span> <span class="p">(</span><span class="n">start_year</span> <span class="o">&gt;=</span> <span class="mi">2009</span>
+    <span class="k">AND</span> <span class="n">start_year</span> <span class="o">&lt;=</span> <span class="mi">2020</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
 <div class="highlight"><pre><span></span><code><span class="p">[</span>
   <span class="p">{</span>
-    <span class="nt">&quot;citation_from&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1084215961&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_to&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1135701707&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_year&quot;</span><span class="p">:</span> <span class="s2">&quot;2021&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;citation_from&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1084215961&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_to&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1126671825&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_year&quot;</span><span class="p">:</span> <span class="s2">&quot;2020&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;citation_from&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1084215961&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_to&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1101037901&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_year&quot;</span><span class="p">:</span> <span class="s2">&quot;2018&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;citation_from&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1084215961&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_to&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1120764290&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_year&quot;</span><span class="p">:</span> <span class="s2">&quot;2019&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;citation_from&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1084215961&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_to&quot;</span><span class="p">:</span> <span class="s2">&quot;pub.1103943561&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;citation_year&quot;</span><span class="p">:</span> <span class="s2">&quot;2018&quot;</span>
-  <span class="p">},</span>
-  <span class="err">//</span> <span class="err">many</span> <span class="err">more</span> <span class="err">entries</span> <span class="err">here...</span>
+    <span class="nt">&quot;total_grants&quot;</span><span class="p">:</span> <span class="s2">&quot;731&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;total_grants_amount_usd&quot;</span><span class="p">:</span> <span class="s2">&quot;8.4692966E8&quot;</span>
+  <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
                 
@@ -902,7 +864,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../16/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../24/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -911,25 +873,11 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              16. Citations by journal, for a specific publisher
+              24. Organizations and sub-organizations
             </div>
           </div>
         </a>
       
-      
-        <a href="../18/" class="md-footer__link md-footer__link--next" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              18. Incoming citations for a journal
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
       
     </nav>
   
