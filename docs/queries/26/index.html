@@ -14,7 +14,7 @@
     
     
       
-        <title>23. Citing authors by country - Dimensions BigQuery Lab</title>
+        <title>26. Field Citation Ratio (FCR) median average - Dimensions BigQuery Lab</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#23-citing-authors-by-country" class="md-skip">
+        <a href="#26-field-citation-ratio-fcr-median-average" class="md-skip">
           Skip to content
         </a>
       
@@ -88,7 +88,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              23. Citing authors by country
+              26. Field Citation Ratio (FCR) median average
             
           </span>
         </div>
@@ -671,6 +671,42 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../23/" class="md-nav__link">
+        23. Citing authors by country
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../24/" class="md-nav__link">
+        24. Organizations and sub-organizations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../25/" class="md-nav__link">
+        25. Grants for an organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -682,12 +718,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          23. Citing authors by country
+          26. Field Citation Ratio (FCR) median average
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        23. Citing authors by country
+        26. Field Citation Ratio (FCR) median average
       </a>
       
         
@@ -728,42 +764,6 @@
   
 </nav>
       
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../24/" class="md-nav__link">
-        24. Organizations and sub-organizations
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../25/" class="md-nav__link">
-        25. Grants for an organization
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../26/" class="md-nav__link">
-        26. Field Citation Ratio (FCR) median average
-      </a>
     </li>
   
 
@@ -844,65 +844,149 @@
               
                 
                 
-                <h1 id="23-citing-authors-by-country">23. Citing authors by country</h1>
+                <h1 id="26-field-citation-ratio-fcr-median-average">26. Field Citation Ratio (FCR) median average</h1>
 <div class="admonition info">
 <p class="admonition-title">Level: Medium</p>
 <p>This query requires basic knowledge of SQL and the Dimensions data model</p>
 </div>
 <h2 id="description">Description</h2>
-<p>This query counts incoming citations for a single publication. The final results count <em>authors</em>, rather than publications, and group counts by the country of each author's current affiliation. </p>
-<p>The strategy is similar to <a href="../22/">query 22</a>, which groups citations by journal: the <a href="https://docs.dimensions.ai/bigquery/datasource-publications.html"><code>publications</code> table</a> has a <code>citations</code> field that includes the publication IDs of all incoming citations for a given paper. We fetch that list in the <code>citing</code> subquery below, then query the <code>publications</code> table to get a list of authors for all the publications citing the paper of interest. We join the <code>researchers</code> table to get each author's current affiliation. In the final query, we use the <code>grid</code> table to associate each author affiliation to a single <em>country</em>, then group all results by those countries.</p>
+<p>This query calculates the Field Citation Ratio (FCR) mean per year for publications from a chosen country (eg <code>'CA'</code>). FCR Mean is the average Field Citation Ratio (FCR), which indicates the relative citation performance of an article, when compared to similarly-aged articles in its Fields of Research (FoR) category. </p>
+<p>To calculate the geometric mean, we use the following approach, as documented in <a href="https://app.dimensions.ai/details/publication/pub.1013282544">Thelwall &amp; Fairclough (2015)</a>:</p>
+<ul>
+<li>For a set of documents, all citation counts are incremented by 1.</li>
+<li>We calculate the natural log of the citations counts.</li>
+<li>We add these values together, and divide by the number of documents.</li>
+<li>We calculate the exponential of this value (reversing the log effect).</li>
+<li>We reduce the final value by 1.</li>
+</ul>
+<p>For more background, see this article: <a href="https://plus.dimensions.ai/support/solutions/articles/23000018848-what-is-the-fcr-how-is-it-calculated-">What is the FCR? How is it calculated?</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The list of citing publications is determined by the clause <code>WHERE p.id='pub.1113640622'</code>. This can be changed to be as broad or narrow as you wish—changing it to something like <code>WHERE journal.title='eLife'</code>, for example, would return incoming citations to an entire journal rather than a single paper.</p>
+<p>The equivalent <a href="https://docs.dimensions.ai/dsl/language.html#aggregations">Dimensions API</a> query is:
+<div class="highlight"><pre><span></span><code>search publications
+where research_org_countries = &quot;CA&quot;
+return year aggregate fcr_gavg
+sort by fcr_gavg
+</code></pre></div></p>
 </div>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="n">citing</span> <span class="k">AS</span> <span class="p">(</span>
-    <span class="k">SELECT</span> <span class="n">citing_pubs</span><span class="p">.</span><span class="n">id</span>
-    <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
-    <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span> <span class="k">AS</span> <span class="n">citing_pubs</span>
-    <span class="k">WHERE</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;pub.1113640622&#39;</span> <span class="c1">-- publication of interest</span>
-<span class="p">),</span>
-<span class="n">people_and_grids</span> <span class="k">as</span> <span class="p">(</span>
-  <span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">auth</span><span class="p">.</span><span class="n">researcher_id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">people</span><span class="p">,</span>
-    <span class="n">res</span><span class="p">.</span><span class="n">current_research_org</span> <span class="k">AS</span> <span class="n">gridid</span>
-  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">pubs</span>
-  <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span> <span class="k">as</span> <span class="n">auth</span>
-  <span class="k">INNER</span> <span class="k">JOIN</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">researchers</span><span class="o">`</span> <span class="n">res</span>
-    <span class="k">ON</span> <span class="n">res</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">auth</span><span class="p">.</span><span class="n">researcher_id</span>
-  <span class="k">WHERE</span> <span class="n">pubs</span><span class="p">.</span><span class="n">id</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">citing</span><span class="p">)</span>
-  <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">gridid</span>
-<span class="p">)</span>
-
-<span class="k">SELECT</span> <span class="n">people</span><span class="p">,</span> <span class="n">address</span><span class="p">.</span><span class="n">country</span>
-<span class="k">FROM</span> <span class="n">people_and_grids</span>
-<span class="k">INNER</span> <span class="k">JOIN</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="n">gridinfo</span>
-  <span class="k">ON</span> <span class="n">gridinfo</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">people_and_grids</span><span class="p">.</span><span class="n">gridid</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">people</span> <span class="k">DESC</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+  <span class="k">year</span><span class="p">,</span>
+  <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="n">pub_count</span><span class="p">,</span>
+  <span class="p">(</span><span class="n">EXP</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">LN</span><span class="p">(</span><span class="n">metrics</span><span class="p">.</span><span class="n">field_citation_ratio</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="k">AS</span> <span class="n">fcr_gavg</span>
+<span class="k">FROM</span>
+  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="k">AS</span> <span class="n">p</span>
+<span class="k">WHERE</span>
+  <span class="s1">&#39;CA&#39;</span> <span class="k">IN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_countries</span><span class="p">)</span>
+  <span class="k">AND</span> <span class="k">year</span> <span class="o">&gt;=</span> <span class="mi">2000</span>
+  <span class="k">AND</span> <span class="k">year</span> <span class="o">&lt;=</span> <span class="mi">2019</span>
+<span class="k">GROUP</span> <span class="k">BY</span>
+  <span class="k">year</span>
+<span class="k">ORDER</span> <span class="k">BY</span>
+  <span class="k">year</span> <span class="k">DESC</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
 <div class="highlight"><pre><span></span><code><span class="p">[</span>
   <span class="p">{</span>
-    <span class="nt">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;Brazil&quot;</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2019&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;126595&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;1.895202772875376&quot;</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2018&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;123072&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.063853669997279&quot;</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2017&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;116099&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.173716507769935&quot;</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;United States&quot;</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2016&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;110619&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2466482612818988&quot;</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;people&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;Croatia&quot;</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2015&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;105632&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3125283272558983&quot;</span>
   <span class="p">},</span>
-  <span class="err">//</span> <span class="err">more</span> <span class="err">results</span> <span class="err">here...</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2014&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;103433&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3687156780522907&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2013&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;98650&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.467124347845802&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2012&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;94561&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.544932622059771&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2011&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;90036&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.5889138063645207&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2010&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;86903&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.6670704464809525&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2009&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;83592&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.686271282515282&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2008&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;79437&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.622504341868477&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2007&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;72631&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.6134419550710426&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2006&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;70521&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.5591136625055593&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2005&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;63057&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.6001407619739907&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2004&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;55570&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.6729901969921546&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2003&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;50762&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.6458690167701433&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2002&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;46301&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.5733709228189774&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2001&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;42605&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.7140322564560413&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;year&quot;</span><span class="p">:</span> <span class="s2">&quot;2000&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pub_count&quot;</span><span class="p">:</span> <span class="s2">&quot;41724&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span> <span class="s2">&quot;2.6536040582685607&quot;</span>
+  <span class="p">}</span>
 <span class="p">]</span>
 </code></pre></div>
                 
@@ -923,7 +1007,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../22/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../25/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -932,19 +1016,19 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              22. Incoming citations for a single publication, by journal
+              25. Grants for an organization
             </div>
           </div>
         </a>
       
       
-        <a href="../24/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../27/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              24. Organizations and sub-organizations
+              27. List of corresponding authors
             </div>
           </div>
           <div class="md-footer__button md-icon">
