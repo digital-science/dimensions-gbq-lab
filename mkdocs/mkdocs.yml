@@ -34,3 +34,6 @@ markdown_extensions:
 plugins:
     - search
     - awesome-pages
+google_analytics:
+  - UA-149959808-1
+  - auto
