@@ -35,5 +35,5 @@ plugins:
     - search
     - awesome-pages
 google_analytics:
-  - UA-149959808-1
+  - UA-149959808-3
   - auto
