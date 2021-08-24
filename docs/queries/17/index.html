@@ -656,6 +656,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#171-variant-one-degree-references-network-for-a-single-publication" class="md-nav__link">
+    17.1 Variant: one-degree references network for a single publication
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -835,6 +842,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#171-variant-one-degree-references-network-for-a-single-publication" class="md-nav__link">
+    17.1 Variant: one-degree references network for a single publication
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -854,13 +868,13 @@
 <p>This query requires a good understanding of SQL and the Dimensions data model</p>
 </div>
 <h2 id="description">Description</h2>
-<p>This query generates a basic citation network for a single publication (the "root node"). </p>
-<p>"Level 1" publications in the query are publications that are cited directly by the root publication. "Level 2" publications are cited by Level 1 publications. Each row describes a vertex in the network and what year the citation occurred.</p>
+<p>This query generates a basic (incoming) citation network for a single publication (the "root node"). </p>
+<p>"Level 1" publications in the query are publications that are citing the root publication. "Level 2" publications are citing Level 1 publications. Each row describes a vertex in the network and what year the citation occurred.</p>
 <h2 id="query">Query</h2>
 <div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="n">level1</span> <span class="k">AS</span> <span class="p">(</span>
   <span class="k">SELECT</span> <span class="ss">&quot;pub.1099396382&quot;</span> <span class="k">as</span> <span class="n">citation_from</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">citation_to</span><span class="p">,</span>
     <span class="mi">1</span> <span class="k">AS</span> <span class="k">level</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="k">year</span> <span class="k">as</span> <span class="n">citation_year</span>
-  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span><span class="p">,</span>
+  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
     <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span> <span class="k">AS</span> <span class="n">citations</span>
   <span class="k">WHERE</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;pub.1099396382&quot;</span> <span class="c1">-- starting node defined here</span>
 <span class="p">),</span>
@@ -868,7 +882,7 @@
 <span class="n">level2</span> <span class="k">AS</span> <span class="p">(</span>
   <span class="k">SELECT</span> <span class="n">l</span><span class="p">.</span><span class="n">citation_to</span> <span class="k">AS</span> <span class="n">citation_from</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">citation_to</span><span class="p">,</span>
     <span class="mi">2</span> <span class="k">AS</span> <span class="k">level</span><span class="p">,</span> <span class="n">citations</span><span class="p">.</span><span class="k">year</span> <span class="k">AS</span> <span class="n">citation_year</span>
-  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span><span class="p">,</span>
+  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
     <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span> <span class="k">as</span> <span class="n">citations</span><span class="p">,</span> <span class="n">level1</span> <span class="n">l</span>
   <span class="k">where</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">l</span><span class="p">.</span><span class="n">citation_to</span>
 <span class="p">)</span>
@@ -911,6 +925,29 @@
   <span class="p">},</span>
   <span class="err">//</span> <span class="err">many</span> <span class="err">more</span> <span class="err">entries</span> <span class="err">here...</span>
 <span class="p">]</span>
+</code></pre></div>
+<h2 id="171-variant-one-degree-references-network-for-a-single-publication">17.1 Variant: one-degree references network for a single publication</h2>
+<p>We could use the same approach in order to build a references network (=outgoing citations). </p>
+<p>This can be achieved via the publications field <code>references_ids</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="n">level1</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="ss">&quot;pub.1099396382&quot;</span> <span class="k">as</span> <span class="n">references_from</span><span class="p">,</span> <span class="n">reference</span> <span class="k">AS</span> <span class="n">reference_to</span><span class="p">,</span>
+    <span class="mi">1</span> <span class="k">AS</span> <span class="k">level</span>
+  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+    <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">reference_ids</span><span class="p">)</span> <span class="k">AS</span> <span class="n">reference</span>
+  <span class="k">WHERE</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;pub.1099396382&quot;</span> <span class="c1">-- starting node defined here</span>
+<span class="p">),</span>
+
+<span class="n">level2</span> <span class="k">AS</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">l</span><span class="p">.</span><span class="n">reference_to</span> <span class="k">AS</span> <span class="n">reference_from</span><span class="p">,</span> <span class="n">reference</span> <span class="k">AS</span> <span class="n">reference_to</span><span class="p">,</span>
+    <span class="mi">2</span> <span class="k">AS</span> <span class="k">level</span>
+  <span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+    <span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">reference_ids</span><span class="p">)</span> <span class="k">as</span> <span class="n">reference</span><span class="p">,</span> <span class="n">level1</span> <span class="n">l</span>
+  <span class="k">where</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">l</span><span class="p">.</span><span class="n">reference_to</span>
+<span class="p">)</span>
+
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">level1</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">level2</span>
 </code></pre></div>
                 
               
