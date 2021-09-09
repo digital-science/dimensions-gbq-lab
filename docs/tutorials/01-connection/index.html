@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -18,10 +18,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -38,10 +38,19 @@
     
     
       
-        
-<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-149959808-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-149959808-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
     
     
   </head>
@@ -109,14 +118,18 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -226,6 +239,7 @@
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
+      
         
       
       
@@ -242,6 +256,7 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
     
   
   
@@ -250,6 +265,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#connection-methods" class="md-nav__link">
@@ -363,6 +385,30 @@
     <li class="md-nav__item">
       <a href="../05-topic_clusters/" class="md-nav__link">
         Basic Topic Clustering using TensorFlow and BigQuery ML
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-funder_grant_pubs/" class="md-nav__link">
+        Identify a funder's grants and publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-retrieve_patents/" class="md-nav__link">
+        Retrieve patents linked to a set of grants
       </a>
     </li>
   
@@ -845,6 +891,7 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
     
   
   
@@ -853,6 +900,13 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#connection-methods" class="md-nav__link">
@@ -929,15 +983,17 @@
                 
                 
                 <h1 id="verifying-your-connection">Verifying your connection</h1>
-<p>In this tutorial we will show how to connect to the Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.</p>
-<div class="admonition warning">
-<p class="admonition-title">Prerequisites</p>
-<p>In order to run this tutorial, please ensure that: </p>
+<p>In this tutorial we will show how to connect to Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial is intended for people who want to query BigQuery via a notebook, but the SQL queries in this lab can also be run directly from the <a href="https://console.cloud.google.com/bigquery">BigQuery console</a>.</p>
+</div>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>In order to run this tutorial, please ensure that:</p>
 <ul>
 <li>You have a valid <a href="https://www.dimensions.ai/products/bigquery/">Dimensions on Google BigQuery account</a> and have <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">configured a Google Cloud project</a>.</li>
 <li>You have some basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
 </ul>
-</div>
 <h2 id="connection-methods">Connection methods</h2>
 <p>There are a few options available:</p>
 <ol>
@@ -1057,7 +1113,7 @@ Row((&#39;pub.1126016857&#39;, &#39;Quantifying SARS-CoV-2 transmission suggests
 | 4 | pub.1131721397 | Scientific consensus on the COVID-19 pandemic:... | 31 | 10192 |
 | 5 | pub.1126016857 | Quantifying SARS-CoV-2 transmission suggests e... | 9 | 8320 |</p>
 <h3 id="advanced-bigquery-magic-command-and-dynamic-parameters">Advanced: BigQuery magic command and dynamic parameters</h3>
-<p>The GBQ library comes with a <a href="https://googleapis.dev/python/bigquery/latest/magics.html">magic command</a> that is essentially a nice shortcut method for running queries.</p>
+<p>The Google BigQuery library comes with a <a href="https://googleapis.dev/python/bigquery/latest/magics.html">magic command</a> that is essentially a nice shortcut method for running queries.</p>
 <p>This extensions needs to be loaded sepately e.g.:</p>
 <div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">load_ext</span> <span class="n">google</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">bigquery</span>
 </code></pre></div>
@@ -1193,7 +1249,8 @@ Downloading: 100%|██████████| 11/11 [00:02&lt;00:00,  4.31ro
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../" class="md-footer__link md-footer__link--prev" rel="prev">
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: About Tutorials" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1208,7 +1265,8 @@ Downloading: 100%|██████████| 11/11 [00:02&lt;00:00,  4.31ro
         </a>
       
       
-        <a href="../03-dates/" class="md-footer__link md-footer__link--next" rel="next">
+        
+        <a href="../03-dates/" class="md-footer__link md-footer__link--next" aria-label="Next: Working with dates" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
@@ -1243,10 +1301,10 @@ Downloading: 100%|██████████| 11/11 [00:02&lt;00:00,  4.31ro
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

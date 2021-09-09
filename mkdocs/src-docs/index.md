@@ -6,6 +6,7 @@ This site and its related [Github repository](https://github.com/digital-science
     Dimensions is a comprehensive database for the research & innovation ecosystem, used by governments, universities, businesses, funders and investors around the world. It is a structured, linked database containing trillions of data points about the research landscape, organized in tables e.g. research organizations, publications, patents, grants, clinical trials and more.
 
 You can use the structured code examples on this site to put together analyses for specific use cases e.g.
+
 * Competitive intelligence
 * Horizon-scanning & emerging trends
 * Academic & industry partnerships and collaboration networks

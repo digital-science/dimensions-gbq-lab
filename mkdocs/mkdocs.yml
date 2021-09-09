@@ -18,6 +18,8 @@ nav:
         - tutorials/04-nested.md
         - tutorials/02-dsl.md
         - tutorials/05-topic_clusters.md
+        - tutorials/06-funder_grant_pubs.md
+        - tutorials/07-retrieve_patents.md
     - ...
 
 theme:
@@ -37,5 +39,6 @@ plugins:
 google_analytics:
   - UA-149959808-3
   - auto
-extra_css:
-  - stylesheets/extra.css
+# This isn't working right yet
+# extra_css:
+#   - stylesheets/extra.css

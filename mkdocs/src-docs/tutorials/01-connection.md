@@ -32,9 +32,6 @@ MY_PROJECT_ID = "my-cool-gbq-project"
 
 Using your Google Account you can create notebooks, execute BigQuery queries and share these with other Google Accounts quickly and easily.
 
-
-
-
 ```python
 # authentication happens via your browser
 from google.colab import auth

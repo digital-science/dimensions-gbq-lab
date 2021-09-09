@@ -10,7 +10,7 @@
       
       
       <link rel="icon" href="../../assets/img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -18,10 +18,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.33e2939f.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -38,10 +38,19 @@
     
     
       
-        
-<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-149959808-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-149959808-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
     
     
   </head>
@@ -109,14 +118,18 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -274,6 +287,7 @@
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
+      
         
       
       
@@ -288,6 +302,7 @@
       
         
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -352,6 +367,30 @@
   
 </nav>
       
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-funder_grant_pubs/" class="md-nav__link">
+        Identify a funder's grants and publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-retrieve_patents/" class="md-nav__link">
+        Retrieve patents linked to a set of grants
+      </a>
     </li>
   
 
@@ -833,6 +872,7 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
     
   
   
@@ -912,7 +952,7 @@
 <li>Setup the Python environment and BigQuery access.</li>
 <li>Extract titles/abstracts for the publications of interest from Big Query.</li>
 <li>Use TensorFlow to generate word embeddings from the titles/abstracts.</li>
-<li>Export these embedding vectors back into GBQ and cleanup the format of them.</li>
+<li>Export these embedding vectors back into Google BigQuery and cleanup the format of them.</li>
 <li>Create k-means models using BigQuery ML (multiple models for different cluster counts).</li>
 <li>Compare the different k-means models and select the most appropriate.</li>
 <li>Associate publications back to each cluster.</li>
@@ -920,20 +960,20 @@
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Prerequisites</p>
-<p>In order to run this tutorial, please ensure that: </p>
+<p>In order to run this tutorial, please ensure that:</p>
 <ul>
 <li>You have a valid <a href="https://www.dimensions.ai/products/bigquery/">Dimensions on Google BigQuery account</a> and have <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">configured a Google Cloud project</a>.</li>
 <li>You have some basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
 </ul>
 </div>
 <h2 id="1-setup-google-bigquery-access">1. Setup Google BigQuery access</h2>
-<p>The initial setup is to authenticate your Google Account for accessing GCP resources. This account must be the account which has access to the Dimensions BigQuery datasets. It must also must be allowed to execute and pay for GBQ queries. In the code example below <code>project_id</code> should be replaced with the GCP project identifier which you own or can access GBQ resources on.</p>
+<p>The initial setup is to authenticate your Google Account for accessing GCP resources. This account must be the account which has access to the Dimensions BigQuery datasets. It must also must be allowed to execute and pay for Google BigQuery queries. In the code example below <code>project_id</code> should be replaced with the GCP project identifier which you own or can access BigQuery resources on.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
 <span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
 <span class="n">project_id</span> <span class="o">=</span> <span class="s2">&quot;my-gbq-project&quot;</span>  <span class="c1"># replace with GCP project to bill against</span>
 <span class="o">%</span><span class="n">load_ext</span> <span class="n">google</span><span class="o">.</span><span class="n">cloud</span><span class="o">.</span><span class="n">bigquery</span>
 </code></pre></div>
-<p>The project referenced in the examples below is <code>my-gbq-project</code>, anytime that is contained within Python code or SQL statements it should be replaced with your own projects identifier. The SQL and Python code below also assumes that two datasets exist within the GBQ project (<code>project_id</code>).</p>
+<p>The project referenced in the examples below is <code>my-gbq-project</code>, anytime that is contained within Python code or SQL statements it should be replaced with your own projects identifier. The SQL and Python code below also assumes that two datasets exist within the Google BigQuery project (<code>project_id</code>).</p>
 <ul>
 <li>
 <p><code>temp</code> which holds intermediate tables created during the setup phase.</p>
@@ -1022,7 +1062,7 @@
 <span class="n">new_pubs</span><span class="p">[</span><span class="s2">&quot;title_embed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;title_embed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 <span class="n">new_pubs</span><span class="p">[</span><span class="s2">&quot;abstract_embed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s2">&quot;abstract_embed&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-<span class="c1"># Save the DataFrame to a pickle file and into a GBQ table.</span>
+<span class="c1"># Save the DataFrame to a pickle file and into a BigQuery table.</span>
 <span class="n">new_pubs</span><span class="o">.</span><span class="n">to_pickle</span><span class="p">(</span><span class="s2">&quot;/content/new_pubs.pkl&quot;</span><span class="p">)</span>
 <span class="n">new_pubs</span><span class="o">.</span><span class="n">to_gbq</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">project_id</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">2500</span><span class="p">)</span>
 </code></pre></div>
@@ -1187,7 +1227,8 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../02-dsl/" class="md-footer__link md-footer__link--prev" rel="prev">
+        
+        <a href="../02-dsl/" class="md-footer__link md-footer__link--prev" aria-label="Previous: From the DSL API to Google BigQuery" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1202,13 +1243,14 @@
         </a>
       
       
-        <a href="../../collections/" class="md-footer__link md-footer__link--next" rel="next">
+        
+        <a href="../06-funder_grant_pubs/" class="md-footer__link md-footer__link--next" aria-label="Next: Identify a funder&#39;s grants and publications" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              About Collections
+              Identify a funder's grants and publications
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -1237,10 +1279,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d892486b.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>
