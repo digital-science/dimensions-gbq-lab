@@ -11,7 +11,7 @@ site_dir: ../docs
 
 nav:
     - Home: index.md
-    - Tutorials: 
+    - Tutorials:
         - tutorials/index.md
         - tutorials/01-connection.md
         - tutorials/03-dates.md
@@ -20,7 +20,7 @@ nav:
         - tutorials/05-topic_clusters.md
     - ...
 
-theme: 
+theme:
     name: material
     favicon: assets/img/favicon.ico
     logo: assets/img/apple-touch-icon.png
@@ -37,3 +37,5 @@ plugins:
 google_analytics:
   - UA-149959808-3
   - auto
+extra_css:
+  - stylesheets/extra.css
