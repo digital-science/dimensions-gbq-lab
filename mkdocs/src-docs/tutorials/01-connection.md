@@ -1,12 +1,15 @@
 # Verifying your connection
 
-In this tutorial we will show how to connect to the Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.
+In this tutorial we will show how to connect to Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.
 
-!!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that:
+!!! note "Note"
+    This tutorial is intended for people who want to query BigQuery via a notebook, but the SQL queries in this lab can also be run directly from the [BigQuery console](https://console.cloud.google.com/bigquery).
 
-    * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
+## Prerequisites
+In order to run this tutorial, please ensure that:
+
+* You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
+* You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
 
 ## Connection methods
 

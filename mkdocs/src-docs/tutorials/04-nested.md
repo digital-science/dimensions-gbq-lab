@@ -1,6 +1,6 @@
 # Working with nested and repeated fields
 
-A prominent features of Google BigQuery is their addition of nested and repeated fields to what may otherwise be a familiar SQL paradigm. Both present opportunities to reorganize data within single tables in novel ways, but they can be difficult to get used to. Below, we explain the basics of nested and repeated fields, work through several examples, and provide links to external resources that we've found helpful.
+A prominent feature of Google BigQuery is their addition of nested and repeated fields to what may otherwise be a familiar SQL paradigm. Both present opportunities to reorganize data within single tables in novel ways, but they can take some time to get used to. Below, we explain the basics of nested and repeated fields, work through several examples, and provide links to external resources that we've found helpful.
 
 !!! warning "Prerequisites"
     In order to run this tutorial, please ensure that:
@@ -95,10 +95,6 @@ The (heavily truncated) results look something like this:
 
 You can see that rows 3 and 4 have multiple values in the `clinical_trial_ids` field, despite all values getting listed **within a single row number**.
 
-
-UNNEST are implicit 'cross-join' queries, hence only records that have some value in the nested column are represented
-
-For example, the query below return less publications that then ones available, because only the ones with `research_org_country_names` are included (= cross join)
 
 ### Nested fields
 
@@ -535,8 +531,8 @@ The trouble with using `CROSS JOIN` clauses in queries is that *they omit all re
 ```sql
 SELECT COUNT(DISTINCT p.id) AS tot_articles
 FROM
-  `dimensions-ai.data_analytics.publications` p,
-  UNNEST(research_org_country_names) AS unnested_countries
+  `dimensions-ai.data_analytics.publications` p
+CROSS JOIN UNNEST(research_org_country_names) AS unnested_countries
 WHERE year = 2000
 ```
 
@@ -571,8 +567,7 @@ SELECT
   COUNT(DISTINCT p.id) AS tot_articles
 FROM
   `dimensions-ai.data_analytics.publications` p
-LEFT JOIN
-  UNNEST(research_org_country_names) AS unnested_countries
+LEFT JOIN UNNEST(research_org_country_names) AS unnested_countries
 WHERE year = 2000
 ```
 

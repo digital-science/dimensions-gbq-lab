@@ -4,7 +4,7 @@ This tutorial demonstrates how to perform a full-text search in Dimensions using
 
 This technique allows to take advantage of the strengths of each of these data products:
 
-* The [Analytics API](https://docs.dimensions.ai/dsl) allows to run [full-text searches](https://docs.dimensions.ai/dsl/language.html#full-text-searching) over the tens of millions documents stored in the Dimensions database. This makes it an ideal tool for identifying a corpus of documents using collections of keywords and/or other filters (note: this is the same functionality available when you search on app.dimensions.ai)
+* The [Analytics API](https://docs.dimensions.ai/dsl) allows to run [full-text searches](https://docs.dimensions.ai/dsl/language.html#full-text-searching) over the hundreds of millions documents stored in the Dimensions database. This makes it an ideal tool for identifying a corpus of documents using collections of keywords and/or other filters (note: this is the same functionality available when you search on app.dimensions.ai)
 * The [Dimensions on Google BigQuery](https://docs.dimensions.ai/bigquery/) database allows to run SQL queries of any complexity using a cloud-based environment containing all of the metadata available in Dimensions, thus removing the need to download/analyse the data offline first. This makes is the perfect solution for advanced analytics tasks such as benchmarking, metrics calculations or impact analyses.
 
 

@@ -1,13 +1,17 @@
-# Changelog - Dimensions API Lab 
+# Changelog - Dimensions API Lab
+
+### 2021-09-09
+
+* Revised text
 
 ### 2021-05-07
 
-New site structure 
+New site structure
 
 
 ### 2021-02-17
 
-First commit 
+First commit
 
 New notebooks:
 * [Veryfying Your Connection](https://digital-science.github.io/dimensions-gbq-lab/cookbooks/1-Verifying-your-connection.html)
