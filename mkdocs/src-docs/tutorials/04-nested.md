@@ -3,12 +3,12 @@
 A prominent features of Google BigQuery is their addition of nested and repeated fields to what may otherwise be a familiar SQL paradigm. Both present opportunities to reorganize data within single tables in novel ways, but they can be difficult to get used to. Below, we explain the basics of nested and repeated fields, work through several examples, and provide links to external resources that we've found helpful.
 
 !!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that: 
+    In order to run this tutorial, please ensure that:
 
     * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    
-    The online [GBQ console](https://console.cloud.google.com/bigquery) can be used to test the queries below.
-    
+
+    The online [Google BigQuery console](https://console.cloud.google.com/bigquery) can be used to test the queries below.
+
 ## What are they?
 
 ### Repeated fields
