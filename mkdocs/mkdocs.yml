@@ -26,6 +26,7 @@ theme:
     name: material
     favicon: assets/img/favicon.ico
     logo: assets/img/apple-touch-icon.png
+    custom_dir: src-docs/custom_theme/
 markdown_extensions:
   - admonition
   - attr_list
@@ -36,9 +37,7 @@ markdown_extensions:
 plugins:
     - search
     - awesome-pages
+copyright: © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
 google_analytics:
   - UA-149959808-3
   - auto
-# This isn't working right yet
-# extra_css:
-#   - stylesheets/extra.css
