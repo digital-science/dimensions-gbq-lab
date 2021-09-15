@@ -984,9 +984,9 @@
                 
                 <h1 id="identify-a-funders-grants-and-publications">Identify a funder's grants and publications</h1>
 <h3 id="use-case">Use case</h3>
-<p>How many grants have resulted in publications?</p>
+<p>How many grants have resulted in publications? This notebook serves two main purposes:</p>
 <p>i. Enables identification of a funder's grants and resulting publications.</p>
-<p>ii. Prepare summary table of grants and publications per year and in total and a bar graph showing number of grants with and without publications by year.</p>
+<p>ii. Prepares a summary table of grants and publications (per year and in total), and a bar graph showing number of grants by year with and without publications.</p>
 <h3 id="method">Method</h3>
 <p>This notebook retrieves grants and publication data from Dimensions the world's largest linked research information dataset. For more about Dimensions visit - https://www.dimensions.ai/</p>
 <p>To complete this analysis the following steps are taken:</p>
@@ -1000,13 +1000,20 @@
 </ol>
 <h3 id="using-this-notebook">Using this notebook</h3>
 <p>Before running some cells you will have to fill in information about the funder and year range. When required instructions are set out in info boxes.</p>
-<p>This notebook assumes installation of python packages pandas and plotly.</p>
+<p>This notebook assumes installation of python packages <code>pandas</code> and <code>plotly</code>.</p>
 <h3 id="1-connect-to-dimensions">1. Connect to Dimensions</h3>
 <p>You will need to be authenticated to run these queries—see the <a href="../01-connection/">"Verifying your connection</a> tutorial for options.</p>
+<p>Run this cell if you're connecting via a Google Colab notebook:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Authenticated
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
 
-<span class="n">GBQ_PROJECT_ID</span> <span class="o">=</span> <span class="s1">&#39;ds-gov-funder-gbq&#39;</span>
+<span class="n">GBQ_PROJECT_ID</span> <span class="o">=</span> <span class="s1">&#39;ds-gov-funder-gbq&#39;</span> <span class="c1"># &lt;----- Input your project ID here</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">GBQ_PROJECT_ID</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="2-find-funders-unique-grid-id">2. Find funder's unique GRID ID</h3>
@@ -1020,8 +1027,8 @@
 </div>
 <p>If no GRID IDs are returned, try searching different name variants for the funder. Avoid acronyms.</p>
 <div class="highlight"><pre><span></span><code><span class="n">funder_name</span> <span class="o">=</span> <span class="s1">&#39;Wellcome Trust&#39;</span> <span class="c1"># Input funder name here</span>
-<span class="n">funder_name</span> <span class="o">=</span> <span class="n">funder_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
+<span class="n">funder_name</span> <span class="o">=</span> <span class="n">funder_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    select</span>
 <span class="s2">        id as grid_id</span>
@@ -1030,9 +1037,46 @@
 <span class="s2">    where lower(name) like &#39;%</span><span class="si">{</span><span class="n">funder_name</span><span class="si">}</span><span class="s2">%&#39;</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
-<span class="n">funder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_gbq</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-<span class="n">funder</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">funder</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_gbq</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">project_id</span><span class="o">=</span><span class="n">GBQ_PROJECT_ID</span><span class="p">)</span>
+<span class="n">funder</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>Row</th>
+      <th>grid_id</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>grid.52788.30</td>
+      <td>Wellcome Trust</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>grid.478079.5</td>
+      <td>NIHR Wellcome Trust Southampton Clinical Resea...</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>grid.484745.e</td>
+      <td>Wellcome Trust/DBT India Alliance</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>grid.482844.6</td>
+      <td>Wellcome Trust Centre for the History of Medicine</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>grid.419393.5</td>
+      <td>Malawi-Liverpool-Wellcome Trust Clinical Resea...</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="3-generate-list-of-grants-and-publications-identifiers">3. Generate list of grants and publications identifiers</h3>
 <p>The following cell generates a table of funders grants and any resulting publications for grants started in a defined time period. Only the first five rows of the table will be shown in this notebook, however the whole table can be exported to excel in the following step.</p>
 <p>Table columns:</p>
@@ -1062,7 +1106,7 @@
 <span class="s2">    , grant_number</span>
 <span class="s2">    , pub_id as dimensions_publication_id</span>
 <span class="s2">  from `dimensions-ai.data_analytics.grants` g left join unnest(g.resulting_publication_ids) as pub_id</span>
-<span class="s2">   where funder_org in (&#39;grid.52788.30&#39;)  -- ADD GRID ID HERE BETWEEN &#39; &#39; e.g. &#39;grid.54679.3&#39;</span>
+<span class="s2">   where funder_org in (&#39;grid.52788.30&#39;)  -- ADD GRID ID HERE</span>
 <span class="s2">      and start_year between 2011 and 2015 -- UPDATE YEAR RANGE</span>
 <span class="s2">    )</span>
 <span class="s2">Select</span>
@@ -1075,6 +1119,61 @@
 <span class="n">grants</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_gbq</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
 <span class="n">grants</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>Row</th>
+      <th>dimensions_grant_id</th>
+      <th>grant_start_year</th>
+      <th>grant_number</th>
+      <th>dimensions_publication_id</th>
+      <th>doi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>grant.3627143</td>
+      <td>2012</td>
+      <td>082265/Z/07/A</td>
+      <td>pub.1105902779</td>
+      <td>10.1016/j.jaci.2018.07.011</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>grant.3635772</td>
+      <td>2012</td>
+      <td>098274/Z/12/Z</td>
+      <td>pub.1124346329</td>
+      <td>10.1016/j.bpj.2020.01.019</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>grant.3636003</td>
+      <td>2012</td>
+      <td>097899/Z/11/Z</td>
+      <td>pub.1062809971</td>
+      <td>10.1016/j.jaci.2018.07.011</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>grant.3642390</td>
+      <td>2012</td>
+      <td>098649/Z/12/Z</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>grant.3638982</td>
+      <td>2012</td>
+      <td>099618/Z/12/Z</td>
+      <td>pub.1023307051</td>
+      <td>10.1007/s00234-016-1648-3</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="4-optional-export-list-of-grants-and-resulting-publications-to-excel">4. (OPTIONAL) Export list of grants and resulting publications to excel</h3>
 <p>The following cell creates new excel file of grants and resulting publications as output from previous cell. The new file will appear in the same location as this notebook is saved.</p>
 <div class="admonition example">
@@ -1114,7 +1213,7 @@
 <span class="s2">    , start_year</span>
 <span class="s2">   , pub_id  -- is this the best way of finding publications? or search for grant or</span>
 <span class="s2">  from `dimensions-ai.data_analytics.grants` g left join unnest(g.resulting_publication_ids) as pub_id</span>
-<span class="s2">    where funder_org = &#39;grid.52788.30&#39;  -- ADD GRID IDs HERE BETWEEN &#39; &#39; e.g. &#39;grid.52788.30&#39;</span>
+<span class="s2">    where funder_org = &#39;grid.52788.30&#39;  -- ADD GRID IDs HERE</span>
 <span class="s2">      and start_year between 2011 and 2015 -- UPDATE YEAR RANGE</span>
 <span class="s2">  )</span>
 <span class="s2">select</span>
@@ -1139,8 +1238,69 @@
 <span class="s2">&quot;&quot;&quot;</span>
 
 <span class="n">grants1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_gbq</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-<span class="n">grants1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">grants1</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>Row</th>
+      <th>grant_start_year</th>
+      <th>grants</th>
+      <th>publications</th>
+      <th>grants_without_publications</th>
+      <th>perc_without_publications</th>
+      <th>avg_publications_per_grants</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>All years</td>
+      <td>6423</td>
+      <td>45840</td>
+      <td>3731</td>
+      <td>58.09</td>
+      <td>7.14</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2015</td>
+      <td>1417</td>
+      <td>6901</td>
+      <td>833</td>
+      <td>58.79</td>
+      <td>4.87</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2014</td>
+      <td>1327</td>
+      <td>8746</td>
+      <td>791</td>
+      <td>59.61</td>
+      <td>6.59</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>2013</td>
+      <td>1200</td>
+      <td>8217</td>
+      <td>690</td>
+      <td>57.50</td>
+      <td>6.85</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>2012</td>
+      <td>1159</td>
+      <td>8515</td>
+      <td>689</td>
+      <td>59.45</td>
+      <td>7.35</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="6-bar-graph-showing-number-of-grants-that-have-yielded-one-or-more-publications-by-year">6. Bar graph showing number of grants that have yielded one or more publications by year</h3>
 <p>Using the table above the following cell generates a bar graph showing the number of grants with and without publications per year.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Remove first row that counts all grants over all years</span>
@@ -1180,6 +1340,7 @@
 <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">layout</span> <span class="o">=</span> <span class="n">layout</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
+<p><img alt="grant_pubs_barchart" src="../img/funder_grant_pubs1.png" /></p>
                 
               
               
