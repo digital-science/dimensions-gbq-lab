@@ -19,7 +19,7 @@ There are a few options available:
 2. **Use a local Jupyter environment and your personal credentials.** This option requires you to install the Google Cloud SDK in order to authenticate. It is the best option if you want to work locally and/or have other Python libraries or services that you need to access.
 3. **Use a local Jupyter environment and a service account.** This option is really a variance on the option 2, for those users that must use a service account.
 
-NOTE All of these options require you to first set up a [GCP project](https://docs.dimensions.ai/bigquery/gcp-setup.html#projects) (as you haven't done it already) and provide your project ID. E.g.:
+NOTE All of these options require you to first set up a [GCP project](https://docs.dimensions.ai/bigquery/gcp-setup.html#projects) (if you haven't done it already) and provide your project ID. E.g.:
 
 
 ```python
