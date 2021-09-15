@@ -4,23 +4,23 @@ This tutorial demonstrates how to perform a full-text search in Dimensions using
 
 This technique allows to take advantage of the strengths of each of these data products:
 
-* The [Analytics API](https://docs.dimensions.ai/dsl) allows to run [full-text searches](https://docs.dimensions.ai/dsl/language.html#full-text-searching) over the tens of millions documents stored in the Dimensions database. This makes it an ideal tool for identifying a corpus of documents using collections of keywords and/or other filters (note: this is the same functionality available when you search on app.dimensions.ai)
+* The [Analytics API](https://docs.dimensions.ai/dsl) allows to run [full-text searches](https://docs.dimensions.ai/dsl/language.html#full-text-searching) over the hundreds of millions documents stored in the Dimensions database. This makes it an ideal tool for identifying a corpus of documents using collections of keywords and/or other filters (note: this is the same functionality available when you search on app.dimensions.ai)
 * The [Dimensions on Google BigQuery](https://docs.dimensions.ai/bigquery/) database allows to run SQL queries of any complexity using a cloud-based environment containing all of the metadata available in Dimensions, thus removing the need to download/analyse the data offline first. This makes is the perfect solution for advanced analytics tasks such as benchmarking, metrics calculations or impact analyses.
 
 
 !!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that: 
+    In order to run this tutorial, please ensure that:
 
     * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    * You have a valid [Dimensions API account](https://docs.dimensions.ai/dsl/). 
+    * You have a valid [Dimensions API account](https://docs.dimensions.ai/dsl/).
     * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
-    
+
 
 ## Example: profiling researchers linked to a topic
 
-The concrete usecase we'll be looking at involves running a full-text search for "moon landing" publications using the DSL API, then creating a corpus in GBQ based on this search (eg see this [search](https://app.dimensions.ai/discover/publication?search_mode=content&search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&search_type=kws&search_field=full_search)).
+The concrete usecase we'll be looking at involves running a full-text search for "moon landing" publications using the DSL API, then creating a corpus in BigQuery based on this search (eg see this [search](https://app.dimensions.ai/discover/publication?search_mode=content&search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&search_type=kws&search_field=full_search)).
 
-Once we have the publication corpus available in GBQ, we will extract all associated researchers (=authors). At the same time, we are going to use SQL in order to enrich the results using other metrics (eg more `researchers` metadata including citations & altmetric).
+Once we have the publication corpus available in BigQuery, we will extract all associated researchers (=authors). At the same time, we are going to use SQL in order to enrich the results using other metrics (eg more `researchers` metadata including citations & altmetric).
 
 
 ## Getting started
@@ -194,12 +194,12 @@ return publications limit 10
 </table>
 
 
-## 2. Exporting DSL results to GBQ
+## 2. Exporting DSL results to Google BigQuery
 
 
 First off, we want to run the full-text search so to extract *all* relevant publications IDs.
 
-Second, we will export the publications IDs to GBQ. NOTE: Pandas provides a handy command to move data to GBQ: [DataFrame.to_gbq](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_gbq.html).
+Second, we will export the publications IDs to Google BigQuery. NOTE: Pandas provides a handy command to move data to BigQuery: [DataFrame.to_gbq](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_gbq.html).
 
 
 ```python
@@ -305,7 +305,7 @@ df.to_gbq(table_id, project_id = PROJECTID, if_exists="replace")
     1it [00:05,  5.05s/it]
 
 
-That's it - you should now be able to go to the [online GBQ console](https://console.cloud.google.com/bigquery) and see the new `demo_dsl.moonlanding` dataset.
+That's it - you should now be able to go to the [online BigQuery console](https://console.cloud.google.com/bigquery) and see the new `demo_dsl.moonlanding` dataset.
 
 ## 3. Querying your new dataset using a JOIN on Dimensions
 
@@ -390,7 +390,7 @@ ORDER BY tot DESC
 </table>
 
 
-## 4. Using GBQ to generate researcher statistics
+## 4. Using Google BigQuery to generate researcher statistics
 
 The goal is to generate a table just like the one in the 'researchers' analytical view in the [webapp](https://app.dimensions.ai/analytics/publication/author/aggregated?search_mode=content&search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&search_type=kws&search_field=full_search).
 

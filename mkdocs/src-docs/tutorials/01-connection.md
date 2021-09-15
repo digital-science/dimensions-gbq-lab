@@ -1,12 +1,15 @@
 # Verifying your connection
 
-In this tutorial we will show how to connect to the Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.
+In this tutorial we will show how to connect to Dimensions on Google BigQuery using Python, so that we can then run a few sample queries.
 
-!!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that: 
+!!! note "Note"
+    This tutorial is intended for people who want to query BigQuery via a notebook, but the SQL queries in this lab can also be run directly from the [BigQuery console](https://console.cloud.google.com/bigquery).
 
-    * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
+## Prerequisites
+In order to run this tutorial, please ensure that:
+
+* You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
+* You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
 
 ## Connection methods
 
@@ -16,7 +19,7 @@ There are a few options available:
 2. **Use a local Jupyter environment and your personal credentials.** This option requires you to install the Google Cloud SDK in order to authenticate. It is the best option if you want to work locally and/or have other Python libraries or services that you need to access.
 3. **Use a local Jupyter environment and a service account.** This option is really a variance on the option 2, for those users that must use a service account.
 
-NOTE All of these options require you to first set up a [GCP project](https://docs.dimensions.ai/bigquery/gcp-setup.html#projects) (as you haven't done it already) and provide your project ID. E.g.:
+NOTE All of these options require you to first set up a [GCP project](https://docs.dimensions.ai/bigquery/gcp-setup.html#projects) (if you haven't done it already) and provide your project ID. E.g.:
 
 
 ```python
@@ -28,9 +31,6 @@ MY_PROJECT_ID = "my-cool-gbq-project"
 [Google Colaboratory](https://colab.research.google.com/) is a free cloud-based Jupyter environment from Google. This option provides an easy service allowing you to get started with notebooks.
 
 Using your Google Account you can create notebooks, execute BigQuery queries and share these with other Google Accounts quickly and easily.
-
-
-
 
 ```python
 # authentication happens via your browser
@@ -177,7 +177,7 @@ query_job
 
 ### Advanced: BigQuery magic command and dynamic parameters
 
-The GBQ library comes with a [magic command](https://googleapis.dev/python/bigquery/latest/magics.html) that is essentially a nice shortcut method for running queries.
+The Google BigQuery library comes with a [magic command](https://googleapis.dev/python/bigquery/latest/magics.html) that is essentially a nice shortcut method for running queries.
 
 This extensions needs to be loaded sepately e.g.:
 

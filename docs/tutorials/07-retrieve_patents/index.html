@@ -1,0 +1,1439 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Retrieve patents linked to a set of grants - Dimensions BigQuery Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+
+  <!-- OneTrust Cookies Consent Notice start for dimensions.ai -->
+  <script type="text/javascript" src="https://cdn.cookielaw.org/consent/3329b668-7887-4dba-9bee-c3853a706e6f/OtAutoBlock.js"></script>
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3329b668-7887-4dba-9bee-c3853a706e6f"></script>
+  <script type="text/javascript">
+      function OptanonWrapper() { }
+  </script>
+  <!-- OneTrust Cookies Consent Notice end for dimensions.ai -->
+
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+  
+
+
+
+  
+  
+
+
+
+  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-149959808-3","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+  <script async src="https://www.google-analytics.com/analytics.js"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#retrieve-patents-linked-to-a-set-of-grants" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-header__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dimensions BigQuery Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Retrieve patents linked to a set of grants
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-nav__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    Dimensions BigQuery Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        About Tutorials
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-connection/" class="md-nav__link">
+        Verifying your connection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-dates/" class="md-nav__link">
+        Working with dates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-nested/" class="md-nav__link">
+        Working with nested and repeated fields
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-dsl/" class="md-nav__link">
+        From the DSL API to Google BigQuery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-topic_clusters/" class="md-nav__link">
+        Basic Topic Clustering using TensorFlow and BigQuery ML
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-funder_grant_pubs/" class="md-nav__link">
+        Identify a funder's grants and publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Retrieve patents linked to a set of grants
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Retrieve patents linked to a set of grants
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#an-example" class="md-nav__link">
+    An example
+  </a>
+  
+    <nav class="md-nav" aria-label="An example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrieve-patents-that-directly-acknowledged-grants" class="md-nav__link">
+    Retrieve patents that directly acknowledged grants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieve-patents-that-cited-the-publications-funded-by-the-same-set-of-grants" class="md-nav__link">
+    Retrieve patents that cited the publications funded by the same set of grants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-results" class="md-nav__link">
+    Merge results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-overview-of-patents" class="md-nav__link">
+    Quick overview of patents
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Collections
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Collections" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Collections
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/" class="md-nav__link">
+        About Collections
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/01-publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/02-citations/" class="md-nav__link">
+        Citations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/03-authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/04-funding/" class="md-nav__link">
+        Funding & Grants
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Queries
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Queries" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Queries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/" class="md-nav__link">
+        About Queries
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/01/" class="md-nav__link">
+        1. Number of publications added to Dimensions each month
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/02/" class="md-nav__link">
+        2. Number of Publications by Type
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/03/" class="md-nav__link">
+        3. Generate a list of publication authors by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/04/" class="md-nav__link">
+        4. Generate a list of publication categories by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/05/" class="md-nav__link">
+        5. Number of publications per SDG category
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/06/" class="md-nav__link">
+        6. Publications count per FoR category, total and percentage against total
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/07/" class="md-nav__link">
+        7. Finding Journals using string matching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/08/" class="md-nav__link">
+        8. Finding articles matching a specific affiliation string
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/09/" class="md-nav__link">
+        9. Top publications by Altmetric score and research organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/10/" class="md-nav__link">
+        10. Select publications matching selected concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/11/" class="md-nav__link">
+        11. Count of corresponding authors by publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/12/" class="md-nav__link">
+        12. Counting new vs recurring authors, for a specific journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/13/" class="md-nav__link">
+        13. Funding by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/14/" class="md-nav__link">
+        14. Extracting complex publications records
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/15/" class="md-nav__link">
+        15. Top N publications by citations percentile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/16/" class="md-nav__link">
+        16. Citations by journal, for a specific publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/17/" class="md-nav__link">
+        17. One-degree citation network for a single publication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/18/" class="md-nav__link">
+        18. Incoming citations for a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/19/" class="md-nav__link">
+        19. Outgoing citations from a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/20/" class="md-nav__link">
+        20. International collaboration of an organisation in a field
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/21/" class="md-nav__link">
+        21. International collaboration rate of individuals, with context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/22/" class="md-nav__link">
+        22. Incoming citations for a single publication, by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/23/" class="md-nav__link">
+        23. Citing authors by country
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/24/" class="md-nav__link">
+        24. Organizations and sub-organizations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/25/" class="md-nav__link">
+        25. Grants for an organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/26/" class="md-nav__link">
+        26. Field Citation Ratio (FCR) median average
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/27/" class="md-nav__link">
+        27. List of corresponding authors
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#an-example" class="md-nav__link">
+    An example
+  </a>
+  
+    <nav class="md-nav" aria-label="An example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retrieve-patents-that-directly-acknowledged-grants" class="md-nav__link">
+    Retrieve patents that directly acknowledged grants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieve-patents-that-cited-the-publications-funded-by-the-same-set-of-grants" class="md-nav__link">
+    Retrieve patents that cited the publications funded by the same set of grants
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-results" class="md-nav__link">
+    Merge results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-overview-of-patents" class="md-nav__link">
+    Quick overview of patents
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="retrieve-patents-linked-to-a-set-of-grants">Retrieve patents linked to a set of grants</h1>
+<p><strong>Use case</strong>: How many patents were generated following a set of grants?</p>
+<p><strong>Intended audience</strong>: Funders who wish to have gain different insights on the impact of their funding</p>
+<p>Aside from the research publications, patent data could also provide insights on how research funding impacts the generation of invention.</p>
+<p>This notebook shows you how to <strong>retrieve patents that are linked to a given list of grants</strong>. More specifically, two types of linkages are considered here:</p>
+<ul>
+<li><strong>patents that directly acknowledge grants</strong> (Since the enactment of <a href="https://https://en.wikipedia.org/wiki/Bayh%E2%80%93Dole_Act">the Bayh-Dole Act</a> in 1980, all recipients of US federal funding are legally obligated to disclose government support that led to any inventions they produce). This is useful when funders are most interested in the patents directly supported by the grants;</li>
+<li><strong>patents that cite publications supported by grants</strong> (note that non-patent literatures in the patent references section are not only provided by inventor, but also added by patent examiner during the patent examination process). This can be considered when the funders are interested in understanding the patents that relate with the publications supported by the grants;</li>
+</ul>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This section shows you how to import python packages, and authenticate your BigQuery connection. In order to run this tutorial, please ensure that you have a valid <strong>Dimensions on Google BigQuery</strong> account and have configured a <strong>Google Cloud project</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># general import</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+
+<span class="c1"># authentication happens via your browser</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Authenticated
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># GBQ import</span>
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+
+<span class="n">BQ_PROJECT_ID</span> <span class="o">=</span> <span class="s2">&quot;ds-gov-funder-gbq&quot;</span>  <span class="c1"># remember to change this to your project ID</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">BQ_PROJECT_ID</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="an-example">An example</h2>
+<p>For this example, we will be using the Dimensions database to extract patents that are linked to the grants funded by <a href="https://www.nsf.gov/dir/index.jsp?org=ENG"><strong>NSF Directorate for Engineering</strong></a> and started in <strong>2015</strong>.</p>
+<p>The <strong>patents</strong>, <strong>publications</strong>, and <strong>grants</strong> datasets will be used in the example to retrieve patents through two types of linkages.</p>
+<h3 id="retrieve-patents-that-directly-acknowledged-grants">Retrieve patents that directly acknowledged grants</h3>
+<p>First, let's get all patents that directly acknowledged the NSF Directorate for Engineering grants that started in 2015</p>
+<div class="admonition tip">
+<p class="admonition-title">Tips</p>
+<ul>
+<li>Unnest the <code>funding_details</code> in <code>dimensions-ai.data_analytics.patents</code> table to get the funder's <strong>GRID ID</strong> and Dimensions <strong>Grant ID</strong></li>
+<li>Join with <code>dimensions-ai.data_analytics.grants</code> table and limit to the grants that started in 2015</li>
+<li>The <strong>GRID ID</strong> of NSF Directorate for Engineering can be found in <a href="https://www.grid.ac/">Global Research Identifier Database</a></li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># build the search string</span>
+<span class="n">search_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT</span>
+<span class="s2">  DISTINCT pat.id AS patent_id,</span>
+<span class="s2">  f.grant_id,</span>
+<span class="s2">  pat.family_id,</span>
+<span class="s2">  CAST(pat.priority_year AS string) priority_year,</span>
+<span class="s2">  &#39;supported&#39; AS link_type</span>
+<span class="s2">FROM</span>
+<span class="s2">  `dimensions-ai.data_analytics.patents` pat</span>
+<span class="s2">CROSS JOIN</span>
+<span class="s2">  UNNEST(funding_details) f     -- unnest the field to get the funder and grant number acknowledged by the patent</span>
+<span class="s2">JOIN</span>
+<span class="s2">  `dimensions-ai.data_analytics.grants` g</span>
+<span class="s2">ON</span>
+<span class="s2">  g.id = f.grant_id</span>
+<span class="s2">WHERE</span>
+<span class="s2">  f.grid_id = &#39;grid.457810.f&#39;    -- specify funder&#39;s GRID ID</span>
+<span class="s2">  AND g.start_year = 2015        -- specify the grant start year</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># retrieve from BigQuery and make it a pandas dataframe</span>
+<span class="n">nsf_grant_patents</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">search_string</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># get a quick preview of the patents directly linked to the grants</span>
+<span class="n">nsf_grant_patents</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>Row</th>
+      <th>patent_id</th>
+      <th>grant_id</th>
+      <th>family_id</th>
+      <th>priority_year</th>
+      <th>link_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>US-20200303900-A1</td>
+      <td>grant.4179692</td>
+      <td>60479104</td>
+      <td>2016</td>
+      <td>supported</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>US-20190224370-A1</td>
+      <td>grant.4178213</td>
+      <td>61562333</td>
+      <td>2016</td>
+      <td>supported</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>US-20160236141-A1</td>
+      <td>grant.3852639</td>
+      <td>56620694</td>
+      <td>2014</td>
+      <td>supported</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>US-20190193116-A1</td>
+      <td>grant.3982138</td>
+      <td>60663733</td>
+      <td>2016</td>
+      <td>supported</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>US-20200061618-A1</td>
+      <td>grant.4318677</td>
+      <td>69584146</td>
+      <td>2018</td>
+      <td>supported</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># get a quick count of how many patents were retrieved</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nsf_grant_patents</span><span class="p">[</span><span class="s1">&#39;patent_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>581
+</code></pre></div>
+<h3 id="retrieve-patents-that-cited-the-publications-funded-by-the-same-set-of-grants">Retrieve patents that cited the publications funded by the same set of grants</h3>
+<p>Then, we can get all patents that cited publications which were funded by the same set of grants (i.e. grants funded by NSF Directorate for Engineering started in 2015)</p>
+<div class="admonition tip">
+<p class="admonition-title">Tips</p>
+<ul>
+<li>unnest the <code>resulting_publication_ids</code> in <code>dimensions-ai.data_analytics.grants</code> table to get the publication ids funded by a set of grants, setting the funder's <strong>GRID ID</strong> and <strong>Start year</strong> the same as the above query</li>
+<li>unnest the <code>publication_ids</code> in <code>dimensions-ai.data_analytics.patents</code> table which contains publication ids cited by patents</li>
+<li>the publication_ids unnested from the above are used as an intermediate link between <strong>patents</strong> and <strong>grants</strong></li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="c1"># build the search string</span>
+<span class="n">search_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">WITH</span>
+<span class="s2">  grant_pubs AS (</span>
+<span class="s2">  SELECT</span>
+<span class="s2">    DISTINCT pub_id,</span>
+<span class="s2">    g.id AS grant_id</span>
+<span class="s2">  FROM</span>
+<span class="s2">    `dimensions-ai.data_analytics.grants` g</span>
+<span class="s2">  CROSS JOIN</span>
+<span class="s2">    UNNEST(resulting_publication_ids) pub_id   -- unnest the publication ids resulting from grants</span>
+<span class="s2">  WHERE</span>
+<span class="s2">    g.funder_org = &#39;grid.457810.f&#39;     -- specify funder grid id</span>
+<span class="s2">    AND g.start_year = 2015)           -- specify grant start year</span>
+<span class="s2">SELECT</span>
+<span class="s2">  DISTINCT pat.id AS patent_id,</span>
+<span class="s2">  gp.grant_id,</span>
+<span class="s2">  pat.family_id,</span>
+<span class="s2">  CAST(pat.priority_year AS string) priority_year,</span>
+<span class="s2">  &#39;pub_reference&#39; AS link_type</span>
+<span class="s2">FROM</span>
+<span class="s2">  `dimensions-ai.data_analytics.patents` pat</span>
+<span class="s2">CROSS JOIN</span>
+<span class="s2">  UNNEST(publication_ids) pub_ref     -- unnest the publication ids cited by patents</span>
+<span class="s2">JOIN</span>
+<span class="s2">  grant_pubs gp</span>
+<span class="s2">ON</span>
+<span class="s2">  gp.pub_id = pub_ref                 -- join on publicaiton id</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># retrieve from BigQuery and make it a pandas dataframe</span>
+<span class="n">nsf_pub_ref_patents</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">search_string</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+
+<span class="c1"># get a quick preview of the patents that cited publications which were funded by NSF grants</span>
+<span class="n">nsf_pub_ref_patents</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>Row</th>
+      <th>patent_id</th>
+      <th>grant_id</th>
+      <th>family_id</th>
+      <th>priority_year</th>
+      <th>link_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>WO-2019202933-A1</td>
+      <td>grant.4179511</td>
+      <td>68239624</td>
+      <td>2018</td>
+      <td>pub_reference</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>US-10528687-B2</td>
+      <td>grant.3861071</td>
+      <td>60158395</td>
+      <td>2016</td>
+      <td>pub_reference</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>DE-102017002874-A1</td>
+      <td>grant.3981846</td>
+      <td>61731654</td>
+      <td>2017</td>
+      <td>pub_reference</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>US-10725209-B2</td>
+      <td>grant.4312170</td>
+      <td>62908810</td>
+      <td>2017</td>
+      <td>pub_reference</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>US-10196708-B2</td>
+      <td>grant.4312419</td>
+      <td>62782292</td>
+      <td>2017</td>
+      <td>pub_reference</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># get a quick count of how many patents were retrieved</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nsf_pub_ref_patents</span><span class="p">[</span><span class="s1">&#39;patent_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>224
+</code></pre></div>
+<h3 id="merge-results">Merge results</h3>
+<p>Now we will merge two data frames to have a complete set of patents that are directly and indirectly linked to the set of grants</p>
+<div class="highlight"><pre><span></span><code><span class="n">nsf_patents</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">nsf_grant_patents</span><span class="p">,</span> <span class="n">nsf_pub_ref_patents</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># get a quick count of how many patents in total</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nsf_patents</span><span class="p">[</span><span class="s1">&#39;patent_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>799
+</code></pre></div>
+<h3 id="quick-overview-of-patents">Quick overview of patents</h3>
+<p>Lastly, we can examine the trends in the patents by priority year</p>
+<div class="admonition tip">
+<p class="admonition-title">Tips</p>
+<ul>
+<li><code>family_id</code> was used to deduplicate the patent documents, one patent family is a collection of patent documents that are considered to cover a single invention <a href="https://www.epo.org/searching-for-patents/helpful-resources/first-time-here/patent-families/docdb.html">(see definition in DOCDB Simple patent family)</a></li>
+<li><code>priority_year</code> was used to aggregate the patents, since it indicates the time when the invention was established. All patent documents in one patent family share the same priority date</li>
+</ul>
+</div>
+<div class="highlight"><pre><span></span><code><span class="n">nsf_patents</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;link_type&#39;</span><span class="p">,</span><span class="s1">&#39;priority_year&#39;</span><span class="p">],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;family_id&#39;</span><span class="p">:</span><span class="s1">&#39;nunique&#39;</span><span class="p">})</span>\
+           <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;family_id&#39;</span><span class="p">:</span><span class="s1">&#39;n_pat_families&#39;</span><span class="p">})</span>\
+           <span class="o">.</span><span class="n">pivot</span> <span class="p">(</span><span class="n">values</span> <span class="o">=</span> <span class="s1">&#39;n_pat_families&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="s1">&#39;priority_year&#39;</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;link_type&#39;</span><span class="p">)</span>
+</code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>link_type</th>
+      <th>pub_reference</th>
+      <th>supported</th>
+    </tr>
+    <tr>
+      <th>priority_year</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2004</td>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>2005</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>2009</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>2010</td>
+      <td>NaN</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>2011</td>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <td>2012</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <td>2013</td>
+      <td>4.0</td>
+      <td>5.0</td>
+    </tr>
+    <tr>
+      <td>2014</td>
+      <td>8.0</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <td>2015</td>
+      <td>10.0</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <td>2016</td>
+      <td>41.0</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <td>2017</td>
+      <td>57.0</td>
+      <td>123.0</td>
+    </tr>
+    <tr>
+      <td>2018</td>
+      <td>57.0</td>
+      <td>63.0</td>
+    </tr>
+    <tr>
+      <td>2019</td>
+      <td>15.0</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <td>2020</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In addition, we can also create a quick visualization of the trends</p>
+<div class="highlight"><pre><span></span><code><span class="n">plot_data</span> <span class="o">=</span> <span class="n">nsf_patents</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;link_type&#39;</span><span class="p">,</span><span class="s1">&#39;priority_year&#39;</span><span class="p">],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>\
+           <span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;family_id&#39;</span><span class="p">:</span><span class="s1">&#39;nunique&#39;</span><span class="p">})</span>\
+           <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;family_id&#39;</span><span class="p">:</span><span class="s1">&#39;n_patent_families&#39;</span><span class="p">})</span>
+
+<span class="c1"># create line plot by using plotly express</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">plot_data</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;priority_year&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;n_patent_families&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;link_type&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Trends in patents supported by NSF Directorate for Engineering grants starting 2015&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><html>
+<head><meta charset="utf-8" /></head></p>
+<body>
+    <div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>
+                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+            <div id="d2f6fb5d-2291-4ffe-8c38-48c5cd14abda" class="plotly-graph-div" style="height:525px; width:100%;"></div>
+            <script type="text/javascript">
+
+                    window.PLOTLYENV=window.PLOTLYENV || {};
+
+                if (document.getElementById("d2f6fb5d-2291-4ffe-8c38-48c5cd14abda")) {
+                    Plotly.newPlot(
+                        'd2f6fb5d-2291-4ffe-8c38-48c5cd14abda',
+                        [{"hoverlabel": {"namelength": 0}, "hovertemplate": "link_type=pub_reference<br>priority_year=%{x}<br>n_patent_families=%{y}", "legendgroup": "link_type=pub_reference", "line": {"color": "#636efa", "dash": "solid"}, "mode": "lines", "name": "link_type=pub_reference", "showlegend": true, "type": "scatter", "x": ["2004", "2005", "2009", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"], "xaxis": "x", "y": [3, 1, 1, 1, 1, 4, 8, 10, 41, 57, 57, 15, 1], "yaxis": "y"}, {"hoverlabel": {"namelength": 0}, "hovertemplate": "link_type=supported<br>priority_year=%{x}<br>n_patent_families=%{y}", "legendgroup": "link_type=supported", "line": {"color": "#EF553B", "dash": "solid"}, "mode": "lines", "name": "link_type=supported", "showlegend": true, "type": "scatter", "x": ["2010", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"], "xaxis": "x", "y": [1, 1, 5, 15, 42, 90, 123, 63, 42, 1], "yaxis": "y"}],
+                        {"legend": {"tracegroupgap": 0}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Trends in patents supported by NSF Directorate for Engineering grants starting 2015"}, "xaxis": {"anchor": "y", "domain": [0.0, 1.0], "title": {"text": "priority_year"}}, "yaxis": {"anchor": "x", "domain": [0.0, 1.0], "title": {"text": "n_patent_families"}}},
+                        {"responsive": true}
+                    ).then(function(){
+
+var gd = document.getElementById('d2f6fb5d-2291-4ffe-8c38-48c5cd14abda');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })
+                };
+
+            </script>
+        </div>
+</body>
+<p></html></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../06-funder_grant_pubs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Identify a funder&#39;s grants and publications" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Identify a funder's grants and publications
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../collections/" class="md-footer__link md-footer__link--next" aria-label="Next: About Collections" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              About Collections
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
