@@ -7,7 +7,7 @@
     * [Researcher collaboration counts](https://bigquery-lab.dimensions.ai/queries/28/)
     * [Institution collaboration counts](https://bigquery-lab.dimensions.ai/queries/29/)
     * [Publication growth rate with sliding window](https://bigquery-lab.dimensions.ai/queries/30/)
-    * [Country-level publication activity over time](https://bigquery-lab.dimensions.ai/queries/31/
+    * [Country-level publication activity over time](https://bigquery-lab.dimensions.ai/queries/31/)
 
 ### 2021-09-09
 
