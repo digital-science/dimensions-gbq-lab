@@ -14,7 +14,7 @@
     
     
       
-        <title>24. Organizations and sub-organizations - Dimensions BigQuery Lab</title>
+        <title>28. Researcher collaborations - Dimensions BigQuery Lab</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#24-organizations-and-sub-organizations" class="md-skip">
+        <a href="#28-researcher-collaborations" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              24. Organizations and sub-organizations
+              28. Researcher collaborations
             
           </span>
         </div>
@@ -734,78 +734,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          24. Organizations and sub-organizations
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../24/" class="md-nav__link">
         24. Organizations and sub-organizations
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query" class="md-nav__link">
-    Query
-  </a>
-  
-    <nav class="md-nav" aria-label="Query">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#breaking-it-down" class="md-nav__link">
-    Breaking it down
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
-    Results
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -849,11 +782,65 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../28/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          28. Researcher collaborations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         28. Researcher collaborations
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Query
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -937,19 +924,6 @@
     Query
   </a>
   
-    <nav class="md-nav" aria-label="Query">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#breaking-it-down" class="md-nav__link">
-    Breaking it down
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -972,186 +946,99 @@
               
                 
                 
-                <h1 id="24-organizations-and-sub-organizations">24. Organizations and sub-organizations</h1>
+                <h1 id="28-researcher-collaborations">28. Researcher collaborations</h1>
 <div class="admonition info">
 <p class="admonition-title">Level: Medium</p>
 <p>This query requires basic knowledge of SQL and the Dimensions data model</p>
 </div>
 <h2 id="description">Description</h2>
-<p>This query shows how to extract information about a GRID organization together with all of its sub-organizations. </p>
-<p>Many organizations in the GRID database include parent-child relationships. For example, <a href="https://grid.ac/institutes/grid.495456.f">grid.495456.f</a> (the <em>United States Department of the Air Force</em> page) has both parent and children institutions, so one can use the hierarchy when querying related data e.g. the total number of publications for each of these organizations. </p>
-<p>The query below shows how to leverage the <code>organization_recursive_child_ids</code> field in the <code>grid</code> table in order to achieve that. This field is prepopulated with all children institutions GRID IDs (recursively), hence it makes it easier to run this type of analyses. </p>
+<p>This query generates two-author pairs and counts how many publications are shared between them. The <code>WHERE</code> clause can be used to define a subset of the Dimensions publication dataset to examine—without that, the query will generate co-authorship counts for every author of all 120+ million publications.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each two-author pair will have <em>two</em> entries in the results: One for <code>(Researcher 1, Researcher 2)</code> and another for <code>(Researcher 2, Researcher 1)</code>. If you want to prevent duplicates, adding something like <code>WHERE researcher1_id &gt; researcher2_id</code> will arbitrarily pick one of the combinations to display.</p>
+</div>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="k">hierarchy</span> <span class="k">AS</span> <span class="p">(</span>
-
-  <span class="k">SELECT</span>
-    <span class="k">g</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">parent</span><span class="p">,</span>
-    <span class="k">g</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">parent_name</span><span class="p">,</span>
-    <span class="n">children</span><span class="p">,</span>
-    <span class="n">g2</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">children_name</span><span class="p">,</span>
-  <span class="k">FROM</span>
-    <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="k">g</span>
-  <span class="k">CROSS</span> <span class="k">JOIN</span>
-    <span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span> <span class="k">AS</span> <span class="n">children</span>
-  <span class="k">INNER</span> <span class="k">JOIN</span>
-    <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="n">g2</span>
-  <span class="k">ON</span>
-    <span class="n">g2</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">children</span> 
-  <span class="k">WHERE</span>
-    <span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span> <span class="c1">-- United States Department of the Air Force</span>
-
-<span class="p">)</span>
-
-<span class="k">SELECT</span>
-  <span class="k">hierarchy</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-  <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">as</span> <span class="n">pubs</span>
-<span class="k">FROM</span>
-  <span class="k">hierarchy</span> 
-<span class="k">INNER</span> <span class="k">JOIN</span>
-  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
-  <span class="k">on</span> <span class="k">hierarchy</span><span class="p">.</span><span class="n">children</span> <span class="k">in</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_orgs</span><span class="p">)</span>
-<span class="k">GROUP</span> <span class="k">by</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
-</code></pre></div>
-<h3 id="breaking-it-down">Breaking it down</h3>
-<p>The key part of the query uses a <code>CROSS JOIN</code> on the <code>organization_recursive_child_ids</code> field to retrieve all the descendants of the chosen organization:</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-  <span class="k">g</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">parent</span><span class="p">,</span>
-  <span class="n">children</span><span class="p">,</span>
-<span class="k">FROM</span>
-  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="k">g</span>
-<span class="k">CROSS</span> <span class="k">JOIN</span>
-  <span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span> <span class="k">AS</span> <span class="n">children</span>
+  <span class="p">,</span><span class="n">CONCAT</span><span class="p">(</span><span class="n">r1</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span> <span class="ss">&quot; &quot;</span><span class="p">,</span> <span class="n">r1</span><span class="p">.</span><span class="n">last_name</span><span class="p">)</span> <span class="k">AS</span> <span class="n">researcher1</span>
+  <span class="p">,</span><span class="n">g1</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">researcher1_org</span>
+  <span class="p">,</span><span class="n">CONCAT</span><span class="p">(</span><span class="n">r2</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span> <span class="ss">&quot; &quot;</span><span class="p">,</span> <span class="n">r2</span><span class="p">.</span><span class="n">last_name</span><span class="p">)</span> <span class="k">AS</span> <span class="n">researcher2</span>
+  <span class="p">,</span><span class="n">g2</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">researcher2_org</span>
+  <span class="p">,</span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">AS</span> <span class="n">collaborations</span>
+<span class="k">FROM</span> <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">researcher_ids</span><span class="p">)</span> <span class="n">researcher1_id</span>
+<span class="k">CROSS</span> <span class="k">JOIN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">researcher_ids</span><span class="p">)</span> <span class="n">researcher2_id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">researchers</span> <span class="n">r1</span>
+  <span class="k">ON</span> <span class="n">researcher1_id</span><span class="o">=</span><span class="n">r1</span><span class="p">.</span><span class="n">id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">researchers</span> <span class="n">r2</span>
+  <span class="k">ON</span> <span class="n">researcher2_id</span><span class="o">=</span><span class="n">r2</span><span class="p">.</span><span class="n">id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span> <span class="n">g1</span>
+  <span class="k">ON</span> <span class="n">r1</span><span class="p">.</span><span class="n">current_research_org</span><span class="o">=</span><span class="n">g1</span><span class="p">.</span><span class="n">id</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span> <span class="n">g2</span>
+  <span class="k">ON</span> <span class="n">r2</span><span class="p">.</span><span class="n">current_research_org</span><span class="o">=</span><span class="n">g2</span><span class="p">.</span><span class="n">id</span>
 <span class="k">WHERE</span>
-  <span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span>
-</code></pre></div>
-<p>Furthermore, in order to get more organization metadata e.g. the name, an inner self-join is introduced: </p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-  <span class="k">g</span><span class="p">.</span><span class="n">id</span> <span class="k">AS</span> <span class="n">parent</span><span class="p">,</span>
-  <span class="k">g</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">parent_name</span><span class="p">,</span>
-  <span class="n">children</span><span class="p">,</span>
-  <span class="n">g2</span><span class="p">.</span><span class="n">name</span> <span class="k">AS</span> <span class="n">children_name</span><span class="p">,</span>
-<span class="k">FROM</span>
-  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="k">g</span>
-<span class="k">CROSS</span> <span class="k">JOIN</span>
-  <span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span> <span class="k">AS</span> <span class="n">children</span>
-<span class="k">INNER</span> <span class="k">JOIN</span>
-  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span> <span class="n">g2</span>
-<span class="k">ON</span>
-  <span class="n">g2</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">children</span> 
-<span class="k">WHERE</span>
-  <span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span> 
-</code></pre></div>
-<p>The final step is to join also the <code>publications</code> table, so to get the total publications count for each organization. </p>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span> <span class="k">hierarchy</span> <span class="k">AS</span> <span class="p">(</span>
-  <span class="c1">-- the grid query above</span>
-<span class="p">)</span>
-
-<span class="k">SELECT</span>
-  <span class="k">hierarchy</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-  <span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">as</span> <span class="n">pubs</span>
-<span class="k">FROM</span>
-  <span class="k">hierarchy</span> 
-<span class="k">INNER</span> <span class="k">JOIN</span>
-  <span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span> <span class="n">p</span>
-  <span class="k">on</span> <span class="k">hierarchy</span><span class="p">.</span><span class="n">children</span> <span class="k">in</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_orgs</span><span class="p">)</span>
-<span class="k">GROUP</span> <span class="k">by</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span>
+  <span class="k">AND</span> <span class="n">researcher1_id</span> <span class="o">&lt;&gt;</span> <span class="n">researcher2_id</span>
+  <span class="c1">---- Here is where you can add filters for which</span>
+  <span class="c1">--   publications to evaluate</span>
+  <span class="n">p</span><span class="p">.</span><span class="k">year</span> <span class="o">&gt;=</span> <span class="mi">2019</span>
+  <span class="k">AND</span> <span class="s1">&#39;0604&#39;</span> <span class="k">IN</span> <span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">second_level</span><span class="p">.</span><span class="n">codes</span><span class="p">)</span> <span class="c1">-- genetics</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="mi">5</span> <span class="k">DESC</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.494596.3&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Edwards Air Force Base&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;467&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.461685.8&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Joint Base San Antonio&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;1031&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.265457.7&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Air Force Academy&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;3137&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.431316.2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Grand Forks Air Force Base&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.499282.c&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Maxwell Air Force Base&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;201&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.417730.6&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Air Force Research Laboratory&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;24279&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.453002.0&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;2545&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.461677.5&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Eglin Air Force Base&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;575&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.507554.6&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Air Force Office of Scientific Research&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;543&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.465246.7&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Air University&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;47&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.472535.2&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Kirtland Air Force Base&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;801&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.461680.d&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Hanscom Air Force Base&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;400&quot;</span>
-  <span class="p">},</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;parent_name&quot;</span><span class="p">:</span> <span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children&quot;</span><span class="p">:</span> <span class="s2">&quot;grid.427848.5&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;children_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Air Force Institute of Technology&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;pubs&quot;</span><span class="p">:</span> <span class="s2">&quot;4028&quot;</span>
-  <span class="p">}</span>
-  <span class="err">//</span> <span class="err">more</span> <span class="err">resul</span><span class="kc">ts</span> <span class="err">here...</span>
-<span class="p">]</span>
-</code></pre></div>
+<table>
+  <thead>
+    <tr>
+      <th>Row</th>
+      <th>researcher1</th>
+      <th>researcher1_org</th>
+      <th>researcher2</th>
+      <th>researcher2_org</th>
+      <th>collaborations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Vasileios A Bampidis</td>
+      <td>International Hellenic University</td>
+      <td>Roberto Edoardo Villa</td>
+      <td>University of Milan</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Roberto Edoardo Villa</td>
+      <td>University of Milan</td>
+      <td>Vasileios A Bampidis</td>
+      <td>International Hellenic University</td>
+      <td>67</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Alexander Sergeevich Galushko</td>
+      <td>Agrophysical Research Institute</td>
+      <td>Jan Kuever</td>
+      <td>Leibniz Institute for Materials Engineering</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Jan Kuever</td>
+      <td>Leibniz Institute for Materials Engineering</td>
+      <td>Alexander Sergeevich Galushko</td>
+      <td>Agrophysical Research Institute</td>
+      <td>66</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Jerome I Rotter</td>
+      <td>Harbor–UCLA Medical Center</td>
+      <td>Kent D Taylor</td>
+      <td>Harbor–UCLA Medical Center</td>
+      <td>65</td>
+    </tr>
+  </tbody>
+</table>
                 
               
               
@@ -1171,7 +1058,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../23/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 23. Citing authors by country" rel="prev">
+        <a href="../27/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 27. List of corresponding authors" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1180,20 +1067,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              23. Citing authors by country
+              27. List of corresponding authors
             </div>
           </div>
         </a>
       
       
         
-        <a href="../25/" class="md-footer__link md-footer__link--next" aria-label="Next: 25. Grants for an organization" rel="next">
+        <a href="../29/" class="md-footer__link md-footer__link--next" aria-label="Next: 29. Institutions collaborations" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              25. Grants for an organization
+              29. Institutions collaborations
             </div>
           </div>
           <div class="md-footer__button md-icon">
