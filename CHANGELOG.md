@@ -1,5 +1,14 @@
 # Changelog - Dimensions API Lab
 
+### 2021-09-21
+
+* [Collections](https://bigquery-lab.dimensions.ai/collections/) page now lists all query collections
+* New queries added:
+    * [Researcher collaboration counts](https://bigquery-lab.dimensions.ai/queries/28/)
+    * [Institution collaboration counts](https://bigquery-lab.dimensions.ai/queries/29/)
+    * [Publication growth rate with sliding window](https://bigquery-lab.dimensions.ai/queries/30/)
+    * [Country-level publication activity over time](https://bigquery-lab.dimensions.ai/queries/31/)
+
 ### 2021-09-09
 
 * Revised text

@@ -11,6 +11,8 @@ In order to run this tutorial, please ensure that:
 * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
 * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
 
+(This tutorial is based on a Jupyter notebook that is [available directly via GitHub](https://github.com/digital-science/dimensions-gbq-lab/blob/f1ed0d3f46517a32711a0a5b295d074a3d0fa02b/archive/1-Verifying-your-connection.ipynb).)
+
 ## Connection methods
 
 There are a few options available:

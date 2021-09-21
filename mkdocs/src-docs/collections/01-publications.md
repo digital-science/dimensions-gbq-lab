@@ -12,3 +12,7 @@
 * [Finding Journals using string matching](../queries/07.md)
 * [International collaboration of an organisation in a field](../queries/20.md)
 * [International collaboration of a researcher with org and country context](../queries/21.md)
+* [Researcher collaboration counts](../queries/28.md)
+* [Institution collaboration counts](../queries/29.md)
+* [Publication growth rate with sliding window](../queries/30.md)
+* [Country-level publication activity over time](../queries/31.md)

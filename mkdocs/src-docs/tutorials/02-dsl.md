@@ -15,6 +15,7 @@ This technique allows to take advantage of the strengths of each of these data p
     * You have a valid [Dimensions API account](https://docs.dimensions.ai/dsl/).
     * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
 
+(This tutorial is based on a Jupyter notebook that is [available directly via GitHub](https://github.com/digital-science/dimensions-gbq-lab/blob/f1ed0d3f46517a32711a0a5b295d074a3d0fa02b/archive/3-Using-the-API-with-GBQ.ipynb).)
 
 ## Example: profiling researchers linked to a topic
 
