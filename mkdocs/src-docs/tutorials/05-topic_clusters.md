@@ -9,22 +9,22 @@ The basic steps taken are:
 * Setup the Python environment and BigQuery access.
 * Extract titles/abstracts for the publications of interest from Big Query.
 * Use TensorFlow to generate word embeddings from the titles/abstracts.
-* Export these embedding vectors back into GBQ and cleanup the format of them.
+* Export these embedding vectors back into Google BigQuery and cleanup the format of them.
 * Create k-means models using BigQuery ML (multiple models for different cluster counts).
 * Compare the different k-means models and select the most appropriate.
 * Associate publications back to each cluster.
 * Determine the topics/concepts associated with each cluster.
 
 !!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that: 
+    In order to run this tutorial, please ensure that:
 
     * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
     * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
-    
+
 
 ## 1. Setup Google BigQuery access
 
-The initial setup is to authenticate your Google Account for accessing GCP resources. This account must be the account which has access to the Dimensions BigQuery datasets. It must also must be allowed to execute and pay for GBQ queries. In the code example below `project_id` should be replaced with the GCP project identifier which you own or can access GBQ resources on.
+The initial setup is to authenticate your Google Account for accessing GCP resources. This account must be the account which has access to the Dimensions BigQuery datasets. It must also must be allowed to execute and pay for Google BigQuery queries. In the code example below `project_id` should be replaced with the GCP project identifier which you own or can access BigQuery resources on.
 
 ```python
 from google.colab import auth
@@ -33,7 +33,7 @@ project_id = "my-gbq-project"  # replace with GCP project to bill against
 %load_ext google.cloud.bigquery
 ```
 
-The project referenced in the examples below is `my-gbq-project`, anytime that is contained within Python code or SQL statements it should be replaced with your own projects identifier. The SQL and Python code below also assumes that two datasets exist within the GBQ project (`project_id`).
+The project referenced in the examples below is `my-gbq-project`, anytime that is contained within Python code or SQL statements it should be replaced with your own projects identifier. The SQL and Python code below also assumes that two datasets exist within the Google BigQuery project (`project_id`).
 
 * `temp` which holds intermediate tables created during the setup phase.
 
@@ -140,7 +140,7 @@ table_name = "temp.semantic_clustering"
 new_pubs["title_embed"] = r["title_embed"].numpy().tolist()
 new_pubs["abstract_embed"] = r["abstract_embed"].numpy().tolist()
 
-# Save the DataFrame to a pickle file and into a GBQ table.
+# Save the DataFrame to a pickle file and into a BigQuery table.
 new_pubs.to_pickle("/content/new_pubs.pkl")
 new_pubs.to_gbq(table_name, project_id, chunksize=2500)
 ```

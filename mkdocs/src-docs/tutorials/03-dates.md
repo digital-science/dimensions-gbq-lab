@@ -3,17 +3,17 @@
 Each publication has various dates available.
 
 * `date`, `year`, `date_normal`, `date_online`, `date_print` refer to the publication object. See the [documentation](https://docs.dimensions.ai/bigquery/datasource-publications.html) to find out more about their meaning.
-* `date_imported_gbq` refers to when this record was last added to GBQ - this date can be handy if you want to synchronize an external data source to GBQ.
+* `date_imported_gbq` refers to when this record was last added to Google BigQuery - this date can be handy if you want to synchronize an external data source to BigQuery.
 * `date_inserted`: this refers to when this records was originally added to Dimensions. This date does not change, even if the record is later adjusted.
 
 The following examples show how to work with publications dates.
 
 !!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that: 
+    In order to run this tutorial, please ensure that:
 
     * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    
-    The online [GBQ console](https://console.cloud.google.com/bigquery) can be used to test the queries below.
+
+    The online [BigQuery console](https://console.cloud.google.com/bigquery) can be used to test the queries below.
 
 
 ## Comparing date fields
