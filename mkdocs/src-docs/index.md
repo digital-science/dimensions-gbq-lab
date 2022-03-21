@@ -19,11 +19,12 @@ You can use the structured code examples on this site to put together analyses f
 
 ## Get started now, fast and for free
 
-If you haven’t used Dimensions on BigQuery before, you can get started now for free. This video will show you how to set up Google cloud, run a query and do a visualization with our trial dataset - all in 5 minutes.
+If you haven’t used Dimensions on BigQuery before, you can get started now for free. This [video](https://www.youtube.com/watch?v=rZZqF0w24sg) will show you how to set up Google cloud, run a query and do a visualization with our trial dataset - all in 5 minutes.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/rZZqF0w24sg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-**Following the steps in the video above gives you access to our [sandbox environment](https://docs.dimensions.ai/bigquery/sandbox.html).** This contains all Dimensions data related to COVID-19. It has the same data structure as the full Dimensions database and is updated on a daily basis.
+
+**Following the steps in the [video](https://www.youtube.com/watch?v=rZZqF0w24sg) above gives you access to our [sandbox environment](https://docs.dimensions.ai/bigquery/sandbox.html).** This contains all Dimensions data related to COVID-19. It has the same data structure as the full Dimensions database and is updated on a daily basis.
 
 !!! note "Note"
     Access to the full Dimensions dataset on Google BigQuery is **subscription-only**: you or your organization needs to subscribe for you to gain access to the full dataset. [Get in touch here](https://www.dimensions.ai/contact-us/).
@@ -52,10 +53,9 @@ Find out more about Dimensions on BigQuery with the following resources:
 
 ## Video tutorials
 
-The Dimensions [YouTube channel](https://www.youtube.com/channel/UCUweBvolfJTXEAxDCc5lntQ) contains various how-to videos like the one below:
+The Dimensions [YouTube channel](https://www.youtube.com/channel/UCUweBvolfJTXEAxDCc5lntQ) contains various how-to videos like this one: [Dimensions on Google BigQuery - what it is and how to get started with it](https://www.youtube.com/watch?v=cmYEHX4vOv8):
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/cmYEHX4vOv8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 
 
 ## Changelog
