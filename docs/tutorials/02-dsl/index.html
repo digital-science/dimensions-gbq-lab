@@ -398,6 +398,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -1260,22 +1272,22 @@ Records extracted: 11201
 <p>GOAL: Roughly, the results should be the same as the 'publication year' facet in the <a href="https://app.dimensions.ai/discover/publication?search_mode=content&amp;search_text=%22moon%20landing%22%20AND%20Moon%20AND%20%22lunar%20surface%22%20&amp;search_type=kws&amp;search_field=full_search">webapp</a></p>
 <div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span><span class="w"> </span><span class="c1">--project $PROJECTID</span>
 
-<span class="k">WITH</span><span class="w"> </span><span class="n">mypubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">dim_pubs</span><span class="p">.</span><span class="o">*</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">dim_pubs</span><span class="w"></span>
-<span class="w">  </span><span class="k">JOIN</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">ds</span><span class="o">-</span><span class="k">data</span><span class="o">-</span><span class="n">solutions</span><span class="o">-</span><span class="n">gbq</span><span class="p">.</span><span class="n">demo_dsl</span><span class="p">.</span><span class="n">moonlanding</span><span class="o">`</span><span class="w"> </span><span class="n">dslexport</span><span class="w"></span>
-<span class="w">  </span><span class="k">ON</span><span class="w"></span>
-<span class="w">    </span><span class="n">dim_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dslexport</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">mypubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">dim_pubs</span><span class="p">.</span><span class="o">*</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">dim_pubs</span>
+<span class="w">  </span><span class="k">JOIN</span>
+<span class="w">    </span><span class="o">`</span><span class="n">ds</span><span class="o">-</span><span class="k">data</span><span class="o">-</span><span class="n">solutions</span><span class="o">-</span><span class="n">gbq</span><span class="p">.</span><span class="n">demo_dsl</span><span class="p">.</span><span class="n">moonlanding</span><span class="o">`</span><span class="w"> </span><span class="n">dslexport</span>
+<span class="w">  </span><span class="k">ON</span>
+<span class="w">    </span><span class="n">dim_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dslexport</span><span class="p">.</span><span class="n">id</span>
+<span class="p">)</span>
 
-<span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">tot</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">mypubs</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">SELECT</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">tot</span><span class="p">,</span>
+<span class="w">  </span><span class="k">year</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mypubs</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="k">DESC</span>
 </code></pre></div>
 <table>
   <thead>
@@ -1340,29 +1352,29 @@ Records extracted: 11201
 </ul>
 <div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span><span class="w"> </span><span class="c1">--project $PROJECTID</span>
 
-<span class="k">WITH</span><span class="w"> </span><span class="n">mypubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">dim_pubs</span><span class="p">.</span><span class="o">*</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">dim_pubs</span><span class="w"></span>
-<span class="w">  </span><span class="k">JOIN</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">ds</span><span class="o">-</span><span class="k">data</span><span class="o">-</span><span class="n">solutions</span><span class="o">-</span><span class="n">gbq</span><span class="p">.</span><span class="n">demo_dsl</span><span class="p">.</span><span class="n">moonlanding</span><span class="o">`</span><span class="w"> </span><span class="n">dslexport</span><span class="w"></span>
-<span class="w">  </span><span class="k">ON</span><span class="w"></span>
-<span class="w">    </span><span class="n">dim_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dslexport</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
-<span class="p">),</span><span class="w"></span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">mypubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">dim_pubs</span><span class="p">.</span><span class="o">*</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">dim_pubs</span>
+<span class="w">  </span><span class="k">JOIN</span>
+<span class="w">    </span><span class="o">`</span><span class="n">ds</span><span class="o">-</span><span class="k">data</span><span class="o">-</span><span class="n">solutions</span><span class="o">-</span><span class="n">gbq</span><span class="p">.</span><span class="n">demo_dsl</span><span class="p">.</span><span class="n">moonlanding</span><span class="o">`</span><span class="w"> </span><span class="n">dslexport</span>
+<span class="w">  </span><span class="k">ON</span>
+<span class="w">    </span><span class="n">dim_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dslexport</span><span class="p">.</span><span class="n">id</span>
+<span class="p">),</span>
 
-<span class="n">researchers_metrics</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">researcher_id</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">publications_count</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">citations_count</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">citations_count</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">altmetric_sum</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="n">mypubs</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="w"> </span><span class="n">researcher_ids</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">researcher_id</span><span class="w"></span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">researcher_id</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<span class="n">researchers_metrics</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">researcher_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">publications_count</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">citations_count</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">citations_count</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">altmetric_sum</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="n">mypubs</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="w"> </span><span class="n">researcher_ids</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">researcher_id</span>
+<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">researcher_id</span>
+<span class="p">)</span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">researchers_metrics</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">publications_count</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">researchers_metrics</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">publications_count</span><span class="w"> </span><span class="k">DESC</span>
 </code></pre></div>
 <table>
   <thead>
@@ -1458,54 +1470,54 @@ Records extracted: 11201
 <p><strong>Final step</strong>: let's add researchers names and current organization details by joining up data from the <a href="https://docs.dimensions.ai/bigquery/datasource-organizations.html">GRID table</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span><span class="w"> </span><span class="c1">--project $PROJECTID</span>
 
-<span class="k">WITH</span><span class="w"> </span><span class="n">mypubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="k">WITH</span><span class="w"> </span><span class="n">mypubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
 
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">dim_pubs</span><span class="p">.</span><span class="o">*</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">dim_pubs</span><span class="w"></span>
-<span class="w">  </span><span class="k">JOIN</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">ds</span><span class="o">-</span><span class="k">data</span><span class="o">-</span><span class="n">solutions</span><span class="o">-</span><span class="n">gbq</span><span class="p">.</span><span class="n">demo_dsl</span><span class="p">.</span><span class="n">moonlanding</span><span class="o">`</span><span class="w"> </span><span class="n">dslexport</span><span class="w"></span>
-<span class="w">  </span><span class="k">ON</span><span class="w"></span>
-<span class="w">    </span><span class="n">dim_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dslexport</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">dim_pubs</span><span class="p">.</span><span class="o">*</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">dim_pubs</span>
+<span class="w">  </span><span class="k">JOIN</span>
+<span class="w">    </span><span class="o">`</span><span class="n">ds</span><span class="o">-</span><span class="k">data</span><span class="o">-</span><span class="n">solutions</span><span class="o">-</span><span class="n">gbq</span><span class="p">.</span><span class="n">demo_dsl</span><span class="p">.</span><span class="n">moonlanding</span><span class="o">`</span><span class="w"> </span><span class="n">dslexport</span>
+<span class="w">  </span><span class="k">ON</span>
+<span class="w">    </span><span class="n">dim_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dslexport</span><span class="p">.</span><span class="n">id</span>
 
-<span class="p">),</span><span class="w"></span>
+<span class="p">),</span>
 
-<span class="n">researchers_metrics</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="n">researchers_metrics</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
 
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">researcher_id</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">publications_count</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">citations_count</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">citations_count</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">altmetric_sum</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="n">mypubs</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="w"> </span><span class="n">researcher_ids</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">researcher_id</span><span class="w"></span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">researcher_id</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">researcher_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">publications_count</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">citations_count</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">citations_count</span><span class="p">,</span>
+<span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">altmetric_sum</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="n">mypubs</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="w"> </span><span class="n">researcher_ids</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">researcher_id</span>
+<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">researcher_id</span>
 
-<span class="p">),</span><span class="w"></span>
+<span class="p">),</span>
 
-<span class="n">researchers_full</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="n">researchers_full</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
 
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">researchers_metrics</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">total_grants</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_id</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_name</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">city</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_city</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">country</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_country</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="n">researchers_metrics</span><span class="w"></span>
-<span class="w">  </span><span class="k">JOIN</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">researchers</span><span class="o">`</span><span class="w"> </span><span class="n">r</span><span class="w"></span>
-<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">researchers_metrics</span><span class="p">.</span><span class="n">researcher_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
-<span class="w">  </span><span class="k">JOIN</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">grid</span><span class="w"></span>
-<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">current_research_org</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">researchers_metrics</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
+<span class="w">    </span><span class="n">r</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">total_grants</span><span class="p">,</span>
+<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_name</span><span class="p">,</span>
+<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">city</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_city</span><span class="p">,</span>
+<span class="w">    </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">country</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">grid_country</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="n">researchers_metrics</span>
+<span class="w">  </span><span class="k">JOIN</span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">researchers</span><span class="o">`</span><span class="w"> </span><span class="n">r</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">researchers_metrics</span><span class="p">.</span><span class="n">researcher_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">id</span>
+<span class="w">  </span><span class="k">JOIN</span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">grid</span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">current_research_org</span>
 
-<span class="p">)</span><span class="w"></span>
+<span class="p">)</span>
 
 
 
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">researchers_full</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">publications_count</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">researchers_full</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">publications_count</span><span class="w"> </span><span class="k">DESC</span>
 </code></pre></div>
 <table>
   <thead>

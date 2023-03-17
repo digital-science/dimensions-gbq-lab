@@ -18,6 +18,7 @@ nav:
         - tutorials/05-topic_clusters.md
         - tutorials/06-funder_grant_pubs.md
         - tutorials/07-retrieve_patents.md
+        - tutorials/08-research_integrity.md
     - ...
 
 theme:

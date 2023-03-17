@@ -321,6 +321,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -954,23 +966,23 @@
 <h2 id="description">Description</h2>
 <p>This query counts all grants received by a selected GRID organization and sums up the total amount of funding received, based on the grants <code>start_year</code>.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_grants</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">SUM</span><span class="p">(</span><span class="n">funding_usd</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_grants_amount_usd</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grants</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="ss">&quot;grid.10837.3d&quot;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">(</span><span class="n">start_year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2009</span><span class="w"></span>
-<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">start_year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2020</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_grants</span><span class="p">,</span>
+<span class="w">  </span><span class="k">SUM</span><span class="p">(</span><span class="n">funding_usd</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_grants_amount_usd</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grants</span><span class="o">`</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="ss">&quot;grid.10837.3d&quot;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="p">(</span><span class="n">start_year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2009</span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">start_year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2020</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;total_grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;731&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;total_grants_amount_usd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.4692966E8&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;total_grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;731&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;total_grants_amount_usd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8.4692966E8&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
                 
               

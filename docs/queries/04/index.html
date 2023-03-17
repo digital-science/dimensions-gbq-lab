@@ -321,6 +321,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -955,31 +967,31 @@
 <p>This query returns a table with a single row. One field contains the Dimensions publication ID, and the other contains a string of all categories associated with the publication, separated by semicolons. </p>
 <p>It's very similar to the <a href="../03/">publication authors query</a>. You may also be interested in <a href="../../tutorials/04-nested/">the tutorial about working with nested fields</a>.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nb">ARRAY</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="w"></span>
-<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">FULL</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category_names</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">categories</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="nb">ARRAY</span><span class="p">(</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">FULL</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category_names</span>
+<span class="w">  </span><span class="k">FROM</span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="w">  </span><span class="k">WHERE</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span>
+<span class="p">)</span>
 
-<span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">ARRAY_TO_STRING</span><span class="p">(</span><span class="n">category_names</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;; &#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">categories_list</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">categories</span><span class="w"></span>
+<span class="k">SELECT</span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span>
+<span class="w">  </span><span class="n">ARRAY_TO_STRING</span><span class="p">(</span><span class="n">category_names</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;; &#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">categories_list</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">categories</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1132070778&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;categories_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Physical Sciences; Chemical Sciences&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1132070778&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;categories_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Physical Sciences; Chemical Sciences&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
                 
               

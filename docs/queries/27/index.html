@@ -321,6 +321,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -954,116 +966,116 @@
 <h2 id="description">Description</h2>
 <p>Extract corresponding authors for the <code>Nature Medicine</code> journal.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">doi</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="k">corresponding</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">journal_title</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;jour.1113716&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="k">corresponding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"></span>
-<span class="w">  </span><span class="mi">10</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span>
+<span class="w">  </span><span class="n">doi</span><span class="p">,</span>
+<span class="w">  </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span>
+<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span>
+<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="n">last_name</span><span class="p">,</span>
+<span class="w">  </span><span class="n">a</span><span class="p">.</span><span class="k">corresponding</span><span class="p">,</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">journal_title</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">a</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;jour.1113716&quot;</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="k">corresponding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">TRUE</span>
+<span class="k">LIMIT</span>
+<span class="w">  </span><span class="mi">10</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000366392&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/74704&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inhibitory Fc receptors modulate in vivo cytoxicity against tumor targets&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jeffrey V.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ravetch&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1002332484&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/74689&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The tyrosine kinase p56lck is essential in coxsackievirus B3-mediated heart disease&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Josef M.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Penninger&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1002696559&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/75068&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blockade of interleukin 6 trans signaling suppresses T-cell resistance against apoptosis in chronic intestinal inflammation: Evidence in Crohn disease and experimental colitis in vivo&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;M.F.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Neurath&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1001207508&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/74918&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Human neural progenitor cells: better blue than green?&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alberto&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Martínez-Serrano&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000887404&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/73213&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transdermal monitoring of glucose and other analytes using ultrasound&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joseph&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kost&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000887404&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/73213&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transdermal monitoring of glucose and other analytes using ultrasound&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Robert&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Langer&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000556369&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/71527&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PR39, a peptide regulator of angiogenesis&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Michael&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Simons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1001854662&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/72262&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Protection from septic shock by neutralization of macrophage migration inhibitory factor&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thierry&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Calandra&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000791818&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/76267&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Immunologic ‘ignorance’ of vascularized organ transplants in the absence of secondary lymphoid tissue&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fadi G.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lakkis&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1002229158&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/72329&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Molecular mimicry mediated by MHC class Ib molecules after infection with Gram-negative pathogens&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mark J.&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Soloski&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000366392&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/74704&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Inhibitory Fc receptors modulate in vivo cytoxicity against tumor targets&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jeffrey V.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ravetch&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1002332484&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/74689&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The tyrosine kinase p56lck is essential in coxsackievirus B3-mediated heart disease&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Josef M.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Penninger&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1002696559&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/75068&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Blockade of interleukin 6 trans signaling suppresses T-cell resistance against apoptosis in chronic intestinal inflammation: Evidence in Crohn disease and experimental colitis in vivo&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;M.F.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Neurath&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1001207508&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/74918&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Human neural progenitor cells: better blue than green?&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Alberto&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Martínez-Serrano&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000887404&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/73213&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transdermal monitoring of glucose and other analytes using ultrasound&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joseph&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kost&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000887404&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/73213&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Transdermal monitoring of glucose and other analytes using ultrasound&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Robert&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Langer&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000556369&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/71527&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PR39, a peptide regulator of angiogenesis&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Michael&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Simons&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1001854662&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/72262&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Protection from septic shock by neutralization of macrophage migration inhibitory factor&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Thierry&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Calandra&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1000791818&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/76267&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Immunologic ‘ignorance’ of vascularized organ transplants in the absence of secondary lymphoid tissue&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fadi G.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lakkis&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1002229158&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.1038/72329&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;preferred&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Molecular mimicry mediated by MHC class Ib molecules after infection with Gram-negative pathogens&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;first_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mark J.&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;last_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Soloski&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;corresponding&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;journal_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Nature Medicine&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
                 
               

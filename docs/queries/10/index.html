@@ -321,6 +321,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -955,80 +967,80 @@
 <p>This query counts the number of publications about a set of tropical diseases. It filters publications by selecting only those that either refer to those diseases in the title, or that have been tagged with those diseases as <a href="https://docs.dimensions.ai/dsl/language.html#searching-using-concepts">concepts</a> within the Dimensions database.</p>
 <p>Once publications have been found, the counts are broken down both by year and by publisher; the final list shows the top 10 publisher-years in which the most papers were published about those diseases.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">publisher</span><span class="p">.</span><span class="n">NAME</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">publisher</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">num_pub</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">concepts</span><span class="p">)</span><span class="w"> </span><span class="k">c</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">concept</span><span class="p">)</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">([</span><span class="ss">&quot;buruli ulcer&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mycobacterium&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mycolactone&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;bairnsdale ulcer&quot;</span><span class="p">])</span><span class="w"></span>
-<span class="w">    </span><span class="k">OR</span><span class="w"> </span><span class="n">REGEXP_CONTAINS</span><span class="p">(</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="ss">&quot;(?i)/buruli ulcer|mycobacterium|mycolactone|bairnsdale ulcer/&quot;</span><span class="p">))</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2010</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">publisher</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
-<span class="w">  </span><span class="n">publisher</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
-<span class="w">  </span><span class="n">num_pub</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">publisher</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">publisher</span><span class="p">.</span><span class="n">NAME</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">publisher</span><span class="p">,</span>
+<span class="w">  </span><span class="k">year</span><span class="p">,</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">num_pub</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">concepts</span><span class="p">)</span><span class="w"> </span><span class="k">c</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="p">(</span><span class="k">LOWER</span><span class="p">(</span><span class="k">c</span><span class="p">.</span><span class="n">concept</span><span class="p">)</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">([</span><span class="ss">&quot;buruli ulcer&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mycobacterium&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;mycolactone&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;bairnsdale ulcer&quot;</span><span class="p">])</span>
+<span class="w">    </span><span class="k">OR</span><span class="w"> </span><span class="n">REGEXP_CONTAINS</span><span class="p">(</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="ss">&quot;(?i)/buruli ulcer|mycobacterium|mycolactone|bairnsdale ulcer/&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2010</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">publisher</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
+<span class="w">  </span><span class="n">publisher</span><span class="p">,</span>
+<span class="w">  </span><span class="k">year</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
+<span class="w">  </span><span class="n">num_pub</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span>
+<span class="w">  </span><span class="k">year</span><span class="p">,</span>
+<span class="w">  </span><span class="n">publisher</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31602&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29639&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28941&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2017&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28415&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;27299&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2011&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25757&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25149&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;23205&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2014&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22952&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22072&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31602&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29639&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28941&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2017&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28415&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;27299&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2011&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25757&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25149&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;23205&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2014&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22952&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;num_pub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22072&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
                 
               

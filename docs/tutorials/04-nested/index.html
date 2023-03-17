@@ -458,6 +458,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -1121,11 +1133,11 @@
 <h2 id="what-are-they">What are they?</h2>
 <h3 id="repeated-fields">Repeated fields</h3>
 <p>Repeated fields approximate a "one-to-many" relationship and provide an opportunity to define <strong>a field that can hold multiple values per row</strong>. We can demonstrate this by running a query against <a href="https://docs.dimensions.ai/bigquery/datasource-publications.html">the <code>publications</code> table</a> for values in the <code>clinical_trial_ids</code> field:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">LEFT</span><span class="p">(</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">clinical_trial_ids</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">ARRAY_LENGTH</span><span class="p">(</span><span class="n">clinical_trial_ids</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">LEFT</span><span class="p">(</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">clinical_trial_ids</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">ARRAY_LENGTH</span><span class="p">(</span><span class="n">clinical_trial_ids</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div>
 <p>The (heavily truncated) results look something like this:</p>
 <table>
@@ -1199,9 +1211,9 @@
 <p>You can see that rows 3 and 4 have multiple values in the <code>clinical_trial_ids</code> field, despite all values getting listed <strong>within a single row number</strong>.</p>
 <h3 id="nested-fields">Nested fields</h3>
 <p>Nested fields, on their own, are much simpler: They are fields that are linked together as a single entity, like a struct or an object. The <code>title</code> field in the <code>publications</code> table is a good example of this: Rather than a single string indicating the title of the publication, it is a nested field that has two strings within it: <code>"original"</code> and <code>"preferred"</code>, mostly to accommodate titles expressed in multiple languages. Querying nested fields looks almost identical to querying more conventional ones. For example, with the title field:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1242,9 +1254,9 @@
 </table>
 <h3 id="repeated-nested-fields">Repeated nested fields</h3>
 <p>This is where things get a little more complicated: One of the main ways nested fields make themselves useful is when they're <em>repeated</em>: So while a repeated field might be an array of strings (clinical trial IDs, for example), they can also be an array of objects. The <code>authors</code> field of the publications table is a good example of this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1309,9 +1321,9 @@
 <p>You can see here that the author information appears the same way as the clinical trial IDs above, except each repeated entry within a row has multiple fields about each author. (There are many more fields that will appear if you query authors; they've been removed here for clarity.) The useful part about using nested fields for the authors, rather than a bunch of repeated fields alone (one for <code>first_name</code>, another repeated field for <code>last_name</code>, etc) is because <em>those nested fields will stay together</em>: For the publication in row 1, the <code>"A.E."</code> first name will always appear alongside the <code>"Valamin"</code> last name, rather than shuffling them around like what may happen if you queried them separately.</p>
 <h2 id="querying-nested-fields">Querying nested fields</h2>
 <p>We'll start writing queries with nested fields alone first, since it's the simplest to do. We actually did it several times in the above examples: The <code>title</code> field in the publications table is a nested field with two fields in it: <code>original</code> and <code>preferred</code>. If you don't specify which values you want, <em>you'll get them all</em>, like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1351,9 +1363,9 @@
 </tbody>
 </table>
 <p>If you wanted only the <code>preferred</code> field of the <code>title</code>, you can specify that using periods. Nested fields can have <em>more</em> nested fields within them, so there may be multiple entries. Luckily, we only need one period for the title:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">4</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1391,10 +1403,10 @@
 <p>Repeated fields are where we need to start using more exotic patterns to extract information. <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/arrays#flattening_arrays">The <code>UNNEST</code> function</a> is the primary tool for the job here—it converts an array of values into rows in a table, which, if necessary, can then be joined to the original table you're querying.</p>
 <h3 id="example-1-checking-contents-of-array">Example 1: Checking contents of array</h3>
 <p>We'll start with a simple one: the <code>funder_orgs</code> field in the <code>publications</code> table, which lists GRID IDs indicating which organizations funded the research in the publication. IF we wanted to find publications funded by the Brazilian Agricultural Research Corporation, for example, we can use its GRID ID (grid.460200.0) in a <code>WHERE</code> clause:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="s1">&#39;grid.460200.0&#39;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">type</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funded_pubs</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="s1">&#39;grid.460200.0&#39;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">type</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1430,10 +1442,10 @@
 </table>
 <h3 id="example-2-joining-tables-using-a-repeated-field">Example 2: Joining tables using a repeated field</h3>
 <p>Queries can also return the contents of repeated fields. Using a <code>CROSS JOIN</code>, the information can be distributed into separate rows, rather than arrays inside single rows. For this example, we'll look at organizations that have funded recent articles published in <em>eLife</em>, a life sciences journal. We'll start by selecting the information we can get from the publications table:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">forg</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">forg</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span>
 <span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">forg</span><span class="w"> </span><span class="c1">-- This is the important line</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span>
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span><span class="w"> </span><span class="c1">-- eLife</span>
 </code></pre></div>
 <table>
@@ -1484,14 +1496,14 @@
 </table>
 <p>There are a few things to point out here: First, notice that we're querying a nested field within the <code>journal</code> field on the final line—we want only publications in which the <code>journal</code> field lists an <code>id</code> that matches the one assigned to <em>eLife</em>. We're also using a <code>CROSS JOIN</code> with the <code>funder_orgs</code> field. A cross join <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join">returns the Cartesian product</a> of the two tables being joined—to wit, every value on one side of the join (in this case, the <code>publications</code> table) will appear with every matching value from the right side of the join (the "table" created by the call to <code>UNNEST(funder_orgs)</code>). This is demonstrated in lines 3 through 7 of the results above—publication id "pub.1000131550" has five different strings in its <code>funder_orgs</code> field, so when we unnest that field, <strong>the results contain multiple rows for "pub.1000131550," one for each value unnested from <code>funder_orgs</code>.</strong></p>
 <p>We're not done yet, however—we have a table that associates every <em>eLife</em> paper with each of its funders, but that's not really useful on its own. If we use group by the <code>forg</code> field (the values unnested from <code>funder_orgs</code>), we can get a count for each organization, like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">forg</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">forg</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funded_pubs</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span>
 <span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">forg</span><span class="w"> </span><span class="c1">-- This is the important line</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span>
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span><span class="w"> </span><span class="c1">-- eLife</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">forg</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">forg</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1531,16 +1543,16 @@
 </tbody>
 </table>
 <p>This is getting better! Now we have the GRID ID of each funder, paired with the number of <em>eLife</em> publications it's funded. However, GRID IDs aren't very readable. We can get organization names by pulling them in from <a href="https://docs.dimensions.ai/bigquery/datasource-organizations.html">the <code>grid</code> table of organizations data</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">forg</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">forg</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">forg</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funded_pubs</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funder_orgs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">forg</span>
 <span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">grid</span><span class="w"> </span><span class="c1">-- THIS IS NEW!</span>
-<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">forg</span><span class="o">=</span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">forg</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">forg</span><span class="o">=</span><span class="n">grid</span><span class="p">.</span><span class="n">id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;article&#39;</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1046517&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">forg</span><span class="p">,</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">funded_pubs</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1588,9 +1600,9 @@
 <p>Now we have the table we wanted: We unnest the values in the <code>funder_orgs</code> field, use those to join the <code>grid</code> table, and return the name of each funder and how many publications it's funded in <em>eLife</em>.</p>
 <h3 id="example-3-querying-repeated-nested-fields">Example 3: Querying repeated nested fields</h3>
 <p>Let's pull everything together using the task outlined in <a href="../../queries/03/">example 3 from the query library</a>: combining all author names of a paper into a single string. As described above, the <code>authors</code> field is complicated because it's a repeated field in which each value is a nested field: Each repeat of <code>authors</code> has its own <code>first_name</code> field, its own <code>last_name</code>, and so on. It's easier to see the structure if we start with a simpler query:</p>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">authors</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span>
 </code></pre></div>
 <p>Results (truncated for simplicity):</p>
 <table>
@@ -1658,37 +1670,37 @@
 <li>Combine all elements in the <code>author_names</code> into <strong>one long string</strong>.</li>
 </ol>
 <p>First, we try to make things more readable by using a <code>WITH</code> clause to emulate a temporary table: Within this query, there's a "table" called <code>author_array</code> filled with the results of this subquery:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nb">ARRAY</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">authors</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span>
+<span class="w">  </span><span class="nb">ARRAY</span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">authors</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span>
 </code></pre></div>
 <p>This is important, because it's where most of the work happens. We start in the middle and work our way outward.</p>
 <p>This piece takes an array (<code>authors</code>) and uses the <code>UNNEST</code> function to create a new table in which each row is a separate author. Then, we take each row of this temporary "authors" table and combine each first name with each last name:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
 </code></pre></div>
 <p>So we now have a table with a single field—a full name—and each row is one author. We then convert this <em>back into an array</em>:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">ARRAY</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"></span>
-<span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">authors</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="nb">ARRAY</span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">authors</span>
 </code></pre></div>
 <p>The outermost piece of this subquery is just to tie each array of author names to the publication that they authored:
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">author_array</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
-<span class="w">    </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nb">ARRAY</span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span><span class="w"></span>
-<span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">author_names</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">author_array</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span>
+<span class="w">    </span><span class="n">id</span><span class="p">,</span>
+<span class="w">    </span><span class="nb">ARRAY</span><span class="p">(</span>
+<span class="w">      </span><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last_name</span><span class="p">)</span>
+<span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">author_names</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pub.1132070778&#39;</span>
+<span class="p">)</span>
 </code></pre></div></p>
 <p>So now we have a table called <code>author_array</code> in which each publication ID is associated with an array of author names. It looks like this):</p>
 <table>
@@ -1733,10 +1745,10 @@
 </table>
 
 <p>Now that we have the author names pulled out of the author objects, we're almost done. The last step is to iterate through each publication ID, take each entry in the <code>author_names</code> array, and push them all together using <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_to_string">the <code>ARRAY_TO_STRING</code> function</a>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">ARRAY_TO_STRING</span><span class="p">(</span><span class="n">author_names</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;; &#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">authors_list</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">author_array</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span>
+<span class="w">  </span><span class="n">ARRAY_TO_STRING</span><span class="p">(</span><span class="n">author_names</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;; &#39;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">authors_list</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">author_array</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1760,11 +1772,11 @@
 <p>There are a few pitfalls to be aware of when working with nested and repeated fields; we outline some of the most common below.</p>
 <h3 id="example-4-repeated-fields-with-null-values">Example 4: Repeated fields with null values</h3>
 <p>The trouble with using <code>CROSS JOIN</code> clauses in queries is that <em>they omit all records for which the repeated field has no values</em>: If a paper has zero authors listed, for example, including <code>CROSS JOIN UNNEST(authors)</code> in your query means there won't be any rows for that paper. We can examine this further using the <code>research_org_country_names</code> repeated field:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot_articles</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_country_names</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">unnested_countries</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot_articles</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_country_names</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">unnested_countries</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1782,10 +1794,10 @@
 </tbody>
 </table>
 <p>We then run the same query without the <code>UNNEST</code> clause:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot_articles</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot_articles</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1804,12 +1816,12 @@
 </table>
 <p>So without the <code>UNNEST</code>, the total publication count is just over 1.7 million. With the unnest, however, it's less than 1.1 million. The gap is explained by publications that have an ID (that's what we're counting), but that do not have any values in the <code>research_org_country_names</code> field.</p>
 <p>So how can we be sure we aren't excluding records we actually want? In this case, a <strong><code>LEFT JOIN</code> is the way to go</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot_articles</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_country_names</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">unnested_countries</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot_articles</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_country_names</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">unnested_countries</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2000</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1830,17 +1842,17 @@
 <h3 id="example-5-counting-entries-too-many-times">Example 5: Counting entries too many times</h3>
 <p>While it's helpful that <code>CROSS JOIN UNNEST()</code> gives us all relevant combinations of the selected fields, it can also present hazards if you don't account for which fields may have multiple entries. For this example, we want to examine how many papers were published in <em>PLOS ONE</em> that include an author with the surname "Smith."</p>
 <p>This query will get us most of the way there:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">totcount</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">author</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">totcount</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">author</span>
+<span class="k">WHERE</span>
 <span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1037553&#39;</span><span class="w"> </span><span class="c1">-- PLOS ONE</span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2018</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">author</span><span class="p">.</span><span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Smith&#39;</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2018</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2020</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">author</span><span class="p">.</span><span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Smith&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1871,17 +1883,17 @@
 </table>
 <p>We start with all publications published in <em>PLOS ONE</em> between 2018 and 2020, then unnest the <code>authors</code> field so we can get to the <code>last_name</code> field. We then include only entries in which <code>last_name='Smith'</code>.</p>
 <p>However, these yearly totals aren't correct: We're counting the number of entries in the table, and we only have entries in which an author's last name is "Smith." But <strong>some papers may have been written by more than one Smith</strong>. We can account for this by adding a <code>DISTINCT</code> clause, like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
 <span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">totcount</span><span class="w"> </span><span class="c1">-- CHANGE IS HERE!</span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">author</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1037553&#39;</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2018</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">author</span><span class="p">.</span><span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Smith&#39;</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">author</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;jour.1037553&#39;</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2018</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2020</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">author</span><span class="p">.</span><span class="n">last_name</span><span class="o">=</span><span class="s1">&#39;Smith&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span>
 </code></pre></div>
 <p>Results:</p>
 <table>

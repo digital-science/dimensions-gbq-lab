@@ -1,0 +1,2529 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Usage of trust markers in research - Dimensions BigQuery Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+
+  <!-- OneTrust Cookies Consent Notice start for dimensions.ai -->
+  <script type="text/javascript" src="https://cdn.cookielaw.org/consent/3329b668-7887-4dba-9bee-c3853a706e6f/OtAutoBlock.js"></script>
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3329b668-7887-4dba-9bee-c3853a706e6f"></script>
+  <script type="text/javascript">
+      function OptanonWrapper() { }
+  </script>
+  <!-- OneTrust Cookies Consent Notice end for dimensions.ai -->
+
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-BWP057HYGP"),document.addEventListener("DOMContentLoaded",function(){"undefined"!=typeof location$&&location$.subscribe(function(t){gtag("config","G-BWP057HYGP",{page_path:t.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWP057HYGP"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#usage-of-trust-markers-in-research" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-header__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dimensions BigQuery Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Usage of trust markers in research
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-nav__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    Dimensions BigQuery Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        About Tutorials
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-connection/" class="md-nav__link">
+        Verifying your connection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-dates/" class="md-nav__link">
+        Working with dates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-nested/" class="md-nav__link">
+        Working with nested and repeated fields
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-dsl/" class="md-nav__link">
+        From the DSL API to Google BigQuery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-topic_clusters/" class="md-nav__link">
+        Basic Topic Clustering using TensorFlow and BigQuery ML
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-funder_grant_pubs/" class="md-nav__link">
+        Identify a funder's grants and publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-retrieve_patents/" class="md-nav__link">
+        Retrieve patents linked to a set of grants
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Usage of trust markers in research
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Usage of trust markers in research
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#use-case" class="md-nav__link">
+    Use case
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#about-trust-markers" class="md-nav__link">
+    About trust markers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    Method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-connect" class="md-nav__link">
+    1. Connect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-trust-markers-by-publisher" class="md-nav__link">
+    2. Trust markers by publisher
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Trust markers by publisher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-and-run-a-query" class="md-nav__link">
+    Write and run a query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize-your-results" class="md-nav__link">
+    Visualize your results
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-trust-markers-by-research-org" class="md-nav__link">
+    3. Trust markers by research org
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-author-contributions-to-articles" class="md-nav__link">
+    4. Author contributions to articles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-repository-usage" class="md-nav__link">
+    5. Repository usage
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Collections
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Collections" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Collections
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/01-publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/02-citations/" class="md-nav__link">
+        Citations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/03-authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/04-funding/" class="md-nav__link">
+        Funding & Grants
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Queries
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Queries" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Queries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/" class="md-nav__link">
+        About Queries
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/01/" class="md-nav__link">
+        1. Number of publications added to Dimensions each month
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/02/" class="md-nav__link">
+        2. Number of Publications by Type
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/03/" class="md-nav__link">
+        3. Generate a list of publication authors by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/04/" class="md-nav__link">
+        4. Generate a list of publication categories by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/05/" class="md-nav__link">
+        5. Number of publications per SDG category
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/06/" class="md-nav__link">
+        6. Publications count per FoR category, total and percentage against total
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/07/" class="md-nav__link">
+        7. Finding Journals using string matching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/08/" class="md-nav__link">
+        8. Finding articles matching a specific affiliation string
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/09/" class="md-nav__link">
+        9. Top publications by Altmetric score and research organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/10/" class="md-nav__link">
+        10. Select publications matching selected concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/11/" class="md-nav__link">
+        11. Count of corresponding authors by publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/12/" class="md-nav__link">
+        12. Counting new vs recurring authors, for a specific journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/13/" class="md-nav__link">
+        13. Funding by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/14/" class="md-nav__link">
+        14. Extracting complex publications records
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/15/" class="md-nav__link">
+        15. Top N publications by citations percentile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/16/" class="md-nav__link">
+        16. Citations by journal, for a specific publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/17/" class="md-nav__link">
+        17. One-degree citation network for a single publication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/18/" class="md-nav__link">
+        18. Incoming citations for a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/19/" class="md-nav__link">
+        19. Outgoing citations from a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/20/" class="md-nav__link">
+        20. International collaboration of an organisation in a field
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/21/" class="md-nav__link">
+        21. International collaboration rate of individuals, with context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/22/" class="md-nav__link">
+        22. Incoming citations for a single publication, by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/23/" class="md-nav__link">
+        23. Citing authors by country
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/24/" class="md-nav__link">
+        24. Organizations and sub-organizations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/25/" class="md-nav__link">
+        25. Grants for an organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/26/" class="md-nav__link">
+        26. Field Citation Ratio (FCR) median average
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/27/" class="md-nav__link">
+        27. List of corresponding authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/28/" class="md-nav__link">
+        28. Researcher collaborations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/29/" class="md-nav__link">
+        29. Institutions collaborations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/30/" class="md-nav__link">
+        30. Publication volume growth rate
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/31/" class="md-nav__link">
+        31. Country-level publication activity over time
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#use-case" class="md-nav__link">
+    Use case
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#about-trust-markers" class="md-nav__link">
+    About trust markers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#method" class="md-nav__link">
+    Method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-connect" class="md-nav__link">
+    1. Connect
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-trust-markers-by-publisher" class="md-nav__link">
+    2. Trust markers by publisher
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Trust markers by publisher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-and-run-a-query" class="md-nav__link">
+    Write and run a query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualize-your-results" class="md-nav__link">
+    Visualize your results
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-trust-markers-by-research-org" class="md-nav__link">
+    3. Trust markers by research org
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-author-contributions-to-articles" class="md-nav__link">
+    4. Author contributions to articles
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-repository-usage" class="md-nav__link">
+    5. Repository usage
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="usage-of-trust-markers-in-research">Usage of trust markers in research</h1>
+<h2 id="use-case">Use case</h2>
+<p>'Trust markers' are indicators of integrity, professionalism and reproducibility in scientific research. They also highlight the level of research transparency within the document, and reduce the risks of allowing non-compliance to research integrity policies to go unobserved.</p>
+<p>This notebook takes you through a few examples which address the above questions. It makes use of the <a href="https://ripeta.com/solutions/dimensions-research-integrity/">Dimensions Research Integrity Dataset</a>, an additional module to Dimensions on Google Big Query (GBQ).</p>
+<p>Using the dataset, you can answer questions such as:</p>
+<ul>
+<li>How many research articles use trust markers? </li>
+<li>How does coverage of trust markers differ across publishers, funders and research organisations?</li>
+<li>If researchers are using trust markers (eg, data availability statements), how many are putting their data in repositories (and which repositories)?</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Prerequisites</p>
+<p>In order to run this tutorial, please ensure that:</p>
+<ul>
+<li>You have a valid <a href="https://www.dimensions.ai/products/bigquery/">Dimensions on Google BigQuery account</a> and have <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">configured a Google Cloud project</a>. This must include access to the Dimensions Research Integrity Dataset.</li>
+<li>You have some basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
+</ul>
+</div>
+<h2 id="about-trust-markers">About trust markers</h2>
+<p>The trust markers in the Dataset represent the integrity and reproducibility of scientific research. Trust markers represent a contract between authors and readers that proper research practices have been observed. They also highlight the level of research transparency within the document, and reduce the risks of allowing non-compliance to research integrity policies to go unobserved.</p>
+<p>Currently, the following trust markers are available via the dataset:</p>
+<ul>
+<li><strong>Funding statement</strong>: States if the author(s) of the paper were granted funding in order to conduct their research.</li>
+<li><strong>Ethical approval statement</strong>: <em>Standalone</em> statement affirming that the conducted research has been carried out in an ethical fashion with proper consent from all participating parties.</li>
+<li><strong>Competing interests statement</strong>: Declares possible sources of bias, based on personal interests of the author(s) in the findings of the research. For example, the source of funding, past or present employers of the author(s), or the author(s) financial interests.</li>
+<li><strong>Author contributions statement</strong>: Details of each author’s role in the development and publication of the manuscript.</li>
+<li><strong>Repositories</strong>: The names of any research data repositories used by the author(s) to preserve, organize and facilitate access to study data.</li>
+<li><strong>Data locations</strong>: Locations where research data (raw or processed) can be accessed.</li>
+<li><strong>Data availability statement</strong>: A dedicated section of a scientific work indicating whether data from the research is available and where it can be found.</li>
+<li><strong>Code availability statement</strong>: States if and how one could gain access to the code used to conduct the study/research.</li>
+</ul>
+<h2 id="method">Method</h2>
+<p>This notebook retrieves data about trust marker and publication data from Dimensions, the world's largest linked research information datatset. In particular the trust markers are taken from the DRI module.</p>
+<p>To complete the analysis the following steps are taken:</p>
+<ol>
+<li>Connect to the Dimensions database.</li>
+<li>Gather information about general use of trust markers, broken down by publisher.</li>
+<li>Look at how usage of trust markers breaks down by research organisations in the US, by joining on data from <a href="https://www.digital-science.com/resource/grid/">GRID</a>.</li>
+<li>Find out some of the most commonly claimed contributions by inviduals to research across different fields.</li>
+<li>Understand the usage of repositories across funders, research orgs and research articles.</li>
+</ol>
+<h2 id="1-connect">1. Connect</h2>
+<p>You will need to be authenticated to run these queries - see the <a href="https://bigquery-lab.dimensions.ai/tutorials/01-connection/">"Verifying yout connection"</a> tutorial for options.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Authenticated
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#import other packages/modules needed for analysis</span>
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objs</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="c1">#set up client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="s1">&#39;ds-ripeta-gbq&#39;</span><span class="p">)</span> <span class="c1">#replace &#39;project&#39; with the required project associate with your account</span>
+</code></pre></div>
+<h2 id="2-trust-markers-by-publisher">2. Trust markers by publisher</h2>
+<h3 id="write-and-run-a-query">Write and run a query</h3>
+<p>In this instance we will limit data to 2022 and 10 publishers to keep things manageable.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#write the query - we&#39;re limiting results here to keep things easy to follow</span>
+<span class="n">qry</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT</span>
+<span class="s2">    p.publisher.name, </span>
+<span class="s2">    100 * COUNTIF(tm.data.data_availability_statement)/ COUNT(p.id) AS data_availability,</span>
+<span class="s2">    100 * COUNTIF(tm.code.code_availability_statement)/COUNT(p.id) AS code_availability,</span>
+<span class="s2">    100 * COUNTIF(tm.author_contributions.author_contributions_statement)/COUNT(p.id) AS author_contributions,</span>
+<span class="s2">    100 * COUNTIF(tm.competing_interests.competing_interests_statement)/COUNT(p.id) AS competing_interests,</span>
+<span class="s2">    100 * COUNTIF(tm.funding.funding_statement)/COUNT(p.id) AS funding_statement,</span>
+<span class="s2">    #note here we are only counting articles with mesh terms of &#39;animal&#39; or &#39;human&#39; as if this criteria isn&#39;t met it is unlikely an ethics statement would be expected</span>
+<span class="s2">    100 * COUNTIF((tm.ethics.ethics_approval_statement AND ((&#39;Humans&#39; IN UNNEST(p.mesh_terms)) OR (&#39;Animals&#39; IN UNNEST(p.mesh_terms)))) )/</span>
+<span class="s2">        NULLIF(COUNTIF((&#39;Humans&#39; in UNNEST(p.mesh_terms)) OR (&#39;Animals&#39; IN unnest(p.mesh_terms))), 0) AS ethics_approval</span>
+<span class="s2">FROM </span>
+<span class="s2">    dimensions-ai.data_analytics.publications p </span>
+<span class="s2">INNER JOIN `dimensions-ai-integrity.data.trust_markers` tm</span>
+<span class="s2">    ON p.id = tm.id</span>
+<span class="s2">WHERE p.year = 2022 AND p.document_type.classification = &#39;RESEARCH_ARTICLE&#39;</span>
+<span class="s2">GROUP BY 1</span>
+<span class="s2">ORDER BY COUNT(p.id) DESC #order by number of publications in the trust marker dataset</span>
+<span class="s2">--To keep things manageable for display purposes, we&#39;ll only look at 10 publishers for now</span>
+<span class="s2">LIMIT 10</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1">#get the results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">qry</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span> <span class="c1">#may take a while depending on how much data your return</span>
+
+<span class="c1">#take a peak</span>
+<span class="n">results</span>
+</code></pre></div>
+<div id="df-7fc01556-b6dd-4467-a22b-6fd2ca929fe4">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>data_availability</th>
+      <th>code_availability</th>
+      <th>author_contributions</th>
+      <th>competing_interests</th>
+      <th>funding_statement</th>
+      <th>ethics_approval</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Elsevier</td>
+      <td>23.220141</td>
+      <td>1.255325</td>
+      <td>9.852915</td>
+      <td>85.654392</td>
+      <td>55.983485</td>
+      <td>20.768440</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Springer Nature</td>
+      <td>47.947094</td>
+      <td>5.239463</td>
+      <td>51.224349</td>
+      <td>63.354514</td>
+      <td>70.045505</td>
+      <td>66.610701</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Wiley</td>
+      <td>41.088111</td>
+      <td>0.609560</td>
+      <td>18.156035</td>
+      <td>42.476518</td>
+      <td>54.245125</td>
+      <td>18.035888</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>MDPI</td>
+      <td>90.374943</td>
+      <td>0.825924</td>
+      <td>98.102639</td>
+      <td>92.952828</td>
+      <td>96.745167</td>
+      <td>14.255689</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Frontiers</td>
+      <td>97.561644</td>
+      <td>0.484786</td>
+      <td>99.626311</td>
+      <td>57.620222</td>
+      <td>78.402516</td>
+      <td>75.672164</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Institute of Electrical and Electronics Engine...</td>
+      <td>0.423834</td>
+      <td>0.548492</td>
+      <td>0.265446</td>
+      <td>4.599117</td>
+      <td>3.783712</td>
+      <td>5.615234</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>American Chemical Society (ACS)</td>
+      <td>2.445753</td>
+      <td>0.355457</td>
+      <td>51.336057</td>
+      <td>75.126886</td>
+      <td>71.855271</td>
+      <td>4.811294</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Hindawi</td>
+      <td>86.262373</td>
+      <td>1.167437</td>
+      <td>21.282875</td>
+      <td>44.916294</td>
+      <td>50.766539</td>
+      <td>23.535921</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Royal Society of Chemistry (RSC)</td>
+      <td>6.180646</td>
+      <td>0.328791</td>
+      <td>44.383674</td>
+      <td>79.058519</td>
+      <td>76.175271</td>
+      <td>14.142808</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>IOP Publishing</td>
+      <td>28.083510</td>
+      <td>0.314284</td>
+      <td>2.292990</td>
+      <td>38.624848</td>
+      <td>43.797704</td>
+      <td>19.267139</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-7fc01556-b6dd-4467-a22b-6fd2ca929fe4')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-7fc01556-b6dd-4467-a22b-6fd2ca929fe4 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-7fc01556-b6dd-4467-a22b-6fd2ca929fe4');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+
+<h3 id="visualize-your-results">Visualize your results</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">#make data &#39;long&#39;</span>
+<span class="n">long_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">,</span> 
+    <span class="n">id_vars</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> 
+    <span class="n">value_vars</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span>
+    <span class="n">var_name</span> <span class="o">=</span> <span class="s2">&quot;trust_marker&quot;</span><span class="p">,</span>
+    <span class="n">value_name</span> <span class="o">=</span> <span class="s2">&quot;pct&quot;</span>
+    <span class="p">)</span>
+
+<span class="c1">#convert your data to a dictionary so plotly can handle it</span>
+<span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;z&quot;</span><span class="p">:</span> <span class="n">long_results</span><span class="o">.</span><span class="n">pct</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="n">long_results</span><span class="o">.</span><span class="n">trust_marker</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">long_results</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">#plot</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span>
+        <span class="n">result_dict</span><span class="p">,</span>
+        <span class="n">colorscale</span> <span class="o">=</span> <span class="s2">&quot;Blues&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><html>
+<head><meta charset="utf-8" /></head></p>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>                <div id="8aa04bfe-d3f5-46fd-97c8-36539411f1cd" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("8aa04bfe-d3f5-46fd-97c8-36539411f1cd")) {                    Plotly.newPlot(                        "8aa04bfe-d3f5-46fd-97c8-36539411f1cd",                        [{"colorscale":[[0.0,"rgb(247,251,255)"],[0.125,"rgb(222,235,247)"],[0.25,"rgb(198,219,239)"],[0.375,"rgb(158,202,225)"],[0.5,"rgb(107,174,214)"],[0.625,"rgb(66,146,198)"],[0.75,"rgb(33,113,181)"],[0.875,"rgb(8,81,156)"],[1.0,"rgb(8,48,107)"]],"x":["data_availability","data_availability","data_availability","data_availability","data_availability","data_availability","data_availability","data_availability","data_availability","data_availability","code_availability","code_availability","code_availability","code_availability","code_availability","code_availability","code_availability","code_availability","code_availability","code_availability","author_contributions","author_contributions","author_contributions","author_contributions","author_contributions","author_contributions","author_contributions","author_contributions","author_contributions","author_contributions","competing_interests","competing_interests","competing_interests","competing_interests","competing_interests","competing_interests","competing_interests","competing_interests","competing_interests","competing_interests","funding_statement","funding_statement","funding_statement","funding_statement","funding_statement","funding_statement","funding_statement","funding_statement","funding_statement","funding_statement"],"y":["Elsevier","Springer Nature","Wiley","MDPI","Frontiers","Institute of Electrical and Electronics Engineers (IEEE)","American Chemical Society (ACS)","Hindawi","Royal Society of Chemistry (RSC)","IOP Publishing","Elsevier","Springer Nature","Wiley","MDPI","Frontiers","Institute of Electrical and Electronics Engineers (IEEE)","American Chemical Society (ACS)","Hindawi","Royal Society of Chemistry (RSC)","IOP Publishing","Elsevier","Springer Nature","Wiley","MDPI","Frontiers","Institute of Electrical and Electronics Engineers (IEEE)","American Chemical Society (ACS)","Hindawi","Royal Society of Chemistry (RSC)","IOP Publishing","Elsevier","Springer Nature","Wiley","MDPI","Frontiers","Institute of Electrical and Electronics Engineers (IEEE)","American Chemical Society (ACS)","Hindawi","Royal Society of Chemistry (RSC)","IOP Publishing","Elsevier","Springer Nature","Wiley","MDPI","Frontiers","Institute of Electrical and Electronics Engineers (IEEE)","American Chemical Society (ACS)","Hindawi","Royal Society of Chemistry (RSC)","IOP Publishing"],"z":[23.220140624853713,47.94709400557669,41.088111375709836,90.37494338903058,97.56164423090796,0.4238344552480678,2.4457530903496205,86.26237300530178,6.180645569220069,28.083509717144505,1.2553249258021328,5.239462509372225,0.6095596642052669,0.8259242485638691,0.48478552568930444,0.5484916479680878,0.35545652289246116,1.1674371229334797,0.3287913755493029,0.3142838817266372,9.852915016524825,51.224349472564,18.15603464067563,98.10263866707983,99.62631115728117,0.26544649273321896,51.336056731568426,21.282874977147483,44.38367424362176,2.292989545250465,85.6543924201144,63.354513698133154,42.476517740397064,92.95282816485114,57.62022248192876,4.5991171337645005,75.12688559958973,44.91629449711405,79.0585185419367,38.62484766852671,55.98348453781985,70.04550495993698,54.24512510185647,96.74516721092651,78.40251626772857,3.783712437854723,71.85527083664915,50.76653869257489,76.17527109481205,43.79770380347637],"type":"heatmap"}],                        {"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('8aa04bfe-d3f5-46fd-97c8-36539411f1cd');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+<p></html></p>
+<h2 id="3-trust-markers-by-research-org">3. Trust markers by research org</h2>
+<p>There are plenty of other analyses we can carry out using DRI. We are also not obliged to pull in aggregated data - we can also pull in data 'row-by-row' and analyse further in Python. We'll do this in the next example to look at the proportion of articles using trust markers at US universities.</p>
+<p>Note that this example is set up to work generally. In a notebook environment (like Colab or Jupyter) you can use magic commands to reduce the code down to just the query and store as a summary dataframe. Google has <a href="https://cloud.google.com/bigquery/docs/visualize-jupyter">guidance on doing this</a>. We will use this magic commands in future examples.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">markers_by_us_uni</span> <span class="o">--</span><span class="n">project</span> <span class="n">ds</span><span class="o">-</span><span class="n">ripeta</span><span class="o">-</span><span class="n">gbq</span> 
+
+<span class="n">SELECT</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">id</span> <span class="n">AS</span> <span class="n">pub_id</span><span class="p">,</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> 
+    <span class="n">orgs</span> <span class="n">AS</span> <span class="n">org_id</span><span class="p">,</span>
+    <span class="n">CONCAT</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39; (&#39;</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">city</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span> <span class="n">AS</span> <span class="n">org_name</span><span class="p">,</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_availability_statement</span> <span class="n">AS</span> <span class="n">das</span><span class="p">,</span>  
+    <span class="n">tm</span><span class="o">.</span><span class="n">code</span><span class="o">.</span><span class="n">code_availability_statement</span> <span class="n">AS</span> <span class="n">cas</span><span class="p">,</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">author_contributions</span><span class="o">.</span><span class="n">author_contributions_statement</span> <span class="n">AS</span> <span class="n">auth_cont</span><span class="p">,</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">competing_interests</span><span class="o">.</span><span class="n">competing_interests_statement</span> <span class="n">AS</span> <span class="n">comp_int</span><span class="p">,</span>
+    <span class="n">tm</span><span class="o">.</span><span class="n">funding</span><span class="o">.</span><span class="n">funding_statement</span> <span class="n">AS</span> <span class="n">funding</span><span class="p">,</span>
+    <span class="n">CASE</span>
+      <span class="n">WHEN</span> <span class="n">tm</span><span class="o">.</span><span class="n">ethics</span><span class="o">.</span><span class="n">ethics_approval_statement</span> <span class="n">IS</span> <span class="n">TRUE</span> <span class="n">AND</span> <span class="p">(</span><span class="s1">&#39;Humans&#39;</span> <span class="n">IN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">mesh_terms</span><span class="p">)</span> <span class="n">OR</span> <span class="s1">&#39;Animals&#39;</span> <span class="n">IN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">mesh_terms</span><span class="p">))</span> <span class="n">THEN</span> <span class="n">TRUE</span>
+      <span class="n">WHEN</span> <span class="n">tm</span><span class="o">.</span><span class="n">ethics</span><span class="o">.</span><span class="n">ethics_approval_statement</span> <span class="n">IS</span> <span class="n">FALSE</span> <span class="n">AND</span> <span class="p">(</span><span class="s1">&#39;Humans&#39;</span> <span class="n">IN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">mesh_terms</span><span class="p">)</span> <span class="n">OR</span> <span class="s1">&#39;Animals&#39;</span> <span class="n">IN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">mesh_terms</span><span class="p">))</span> <span class="n">THEN</span> <span class="n">FALSE</span>
+      <span class="n">ELSE</span> <span class="n">NULL</span>
+      <span class="n">END</span> <span class="n">AS</span> <span class="n">ethics</span>
+<span class="n">FROM</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">.</span><span class="n">data_analytics</span><span class="o">.</span><span class="n">publications</span> <span class="n">p</span><span class="p">,</span>
+     <span class="n">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span> <span class="n">orgs</span>
+<span class="n">INNER</span> <span class="n">JOIN</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">-</span><span class="n">integrity</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">trust_markers</span><span class="err">`</span> <span class="n">tm</span> 
+    <span class="n">ON</span> <span class="n">p</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">tm</span><span class="o">.</span><span class="n">id</span>
+<span class="n">INNER</span> <span class="n">JOIN</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">.</span><span class="n">data_analytics</span><span class="o">.</span><span class="n">grid</span> <span class="n">g</span> 
+    <span class="n">ON</span> <span class="n">orgs</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">id</span> 
+    <span class="n">AND</span> <span class="s1">&#39;Education&#39;</span> <span class="n">IN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">types</span><span class="p">)</span>
+    <span class="n">AND</span> <span class="n">g</span><span class="o">.</span><span class="n">address</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="s2">&quot;United States&quot;</span>
+<span class="n">WHERE</span> 
+    <span class="n">p</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2022</span> 
+    <span class="n">AND</span> <span class="n">p</span><span class="o">.</span><span class="n">document_type</span><span class="o">.</span><span class="n">classification</span> <span class="o">=</span> <span class="s1">&#39;RESEARCH_ARTICLE&#39;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query is running:   0%|          |
+
+
+
+Downloading:   0%|          |
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#you can see we&#39;ve got the result straight to a df; take a look</span>
+<span class="n">markers_by_us_uni</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<div id="df-038be605-1d93-41d7-98ea-148d6944debf">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pub_id</th>
+      <th>year</th>
+      <th>org_id</th>
+      <th>org_name</th>
+      <th>das</th>
+      <th>cas</th>
+      <th>auth_cont</th>
+      <th>comp_int</th>
+      <th>funding</th>
+      <th>ethics</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>pub.1128274945</td>
+      <td>2022</td>
+      <td>grid.131063.6</td>
+      <td>University of Notre Dame (Notre Dame)</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>&lt;NA&gt;</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>pub.1131474369</td>
+      <td>2022</td>
+      <td>grid.267627.0</td>
+      <td>University of the Sciences (Philadelphia)</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>pub.1131474369</td>
+      <td>2022</td>
+      <td>grid.33489.35</td>
+      <td>University of Delaware (Newark)</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>pub.1126087463</td>
+      <td>2022</td>
+      <td>grid.147455.6</td>
+      <td>Carnegie Mellon University (Pittsburgh)</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>&lt;NA&gt;</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>pub.1107329658</td>
+      <td>2022</td>
+      <td>grid.266097.c</td>
+      <td>University of California, Riverside (Riverside)</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>&lt;NA&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-038be605-1d93-41d7-98ea-148d6944debf')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-038be605-1d93-41d7-98ea-148d6944debf button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-038be605-1d93-41d7-98ea-148d6944debf');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">#now we&#39;ll manipulate as required in Python</span>
+<span class="n">marker_df</span> <span class="o">=</span> <span class="n">markers_by_us_uni</span>
+
+<span class="c1">#flag marker cols</span>
+<span class="n">marker_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;das&quot;</span><span class="p">,</span> <span class="s2">&quot;cas&quot;</span><span class="p">,</span> <span class="s2">&quot;auth_cont&quot;</span><span class="p">,</span> <span class="s2">&quot;comp_int&quot;</span><span class="p">,</span> <span class="s2">&quot;funding&quot;</span><span class="p">,</span> <span class="s2">&quot;ethics&quot;</span><span class="p">]</span>
+
+<span class="c1">#work out if there is a least one marker</span>
+<span class="n">marker_df</span><span class="p">[</span><span class="s2">&quot;tm&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">marker_df</span><span class="p">[</span><span class="n">marker_cols</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#institutions w/ &lt;=1,000 publications</span>
+<span class="n">gt1000</span> <span class="o">=</span> <span class="p">(</span><span class="n">marker_df</span><span class="o">.</span>
+          <span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;org_id&quot;</span><span class="p">],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span>
+          <span class="n">agg</span><span class="p">({</span><span class="s2">&quot;pub_id&quot;</span><span class="p">:</span> <span class="s2">&quot;count&quot;</span><span class="p">})</span>
+          <span class="p">)</span>
+
+<span class="n">gt1000</span> <span class="o">=</span> <span class="n">gt1000</span><span class="p">[</span><span class="n">gt1000</span><span class="p">[</span><span class="s2">&quot;pub_id&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1000</span><span class="p">][</span><span class="s2">&quot;org_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+<span class="c1">#summary</span>
+<span class="n">marker_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">marker_df</span><span class="o">.</span>
+              <span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;org_id&quot;</span><span class="p">,</span> <span class="s2">&quot;org_name&quot;</span><span class="p">,</span> <span class="s2">&quot;tm&quot;</span><span class="p">],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span>
+              <span class="n">agg</span><span class="p">({</span><span class="s2">&quot;pub_id&quot;</span><span class="p">:</span> <span class="s2">&quot;count&quot;</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="c1">#add on %</span>
+<span class="n">marker_sum</span><span class="p">[</span><span class="s2">&quot;pct&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">marker_sum</span><span class="p">[</span><span class="s2">&quot;pub_id&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">marker_sum</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;org_id&quot;</span><span class="p">])[</span><span class="s2">&quot;pub_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s2">&quot;sum&quot;</span><span class="p">)</span>
+
+<span class="c1">#remove institutions w/ &lt;=1000 pubs and tm = False rows</span>
+<span class="n">marker_sum</span> <span class="o">=</span> <span class="n">marker_sum</span><span class="p">[(</span><span class="n">marker_sum</span><span class="p">[</span><span class="s2">&quot;org_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">gt1000</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">marker_sum</span><span class="p">[</span><span class="s2">&quot;tm&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)]</span>
+
+<span class="c1">#sort and slice to keep data manageable, pick the top 10 by number of publications...</span>
+<span class="n">marker_sum</span> <span class="o">=</span> <span class="n">marker_sum</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;pub_id&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1">#...then order by pct for purposes of plot</span>
+<span class="n">marker_sum</span> <span class="o">=</span> <span class="n">marker_sum</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;pct&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">marker_sum</span>
+</code></pre></div>
+<div id="df-71c3e3b7-fb46-4980-ac87-8568a72b2371">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>org_id</th>
+      <th>org_name</th>
+      <th>tm</th>
+      <th>pub_id</th>
+      <th>pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1688</th>
+      <td>grid.38142.3c</td>
+      <td>Harvard University (Cambridge)</td>
+      <td>True</td>
+      <td>12198</td>
+      <td>86.028634</td>
+    </tr>
+    <tr>
+      <th>1275</th>
+      <td>grid.266102.1</td>
+      <td>University of California, San Francisco (San F...</td>
+      <td>True</td>
+      <td>4623</td>
+      <td>85.865527</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>grid.21107.35</td>
+      <td>Johns Hopkins University (Baltimore)</td>
+      <td>True</td>
+      <td>6354</td>
+      <td>84.259382</td>
+    </tr>
+    <tr>
+      <th>1680</th>
+      <td>grid.34477.33</td>
+      <td>University of Washington (Seattle)</td>
+      <td>True</td>
+      <td>6070</td>
+      <td>84.025471</td>
+    </tr>
+    <tr>
+      <th>3424</th>
+      <td>grid.5386.8</td>
+      <td>Cornell University (Ithaca)</td>
+      <td>True</td>
+      <td>4660</td>
+      <td>83.363148</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>grid.168010.e</td>
+      <td>Stanford University (Stanford)</td>
+      <td>True</td>
+      <td>6128</td>
+      <td>82.979012</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>grid.19006.3e</td>
+      <td>University of California, Los Angeles (Los Ang...</td>
+      <td>True</td>
+      <td>5245</td>
+      <td>82.820148</td>
+    </tr>
+    <tr>
+      <th>3295</th>
+      <td>grid.47100.32</td>
+      <td>Yale University (New Haven)</td>
+      <td>True</td>
+      <td>4667</td>
+      <td>82.484977</td>
+    </tr>
+    <tr>
+      <th>699</th>
+      <td>grid.25879.31</td>
+      <td>University of Pennsylvania (Philadelphia)</td>
+      <td>True</td>
+      <td>5177</td>
+      <td>82.279085</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>grid.214458.e</td>
+      <td>University of Michigan–Ann Arbor (Ann Arbor)</td>
+      <td>True</td>
+      <td>6045</td>
+      <td>81.043035</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-71c3e3b7-fb46-4980-ac87-8568a72b2371')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-71c3e3b7-fb46-4980-ac87-8568a72b2371 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-71c3e3b7-fb46-4980-ac87-8568a72b2371');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">#plot the data</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">marker_sum</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;pct&quot;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;org_name&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><html>
+<head><meta charset="utf-8" /></head></p>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>                <div id="c8524327-0236-436a-ac6f-022fc6b1c508" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("c8524327-0236-436a-ac6f-022fc6b1c508")) {                    Plotly.newPlot(                        "c8524327-0236-436a-ac6f-022fc6b1c508",                        [{"alignmentgroup":"True","hovertemplate":"pct=%{x}<br>org_name=%{y}<extra></extra>","legendgroup":"","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"","offsetgroup":"","orientation":"h","showlegend":false,"textposition":"auto","x":[86.02863389519712,85.86552748885588,84.25938204482163,84.02547065337762,83.36314847942755,82.9790115098172,82.82014842886468,82.48497702368329,82.27908455181182,81.04303525941815],"xaxis":"x","y":["Harvard University (Cambridge)","University of California, San Francisco (San Francisco)","Johns Hopkins University (Baltimore)","University of Washington (Seattle)","Cornell University (Ithaca)","Stanford University (Stanford)","University of California, Los Angeles (Los Angeles)","Yale University (New Haven)","University of Pennsylvania (Philadelphia)","University of Michigan\u2013Ann Arbor (Ann Arbor)"],"yaxis":"y","type":"bar"}],                        {"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"pct"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"org_name"}},"legend":{"tracegroupgap":0},"margin":{"t":60},"barmode":"relative"},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('c8524327-0236-436a-ac6f-022fc6b1c508');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+<p></html></p>
+<h2 id="4-author-contributions-to-articles">4. Author contributions to articles</h2>
+<p>You can go beyond just the 'basic' trust markers with Dimensions Research Integrity. You can also look at related data, such as recorded contributions to papers by individuals, or at which repositories data is being deposited in.</p>
+<p>Let's take a look at author contributions by research categorisation (note: articles falling under multiple categories will be counted once in each category. Articles mentioning the same verb more than once are only counted once per category). This will help understand acknowledgement patterns in research and possibly identify discipline areas where practice is 'ahead of the curve'.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">cont_df</span> <span class="o">--</span><span class="n">project</span> <span class="n">ds</span><span class="o">-</span><span class="n">ripeta</span><span class="o">-</span><span class="n">gbq</span>
+
+<span class="n">SELECT</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> 
+    <span class="n">cat</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">contributor_verbs</span><span class="p">,</span>
+    <span class="n">COUNT</span><span class="p">(</span><span class="n">DISTINCT</span> <span class="n">p</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="n">publications</span>      
+<span class="n">FROM</span> <span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">.</span><span class="n">data_analytics</span><span class="o">.</span><span class="n">publications</span> <span class="n">p</span><span class="p">,</span>
+    <span class="n">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="o">.</span><span class="n">first_level</span><span class="o">.</span><span class="n">full</span><span class="p">)</span> <span class="n">cat</span>
+<span class="n">INNER</span> <span class="n">JOIN</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">-</span><span class="n">integrity</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">trust_markers</span><span class="err">`</span> <span class="n">tm</span>
+    <span class="n">ON</span> <span class="n">p</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">tm</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">UNNEST</span><span class="p">(</span><span class="n">author_contributions</span><span class="o">.</span><span class="n">activity_keywords</span><span class="p">)</span> <span class="n">contributor_verbs</span>
+<span class="n">WHERE</span>  <span class="n">p</span><span class="o">.</span><span class="n">type</span><span class="o">=</span> <span class="s1">&#39;article&#39;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">year</span> <span class="n">between</span> <span class="mi">2011</span> <span class="ow">and</span> <span class="mi">2022</span>
+<span class="n">group</span> <span class="n">by</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query is running:   0%|          |
+
+
+
+Downloading:   0%|          |
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#see what we get</span>
+<span class="n">cont_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<div id="df-17573fab-1eb4-4307-9524-de2e1334d9a0">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>name</th>
+      <th>contributor_verbs</th>
+      <th>publications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022</td>
+      <td>Chemical Sciences</td>
+      <td>using</td>
+      <td>1322</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2021</td>
+      <td>Health Sciences</td>
+      <td>using</td>
+      <td>442</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022</td>
+      <td>Environmental Sciences</td>
+      <td>using</td>
+      <td>309</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>Built Environment And Design</td>
+      <td>using</td>
+      <td>29</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2020</td>
+      <td>Mathematical Sciences</td>
+      <td>using</td>
+      <td>82</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-17573fab-1eb4-4307-9524-de2e1334d9a0')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-17573fab-1eb4-4307-9524-de2e1334d9a0 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-17573fab-1eb4-4307-9524-de2e1334d9a0');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+
+<p>There are a lot of variables (field and verbs) here and we can't visualise them all in one go. Instead, let's identify the top five verbs and six fields (by number of publications) and stick with just those for now.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#get the most common verbs</span>
+<span class="n">common_verbs</span> <span class="o">=</span> <span class="p">(</span><span class="n">cont_df</span><span class="o">.</span>
+                <span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;contributor_verbs&quot;</span><span class="p">],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span>
+                <span class="n">agg</span><span class="p">({</span><span class="s2">&quot;publications&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">})</span><span class="o">.</span>
+                <span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;publications&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span>
+                <span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+                <span class="p">)[</span><span class="s2">&quot;contributor_verbs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+<span class="n">common_verbs</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[&#39;performed&#39;, &#39;wrote&#39;, &#39;designed&#39;, &#39;contributed&#39;, &#39;approved&#39;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#and the most common fields</span>
+<span class="n">common_fields</span> <span class="o">=</span> <span class="p">(</span><span class="n">cont_df</span><span class="o">.</span>
+                <span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">as_index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span>
+                <span class="n">agg</span><span class="p">({</span><span class="s2">&quot;publications&quot;</span><span class="p">:</span> <span class="s2">&quot;sum&quot;</span><span class="p">})</span><span class="o">.</span>
+                <span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;publications&quot;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span>
+                <span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+                <span class="p">)[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+<span class="n">common_fields</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[&#39;Biomedical And Clinical Sciences&#39;,
+ &#39;Biological Sciences&#39;,
+ &#39;Health Sciences&#39;,
+ &#39;Engineering&#39;,
+ &#39;Chemical Sciences&#39;,
+ &#39;Agricultural, Veterinary And Food Sciences&#39;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#filter the data accordingly and sort</span>
+<span class="n">cont_df</span> <span class="o">=</span> <span class="n">cont_df</span><span class="p">[(</span><span class="n">cont_df</span><span class="p">[</span><span class="s2">&quot;contributor_verbs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">common_verbs</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cont_df</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">common_fields</span><span class="p">))]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+
+<span class="c1">#and now plot the results</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">line</span><span class="p">(</span>
+    <span class="n">cont_df</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;publications&quot;</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;contributor_verbs&quot;</span><span class="p">,</span>
+    <span class="n">facet_col</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
+    <span class="n">facet_col_wrap</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><html>
+<head><meta charset="utf-8" /></head></p>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>                <div id="11122941-4dd9-4709-bed1-fb4567fdb543" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("11122941-4dd9-4709-bed1-fb4567fdb543")) {                    Plotly.newPlot(                        "11122941-4dd9-4709-bed1-fb4567fdb543",                        [{"hovertemplate":"contributor_verbs=performed<br>name=Biomedical And Clinical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"performed","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"performed","orientation":"v","showlegend":true,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x4","y":[17630,26182,34102,37270,42279,41772,40713,45232,50467,60341,70587,55832],"yaxis":"y4","type":"scatter"},{"hovertemplate":"contributor_verbs=performed<br>name=Biological Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"performed","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"performed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x5","y":[16563,22027,28008,29614,35459,37564,35297,37638,40787,45019,49721,38686],"yaxis":"y5","type":"scatter"},{"hovertemplate":"contributor_verbs=performed<br>name=Agricultural, Veterinary And Food Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"performed","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"performed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x6","y":[1088,2028,2890,3558,4485,4869,4482,5207,6638,8526,9679,7769],"yaxis":"y6","type":"scatter"},{"hovertemplate":"contributor_verbs=performed<br>name=Chemical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"performed","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"performed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x","y":[1236,1941,2897,3874,6247,8269,10184,12095,12336,13476,15415,14757],"yaxis":"y","type":"scatter"},{"hovertemplate":"contributor_verbs=performed<br>name=Health Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"performed","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"performed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x2","y":[2633,3758,5282,5990,7170,6315,4771,5296,5883,7620,9443,7522],"yaxis":"y2","type":"scatter"},{"hovertemplate":"contributor_verbs=performed<br>name=Engineering<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"performed","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"performed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x3","y":[1026,1629,2780,3831,6554,9710,13288,14977,13369,15339,15830,15186],"yaxis":"y3","type":"scatter"},{"hovertemplate":"contributor_verbs=approved<br>name=Biomedical And Clinical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"approved","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"approved","orientation":"v","showlegend":true,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x4","y":[11140,14758,18975,23637,28379,31203,36089,44194,53679,73676,99315,83525],"yaxis":"y4","type":"scatter"},{"hovertemplate":"contributor_verbs=approved<br>name=Biological Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"approved","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"approved","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x5","y":[5191,5563,7152,8624,11624,14332,16016,19361,23796,29768,38004,30468],"yaxis":"y5","type":"scatter"},{"hovertemplate":"contributor_verbs=approved<br>name=Agricultural, Veterinary And Food Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"approved","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"approved","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x6","y":[380,646,860,1221,1773,2456,2946,3959,5520,7630,10295,9283],"yaxis":"y6","type":"scatter"},{"hovertemplate":"contributor_verbs=approved<br>name=Chemical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"approved","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"approved","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x","y":[144,302,469,518,1360,1787,2314,3808,4427,5130,6082,5629],"yaxis":"y","type":"scatter"},{"hovertemplate":"contributor_verbs=approved<br>name=Health Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"approved","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"approved","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x2","y":[4068,5207,6820,8252,9662,10325,11808,13749,16002,20737,25659,21903],"yaxis":"y2","type":"scatter"},{"hovertemplate":"contributor_verbs=approved<br>name=Engineering<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"approved","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"approved","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x3","y":[530,908,1179,1469,2019,2657,3327,4451,5015,6527,9133,9870],"yaxis":"y3","type":"scatter"},{"hovertemplate":"contributor_verbs=contributed<br>name=Biomedical And Clinical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"contributed","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"contributed","orientation":"v","showlegend":true,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x4","y":[13224,19367,26087,30055,33053,31952,29849,34416,40356,56473,75818,64849],"yaxis":"y4","type":"scatter"},{"hovertemplate":"contributor_verbs=contributed<br>name=Biological Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"contributed","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"contributed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x5","y":[10848,15027,18665,19784,21377,20291,16697,18296,20428,24661,30986,25294],"yaxis":"y5","type":"scatter"},{"hovertemplate":"contributor_verbs=contributed<br>name=Agricultural, Veterinary And Food Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"contributed","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"contributed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x6","y":[859,1532,2216,2883,3565,3344,2775,3449,4555,6105,7957,7294],"yaxis":"y6","type":"scatter"},{"hovertemplate":"contributor_verbs=contributed<br>name=Chemical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"contributed","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"contributed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x","y":[1450,2528,3619,4719,6010,7517,9075,10942,12076,13959,16062,16264],"yaxis":"y","type":"scatter"},{"hovertemplate":"contributor_verbs=contributed<br>name=Health Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"contributed","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"contributed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x2","y":[2889,4257,6046,7292,8609,8467,7803,9101,10526,14487,18054,15337],"yaxis":"y2","type":"scatter"},{"hovertemplate":"contributor_verbs=contributed<br>name=Engineering<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"contributed","line":{"color":"#00cc96","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"contributed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x3","y":[1027,1775,2772,4048,6485,8503,10959,13274,13688,16668,18797,19065],"yaxis":"y3","type":"scatter"},{"hovertemplate":"contributor_verbs=wrote<br>name=Biomedical And Clinical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"wrote","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"wrote","orientation":"v","showlegend":true,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x4","y":[15447,22784,30284,30404,38188,38264,37535,41341,45955,55943,64972,51432],"yaxis":"y4","type":"scatter"},{"hovertemplate":"contributor_verbs=wrote<br>name=Biological Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"wrote","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"wrote","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x5","y":[16024,21381,27003,26319,35254,38035,36192,36782,39758,44230,48677,36700],"yaxis":"y5","type":"scatter"},{"hovertemplate":"contributor_verbs=wrote<br>name=Agricultural, Veterinary And Food Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"wrote","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"wrote","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x6","y":[988,1840,2690,2946,4477,4924,4669,5275,6479,8361,9611,7616],"yaxis":"y6","type":"scatter"},{"hovertemplate":"contributor_verbs=wrote<br>name=Chemical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"wrote","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"wrote","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x","y":[1175,1832,2700,3381,5848,7758,9229,10588,10525,11583,12993,12278],"yaxis":"y","type":"scatter"},{"hovertemplate":"contributor_verbs=wrote<br>name=Health Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"wrote","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"wrote","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x2","y":[2299,3768,5459,5852,7555,6880,5498,6208,7208,9278,10687,8615],"yaxis":"y2","type":"scatter"},{"hovertemplate":"contributor_verbs=wrote<br>name=Engineering<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"wrote","line":{"color":"#ab63fa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"wrote","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x3","y":[882,1454,2532,3307,6455,9538,13202,15309,13595,15290,14975,12987],"yaxis":"y3","type":"scatter"},{"hovertemplate":"contributor_verbs=designed<br>name=Biomedical And Clinical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"designed","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"designed","orientation":"v","showlegend":true,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x4","y":[15364,22651,30698,33266,38224,38414,38880,43357,48323,57799,65232,50448],"yaxis":"y4","type":"scatter"},{"hovertemplate":"contributor_verbs=designed<br>name=Biological Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"designed","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"designed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x5","y":[15790,21265,27132,28240,33863,36023,34160,36281,39254,42756,46344,34804],"yaxis":"y5","type":"scatter"},{"hovertemplate":"contributor_verbs=designed<br>name=Agricultural, Veterinary And Food Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"designed","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"designed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x6","y":[1025,1944,2826,3551,4694,5119,4888,5895,7204,8979,9919,7614],"yaxis":"y6","type":"scatter"},{"hovertemplate":"contributor_verbs=designed<br>name=Chemical Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"designed","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"designed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x","y":[1171,1812,2668,3392,5472,7188,8875,10553,10318,10861,11733,10511],"yaxis":"y","type":"scatter"},{"hovertemplate":"contributor_verbs=designed<br>name=Health Sciences<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"designed","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"designed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x2","y":[2403,3789,5688,6542,7854,7380,6269,7289,8270,10288,11632,9014],"yaxis":"y2","type":"scatter"},{"hovertemplate":"contributor_verbs=designed<br>name=Engineering<br>year=%{x}<br>publications=%{y}<extra></extra>","legendgroup":"designed","line":{"color":"#FFA15A","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"designed","orientation":"v","showlegend":false,"x":[2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022],"xaxis":"x3","y":[926,1459,2500,3381,5814,8684,12135,13874,11619,12712,11933,10291],"yaxis":"y3","type":"scatter"}],                        {"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.31999999999999995],"title":{"text":"year"}},"yaxis":{"anchor":"x","domain":[0.0,0.46499999999999997],"title":{"text":"publications"}},"xaxis2":{"anchor":"y2","domain":[0.33999999999999997,0.6599999999999999],"matches":"x","title":{"text":"year"}},"yaxis2":{"anchor":"x2","domain":[0.0,0.46499999999999997],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.6799999999999999,0.9999999999999999],"matches":"x","title":{"text":"year"}},"yaxis3":{"anchor":"x3","domain":[0.0,0.46499999999999997],"matches":"y","showticklabels":false},"xaxis4":{"anchor":"y4","domain":[0.0,0.31999999999999995],"matches":"x","showticklabels":false},"yaxis4":{"anchor":"x4","domain":[0.5349999999999999,0.9999999999999999],"matches":"y","title":{"text":"publications"}},"xaxis5":{"anchor":"y5","domain":[0.33999999999999997,0.6599999999999999],"matches":"x","showticklabels":false},"yaxis5":{"anchor":"x5","domain":[0.5349999999999999,0.9999999999999999],"matches":"y","showticklabels":false},"xaxis6":{"anchor":"y6","domain":[0.6799999999999999,0.9999999999999999],"matches":"x","showticklabels":false},"yaxis6":{"anchor":"x6","domain":[0.5349999999999999,0.9999999999999999],"matches":"y","showticklabels":false},"annotations":[{"font":{},"showarrow":false,"text":"name=Chemical Sciences","x":0.15999999999999998,"xanchor":"center","xref":"paper","y":0.46499999999999997,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"name=Health Sciences","x":0.49999999999999994,"xanchor":"center","xref":"paper","y":0.46499999999999997,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"name=Engineering","x":0.8399999999999999,"xanchor":"center","xref":"paper","y":0.46499999999999997,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"name=Biomedical And Clinical Sciences","x":0.15999999999999998,"xanchor":"center","xref":"paper","y":0.9999999999999999,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"name=Biological Sciences","x":0.49999999999999994,"xanchor":"center","xref":"paper","y":0.9999999999999999,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"name=Agricultural, Veterinary And Food Sciences","x":0.8399999999999999,"xanchor":"center","xref":"paper","y":0.9999999999999999,"yanchor":"bottom","yref":"paper"}],"legend":{"title":{"text":"contributor_verbs"},"tracegroupgap":0},"margin":{"t":60}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('11122941-4dd9-4709-bed1-fb4567fdb543');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+<p></html></p>
+<h2 id="5-repository-usage">5. Repository usage</h2>
+<p>Now we'll take a look at how we can access the repositories data. Suppose we want to see the breadth of usage of specific repositories across work across funders and research orgs, to understand how wide the usage of the most common repositories is.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">repo_df</span> <span class="o">--</span><span class="n">project</span> <span class="n">ds</span><span class="o">-</span><span class="n">ripeta</span><span class="o">-</span><span class="n">gbq</span>
+
+<span class="o">--</span><span class="n">the</span> <span class="n">first</span> <span class="n">two</span> <span class="n">tables</span> <span class="n">created</span> <span class="n">by</span> <span class="n">the</span> <span class="n">WITH</span> <span class="n">statements</span> <span class="n">are</span> <span class="n">needed</span> <span class="p">(</span><span class="k">for</span> <span class="n">now</span><span class="p">)</span> <span class="n">to</span> <span class="n">tidy</span> <span class="n">up</span> <span class="n">repository</span> <span class="n">data</span>
+<span class="n">WITH</span>
+  <span class="n">common_keywords</span> <span class="n">AS</span><span class="p">(</span>
+  <span class="n">SELECT</span>
+    <span class="n">kw</span><span class="p">,</span> 
+    <span class="n">COUNT</span><span class="p">(</span><span class="n">DISTINCT</span> <span class="nb">id</span><span class="p">)</span> <span class="n">AS</span> <span class="n">pubs</span>
+  <span class="n">FROM</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">-</span><span class="n">integrity</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">trust_markers</span><span class="err">`</span> <span class="n">tm</span><span class="p">,</span>
+    <span class="n">UNNEST</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">repository_keywords</span><span class="p">)</span> <span class="n">kw</span>
+  <span class="n">GROUP</span> <span class="n">BY</span> <span class="mi">1</span>
+<span class="p">),</span>
+<span class="n">repositories</span> <span class="n">AS</span><span class="p">(</span>
+  <span class="n">SELECT</span>
+  <span class="nb">id</span><span class="p">,</span>
+  <span class="n">kw</span><span class="p">,</span> 
+  <span class="s1">&#39;url&#39;</span> <span class="n">isin</span>
+    <span class="n">FROM</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">-</span><span class="n">integrity</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">trust_markers</span><span class="err">`</span> <span class="n">tm</span><span class="p">,</span>
+      <span class="n">UNNEST</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">data_repository_urls</span><span class="p">)</span> <span class="n">url</span>
+    <span class="n">INNER</span> <span class="n">JOIN</span> <span class="n">common_keywords</span>
+      <span class="n">ON</span> <span class="n">REGEXP_CONTAINS</span><span class="p">(</span><span class="n">REPLACE</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="s1">&#39;10.17632&#39;</span><span class="p">,</span><span class="s1">&#39;mendeley&#39;</span><span class="p">),</span> <span class="n">LOWER</span><span class="p">(</span><span class="n">kw</span><span class="p">))</span>
+    <span class="n">UNION</span> <span class="n">DISTINCT</span>
+      <span class="n">SELECT</span> 
+        <span class="nb">id</span><span class="p">,</span> 
+          <span class="n">replace</span><span class="p">(</span>
+            <span class="n">replace</span><span class="p">(</span>
+              <span class="c1">#replace(</span>
+                <span class="n">replace</span><span class="p">(</span><span class="n">kw</span><span class="p">,</span><span class="s1">&#39;open science framework&#39;</span><span class="p">,</span><span class="s1">&#39;osf&#39;</span><span class="p">),</span>
+              <span class="c1">#&#39;gene&#39;,&#39;geo&#39;),</span>
+              <span class="s1">&#39;gene expression omnibus&#39;</span><span class="p">,</span><span class="s1">&#39;geo&#39;</span><span class="p">),</span> 
+            <span class="s1">&#39;sequence read archive&#39;</span><span class="p">,</span><span class="s1">&#39;sra&#39;</span><span class="p">)</span> <span class="n">kw</span><span class="p">,</span> 
+        <span class="s1">&#39;keyword&#39;</span> <span class="n">isin</span>
+        <span class="n">FROM</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">-</span><span class="n">integrity</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">trust_markers</span><span class="err">`</span> <span class="n">tm</span><span class="p">,</span>
+          <span class="n">UNNEST</span><span class="p">(</span><span class="n">tm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">repository_keywords</span><span class="p">)</span> <span class="n">kw</span>
+        <span class="n">WHERE</span> <span class="n">kw</span> <span class="o">!=</span> <span class="s1">&#39;board&#39;</span>
+        <span class="p">),</span>
+  <span class="n">funders</span> <span class="n">AS</span><span class="p">(</span>
+    <span class="n">SELECT</span>
+    <span class="n">pubs</span><span class="o">.</span><span class="n">id</span> <span class="n">AS</span> <span class="n">pub_id</span><span class="p">,</span>
+    <span class="n">fund</span><span class="o">.</span><span class="n">grid_id</span> <span class="n">AS</span> <span class="n">funder_id</span>
+    <span class="n">FROM</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">.</span><span class="n">data_analytics</span><span class="o">.</span><span class="n">publications</span><span class="err">`</span> <span class="n">pubs</span><span class="p">,</span>
+      <span class="n">UNNEST</span><span class="p">(</span><span class="n">funding_details</span><span class="p">)</span> <span class="n">fund</span>
+    <span class="n">WHERE</span> <span class="n">pubs</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2021</span>
+  <span class="p">),</span>
+  <span class="n">orgs</span> <span class="n">AS</span><span class="p">(</span>
+    <span class="n">SELECT</span>
+      <span class="n">pubs</span><span class="o">.</span><span class="n">id</span> <span class="n">AS</span> <span class="n">pub_id</span><span class="p">,</span>
+      <span class="n">org</span>
+    <span class="n">FROM</span> <span class="err">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="o">.</span><span class="n">data_analytics</span><span class="o">.</span><span class="n">publications</span><span class="err">`</span> <span class="n">pubs</span><span class="p">,</span>
+      <span class="n">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span> <span class="n">org</span>
+    <span class="n">WHERE</span> <span class="n">pubs</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="mi">2021</span>
+  <span class="p">),</span> <span class="n">combined</span> <span class="n">AS</span><span class="p">(</span>
+  <span class="n">SELECT</span>
+    <span class="n">rep</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">rep</span><span class="o">.</span><span class="n">kw</span><span class="p">,</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">funder_id</span> <span class="n">AS</span> <span class="n">funder</span><span class="p">,</span>
+    <span class="n">o</span><span class="o">.</span><span class="n">org</span> <span class="n">AS</span> <span class="n">ro</span>
+  <span class="n">FROM</span> <span class="n">repositories</span> <span class="n">rep</span>
+  <span class="n">INNER</span> <span class="n">JOIN</span> <span class="n">funders</span> <span class="n">f</span>
+    <span class="n">ON</span> <span class="n">rep</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">pub_id</span>
+  <span class="n">INNER</span> <span class="n">JOIN</span> <span class="n">orgs</span> <span class="n">o</span>
+    <span class="n">ON</span> <span class="n">rep</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">pub_id</span>
+  <span class="p">)</span>
+  <span class="n">SELECT</span>
+  <span class="n">kw</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">DISTINCT</span> <span class="n">funder</span><span class="p">)</span> <span class="n">AS</span> <span class="n">funders</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">DISTINCT</span> <span class="n">ro</span><span class="p">)</span> <span class="n">AS</span> <span class="n">orgs</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">DISTINCT</span> <span class="nb">id</span><span class="p">)</span> <span class="n">AS</span> <span class="n">pubs</span>
+  <span class="n">FROM</span> <span class="n">combined</span>
+  <span class="n">GROUP</span> <span class="n">BY</span> <span class="mi">1</span>
+  <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">pubs</span> <span class="n">DESC</span>
+  <span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query is running:   0%|          |
+
+
+
+Downloading:   0%|          |
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1">#see what we&#39;ve got</span>
+<span class="n">repo_df</span>
+</code></pre></div>
+<div id="df-802fbe73-1429-4fa7-adad-7674680971b2">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>kw</th>
+      <th>funders</th>
+      <th>orgs</th>
+      <th>pubs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>github</td>
+      <td>1688</td>
+      <td>6915</td>
+      <td>13760</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ncbi</td>
+      <td>1630</td>
+      <td>6586</td>
+      <td>12219</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>geo</td>
+      <td>1478</td>
+      <td>5323</td>
+      <td>9777</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>gene</td>
+      <td>1578</td>
+      <td>6037</td>
+      <td>9023</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>zenodo</td>
+      <td>1201</td>
+      <td>4922</td>
+      <td>7041</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>bioproject</td>
+      <td>1148</td>
+      <td>4442</td>
+      <td>6138</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>sra</td>
+      <td>1176</td>
+      <td>4351</td>
+      <td>6020</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>genbank</td>
+      <td>1067</td>
+      <td>4295</td>
+      <td>5289</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>figshare</td>
+      <td>1144</td>
+      <td>4433</td>
+      <td>4828</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>map</td>
+      <td>1002</td>
+      <td>3893</td>
+      <td>3315</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-802fbe73-1429-4fa7-adad-7674680971b2')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-802fbe73-1429-4fa7-adad-7674680971b2 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-802fbe73-1429-4fa7-adad-7674680971b2');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+
+<div class="highlight"><pre><span></span><code><span class="c1">#plot</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">repo_df</span><span class="p">,</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;funders&quot;</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s2">&quot;orgs&quot;</span><span class="p">,</span>
+    <span class="n">hover_data</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;kw&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">plot</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><html>
+<head><meta charset="utf-8" /></head></p>
+<body>
+    <div>            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_SVG"></script><script type="text/javascript">if (window.MathJax) {MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script src="https://cdn.plot.ly/plotly-2.8.3.min.js"></script>                <div id="f70fe498-f0cd-440f-9d59-4c8d62c9d285" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("f70fe498-f0cd-440f-9d59-4c8d62c9d285")) {                    Plotly.newPlot(                        "f70fe498-f0cd-440f-9d59-4c8d62c9d285",                        [{"customdata":[["github"],["ncbi"],["geo"],["gene"],["zenodo"],["bioproject"],["sra"],["genbank"],["figshare"],["map"]],"hovertemplate":"funders=%{x}<br>orgs=%{y}<br>kw=%{customdata[0]}<extra></extra>","legendgroup":"","marker":{"color":"#636efa","symbol":"circle"},"mode":"markers","name":"","orientation":"v","showlegend":false,"x":[1688,1630,1478,1578,1201,1148,1176,1067,1144,1002],"xaxis":"x","y":[6915,6586,5323,6037,4922,4442,4351,4295,4433,3893],"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"funders"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"orgs"}},"legend":{"tracegroupgap":0},"margin":{"t":60}},                        {"responsive": true}                    ).then(function(){
+
+var gd = document.getElementById('f70fe498-f0cd-440f-9d59-4c8d62c9d285');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                            </script>        </div>
+</body>
+<p></html></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../07-retrieve_patents/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Retrieve patents linked to a set of grants" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Retrieve patents linked to a set of grants
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../collections/" class="md-footer__link md-footer__link--next" aria-label="Next: About" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              About
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>

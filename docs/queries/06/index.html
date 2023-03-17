@@ -321,6 +321,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -981,171 +993,171 @@
 <p>Many publications in the Dimensions database are classified under <a href="https://dimensions.freshdesk.com/support/solutions/articles/23000018820">ANZSRC Field of Research codes</a>. </p>
 <p>This query returns the total number of publications classified under each, plus the percentage of all publications in Dimensions with that classification.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">ROUND</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="w">      </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global_pc</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">cat</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
-<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
-<span class="w">  </span><span class="n">pubs_global_pc</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global</span><span class="p">,</span>
+<span class="w">  </span><span class="n">ROUND</span><span class="p">(</span>
+<span class="w">    </span><span class="p">(</span>
+<span class="w">      </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="p">(</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global_pc</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">cat</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
+<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
+<span class="w">  </span><span class="n">pubs_global_pc</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span>
+<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span>
 </code></pre></div>
 <h3 id="breaking-it-down">Breaking it down</h3>
 <p>This query looks more complicated than it is. The main component could be summarized using this query:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">cat</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
-<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="p">,</span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">cat</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
+<span class="w">  </span><span class="n">cat</span><span class="p">.</span><span class="n">name</span>
 </code></pre></div>
 <p>This query works exactly like <a href="../05/">the "publications per SDG" query</a>, and there's a full breakdown there explaining how we unnest structs full of arrays full of structs. The main take-away is that we extract the names of all the first-level FOR codes, then count the number of publications listed under each one. That leaves only one more SELECT statement:</p>
-<div class="highlight"><pre><span></span><code><span class="n">ROUND</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="p">(</span><span class="w"></span>
-<span class="w">      </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="p">(</span><span class="w"></span>
-<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="w">      </span><span class="p">)</span><span class="w"></span>
-<span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
-<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global_pc</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">ROUND</span><span class="p">(</span>
+<span class="w">    </span><span class="p">(</span>
+<span class="w">      </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="p">(</span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs_global_pc</span>
 </code></pre></div>
 <p>This piece of the query just counts how many total records are in the <code>publications</code> table:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
 </code></pre></div></p>
 <p>And this next piece of the query takes the total number of publications in a single classification and divides it by that total. The <code>* 100</code> piece converts the decimal into a percentage:
-<div class="highlight"><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">/</span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="p">)</span>
 </code></pre></div></p>
 <p>The outer-most call, to the <code>ROUND()</code> function, states that the function should return the percentage rounded to two decimal places.</p>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medical and Health Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30145537&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25.49&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Engineering&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12388815&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.48&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Biological Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9009961&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7.62&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chemical Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7876669&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.66&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Physical Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6149858&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.2&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information and Computing Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5236596&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.43&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mathematical Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5040655&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.26&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Psychology and Cognitive Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3871992&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.27&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Studies in Human Society&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3414299&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.89&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Language, Communication and Culture&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2531296&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.14&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;History and Archaeology&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2357976&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.99&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Agricultural and Veterinary Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2108659&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.78&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Earth Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2059783&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.74&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1956256&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.65&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Commerce, Management, Tourism and Services&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1830245&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.55&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Education&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1838328&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.55&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Economics&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1751713&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.48&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Philosophy and Religious Studies&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1680088&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.42&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Environmental Sciences&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1375226&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.16&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Law and Legal Studies&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;902366&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.76&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Studies in Creative Arts and Writing&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;644962&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.55&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Built Environment and Design&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;491404&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.42&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medical and Health Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;30145537&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25.49&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Engineering&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12388815&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.48&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Biological Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9009961&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7.62&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chemical Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7876669&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.66&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Physical Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6149858&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.2&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Information and Computing Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5236596&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.43&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mathematical Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5040655&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.26&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Psychology and Cognitive Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3871992&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.27&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Studies in Human Society&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3414299&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.89&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Language, Communication and Culture&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2531296&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.14&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;History and Archaeology&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2357976&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.99&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Agricultural and Veterinary Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2108659&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.78&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Earth Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2059783&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.74&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Technology&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1956256&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.65&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Commerce, Management, Tourism and Services&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1830245&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.55&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Education&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1838328&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.55&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Economics&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1751713&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.48&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Philosophy and Religious Studies&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1680088&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.42&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Environmental Sciences&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1375226&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.16&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Law and Legal Studies&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;902366&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.76&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Studies in Creative Arts and Writing&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;644962&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.55&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Built Environment and Design&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;491404&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pubs_global_pc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.42&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
                 
               

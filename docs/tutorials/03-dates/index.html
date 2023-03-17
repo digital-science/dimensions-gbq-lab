@@ -396,6 +396,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -1003,19 +1015,19 @@
 <h2 id="comparing-date-fields">Comparing date fields</h2>
 <h3 id="description">Description</h3>
 <p>We'll get started by pulling a selection of the date fields to see their formats:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">doi</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="nb">date</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">date_normal</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="k">year</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">date_online</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">date_print</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">date_imported_gbq</span><span class="p">,</span><span class="w"></span>
-<span class="w">       </span><span class="n">date_inserted</span><span class="w"></span>
-<span class="k">FROM</span><span class="w">   </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2010</span><span class="w"></span>
-<span class="w">      </span><span class="k">AND</span><span class="w"> </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;jour.1115214&quot;</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">citations_count</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">doi</span><span class="p">,</span>
+<span class="w">       </span><span class="nb">date</span><span class="p">,</span>
+<span class="w">       </span><span class="n">date_normal</span><span class="p">,</span>
+<span class="w">       </span><span class="k">year</span><span class="p">,</span>
+<span class="w">       </span><span class="n">date_online</span><span class="p">,</span>
+<span class="w">       </span><span class="n">date_print</span><span class="p">,</span>
+<span class="w">       </span><span class="n">date_imported_gbq</span><span class="p">,</span>
+<span class="w">       </span><span class="n">date_inserted</span>
+<span class="k">FROM</span><span class="w">   </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2010</span>
+<span class="w">      </span><span class="k">AND</span><span class="w"> </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;jour.1115214&quot;</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">citations_count</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div></p>
 <p>Results</p>
 <table>
@@ -1147,25 +1159,25 @@
 </table>
 
 <p>The first thing to stick out is that some of the dates are actually <em>timestamps</em>: <code>date_imported_gbq</code> and <code>date_inserted</code> have times attached to the dates. The other important caveat is that some dates aren't actually whole dates: Some values in the <code>date</code> and <code>date_print</code> fields have only a year and month. One of the reasons these different types are important is because can add an extra step when you compare fields to each other. For example, if we wanted to count how many publications were added to Dimensions before their "publication" date, it would be intuitive to write a query like this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">date_inserted</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">date_inserted</span>
 </code></pre></div>
 <p>However, we get an error from BigQuery: <code>No matching signature for operator &gt; for argument types: STRING, TIMESTAMP. Supported signature: ANY &gt; ANY at [12:11]</code>. BigQuery won't do the comparison because both sides of the comparison aren't of the same type: The <code>date</code> field is of type <code>STRING</code>, since it doesn't always have a day (or month) attached. The <code>date_normal</code> field solves this for us: It uses the same information as the <code>date</code> field, but it fills in the gaps to make a full <code>DATE</code> entry—so <code>"2010-03"</code> in the <code>date</code> field becomes <code>2010-03-01</code> in <code>date_normal</code>. But swapping that in doesn't fix our problems either:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">date_normal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">date_inserted</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">date_normal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">date_inserted</span>
 </code></pre></div>
 <p>We run into a new variant of the issue now: <code>No matching signature for operator &gt; for argument types: DATE, TIMESTAMP. Supported signature: ANY &gt; ANY at [5:7]</code>. Now <code>date_normal</code> gives us a <code>DATE</code>, but we can't compare that to a <code>TIMESTAMP</code>. Generally, you can mitigate most issues with comparing date fields by <strong>converting one of them to match the other</strong>, and BigQuery supports multiple functions for manipulating <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/date_functions">dates</a> and <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions">datetimes</a>. This one should do the trick:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">date_normal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">DATE</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">date_normal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">DATE</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">)</span>
 </code></pre></div>
 <p>Results:</p>
 <table>
@@ -1185,14 +1197,14 @@
 <h2 id="number-of-publications-added-to-dimensions-by-month">Number of publications added to Dimensions by month</h2>
 <h3 id="description_1">Description</h3>
 <p>Next, we'll use the <code>date_inserted</code> field to count the number of publications added to the Dimensions database per month. <code>date_inserted</code> is of type <code>DATETIME</code>, so we choose from the <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions">datetime manipulation functions</a> to round down all dates to the first of the month:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">DATETIME_TRUNC</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">,</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_date</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">DATETIME_TRUNC</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">,</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_date</span><span class="p">,</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1232,14 +1244,14 @@
 </tbody>
 </table>
 <p>We can see the dates have all been collapsed into the first of the month for each paper, but those timestamps that are attached are unhelpful. We can get rid of them by converting <code>date_inserted</code> to a <code>DATE</code> first, and switch to using the <code>DATE_TRUNC</code> function instead:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="n">DATE_TRUNC</span><span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">),</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_date</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="n">DATE_TRUNC</span><span class="p">(</span><span class="nb">DATE</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">),</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_date</span><span class="p">,</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_date</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div>
 <p>Results</p>
 <table>
@@ -1279,15 +1291,15 @@
 </tbody>
 </table>
 <p>That looks much better. If we want to manipulate different parts of the dates separately, we can also use <code>EXTRACT</code> to split things up:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
-<span class="w">  </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">MONTH</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">date_inserted</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_month</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">date_inserted</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_year</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_month</span><span class="p">,</span><span class="w"> </span><span class="n">added_year</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_year</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">added_month</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
+<span class="w">  </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">MONTH</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">date_inserted</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_month</span><span class="p">,</span>
+<span class="w">  </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">date_inserted</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">added_year</span><span class="p">,</span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_month</span><span class="p">,</span><span class="w"> </span><span class="n">added_year</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">added_year</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"> </span><span class="n">added_month</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div>
 <p>Results</p>
 <table>

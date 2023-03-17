@@ -321,6 +321,18 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/08-research_integrity/" class="md-nav__link">
+        Usage of trust markers in research
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -980,19 +992,19 @@
 <h2 id="description">Description</h2>
 <p>Returns data on how many publications have been published by journals that include a set of characters in the journal's title. Each row contains basic metadata about a single journal, plus a count of total publications indexed by Dimensions.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">issn</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">eissn</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="n">publisher</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"></span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
-<span class="k">WHERE</span><span class="w"></span>
-<span class="w">  </span><span class="k">LOWER</span><span class="p">(</span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%medicine%&#39;</span><span class="w"></span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">pubs</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">20</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="p">,</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">issn</span><span class="p">,</span>
+<span class="w">  </span><span class="n">journal</span><span class="p">.</span><span class="n">eissn</span><span class="p">,</span>
+<span class="w">  </span><span class="n">publisher</span><span class="p">.</span><span class="n">name</span>
+<span class="k">FROM</span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
+<span class="k">WHERE</span>
+<span class="w">  </span><span class="k">LOWER</span><span class="p">(</span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">)</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%medicine%&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">pubs</span><span class="w"> </span><span class="k">DESC</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">20</span>
 </code></pre></div>
 <h3 id="breaking-it-down">Breaking it down</h3>
 <p><code>WHERE LOWER(journal.title) LIKE '%medicine%'</code> is a trick to do a case-insensitive substring search:</p>
@@ -1001,168 +1013,168 @@
 <li>Using <code>LOWER(journal.title)</code> here converts the entire journal title to lowercase <em>before doing the string comparison</em>, which means "Medicine" will be a match, as will "MEDICINE," "medicine," and so on.</li>
 </ul>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;168838&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1014075&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New England Journal of Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0028-4793&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1533-4406&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Massachusetts Medical Society&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;84137&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1011551&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medicine &amp; Science in Sports &amp; Exercise&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0195-9131&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1530-0315&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;58776&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017222&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Annals of Internal Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0003-4819&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1539-3704&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American College of Physicians&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52827&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1312267&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of the Royal Society of Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0141-0768&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1758-1095&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAGE Publications&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52384&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017256&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JAMA Internal Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2168-6106&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2168-6114&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Medical Association (AMA)&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;47157&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1027092&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Experimental Biology and Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1535-3702&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1535-3699&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAGE Publications&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;46459&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1016342&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Care Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0090-3493&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1530-0293&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;37666&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1057918&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of Molecular Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0946-2716&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1432-1440&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;34891&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017275&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Arizona Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0093-0415&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1476-2978&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31166&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1014535&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The American Journal of Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0002-9343&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1555-7162&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29793&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017863&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Oral Surgery Oral Medicine Oral Pathology and Oral Radiology&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2212-4403&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2212-4411&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28529&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1090935&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Annals of Emergency Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0196-0644&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1097-6760&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;27453&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1077253&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0025-7974&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1536-5964&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25713&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017316&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bulletin of Experimental Biology and Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0007-4888&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1573-8221&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24861&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1077126&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of Experimental Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0022-1007&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1540-9538&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rockefeller University Press&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24370&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1319882&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of Internal Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0954-6820&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1365-2796&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wiley&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;23679&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017748&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1040-2446&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1938-808X&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22723&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017031&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Journal of Respiratory and Critical Care Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1073-449X&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1535-4970&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Thoracic Society&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22340&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1036793&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Military Medicine&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0026-4075&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1930-613X&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Oxford University Press (OUP)&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;21837&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017021&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Journal of Tropical Medicine and Hygiene&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0002-9637&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1476-1645&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Society of Tropical Medicine and Hygiene&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;168838&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1014075&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New England Journal of Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0028-4793&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1533-4406&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Massachusetts Medical Society&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;84137&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1011551&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medicine &amp; Science in Sports &amp; Exercise&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0195-9131&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1530-0315&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;58776&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017222&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Annals of Internal Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0003-4819&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1539-3704&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American College of Physicians&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52827&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1312267&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of the Royal Society of Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0141-0768&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1758-1095&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAGE Publications&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52384&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017256&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;JAMA Internal Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2168-6106&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2168-6114&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Medical Association (AMA)&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;47157&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1027092&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Experimental Biology and Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1535-3702&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1535-3699&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SAGE Publications&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;46459&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1016342&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Critical Care Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0090-3493&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1530-0293&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;37666&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1057918&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of Molecular Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0946-2716&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1432-1440&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;34891&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017275&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Arizona Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0093-0415&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1476-2978&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;31166&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1014535&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The American Journal of Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0002-9343&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1555-7162&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29793&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017863&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Oral Surgery Oral Medicine Oral Pathology and Oral Radiology&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2212-4403&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2212-4411&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28529&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1090935&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Annals of Emergency Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0196-0644&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1097-6760&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Elsevier&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;27453&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1077253&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0025-7974&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1536-5964&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;25713&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017316&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bulletin of Experimental Biology and Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0007-4888&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1573-8221&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24861&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1077126&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of Experimental Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0022-1007&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1540-9538&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rockefeller University Press&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24370&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1319882&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journal of Internal Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0954-6820&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1365-2796&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wiley&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;23679&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017748&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Academic Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1040-2446&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1938-808X&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wolters Kluwer&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22723&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017031&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Journal of Respiratory and Critical Care Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1073-449X&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1535-4970&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Thoracic Society&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;22340&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1036793&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Military Medicine&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0026-4075&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1930-613X&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Oxford University Press (OUP)&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;21837&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;jour.1017021&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Journal of Tropical Medicine and Hygiene&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;issn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0002-9637&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;eissn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1476-1645&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;American Society of Tropical Medicine and Hygiene&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
                 
               
