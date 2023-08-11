@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE `reports-dimensions-ai.precomputed.publications_cd_index_pubmed`
+CREATE OR REPLACE TABLE `{your-gbq-project}.{you-gbq-dataset}.publications_cd_index_pubmed`
 CLUSTER BY id
 AS
 (
