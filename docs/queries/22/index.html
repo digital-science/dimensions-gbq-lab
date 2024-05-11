@@ -893,6 +893,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -973,61 +997,61 @@
 <p>The list of citing publications is determined by the clause <code>WHERE p.id='pub.1113640622'</code>. This can be changed to be as broad or narrow as you wish—changing it to something like <code>WHERE journal.title='eLife'</code>, for example, would return incoming citations to an entire journal rather than a single paper.</p>
 </div>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">citing</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">citing_pubs</span><span class="p">.</span><span class="n">id</span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="w">    </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">citing_pubs</span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">citing</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">citing_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
+<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">    </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">citing_pubs</span><span class="w"></span>
 <span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;pub.1113640622&#39;</span><span class="w"> </span><span class="c1">-- publication of interest here</span>
-<span class="p">)</span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="k">SELECT</span>
-<span class="w">    </span><span class="k">COALESCE</span><span class="p">(</span>
-<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">,</span>
-<span class="w">        </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">book_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; (book)&#39;</span><span class="p">),</span>
-<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">proceedings_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span>
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="k">COALESCE</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">book_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; (book)&#39;</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="p">.</span><span class="n">proceedings_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"></span>
 <span class="w">        </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; (book)&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">-- some books have this field instead of book_title</span>
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">journal</span><span class="p">,</span>
-<span class="w">    </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">publisher</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;(unknown)&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">publisher</span><span class="p">,</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="k">type</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubtype</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">citations</span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">citing</span><span class="p">)</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">DESC</span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">journal</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">publisher</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;(unknown)&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">publisher</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="k">type</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubtype</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">citations</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">citing</span><span class="p">)</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bioRxiv&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cold Spring Harbor Laboratory&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preprint&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLOS Biology&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Public Library of Science (PLoS)&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;article&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eLife&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eLife&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;article&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;medRxiv&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cold Spring Harbor Laboratory&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preprint&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scientometrics&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;article&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="c1">// more entries here...</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bioRxiv&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cold Spring Harbor Laboratory&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preprint&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PLOS Biology&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Public Library of Science (PLoS)&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;article&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eLife&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eLife&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;article&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;medRxiv&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cold Spring Harbor Laboratory&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preprint&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;journal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scientometrics&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Springer Nature&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubtype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;article&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">e</span><span class="kc">ntr</span><span class="err">ies</span><span class="w"> </span><span class="err">here...</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1085,7 +1109,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

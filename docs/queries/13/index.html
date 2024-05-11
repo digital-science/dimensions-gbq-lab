@@ -893,6 +893,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -967,94 +991,94 @@
 <p>This query looks at all publications from a single specified journal and counts the total number of grants associated with those publications. </p>
 <p>The results list each funding agency with a count of how many papers it has been linked to, combined with the number of grants from that agency that were referenced by those papers.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">funding</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span>
-<span class="w">    </span><span class="n">funding</span><span class="p">.</span><span class="n">grid_id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funders</span><span class="p">,</span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="p">,</span>
-<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">funding</span><span class="p">.</span><span class="n">grant_id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">grants</span>
-<span class="w">  </span><span class="k">FROM</span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span>
-<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funding_details</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funding</span>
-<span class="w">  </span><span class="k">WHERE</span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">funding</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">funding</span><span class="p">.</span><span class="n">grid_id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funders</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">funding</span><span class="p">.</span><span class="n">grant_id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">grants</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">funding_details</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">funding</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
 <span class="w">    </span><span class="n">journal</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;jour.1113716&quot;</span><span class="w"> </span><span class="c1">-- nature medicine</span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">    </span><span class="n">funders</span>
-<span class="p">)</span>
+<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">    </span><span class="n">funders</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="k">SELECT</span>
-<span class="w">  </span><span class="n">funding</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-<span class="w">  </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">funding</span>
-<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">grid</span>
-<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">funding</span><span class="p">.</span><span class="n">funders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">pubs</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span>
-<span class="w">  </span><span class="n">grants</span><span class="w"> </span><span class="k">DESC</span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span>
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="n">funding</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">funding</span><span class="w"></span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">grid</span><span class="w"></span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">funding</span><span class="p">.</span><span class="n">funders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">pubs</span><span class="w"> </span><span class="k">DESC</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">grants</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.48336.3a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2727&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2510&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Cancer Institute&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.419681.3&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2043&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1910&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of Allergy and Infectious Diseases&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.419635.c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1642&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1584&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of Diabetes and Digestive and Kidney Diseases&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.279885.9&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1641&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1554&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Heart Lung and Blood Institute&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.416870.c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;717&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;673&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of Neurological Disorders and Stroke&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.419475.a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;585&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;553&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute on Aging&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.14105.31&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;547&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;431&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medical Research Council&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.54432.34&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;512&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;447&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Japan Society for the Promotion of Science&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.280785.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;465&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;446&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of General Medical Sciences&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.270680.b&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;410&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;187&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;European Commission&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.48336.3a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2727&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2510&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Cancer Institute&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.419681.3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2043&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1910&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of Allergy and Infectious Diseases&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.419635.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1642&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1584&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of Diabetes and Digestive and Kidney Diseases&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.279885.9&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1641&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1554&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Heart Lung and Blood Institute&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.416870.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;717&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;673&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of Neurological Disorders and Stroke&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.419475.a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;585&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;553&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute on Aging&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.14105.31&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;547&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;431&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medical Research Council&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.54432.34&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;512&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;447&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Japan Society for the Promotion of Science&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.280785.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;465&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;446&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;National Institute of General Medical Sciences&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;funders&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.270680.b&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;410&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grants&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;187&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;European Commission&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1112,7 +1136,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

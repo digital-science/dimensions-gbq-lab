@@ -893,6 +893,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -967,71 +991,71 @@
 <p>This query sorts all engineering publications from 2020 by their total citations and returns those in the top 1%. </p>
 <p>Engineering publications are determined by evaluating <a href="https://plus.dimensions.ai/support/solutions/articles/23000018826-what-is-the-background-behind-the-fields-of-research-for-classification-system-">Field of Research classifications</a> that are applied to the publications. <code>"09"</code> is the top-level code <a href="https://app.dimensions.ai/browse/categories/publication/for">assigned to "Engineering."</a></p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">pubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id</span><span class="p">,</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title</span><span class="p">,</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">citations_count</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">citations</span><span class="p">,</span>
-<span class="w">  </span><span class="k">FROM</span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="w">  </span><span class="k">WHERE</span>
-<span class="w">    </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
-<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="ss">&quot;09&quot;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="n">codes</span><span class="p">)</span>
-<span class="p">),</span>
-<span class="n">ranked_pubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-<span class="w">    </span><span class="n">PERCENT_RANK</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">citations</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="n">citation_percentile</span>
-<span class="w">  </span><span class="k">FROM</span>
-<span class="w">    </span><span class="n">pubs</span><span class="w"> </span><span class="n">p</span>
-<span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">pubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="n">citations_count</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">citations</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
+<span class="w">    </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="ss">&quot;09&quot;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="n">codes</span><span class="p">)</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+<span class="n">ranked_pubs</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">PERCENT_RANK</span><span class="p">()</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">citations</span><span class="w"> </span><span class="k">DESC</span><span class="p">)</span><span class="w"> </span><span class="n">citation_percentile</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
+<span class="w">    </span><span class="n">pubs</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ranked_pubs</span>
-<span class="k">WHERE</span>
-<span class="w">  </span><span class="n">citation_percentile</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">citation_percentile</span><span class="w"> </span><span class="k">ASC</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ranked_pubs</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="n">citation_percentile</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">citation_percentile</span><span class="w"> </span><span class="k">ASC</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1129408972&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estimation of total flavonoid content in propolis by two complementary colometric methods&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1014&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1122861707&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mercury 4.0: from visualization to analysis, design and prediction&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;517&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.4502085399880502E-6&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1126110231&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Covid-19: automatic detection from X-ray images utilizing transfer learning with convolutional neural networks&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;373&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.9004170799761005E-6&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1125814051&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Analysis and forecast of COVID-19 spreading in China, Italy and France&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;348&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.350625619964151E-6&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1121839330&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A Vision of 6G Wireless Systems: Applications, Trends, Technologies, and Open Research Problems&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;327&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.800834159952201E-6&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1125821215&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Role of Telehealth in Reducing the Mental Health Burden from COVID-19&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;307&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7.251042699940251E-6&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="c1">// many more entries here...</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1129408972&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estimation of total flavonoid content in propolis by two complementary colometric methods&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1014&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1122861707&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mercury 4.0: from visualization to analysis, design and prediction&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;517&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.4502085399880502E-6&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1126110231&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Covid-19: automatic detection from X-ray images utilizing transfer learning with convolutional neural networks&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;373&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.9004170799761005E-6&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1125814051&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Analysis and forecast of COVID-19 spreading in China, Italy and France&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;348&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.350625619964151E-6&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1121839330&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A Vision of 6G Wireless Systems: Applications, Trends, Technologies, and Open Research Problems&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;327&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.800834159952201E-6&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1125821215&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Role of Telehealth in Reducing the Mental Health Burden from COVID-19&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;307&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;citation_percentile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7.251042699940251E-6&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">ma</span><span class="kc">n</span><span class="err">y</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">e</span><span class="kc">ntr</span><span class="err">ies</span><span class="w"> </span><span class="err">here...</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1089,7 +1113,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

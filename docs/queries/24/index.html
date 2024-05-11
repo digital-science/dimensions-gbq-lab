@@ -906,6 +906,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -994,175 +1018,175 @@
 <p>Many organizations in the GRID database include parent-child relationships. For example, <a href="https://grid.ac/institutes/grid.495456.f">grid.495456.f</a> (the <em>United States Department of the Air Force</em> page) has both parent and children institutions, so one can use the hierarchy when querying related data e.g. the total number of publications for each of these organizations. </p>
 <p>The query below shows how to leverage the <code>organization_recursive_child_ids</code> field in the <code>grid</code> table in order to achieve that. This field is prepopulated with all children institutions GRID IDs (recursively), hence it makes it easier to run this type of analyses. </p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="k">hierarchy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="k">hierarchy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 
-<span class="w">  </span><span class="k">SELECT</span>
-<span class="w">    </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span>
-<span class="w">    </span><span class="k">g</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent_name</span><span class="p">,</span>
-<span class="w">    </span><span class="n">children</span><span class="p">,</span>
-<span class="w">    </span><span class="n">g2</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children_name</span><span class="p">,</span>
-<span class="w">  </span><span class="k">FROM</span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">g</span>
-<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children</span>
-<span class="w">  </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">g2</span>
-<span class="w">  </span><span class="k">ON</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">    </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="k">g</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent_name</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">children</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="n">g2</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children_name</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"></span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">g</span><span class="w"></span>
+<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">    </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children</span><span class="w"></span>
+<span class="w">  </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">    </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">g2</span><span class="w"></span>
+<span class="w">  </span><span class="k">ON</span><span class="w"></span>
 <span class="w">    </span><span class="n">g2</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">children</span><span class="w"> </span>
-<span class="w">  </span><span class="k">WHERE</span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
 <span class="w">    </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span><span class="w"> </span><span class="c1">-- United States Department of the Air Force</span>
 
-<span class="p">)</span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="k">SELECT</span>
-<span class="w">  </span><span class="k">hierarchy</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pubs</span>
-<span class="k">FROM</span>
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">hierarchy</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
 <span class="w">  </span><span class="k">hierarchy</span><span class="w"> </span>
-<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="w">  </span><span class="k">on</span><span class="w"> </span><span class="k">hierarchy</span><span class="p">.</span><span class="n">children</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_orgs</span><span class="p">)</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">  </span><span class="k">on</span><span class="w"> </span><span class="k">hierarchy</span><span class="p">.</span><span class="n">children</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_orgs</span><span class="p">)</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
 </code></pre></div>
 <h3 id="breaking-it-down">Breaking it down</h3>
 <p>The key part of the query uses a <code>CROSS JOIN</code> on the <code>organization_recursive_child_ids</code> field to retrieve all the descendants of the chosen organization:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span>
-<span class="w">  </span><span class="n">children</span><span class="p">,</span>
-<span class="k">FROM</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">g</span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children</span>
-<span class="k">WHERE</span>
-<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">children</span><span class="p">,</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">g</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span><span class="w"></span>
 </code></pre></div>
 <p>Furthermore, in order to get more organization metadata e.g. the name, an inner self-join is introduced: </p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span>
-<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent_name</span><span class="p">,</span>
-<span class="w">  </span><span class="n">children</span><span class="p">,</span>
-<span class="w">  </span><span class="n">g2</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children_name</span><span class="p">,</span>
-<span class="k">FROM</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">g</span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children</span>
-<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">g2</span>
-<span class="k">ON</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">parent_name</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">children</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">g2</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children_name</span><span class="p">,</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="k">g</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">organization_recursive_child_ids</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">children</span><span class="w"></span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">g2</span><span class="w"></span>
+<span class="k">ON</span><span class="w"></span>
 <span class="w">  </span><span class="n">g2</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">children</span><span class="w"> </span>
-<span class="k">WHERE</span>
+<span class="k">WHERE</span><span class="w"></span>
 <span class="w">  </span><span class="k">g</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="ss">&quot;grid.495456.f&quot;</span><span class="w"> </span>
 </code></pre></div>
 <p>The final step is to join also the <code>publications</code> table, so to get the total publications count for each organization. </p>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="k">hierarchy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="k">hierarchy</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="c1">-- the grid query above</span>
-<span class="p">)</span>
+<span class="p">)</span><span class="w"></span>
 
-<span class="k">SELECT</span>
-<span class="w">  </span><span class="k">hierarchy</span><span class="p">.</span><span class="o">*</span><span class="p">,</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pubs</span>
-<span class="k">FROM</span>
+<span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">hierarchy</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
 <span class="w">  </span><span class="k">hierarchy</span><span class="w"> </span>
-<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="w">  </span><span class="k">on</span><span class="w"> </span><span class="k">hierarchy</span><span class="p">.</span><span class="n">children</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_orgs</span><span class="p">)</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span>
+<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">  </span><span class="k">on</span><span class="w"> </span><span class="k">hierarchy</span><span class="p">.</span><span class="n">children</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_orgs</span><span class="p">)</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.494596.3&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Edwards Air Force Base&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;467&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.461685.8&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joint Base San Antonio&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1031&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.265457.7&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force Academy&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3137&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.431316.2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Grand Forks Air Force Base&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.499282.c&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Maxwell Air Force Base&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;201&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.417730.6&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force Research Laboratory&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24279&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.453002.0&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2545&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.461677.5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Eglin Air Force Base&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;575&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.507554.6&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force Office of Scientific Research&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;543&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.465246.7&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Air University&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;47&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.472535.2&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kirtland Air Force Base&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;801&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.461680.d&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hanscom Air Force Base&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.427848.5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Air Force Institute of Technology&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4028&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="c1">// more results here...</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.494596.3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Edwards Air Force Base&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;467&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.461685.8&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Joint Base San Antonio&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1031&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.265457.7&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force Academy&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3137&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.431316.2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Grand Forks Air Force Base&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.499282.c&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Maxwell Air Force Base&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;201&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.417730.6&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force Research Laboratory&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;24279&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.453002.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2545&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.461677.5&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Eglin Air Force Base&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;575&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.507554.6&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Air Force Office of Scientific Research&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;543&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.465246.7&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Air University&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;47&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.472535.2&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Kirtland Air Force Base&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;801&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.461680.d&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hanscom Air Force Base&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;400&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.495456.f&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;parent_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States Department of the Air Force&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.427848.5&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;children_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Air Force Institute of Technology&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pubs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4028&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">resul</span><span class="kc">ts</span><span class="w"> </span><span class="err">here...</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1220,7 +1244,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with
