@@ -893,6 +893,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -971,62 +995,62 @@
 </ol>
 <p>This example returns yearly numbers only for the top eight countries by publication count—the <code>top_countries</code> subquery holds the logic for this step. The rest of the country totals are combined as "Others" using the <code>everybody_else</code> subquery.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span>
-<span class="w">    </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_org_country_names</span><span class="p">)</span><span class="w"> </span><span class="n">country</span>
-<span class="w">  </span><span class="k">WHERE</span>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">results</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"></span>
+<span class="w">    </span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">research_org_country_names</span><span class="p">)</span><span class="w"> </span><span class="n">country</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"></span>
 <span class="w">    </span><span class="c1">---- HERE is where to define your publications</span>
 <span class="w">    </span><span class="c1">---- of interest</span>
-<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1970</span>
+<span class="w">    </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1970</span><span class="w"></span>
 <span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="s1">&#39;2101&#39;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">category_for</span><span class="p">.</span><span class="n">second_level</span><span class="p">.</span><span class="n">codes</span><span class="p">)</span><span class="w"> </span><span class="c1">-- Archaeology</span>
-<span class="p">),</span>
-<span class="n">counts</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
-<span class="p">),</span>
-<span class="n">top_countries</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">pubs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_pubs</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">counts</span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">DESC</span>
-<span class="w">  </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">8</span>
-<span class="p">),</span>
-<span class="n">everybody_else</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Others&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">pubs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">counts</span>
-<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">counts</span><span class="p">.</span><span class="n">country</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">top_countries</span><span class="p">)</span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span>
-<span class="p">),</span>
-<span class="n">everybody_else_all_years</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="p">),</span><span class="w"></span>
+<span class="n">counts</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="w"></span>
+<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+<span class="n">top_countries</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">pubs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">total_pubs</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">counts</span><span class="w"></span>
+<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">  </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="w">  </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">8</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+<span class="n">everybody_else</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Others&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">pubs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">counts</span><span class="w"></span>
+<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">counts</span><span class="p">.</span><span class="n">country</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">top_countries</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+<span class="n">everybody_else_all_years</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="c1">-- We add a CROSS JOIN with the years from the results to make</span>
 <span class="w">  </span><span class="c1">-- sure there&#39;s an entry for &quot;Others&quot; even in years where that</span>
 <span class="w">  </span><span class="c1">-- number is zero.</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">everybody_else</span><span class="p">.</span><span class="n">pubs</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Others&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="n">base</span>
-<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="p">)</span><span class="w"> </span><span class="k">year</span>
-<span class="w">  </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">everybody_else</span>
-<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="o">=</span><span class="n">everybody_else</span><span class="p">.</span><span class="k">year</span>
-<span class="p">),</span>
-<span class="n">counts_consolidated</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">base</span><span class="p">.</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">everybody_else</span><span class="p">.</span><span class="n">pubs</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="s1">&#39;Others&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">country</span><span class="p">)</span><span class="w"> </span><span class="n">base</span><span class="w"></span>
+<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="p">)</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
+<span class="w">  </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">everybody_else</span><span class="w"></span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="o">=</span><span class="n">everybody_else</span><span class="p">.</span><span class="k">year</span><span class="w"></span>
+<span class="p">),</span><span class="w"></span>
+<span class="n">counts_consolidated</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 <span class="w">  </span><span class="c1">-- This query makes sure we have an entry for each country</span>
 <span class="w">  </span><span class="c1">-- in each year</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">top_countries</span><span class="p">.</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="n">pubs</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">top_countries</span>
-<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="p">)</span><span class="w"> </span><span class="k">year</span>
-<span class="w">  </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">counts</span>
-<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">top_countries</span><span class="p">.</span><span class="n">country</span><span class="o">=</span><span class="n">counts</span><span class="p">.</span><span class="n">country</span>
-<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="o">=</span><span class="n">counts</span><span class="p">.</span><span class="k">year</span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">top_countries</span><span class="p">.</span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="n">pubs</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
+<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">top_countries</span><span class="w"></span>
+<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="p">)</span><span class="w"> </span><span class="k">year</span><span class="w"></span>
+<span class="w">  </span><span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">counts</span><span class="w"></span>
+<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">top_countries</span><span class="p">.</span><span class="n">country</span><span class="o">=</span><span class="n">counts</span><span class="p">.</span><span class="n">country</span><span class="w"></span>
+<span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="p">.</span><span class="k">year</span><span class="o">=</span><span class="n">counts</span><span class="p">.</span><span class="k">year</span><span class="w"></span>
 <span class="w">  </span><span class="c1">--Then we add everybody else:</span>
-<span class="w">  </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">everybody_else_all_years</span>
-<span class="p">)</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">pubs</span><span class="p">,</span>
-<span class="w">  </span><span class="k">SUM</span><span class="w"> </span><span class="p">(</span><span class="n">pubs</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">running_total</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">counts_consolidated</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span>
+<span class="w">  </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"></span>
+<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">everybody_else_all_years</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="p">,</span><span class="w"> </span><span class="n">pubs</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">SUM</span><span class="w"> </span><span class="p">(</span><span class="n">pubs</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">running_total</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">counts_consolidated</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">year</span><span class="p">,</span><span class="w"> </span><span class="n">country</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
 <table>
@@ -1114,6 +1138,21 @@
         </a>
       
       
+        
+        <a href="../32/" class="md-footer__link md-footer__link--next" aria-label="Next: 32. Creating a concepts network" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              32. Creating a concepts network
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
     </nav>
   
   <div class="md-footer-meta md-typeset">
@@ -1121,7 +1160,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

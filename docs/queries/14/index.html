@@ -893,6 +893,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -967,72 +991,72 @@
 <p>The query below combines various techniques in order to extract full publication metadata records that include both single-value metadata and unpacked lists. </p>
 <p>Note: we use <code>LEFT JOIN</code> clauses in order to ensure we obtain all records, not just the ones that have non-null values in the nested objects.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">title</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">doi</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span>
-<span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">proceedings_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">book_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">book_series_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">venue</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="k">type</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="nb">date</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_publication</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">date_inserted</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">altmetrics_score</span><span class="p">,</span>
-<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">metrics</span><span class="p">.</span><span class="n">times_cited</span><span class="p">,</span>
-<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridid</span><span class="p">,</span>
-<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridname</span><span class="p">,</span>
-<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">country</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridcountry</span><span class="p">,</span>
-<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">city</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridcity</span><span class="p">,</span>
-<span class="w"> </span><span class="n">open_access_categories</span><span class="p">,</span>
-<span class="w"> </span><span class="n">cat_for</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category_for</span><span class="p">,</span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">research_orgs_grids</span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">grid</span>
-<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">research_orgs_grids</span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">open_access_categories_v2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">open_access_categories</span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">cat_for</span>
-<span class="k">WHERE</span>
-<span class="w">  </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">date_inserted</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2020</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">title</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">doi</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="k">year</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="k">COALESCE</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">journal</span><span class="p">.</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">proceedings_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">book_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">book_series_title</span><span class="p">.</span><span class="n">preferred</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">venue</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="k">type</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="nb">date</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">date_publication</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">date_inserted</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">altmetrics_score</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">metrics</span><span class="p">.</span><span class="n">times_cited</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridid</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridname</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">country</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridcountry</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">address</span><span class="p">.</span><span class="n">city</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridcity</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">open_access_categories</span><span class="p">,</span><span class="w"></span>
+<span class="w"> </span><span class="n">cat_for</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">category_for</span><span class="p">,</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_orgs</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">research_orgs_grids</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">grid</span><span class="w"></span>
+<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">grid</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">research_orgs_grids</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">open_access_categories_v2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">open_access_categories</span><span class="w"></span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">category_for</span><span class="p">.</span><span class="n">first_level</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">cat_for</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">YEAR</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">date_inserted</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124854415&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gabinetto armonico pieno d&#39;istromenti sonori&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.5479/sil.744616.39088011251444&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;venue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;monograph&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_publication&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_inserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-02-15 01:10:52 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;altmetrics_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;times_cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridcountry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridcity&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;open_access_categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oa_all&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;category_for&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124854415&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gabinetto armonico pieno d&#39;istromenti sonori&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.5479/sil.744616.39088011251444&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;venue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;monograph&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_publication&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;date_inserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-02-15 01:10:52 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;altmetrics_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;times_cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridcountry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;gridcity&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;open_access_categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bronze&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;category_for&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="c1">// many more entries here...</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124854415&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gabinetto armonico pieno d&#39;istromenti sonori&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.5479/sil.744616.39088011251444&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;venue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;monograph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date_publication&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date_inserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-02-15 01:10:52 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;altmetrics_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;times_cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridcountry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridcity&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;open_access_categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oa_all&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;category_for&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124854415&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Gabinetto armonico pieno d&#39;istromenti sonori&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;doi&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10.5479/sil.744616.39088011251444&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;venue&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;monograph&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date_publication&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1722&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date_inserted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-02-15 01:10:52 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;altmetrics_score&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;times_cited&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridname&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridcountry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;gridcity&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;open_access_categories&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bronze&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;category_for&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">ma</span><span class="kc">n</span><span class="err">y</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">e</span><span class="kc">ntr</span><span class="err">ies</span><span class="w"> </span><span class="err">here...</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1090,7 +1114,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

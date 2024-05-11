@@ -907,6 +907,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -995,85 +1019,85 @@
 <p>This query returns a list of publications and affiliations associated with a single institution. Each line represents a single affiliation string, and includes the publication ID, the institution ID, and the affiliation string as reported by the journal. </p>
 <p>Results are filtered to include only a single institution, specified by GRID ID (<a href="https://www.grid.ac/institutes/grid.69566.3a">grid.69566.3a</a>), and affiliation strings that include the phrase <code>"school of medicine"</code>.  <strong>For more details about working with nested fields, see <a href="../../tutorials/04-nested/">the tutorial page on the topic</a>.</strong></p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
-<span class="w">  </span><span class="n">aff</span><span class="p">.</span><span class="n">grid_id</span><span class="p">,</span>
-<span class="w">  </span><span class="n">aff</span><span class="p">.</span><span class="n">raw_affiliation</span>
-<span class="k">FROM</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">auth</span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">auth</span><span class="p">.</span><span class="n">affiliations_address</span><span class="p">)</span><span class="w"> </span><span class="n">aff</span>
-<span class="k">WHERE</span>
-<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">aff</span><span class="p">.</span><span class="n">grid_id</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">aff</span><span class="p">.</span><span class="n">raw_affiliation</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">auth</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">auth</span><span class="p">.</span><span class="n">affiliations_address</span><span class="p">)</span><span class="w"> </span><span class="n">aff</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">aff</span><span class="p">.</span><span class="n">grid_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;grid.69566.3a&quot;</span><span class="w"> </span><span class="c1">-- Sendai, Japan</span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="n">aff</span><span class="p">.</span><span class="n">raw_affiliation</span><span class="p">)</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="ss">&quot;%school of medicine%&quot;</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="n">aff</span><span class="p">.</span><span class="n">raw_affiliation</span><span class="p">)</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="ss">&quot;%school of medicine%&quot;</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1120198400&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Department of Neurosurgery, Tohoku University Graduate School of Medicine, Sendai, Miyagi, Japan&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1117164397&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Division of Cardiovascular Surgery, Tohoku University Graduate School of Medicine, 1-1 Seiryo-machi, Aoba-ku, Sendai, Miyagi, Japan.&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1120113207&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Division of Internal Medicine and Hypertension Unit Division of Cardiology, Department of Medical Sciences, University of Torino, Torino Division of Internal Medicine, Department of Medicine, University of Udine, Udine, Italy Division of Clinical Hypertension, Endocrinology and Metabolism, Tohoku University Graduate School of Medicine, Sendai, Japan.&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1119863526&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Division of Emergency and Critical Care Medicine, Tohoku University Graduate School of Medicine, Japan.&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="c1">// many thousands more records...</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1120198400&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Department of Neurosurgery, Tohoku University Graduate School of Medicine, Sendai, Miyagi, Japan&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1117164397&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Division of Cardiovascular Surgery, Tohoku University Graduate School of Medicine, 1-1 Seiryo-machi, Aoba-ku, Sendai, Miyagi, Japan.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1120113207&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Division of Internal Medicine and Hypertension Unit Division of Cardiology, Department of Medical Sciences, University of Torino, Torino Division of Internal Medicine, Department of Medicine, University of Udine, Udine, Italy Division of Clinical Hypertension, Endocrinology and Metabolism, Tohoku University Graduate School of Medicine, Sendai, Japan.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1119863526&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;grid_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;grid.69566.3a&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;raw_affiliation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Division of Emergency and Critical Care Medicine, Tohoku University Graduate School of Medicine, Japan.&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">ma</span><span class="kc">n</span><span class="err">y</span><span class="w"> </span><span class="kc">t</span><span class="err">housa</span><span class="kc">n</span><span class="err">ds</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">records...</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
 <h2 id="81-variant-get-unique-publication-records-with-affiliation-count">8.1 Variant: get unique publication records with affiliation count</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">aff</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">matching_affiliations</span><span class="p">,</span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span>
-<span class="w">  </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">title</span>
-<span class="k">FROM</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">auth</span><span class="p">,</span>
-<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">auth</span><span class="p">.</span><span class="n">affiliations_address</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">aff</span>
-<span class="k">WHERE</span>
-<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">aff</span><span class="p">.</span><span class="n">grid_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;grid.69566.3a&quot;</span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="n">aff</span><span class="p">.</span><span class="n">raw_affiliation</span><span class="p">)</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="ss">&quot;%school of medicine%&quot;</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">id</span><span class="p">,</span>
-<span class="w">  </span><span class="n">title</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">aff</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">matching_affiliations</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">title</span><span class="p">.</span><span class="n">preferred</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">title</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="n">auth</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">auth</span><span class="p">.</span><span class="n">affiliations_address</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">aff</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="w"></span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">aff</span><span class="p">.</span><span class="n">grid_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;grid.69566.3a&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="n">aff</span><span class="p">.</span><span class="n">raw_affiliation</span><span class="p">)</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="ss">&quot;%school of medicine%&quot;</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">id</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">title</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results-from-variant">Results from variant</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1123153684&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Management following endoscopic resection in elderly patients with early‐stage upper gastrointestinal neoplasia&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124283456&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unique Sex Steroid Profiles in Estrogen-Producing Adrenocortical Adenoma Associated with Bilateral Hyperaldosteronism&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124295695&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Clinical implication of myocardial FDG uptake pattern in oncologic PET: retrospective comparison study with stress myocardial perfusion imaging as the reference standard&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124238412&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Keap1 deletion accelerates mutant K-ras/p53-driven cholangiocarcinoma&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="c1">// many more results...</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1123153684&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Management following endoscopic resection in elderly patients with early‐stage upper gastrointestinal neoplasia&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124283456&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unique Sex Steroid Profiles in Estrogen-Producing Adrenocortical Adenoma Associated with Bilateral Hyperaldosteronism&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124295695&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Clinical implication of myocardial FDG uptake pattern in oncologic PET: retrospective comparison study with stress myocardial perfusion imaging as the reference standard&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;matching_affiliations&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1124238412&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Keap1 deletion accelerates mutant K-ras/p53-driven cholangiocarcinoma&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">ma</span><span class="kc">n</span><span class="err">y</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">resul</span><span class="kc">ts</span><span class="err">...</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1131,7 +1155,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

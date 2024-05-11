@@ -893,6 +893,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -984,124 +1008,124 @@ sort by fcr_gavg
 </code></pre></div></p>
 </div>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="k">year</span><span class="p">,</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pub_count</span><span class="p">,</span>
-<span class="w">  </span><span class="p">(</span><span class="n">EXP</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">LN</span><span class="p">(</span><span class="n">metrics</span><span class="p">.</span><span class="n">field_citation_ratio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">fcr_gavg</span>
-<span class="k">FROM</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span>
-<span class="k">WHERE</span>
-<span class="w">  </span><span class="s1">&#39;CA&#39;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_countries</span><span class="p">)</span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2000</span>
-<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2019</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="k">year</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="k">DESC</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">year</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">pub_count</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="n">EXP</span><span class="p">(</span><span class="k">AVG</span><span class="p">(</span><span class="n">LN</span><span class="p">(</span><span class="n">metrics</span><span class="p">.</span><span class="n">field_citation_ratio</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">fcr_gavg</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="k">WHERE</span><span class="w"></span>
+<span class="w">  </span><span class="s1">&#39;CA&#39;</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">research_org_countries</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2000</span><span class="w"></span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">2019</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="k">year</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="k">year</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
 </code></pre></div>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;126595&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.895202772875376&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123072&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.063853669997279&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2017&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;116099&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.173716507769935&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110619&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.2466482612818988&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;105632&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.3125283272558983&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2014&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;103433&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.3687156780522907&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;98650&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.467124347845802&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;94561&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.544932622059771&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2011&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;90036&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5889138063645207&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2010&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;86903&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6670704464809525&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2009&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;83592&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.686271282515282&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2008&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;79437&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.622504341868477&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2007&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;72631&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6134419550710426&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2006&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;70521&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5591136625055593&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2005&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;63057&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6001407619739907&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2004&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;55570&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6729901969921546&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2003&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;50762&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6458690167701433&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2002&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;46301&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5733709228189774&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;42605&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.7140322564560413&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;41724&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6536040582685607&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2019&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;126595&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.895202772875376&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2018&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123072&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.063853669997279&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2017&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;116099&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.173716507769935&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2016&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110619&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.2466482612818988&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2015&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;105632&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.3125283272558983&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2014&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;103433&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.3687156780522907&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2013&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;98650&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.467124347845802&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2012&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;94561&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.544932622059771&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2011&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;90036&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5889138063645207&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2010&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;86903&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6670704464809525&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2009&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;83592&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.686271282515282&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2008&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;79437&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.622504341868477&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2007&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;72631&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6134419550710426&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2006&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;70521&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5591136625055593&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2005&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;63057&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6001407619739907&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2004&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;55570&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6729901969921546&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2003&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;50762&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6458690167701433&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2002&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;46301&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5733709228189774&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2001&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;42605&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.7140322564560413&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;year&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2000&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;pub_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;41724&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;fcr_gavg&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6536040582685607&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1159,7 +1183,7 @@ sort by fcr_gavg
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

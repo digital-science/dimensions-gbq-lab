@@ -906,6 +906,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -993,16 +1017,16 @@
 <p>Many publications in the Dimensions database are classified under <a href="https://dimensions.freshdesk.com/support/solutions/articles/23000018820">Sustainable Development Goals (SDGs)</a>. </p>
 <p>This query returns the top five most commonly applied SDG classifications and the total number of publications in each one.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot</span><span class="p">,</span>
-<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">tot</span><span class="w"> </span><span class="k">DESC</span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">tot</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
 </code></pre></div>
 <h3 id="breaking-it-down">Breaking it down</h3>
 <p>This query is short but wades through a complex data structure. While the <a href="../03/">author names query</a> has to deal with an array of structs, this one has to parse <em>a struct of arrays</em>: Refer to the <a href="https://docs.dimensions.ai/bigquery/datasource-publications.html">schema documentation</a> for the details, but if we want to access the names of the SDG categories relevant to a single publication, we have to drill through multiple layers:</p>
@@ -1013,7 +1037,7 @@
 <li>Each entry in the <code>category_sdg.full</code> array is another struct, with three fields: <code>code</code>, <code>id</code> and <code>name</code>. <strong>We want the names.</strong></li>
 </ol>
 <p>We can get through the first struct by getting the <code>full</code> field by name. From there, we need to do something more complex:
-<div class="highlight"><pre><span></span><code><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span>
+<div class="highlight"><pre><span></span><code><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span><span class="w"></span>
 </code></pre></div></p>
 <p>This line performs <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join">a <em>cross join</em></a>. The less-technical explanation for what happens here is that, since <code>category_sdg.full</code> is an array, using a cross join with the publications table creates a new field called <code>sdg</code>, and each row of the <code>publications</code> table is repeated, <strong>once for each value for <code>sdg</code>.</strong> A quick demonstration:</p>
 <p><strong>WITHOUT UNNEST()</strong>:</p>
@@ -1067,44 +1091,44 @@
 </tbody>
 </table>
 <p>So after this clause:
-<div class="highlight"><pre><span></span><code><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span>
+<div class="highlight"><pre><span></span><code><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span><span class="w"></span>
 </code></pre></div>
 we have a new field, <code>sdg</code>, that has the nested fields <a href="https://docs.dimensions.ai/bigquery/datasource-publications.html#publications-systematiccategory">associated with an individual SDG</a>: <code>code</code>, <code>id</code> and <code>name</code>. Since we want <code>name</code>, that's what we refer to in the final query:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot</span><span class="p">,</span>
-<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span>
-<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">  </span><span class="n">tot</span><span class="w"> </span><span class="k">DESC</span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">tot</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">category_sdg</span><span class="p">.</span><span class="k">full</span><span class="p">)</span><span class="w"> </span><span class="n">sdg</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">sdg</span><span class="p">.</span><span class="n">name</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"></span>
+<span class="w">  </span><span class="n">tot</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
 </code></pre></div>
 <p>We then count the number of IDs associated with each SDG <code>name</code> by using a <code>GROUP BY</code> clause.</p>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1577950&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Affordable and Clean Energy&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1455575&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Good Health and Well Being&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;769875&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Peace, Justice and Strong Institutions&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;633369&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quality Education&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;507003&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Climate Action&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1577950&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Affordable and Clean Energy&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1455575&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Good Health and Well Being&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;769875&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Peace, Justice and Strong Institutions&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;633369&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Quality Education&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;507003&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Climate Action&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1162,7 +1186,7 @@ we have a new field, <code>sdg</code>, that has the nested fields <a href="https
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

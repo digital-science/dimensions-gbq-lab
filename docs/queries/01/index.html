@@ -906,6 +906,30 @@
   
 
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
         </ul>
       </nav>
     </li>
@@ -992,40 +1016,40 @@
 <h2 id="description">Description</h2>
 <p>Counts the number of publications added to Dimensions each month, using the <code>date_inserted</code> field.</p>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">  </span><span class="n">DATE_TRUNC</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">,</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span>
-<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span>
-<span class="k">FROM</span>
-<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">DESC</span>
-<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"></span>
+<span class="w">  </span><span class="n">DATE_TRUNC</span><span class="p">(</span><span class="n">date_inserted</span><span class="p">,</span><span class="w"> </span><span class="k">MONTH</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="k">COUNT</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">countDim</span><span class="w"></span>
+<span class="k">FROM</span><span class="w"></span>
+<span class="w">  </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"></span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">5</span><span class="w"></span>
 </code></pre></div>
 <h3 id="breaking-it-down">Breaking it down</h3>
 <p>The <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators#datetime_trunc">DATETIME_TRUNC</a> function is used here to "round down" the timestamps in the <code>date_inserted</code> field to the month level.</p>
 <h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-04-01 00:00:00 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;458175&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-01 00:00:00 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;746884&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-02-01 00:00:00 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;661512&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-01-01 00:00:00 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;687725&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-12-01 00:00:00 UTC&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;828301&quot;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-04-01 00:00:00 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;458175&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-01 00:00:00 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;746884&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-02-01 00:00:00 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;661512&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-01-01 00:00:00 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;687725&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2020-12-01 00:00:00 UTC&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;countDim&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;828301&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </code></pre></div>
                 
               
@@ -1083,7 +1107,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            © Copyright 2021 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
           </div>
         
         Made with

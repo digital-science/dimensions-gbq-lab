@@ -14,7 +14,7 @@
     
     
       
-        <title>23. Citing authors by country - Dimensions BigQuery Lab</title>
+        <title>32. Creating a concepts network - Dimensions BigQuery Lab</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#23-citing-authors-by-country" class="md-skip">
+        <a href="#32-creating-a-concepts-network" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              23. Citing authors by country
+              32. Creating a concepts network
             
           </span>
         </div>
@@ -734,65 +734,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          23. Citing authors by country
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../23/" class="md-nav__link">
         23. Citing authors by country
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#description" class="md-nav__link">
-    Description
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query" class="md-nav__link">
-    Query
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
-    Results
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -896,11 +842,58 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../32/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          32. Creating a concepts network
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         32. Creating a concepts network
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#query" class="md-nav__link">
+    Query
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -962,13 +955,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
-    Results
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -982,67 +968,78 @@
               
                 
                 
-                <h1 id="23-citing-authors-by-country">23. Citing authors by country</h1>
-<div class="admonition info">
-<p class="admonition-title">Level: Medium</p>
-<p>This query requires basic knowledge of SQL and the Dimensions data model</p>
+                <h1 id="32-creating-a-concepts-network">32. Creating a concepts network</h1>
+<div class="admonition warning">
+<p class="admonition-title">Level: Advanced</p>
+<p>This query requires a good understanding of SQL and the Dimensions data model</p>
 </div>
 <h2 id="description">Description</h2>
-<p>This query counts incoming citations for a single publication. The final results count <em>authors</em>, rather than publications, and group counts by the country of each author's current affiliation. </p>
-<p>The strategy is similar to <a href="../22/">query 22</a>, which groups citations by journal: the <a href="https://docs.dimensions.ai/bigquery/datasource-publications.html"><code>publications</code> table</a> has a <code>citations</code> field that includes the publication IDs of all incoming citations for a given paper. We fetch that list in the <code>citing</code> subquery below, then query the <code>publications</code> table to get a list of authors for all the publications citing the paper of interest. We join the <code>researchers</code> table to get each author's current affiliation. In the final query, we use the <code>grid</code> table to associate each author affiliation to a single <em>country</em>, then group all results by those countries.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The list of citing publications is determined by the clause <code>WHERE p.id='pub.1113640622'</code>. This can be changed to be as broad or narrow as you wish—changing it to something like <code>WHERE journal.title='eLife'</code>, for example, would return incoming citations to an entire journal rather than a single paper.</p>
-</div>
+<p>This query generates two-concept pairs and counts how many publications are shared between these concepts (note: concepts in Dimensions are publication-level keywords normalised and weighted based on a relevancy score).</p>
+<p>The query includes a user input query (<code>user-provided-subquery</code>) that can customised so to focus on arbitrary subsets of the Dimensions database. Also, parameters values for max number of nodes and min weight of edges to be included in the result (@max_nodes, @min_edge_weight) can be fine-tuned as needed. </p>
+<p>The gist of the query lies in the double CROSS JOIN UNNEST. This mechanism allows to traverse a potentially very large number of relationships in seconds and to expose all relevant combinations of co-authoring organisations within the same data structure.</p>
+<p>For more details, see also: </p>
+<ul>
+<li><a href="https://zenodo.org/records/6951456#.YySlhOxuerM">Generating large-scale network analyses of scientific landscapes in seconds using Dimensions on Google BigQuery</a>, International Conference on Science, Technology and Innovation Indicators (STI 2022) Granada September 2022</li>
+<li>Python tool to generate network visualizations: <a href="https://digital-science.github.io/dimensions-network-gen/">website</a> and source code in <a href="https://github.com/digital-science/dimensions-network-gen">Github</a> </li>
+</ul>
 <h2 id="query">Query</h2>
-<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">citing</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">SELECT</span><span class="w"> </span><span class="n">citing_pubs</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
-<span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
-<span class="w">    </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">citations</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">citing_pubs</span><span class="w"></span>
-<span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;pub.1113640622&#39;</span><span class="w"> </span><span class="c1">-- publication of interest</span>
-<span class="p">),</span><span class="w"></span>
-<span class="n">people_and_grids</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">DISTINCT</span><span class="w"> </span><span class="n">auth</span><span class="p">.</span><span class="n">researcher_id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">people</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="n">res</span><span class="p">.</span><span class="n">current_research_org</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gridid</span><span class="w"></span>
-<span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">pubs</span><span class="w"></span>
-<span class="w">  </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">authors</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">auth</span><span class="w"></span>
-<span class="w">  </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">researchers</span><span class="o">`</span><span class="w"> </span><span class="n">res</span><span class="w"></span>
-<span class="w">    </span><span class="k">ON</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">auth</span><span class="p">.</span><span class="n">researcher_id</span><span class="w"></span>
-<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">pubs</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">citing</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">gridid</span><span class="w"></span>
-<span class="p">)</span><span class="w"></span>
+<p>For example, we can generate a concepts cooccurence network for all publications from the last 30 days that have an Altmetric Attention Score greater than 10:</p>
+<div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 
-<span class="k">SELECT</span><span class="w"> </span><span class="n">people</span><span class="p">,</span><span class="w"> </span><span class="n">address</span><span class="p">.</span><span class="n">country</span><span class="w"></span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">people_and_grids</span><span class="w"></span>
-<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">grid</span><span class="o">`</span><span class="w"> </span><span class="n">gridinfo</span><span class="w"></span>
-<span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">gridinfo</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">people_and_grids</span><span class="p">.</span><span class="n">gridid</span><span class="w"></span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="w">          </span><span class="c1">-- USER-PROVIDED-SUBQUERY</span>
+<span class="w">          </span><span class="c1">-- add any query in this section, as long as it returns publication IDs</span>
+<span class="w">          </span><span class="c1">-- EG here we get all papers from the last 30 days with Altmetric attention &gt; 10</span>
+
+<span class="w">          </span><span class="k">SELECT</span><span class="w"></span>
+<span class="w">              </span><span class="n">id</span><span class="w"></span>
+<span class="w">          </span><span class="k">FROM</span><span class="w"></span>
+<span class="w">              </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"></span>
+<span class="w">          </span><span class="k">WHERE</span><span class="w"></span>
+<span class="w">              </span><span class="k">EXTRACT</span><span class="p">(</span><span class="w"></span>
+<span class="w">                  </span><span class="nb">DATE</span><span class="w"></span>
+<span class="w">                  </span><span class="k">FROM</span><span class="w"></span>
+<span class="w">                      </span><span class="n">date_inserted</span><span class="w"></span>
+<span class="w">              </span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">DATE_ADD</span><span class="p">(</span><span class="k">CURRENT_DATE</span><span class="p">(),</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="o">-</span><span class="mi">30</span><span class="w"> </span><span class="k">DAY</span><span class="p">)</span><span class="w"></span>
+<span class="w">              </span><span class="k">AND</span><span class="w"> </span><span class="n">altmetrics</span><span class="p">.</span><span class="n">score</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">papercount</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="n">concept</span><span class="p">.</span><span class="n">concept</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">papers</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">            </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">subset</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
+<span class="w">            </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">concepts</span><span class="p">)</span><span class="w"> </span><span class="n">concept</span><span class="w"></span>
+<span class="w">            </span><span class="k">WHERE</span><span class="w"></span>
+<span class="w">                </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1965</span><span class="w"></span>
+<span class="w">                </span><span class="k">AND</span><span class="w"> </span><span class="n">concept</span><span class="p">.</span><span class="n">relevance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="w"> </span><span class="c1">-- @min_link_relevance</span>
+<span class="w">            </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="w">        </span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">filtered</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="w">            </span><span class="k">FROM</span><span class="w"> </span><span class="n">papercount</span><span class="w"></span>
+<span class="w">            </span><span class="k">WHERE</span><span class="w"> </span><span class="n">papers</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="c1">--@min_concept_frequency</span>
+<span class="w">            </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">papers</span><span class="w"> </span><span class="k">DESC</span><span class="w"></span>
+<span class="w">            </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="c1">-- @max_nodes</span>
+<span class="w">        </span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="n">results</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="n">concept1</span><span class="p">.</span><span class="n">concept</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">concept_a</span><span class="p">,</span><span class="w"> </span><span class="n">concept2</span><span class="p">.</span><span class="n">concept</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">concept_b</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="k">COUNT</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">overlap</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="o">`</span><span class="n">dimensions</span><span class="o">-</span><span class="n">ai</span><span class="p">.</span><span class="n">data_analytics</span><span class="p">.</span><span class="n">publications</span><span class="o">`</span><span class="w"> </span><span class="n">p</span><span class="w"></span>
+<span class="w">        </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="o">=</span><span class="n">subset</span><span class="p">.</span><span class="n">id</span><span class="w"></span>
+<span class="w">        </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">concepts</span><span class="p">)</span><span class="w"> </span><span class="n">concept1</span><span class="w"></span>
+<span class="w">        </span><span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">UNNEST</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">concepts</span><span class="p">)</span><span class="w"> </span><span class="n">concept2</span><span class="w"></span>
+<span class="w">        </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">pcount1</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">concept1</span><span class="p">.</span><span class="n">concept</span><span class="o">=</span><span class="n">pcount1</span><span class="p">.</span><span class="n">concept</span><span class="w"></span>
+<span class="w">        </span><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">filtered</span><span class="w"> </span><span class="n">pcount2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">concept2</span><span class="p">.</span><span class="n">concept</span><span class="o">=</span><span class="n">pcount2</span><span class="p">.</span><span class="n">concept</span><span class="w"></span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="k">year</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1965</span><span class="w"></span>
+<span class="w">            </span><span class="k">AND</span><span class="w"> </span><span class="n">concept1</span><span class="p">.</span><span class="n">relevance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="w"> </span><span class="c1">--@min_link_relevance</span>
+<span class="w">            </span><span class="k">AND</span><span class="w"> </span><span class="n">concept2</span><span class="p">.</span><span class="n">relevance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="w"> </span><span class="c1">--@min_link_relevance</span>
+<span class="w">            </span><span class="k">AND</span><span class="w"> </span><span class="n">concept1</span><span class="p">.</span><span class="n">concept</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">concept2</span><span class="p">.</span><span class="n">concept</span><span class="w"></span>
+<span class="w">        </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"></span>
+<span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="w"></span>
+<span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">overlap</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">--@min_edge_weight</span>
 </code></pre></div>
-<h2 id="results">Results</h2>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;people&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;10&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Brazil&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;people&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;people&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;people&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;United States&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;people&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Croatia&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">resul</span><span class="kc">ts</span><span class="w"> </span><span class="err">here...</span><span class="w"></span>
-<span class="p">]</span><span class="w"></span>
-</code></pre></div>
+<p>A visualization using the results of this query can be <a href="https://digital-science.github.io/dimensions-network-gen/wrapper.html?topicId=last_30_days&amp;network=concepts">explored online</a> (note: the visualization uses data from the <a href="https://console.cloud.google.com/marketplace/product/digitalscience-public/covid-19-dataset-dimensions">COVID-19 dataset</a>)</p>
                 
               
               
@@ -1062,7 +1059,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../22/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 22. Incoming citations for a single publication, by journal" rel="prev">
+        <a href="../31/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 31. Country-level publication activity over time" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -1071,20 +1068,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              22. Incoming citations for a single publication, by journal
+              31. Country-level publication activity over time
             </div>
           </div>
         </a>
       
       
         
-        <a href="../24/" class="md-footer__link md-footer__link--next" aria-label="Next: 24. Organizations and sub-organizations" rel="next">
+        <a href="../33/" class="md-footer__link md-footer__link--next" aria-label="Next: 33. Calculating disruption indices (CD index)" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              24. Organizations and sub-organizations
+              33. Calculating disruption indices (CD index)
             </div>
           </div>
           <div class="md-footer__button md-icon">
