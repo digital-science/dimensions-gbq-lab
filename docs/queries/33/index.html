@@ -902,6 +902,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -955,6 +962,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -979,9 +993,13 @@
 <p>The query below takes advantage of Dimensions on BigQuery scalable architecture and reduces the computational time taken to produce such indices by an order of magnitude. This approach makes it possible to calculate e.g. CD5 index for all journal articles with references in Dimensions in less than 5 hours.</p>
 <p>For more details, see also: </p>
 <ul>
-<li><a href="https://arxiv.org/abs/2309.06120">Dimensions: Calculating Disruption Indices at Scale</a>, Michele Pasin, Joerg Sixt, Arxiv, 2023.</li>
+<li><a href="https://arxiv.org/abs/2309.06120">Dimensions: Calculating Disruption Indices at Scale</a>, Arxiv, 2023.</li>
 <li>The paper accompanying source code in <a href="https://github.com/digital-science/dimensions-gbq-lab/tree/master/archive/CD-index">Github</a> </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please make sure you are familiar with BigQuery <a href="https://cloud.google.com/bigquery/pricing">billing methods</a> and quota before running large queries like the ones below.</p>
+</div>
 <h2 id="query">Query</h2>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="o">`</span><span class="err">{</span><span class="n">your</span><span class="o">-</span><span class="n">gbq</span><span class="o">-</span><span class="n">project</span><span class="err">}</span><span class="p">.</span><span class="err">{</span><span class="n">you</span><span class="o">-</span><span class="n">gbq</span><span class="o">-</span><span class="n">dataset</span><span class="err">}</span><span class="p">.</span><span class="n">publications_cd_index_all</span><span class="o">`</span><span class="w"></span>
 <span class="k">CLUSTER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">id</span><span class="w"></span>
@@ -1064,6 +1082,75 @@
 <span class="w">  </span><span class="p">)</span><span class="w"></span>
 <span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 <span class="p">)</span><span class="w"></span>
+</code></pre></div>
+<h2 id="results">Results</h2>
+<p>The query results have the following format:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1065228952&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1065228398&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;27.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1065228573&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1065125068&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;26.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1113010424&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.125&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.125&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1083797867&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;194.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1078318645&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;108.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1078221791&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;28.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1078052782&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;19.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1071156881&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;21.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1071156878&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;56.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1071156873&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;56.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1071156882&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;27.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1070917761&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;17.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1071163762&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;144.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pub.1071053457&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;cd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;mcd_5&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;44.0&quot;</span><span class="w"></span>
+<span class="p">},</span><span class="w"></span>
+<span class="err">.......</span><span class="w"></span>
 </code></pre></div>
                 
               

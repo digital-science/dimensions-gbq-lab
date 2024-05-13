@@ -890,6 +890,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vosviewer" class="md-nav__link">
+    VOSViewer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -955,6 +975,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+    <nav class="md-nav" aria-label="Results">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vosviewer" class="md-nav__link">
+    VOSViewer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -975,7 +1015,7 @@
 </div>
 <h2 id="description">Description</h2>
 <p>This query generates two-concept pairs and counts how many publications are shared between these concepts (note: concepts in Dimensions are publication-level keywords normalised and weighted based on a relevancy score).</p>
-<p>The query includes a user input query (<code>user-provided-subquery</code>) that can customised so to focus on arbitrary subsets of the Dimensions database. Also, parameters values for max number of nodes and min weight of edges to be included in the result (@max_nodes, @min_edge_weight) can be fine-tuned as needed. </p>
+<p>The query includes a subquery (<code>user-provided-subquery</code>) that can be customised so to focus on arbitrary subsets of the Dimensions database. Parameters values for max number of nodes and min weight of edges to be included in the result (@max_nodes, @min_edge_weight) can be fine-tuned as needed. </p>
 <p>The gist of the query lies in the double CROSS JOIN UNNEST. This mechanism allows to traverse a potentially very large number of relationships in seconds and to expose all relevant combinations of co-authoring organisations within the same data structure.</p>
 <p>For more details, see also: </p>
 <ul>
@@ -983,7 +1023,7 @@
 <li>Python tool to generate network visualizations: <a href="https://digital-science.github.io/dimensions-network-gen/">website</a> and source code in <a href="https://github.com/digital-science/dimensions-network-gen">Github</a> </li>
 </ul>
 <h2 id="query">Query</h2>
-<p>For example, we can generate a concepts cooccurence network for all publications from the last 30 days that have an Altmetric Attention Score greater than 10:</p>
+<p>As an example, we generate a concepts cooccurence network for all publications from the last 30 days that have an Altmetric Attention Score greater than 10:</p>
 <div class="highlight"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">subset</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 
 <span class="w">          </span><span class="c1">-- USER-PROVIDED-SUBQUERY</span>
@@ -1039,7 +1079,125 @@
 <span class="w">        </span><span class="k">FROM</span><span class="w"> </span><span class="n">results</span><span class="w"></span>
 <span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">overlap</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">--@min_edge_weight</span>
 </code></pre></div>
-<p>A visualization using the results of this query can be <a href="https://digital-science.github.io/dimensions-network-gen/wrapper.html?topicId=last_30_days&amp;network=concepts">explored online</a> (note: the visualization uses data from the <a href="https://console.cloud.google.com/marketplace/product/digitalscience-public/covid-19-dataset-dimensions">COVID-19 dataset</a>)</p>
+<h2 id="results">Results</h2>
+<p>A sample of the results</p>
+<table>
+  <thead>
+    <tr>
+      <th>concept_a</th>
+      <th>concept_b</th>
+      <th>overlap</th>
+    </tr>
+  </thead>
+        <tbody>
+          <tr class="row0">
+            <td class="column0 style0 s">concept_a</td>
+            <td class="column1 style0 s">concept_b</td>
+            <td class="column2 style0 s">overlap</td>
+          </tr>
+          <tr class="row1">
+            <td class="column0 style0 s">odds ratio</td>
+            <td class="column1 style0 s">subgroup analysis</td>
+            <td class="column2 style0 n">5</td>
+          </tr>
+          <tr class="row2">
+            <td class="column0 style0 s">randomized clinical trials</td>
+            <td class="column1 style0 s">patients</td>
+            <td class="column2 style0 n">18</td>
+          </tr>
+          <tr class="row3">
+            <td class="column0 style0 s">population-based study</td>
+            <td class="column1 style0 s">Main Outcomes</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+          <tr class="row4">
+            <td class="column0 style0 s">systematic review</td>
+            <td class="column1 style0 s">Web of Science</td>
+            <td class="column2 style0 n">24</td>
+          </tr>
+          <tr class="row5">
+            <td class="column0 style0 s">intervention</td>
+            <td class="column1 style0 s">care</td>
+            <td class="column2 style0 n">18</td>
+          </tr>
+          <tr class="row6">
+            <td class="column0 style0 s">depression</td>
+            <td class="column1 style0 s">participants</td>
+            <td class="column2 style0 n">20</td>
+          </tr>
+          <tr class="row7">
+            <td class="column0 style0 s">exercise</td>
+            <td class="column1 style0 s">muscle</td>
+            <td class="column2 style0 n">5</td>
+          </tr>
+          <tr class="row8">
+            <td class="column0 style0 s">heart failure</td>
+            <td class="column1 style0 s">observational study</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+          <tr class="row9">
+            <td class="column0 style0 s">non-small cell lung cancer</td>
+            <td class="column1 style0 s">therapy</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+          <tr class="row10">
+            <td class="column0 style0 s">type 2 diabetes</td>
+            <td class="column1 style0 s">cohort study</td>
+            <td class="column2 style0 n">7</td>
+          </tr>
+          <tr class="row11">
+            <td class="column0 style0 s">quality of life</td>
+            <td class="column1 style0 s">primary outcome</td>
+            <td class="column2 style0 n">8</td>
+          </tr>
+          <tr class="row12">
+            <td class="column0 style0 s">Cox proportional hazards models</td>
+            <td class="column1 style0 s">women</td>
+            <td class="column2 style0 n">5</td>
+          </tr>
+          <tr class="row13">
+            <td class="column0 style0 s">plants</td>
+            <td class="column1 style0 s">cells</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+          <tr class="row14">
+            <td class="column0 style0 s">nurses</td>
+            <td class="column1 style0 s">outcomes</td>
+            <td class="column2 style0 n">6</td>
+          </tr>
+          <tr class="row15">
+            <td class="column0 style0 s">COVID-19</td>
+            <td class="column1 style0 s">intervention</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+          <tr class="row16">
+            <td class="column0 style0 s">COVID-19 pandemic</td>
+            <td class="column1 style0 s">well-being</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+          <tr class="row17">
+            <td class="column0 style0 s">clinical trials</td>
+            <td class="column1 style0 s">randomized clinical trials</td>
+            <td class="column2 style0 n">46</td>
+          </tr>
+          <tr class="row18">
+            <td class="column0 style0 s">subgroup analysis</td>
+            <td class="column1 style0 s">meta-analysis</td>
+            <td class="column2 style0 n">17</td>
+          </tr>
+          <tr class="row19">
+            <td class="column0 style0 s">odds ratio</td>
+            <td class="column1 style0 s">logistic regression models</td>
+            <td class="column2 style0 n">3</td>
+          </tr>
+        <tr>
+            <td colspan=5><i>more entries here...</i></td>
+         </tr>
+    </tbody>
+</table>
+
+<h3 id="vosviewer">VOSViewer</h3>
+<p>A VOSViewer visualization using the results of this query can be <a href="https://digital-science.github.io/dimensions-network-gen/wrapper.html?topicId=last_30_days&amp;network=concepts">explored online</a> (note: the visualization uses data from the <a href="https://console.cloud.google.com/marketplace/product/digitalscience-public/covid-19-dataset-dimensions">COVID-19 dataset</a>)</p>
                 
               
               
