@@ -106,3 +106,7 @@ ENV/
 # IDEs
 .vscode
 README_PRIVATE.md
+
+# CD index
+archive/CD-index/settings.py
+archive/CD-index/*.fth
