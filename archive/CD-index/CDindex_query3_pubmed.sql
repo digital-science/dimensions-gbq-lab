@@ -1,3 +1,13 @@
+
+--
+-- **CDindex_query3_pubmed.sql**
+-- SQL query to calculate all $CD$-indices for the citation-publication network of publications in PubMed.					
+-- For more details, see https://github.com/digital-science/dimensions-gbq-lab/blob/master/archive/CD-index/README.md
+--
+
+
+
+
 CREATE OR REPLACE TABLE `{your-gbq-project}.{you-gbq-dataset}.publications_cd_index_pubmed`
 CLUSTER BY id
 AS

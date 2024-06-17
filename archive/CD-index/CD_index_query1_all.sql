@@ -1,3 +1,14 @@
+
+--
+-- **CDindex_query1_pubmed.sql**
+-- SQL query to calculate all $CD$-indices for all publications in the Dimensions GoogleBigQuery table. In order to run it you need to edit the query and add the destination table for the calculation in your GBQ project.						
+-- For more details, see https://github.com/digital-science/dimensions-gbq-lab/blob/master/archive/CD-index/README.md
+--
+
+
+
+
+
 CREATE OR REPLACE TABLE `{your-gbq-project}.{you-gbq-dataset}.publications_cd_index_all`
 CLUSTER BY id
 AS
