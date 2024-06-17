@@ -1,10 +1,10 @@
 # CD Index calculations
 
-The notebooks in this folder present a method to compute the CD index via a short SQL query on Dimensions on Google BigQuery. This approach makes it possible to calculate e.g. $CD_5$ index for all journal articles with references in Dimensions in less than 5 hours.
+The notebooks in this folder present a method to compute the CD index via a short SQL query on [Dimensions on Google BigQuery](https://www.dimensions.ai/products/bigquery/). This approach makes it possible to calculate e.g. $CD_5$ index for all journal articles with references in Dimensions in less than 5 hours.
 
 ## Content
 - **README.md**: This file
-- **settings.py**: In order to run the Jupyter notebook you need to create a file "settings.py" with information on your GBQ connection. The file must define the following variables:
+- **secrets.py**: In order to run the Jupyter notebook you need to create a file "secrets.py" with information on your GBQ connection. The file must define the following variables:
 ```gbq_project_id = "[your GBQ billing project ID]"
 gbq_table_prefix = "[your GBQ project].[GBQ dataset].[prefix for tables with CD indices]"
 gbq_gbq_table_prefix = "[your GBQ project].[GBQ dataset].[prefix for tables with CD indices]"
@@ -26,4 +26,4 @@ cdindex_gbq_table_name = "[your GBQ project].[GBQ dataset].[prefix for tables wi
 
 These notebooks and SQL queries are supplementary materials to the paper (soon to be released):
 
-* A fast way to compute the CD index, Joerg Sixt, Michele Pasin, 2024. (https://arxiv.org/abs/2309.06120, lastest version)
+* A fast way to compute the CD index, Joerg Sixt, Michele Pasin, 2024. (https://arxiv.org/abs/2309.06120, latest version)
