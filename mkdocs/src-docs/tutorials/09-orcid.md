@@ -10,7 +10,6 @@ https://docs.dimensions.ai/bigquery/
     In order to run this tutorial, please ensure that:
 
     * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    * You have a valid [Dimensions API account](https://docs.dimensions.ai/dsl/).
     * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
 
 ```python
