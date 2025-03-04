@@ -1482,12 +1482,13 @@
 <p>https://docs.dimensions.ai/bigquery/</p>
 <div class="admonition warning">
 <p class="admonition-title">Prerequisites</p>
-<p>In order to run this tutorial, please ensure that:</p>
+<p>In order to run this tutorial, please ensure that you have</p>
 <ul>
-<li>You have a valid <a href="https://www.dimensions.ai/products/bigquery/">Dimensions on Google BigQuery account</a> and have <a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">configured a Google Cloud project</a>.</li>
-<li>You have some basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
+<li><a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">Configured a Google Cloud project</a>.</li>
+<li>Basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
 </ul>
 </div>
+<p>(This tutorial is based on a Jupyter notebook that is <a href="https://github.com/digital-science/dimensions-gbq-lab/blob/master/notebooks/09-orcid.ipynb">available directly via GitHub</a>.)</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">auth</span>
 <span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
