@@ -7,10 +7,12 @@ Further documentation on the orcid schema, along with how to get connected to bi
 https://docs.dimensions.ai/bigquery/
 
 !!! warning "Prerequisites"
-    In order to run this tutorial, please ensure that:
+    In order to run this tutorial, please ensure that you have
+    
+    * [Configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
+    * Basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
 
-    * You have a valid [Dimensions on Google BigQuery account](https://www.dimensions.ai/products/bigquery/) and have [configured a Google Cloud project](https://docs.dimensions.ai/bigquery/gcp-setup.html#).
-    * You have some basic familiarity with Python and [Jupyter notebooks](https://jupyter.org/).
+(This tutorial is based on a Jupyter notebook that is [available directly via GitHub](https://github.com/digital-science/dimensions-gbq-lab/blob/master/notebooks/09-orcid.ipynb).)
 
 ```python
 from google.colab import auth
