@@ -209,21 +209,6 @@ from ds-open-datasets.orcid.summaries_2024
    and extract(YEAR FROM timestamp(history.last_modified_date)) = 2023
 ```
 
-  <div id="df-2648a2c3-9819-44a9-a55e-be4a8b4452af" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -238,8 +223,7 @@ from ds-open-datasets.orcid.summaries_2024
     </tr>
   </tbody>
 </table>
-</div>
-  </div>
+
 
 
 
@@ -258,21 +242,6 @@ from ds-open-datasets.orcid.summaries_2024
 where person.name.visibility = 'public'
 ```
 
-<div id="df-7d2b7375-15eb-4157-92c1-a4bfe763dc52" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -287,9 +256,7 @@ where person.name.visibility = 'public'
     </tr>
   </tbody>
 </table>
-</div>
-    
-  </div>
+
 
 
 
@@ -305,21 +272,6 @@ where person.name.visibility = 'public'
  where person.other_names is not null
 ```
 
-  <div id="df-075b30a0-f4e6-4a93-93a1-b222badee702" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -334,9 +286,7 @@ where person.name.visibility = 'public'
     </tr>
   </tbody>
 </table>
-</div>
-    
-  </div>
+
 
 
 
@@ -353,22 +303,6 @@ where person.name.visibility = 'public'
  where person.name.credit_name is not null
 ```
 
-
-  <div id="df-7ca7029e-c371-40f9-8476-65cff41df53d" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -383,9 +317,7 @@ where person.name.visibility = 'public'
     </tr>
   </tbody>
 </table>
-</div>
-    
-  </div>
+
 
 ### 2.4 What are the dominant domains of URLs in author profiles?
 
@@ -403,21 +335,6 @@ order by 2 desc -- count of orcids
 limit 10
 ```
 
-  <div id="df-b775bbe5-194a-4ba7-9174-199c75cf04d0" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -479,9 +396,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-   
-  </div>
+
 
 
 ### 2.5 How many profiles have biographies?
@@ -495,21 +410,7 @@ select count(orcid_identifier)
 where person.biography.content is not null
 ```
 
-  <div id="df-22042cff-42f3-46be-87d6-86b8ee26138b" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -524,9 +425,7 @@ where person.biography.content is not null
     </tr>
   </tbody>
 </table>
-</div>
-   
-  </div>
+
 
 
 
@@ -568,21 +467,6 @@ limit 200
 ```
 
 
-  <div id="df-58eadae4-cb50-479c-9950-ded78137d565" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -650,9 +534,7 @@ limit 200
   </tbody>
 </table>
 <p>200 rows × 2 columns</p>
-</div>
-    
-  </div>
+
 
 ### 2.7 How many public emails are available in ORCiD?
 
@@ -667,21 +549,6 @@ WHERE email.visibility = 'public'
   AND email IS NOT NULL
 ```
 
-  <div id="df-1c526eea-2aa1-457a-9479-f207a797a1d9" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -696,9 +563,7 @@ WHERE email.visibility = 'public'
     </tr>
   </tbody>
 </table>
-</div>
-   
-  </div>
+
 
 
 
@@ -717,21 +582,7 @@ WHERE address.visibility = 'public'
   AND address IS NOT NULL
 ```
 
-  <div id="df-0b45efbc-24ea-4a0b-95b0-1f086ade2a01" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -746,8 +597,7 @@ WHERE address.visibility = 'public'
     </tr>
   </tbody>
 </table>
-</div>
-  </div>
+
 
 
 ### 2.9 Which countries?
@@ -767,21 +617,7 @@ group by address.country
 order by 2 DESC -- count of orcids
 ```
 
-  <div id="df-4c55d2a7-4224-48c7-a728-542053bce0f5" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -849,8 +685,7 @@ order by 2 DESC -- count of orcids
   </tbody>
 </table>
 <p>250 rows × 2 columns</p>
-</div>
-  </div>
+
 
 
 
@@ -870,21 +705,7 @@ group by lower(keyword.content)
 order by 2 desc -- i.e. count
 ```
 
-  <div id="df-8418da5a-9f59-4cff-a40b-edf434957338" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -952,9 +773,7 @@ order by 2 desc -- i.e. count
   </tbody>
 </table>
 <p>1189708 rows × 2 columns</p>
-</div>
-    
-  </div>
+
 
 
 
@@ -975,21 +794,6 @@ order by 2 desc -- i.e. count
 limit 10
 ```
 
-  <div id="df-870663d9-4d7e-4372-9a4f-3c5676e4f50f" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1051,9 +855,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-    
-  </div>
+
 
 
 
@@ -1078,21 +880,6 @@ order by orcids desc
 limit 40
 ```
 
-  <div id="df-098ccd0a-933d-454d-b7bd-a5f1c1293ea1" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1304,9 +1091,7 @@ limit 40
     </tr>
   </tbody>
 </table>
-</div>
-    
-  </div>
+
 
 
 
@@ -1329,21 +1114,6 @@ group by 1
 order by 2 desc
 ```
 
-  <div id="df-01c973b9-baa1-43a8-aeed-d9ab4d39c5b6" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1380,9 +1150,7 @@ order by 2 desc
     </tr>
   </tbody>
 </table>
-</div>
-    
-  </div>
+
 
 
 
@@ -1404,21 +1172,7 @@ order by mentioned_count desc
 limit 10
 ```
 
-  <div id="df-05c1885d-b294-4663-962c-d0b4436feadc" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1480,8 +1234,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-  </div>
+
 
 
 
@@ -1506,21 +1259,6 @@ order by orcids desc
 limit 10
 ```
 
-  <div id="df-562c639f-18f2-437d-9644-ce10ff7bebdf" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1604,8 +1342,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-  </div>
+
 
 
 
@@ -1627,21 +1364,6 @@ order by instances desc
 limit 10
 ```
 
-  <div id="df-62a9858a-0d8c-400d-96d8-6339c9cdfeba" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1703,8 +1425,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-  </div>
+
 
 
 
@@ -1726,21 +1447,6 @@ group by record.role_title
 order by orcids desc
 ```
 
-  <div id="df-258df3f4-53c7-491c-9aa1-e7856ae1d82b" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1808,8 +1514,7 @@ order by orcids desc
   </tbody>
 </table>
 <p>160080 rows × 2 columns</p>
-</div>
-  </div>
+
 
 
 
@@ -1832,21 +1537,6 @@ order by orcids desc
 limit 10
 ```
 
-  <div id="df-d66a1b51-21d7-4577-88c2-84e68ce441c0" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -1908,8 +1598,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-  </div>
+
 
 
 
@@ -1933,21 +1622,6 @@ order by orcids desc
 limit 10
 ```
 
-  <div id="df-c203f9b7-3190-40f5-9d8e-0776134f0f75" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -2009,8 +1683,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-   </div>
+
 
 
 
@@ -2033,21 +1706,6 @@ order by orcids desc
 limit 10
 ```
 
-  <div id="df-b0b5a4ed-3af4-4952-ab5a-48a6bcbe66c5" class="colab-df-container">
-    <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table>
   <thead>
     <tr style="text-align: right;">
@@ -2109,8 +1767,7 @@ limit 10
     </tr>
   </tbody>
 </table>
-</div>
-    </div>
+
 
 
 
