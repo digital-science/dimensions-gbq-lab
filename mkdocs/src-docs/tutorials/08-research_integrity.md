@@ -1,4 +1,8 @@
-# Usage of Trust Markers in research
+# Usage of Trust Markers in research (ARCHIVED)
+
+!!! warning "Archived Dataset"
+    The Trust Markers dataset has been retired, and its associated tutorial is now archived.
+
 
 ## Use case
 
