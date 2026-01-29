@@ -20,6 +20,7 @@ nav:
         - tutorials/07-retrieve_patents.md
         - tutorials/08-research_integrity.md
         - tutorials/09-orcid.md
+        - tutorials/10-datacite.md
     - ...
 
 theme:
