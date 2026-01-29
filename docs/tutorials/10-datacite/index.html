@@ -1,0 +1,1467 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/img/favicon.ico">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>DataCite Example Queries - Dimensions BigQuery Lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+
+  <!-- OneTrust Cookies Consent Notice start for dimensions.ai -->
+  <script type="text/javascript" src="https://cdn.cookielaw.org/consent/3329b668-7887-4dba-9bee-c3853a706e6f/OtAutoBlock.js"></script>
+  <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" type="text/javascript" charset="UTF-8" data-domain-script="3329b668-7887-4dba-9bee-c3853a706e6f"></script>
+  <script type="text/javascript">
+      function OptanonWrapper() { }
+  </script>
+  <!-- OneTrust Cookies Consent Notice end for dimensions.ai -->
+
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+  
+
+
+  
+
+  
+
+
+  <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-BWP057HYGP"),document.addEventListener("DOMContentLoaded",function(){"undefined"!=typeof location$&&location$.subscribe(function(t){gtag("config","G-BWP057HYGP",{page_path:t.pathname})})})</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BWP057HYGP"></script>
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datacite-example-queries" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-header__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Dimensions BigQuery Lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              DataCite Example Queries
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Dimensions BigQuery Lab" class="md-nav__button md-logo" aria-label="Dimensions BigQuery Lab" data-md-component="logo">
+      
+  <img src="../../assets/img/apple-touch-icon.png" alt="logo">
+
+    </a>
+    Dimensions BigQuery Lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        About Tutorials
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-connection/" class="md-nav__link">
+        Verifying your connection
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-dates/" class="md-nav__link">
+        Working with dates
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-nested/" class="md-nav__link">
+        Working with nested and repeated fields
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-dsl/" class="md-nav__link">
+        From the DSL API to Google BigQuery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-topic_clusters/" class="md-nav__link">
+        Basic Topic Clustering using TensorFlow and BigQuery ML
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-funder_grant_pubs/" class="md-nav__link">
+        Identify a funder's grants and publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-retrieve_patents/" class="md-nav__link">
+        Retrieve patents linked to a set of grants
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-research_integrity/" class="md-nav__link">
+        Usage of Trust Markers in research (ARCHIVED)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-orcid/" class="md-nav__link">
+        Exploring the ORCiD dataset on Google Bigquery
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        DataCite Example Queries
+      </a>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        Collections
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Collections" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Collections
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/" class="md-nav__link">
+        About
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/01-publications/" class="md-nav__link">
+        Publications
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/02-citations/" class="md-nav__link">
+        Citations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/03-authors/" class="md-nav__link">
+        Authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collections/04-funding/" class="md-nav__link">
+        Funding & Grants
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Queries
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Queries" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Queries
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/" class="md-nav__link">
+        About Queries
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/01/" class="md-nav__link">
+        1. Number of publications added to Dimensions each month
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/02/" class="md-nav__link">
+        2. Number of Publications by Type
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/03/" class="md-nav__link">
+        3. Generate a list of publication authors by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/04/" class="md-nav__link">
+        4. Generate a list of publication categories by flattening/concatenating nested data
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/05/" class="md-nav__link">
+        5. Number of publications per SDG category
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/06/" class="md-nav__link">
+        6. Publications count per FoR category, total and percentage against total
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/07/" class="md-nav__link">
+        7. Finding Journals using string matching
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/08/" class="md-nav__link">
+        8. Finding articles matching a specific affiliation string
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/09/" class="md-nav__link">
+        9. Top publications by Altmetric score and research organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/10/" class="md-nav__link">
+        10. Select publications matching selected concepts
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/11/" class="md-nav__link">
+        11. Count of corresponding authors by publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/12/" class="md-nav__link">
+        12. Counting new vs recurring authors, for a specific journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/13/" class="md-nav__link">
+        13. Funding by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/14/" class="md-nav__link">
+        14. Extracting complex publications records
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/15/" class="md-nav__link">
+        15. Top N publications by citations percentile
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/16/" class="md-nav__link">
+        16. Citations by journal, for a specific publisher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/17/" class="md-nav__link">
+        17. One-degree citation network for a single publication
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/18/" class="md-nav__link">
+        18. Incoming citations for a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/19/" class="md-nav__link">
+        19. Outgoing citations from a journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/20/" class="md-nav__link">
+        20. International collaboration of an organisation in a field
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/21/" class="md-nav__link">
+        21. International collaboration rate of individuals, with context
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/22/" class="md-nav__link">
+        22. Incoming citations for a single publication, by journal
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/23/" class="md-nav__link">
+        23. Citing authors by country
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/24/" class="md-nav__link">
+        24. Organizations and sub-organizations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/25/" class="md-nav__link">
+        25. Grants for an organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/26/" class="md-nav__link">
+        26. Field Citation Ratio (FCR) median average
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/27/" class="md-nav__link">
+        27. List of corresponding authors
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/28/" class="md-nav__link">
+        28. Researcher collaborations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/29/" class="md-nav__link">
+        29. Institutions collaborations
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/30/" class="md-nav__link">
+        30. Publication volume growth rate
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/31/" class="md-nav__link">
+        31. Country-level publication activity over time
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/32/" class="md-nav__link">
+        32. Creating a concepts network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../queries/33/" class="md-nav__link">
+        33. Calculating disruption indices (CD index)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="datacite-example-queries">DataCite Example Queries</h1>
+<p>The following examples explore how to use the openly available BigQuery dataset available at: <code>ds-external-data.datacite.records_2025</code></p>
+<p>Further documentation on the DataCite schema, along with how to get connected to BigQuery can be found at:</p>
+<p>https://support.datacite.org/docs/api</p>
+<div class="admonition warning">
+<p class="admonition-title">Prerequisites</p>
+<p>In order to run this tutorial, please ensure that you have</p>
+<ul>
+<li><a href="https://docs.dimensions.ai/bigquery/gcp-setup.html#">Configured a Google Cloud project</a>.</li>
+<li>Basic familiarity with Python and <a href="https://jupyter.org/">Jupyter notebooks</a>.</li>
+</ul>
+</div>
+<p>(This tutorial is based on a Jupyter notebook that is <a href="https://github.com/digital-science/dimensions-gbq-lab/blob/master/notebooks/10-datacite.ipynb">available directly via GitHub</a>.)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">bigquery</span>
+
+<span class="kn">from</span> <span class="nn">google.cloud.bigquery</span> <span class="kn">import</span> <span class="n">magics</span>
+
+<span class="n">project_id</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the name of a GBQ project to use when running the code in this notebook: &quot;</span><span class="p">)</span>
+
+<span class="n">magics</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">project_id</span>
+
+<span class="n">bq_params</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">bigquery</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">project_id</span><span class="p">)</span>
+
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">bigquery_magics</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</code></pre></div>
+<p><strong>Before we go further, a quick warning. In BigQuery don't use "SELECT *" to explore a dataset. It will be expensive. Use only the columns that you need.</strong></p>
+<h1 id="exploring-the-datacite-dataset-on-google-bigquery">Exploring the DataCite dataset on Google BigQuery</h1>
+<p>In this notebook, we breakdown the DataCite schema in BigQuery, and demonstrate how to query each section.</p>
+<ul>
+<li>
+<p><a href="#counting_records">Counting Records</a></p>
+</li>
+<li>
+<p><a href="#attributes">Attributes</a></p>
+</li>
+<li><a href="#attributes.types">Resource Types</a></li>
+<li><a href="#attributes.publicationYear">Publication Years</a></li>
+<li><a href="#attributes.titles">Titles and Publishers</a></li>
+<li><a href="#attributes.descriptions">Descriptions (Abstracts)</a></li>
+<li><a href="#attributes.subjects">Subjects (Keywords)</a></li>
+<li><a href="#attributes.geoLocations">GeoLocations</a></li>
+<li><a href="#attributes.rightsList">Rights &amp; Licenses</a></li>
+<li>
+<p><a href="#attributes.usage">Usage Counts</a></p>
+</li>
+<li>
+<p><a href="#people_orgs">People &amp; Organizations</a></p>
+</li>
+<li><a href="#creators">Creators &amp; Affiliations (ROR)</a></li>
+<li>
+<p><a href="#pids">PID Adoption (ORCID)</a></p>
+</li>
+<li>
+<p><a href="#connections">Connections &amp; Funding</a></p>
+</li>
+<li><a href="#attributes.relatedIdentifiers">Related Identifiers (The PID Graph)</a></li>
+<li>
+<p><a href="#attributes.fundingReferences">Funding References</a></p>
+</li>
+<li>
+<p><a href="#deduplication">Advanced: Deduplication</a></p>
+</li>
+<li><a href="#versions">Handling Versions</a></li>
+</ul>
+<h2 id="counting-records"><a name="counting_records"> Counting Records</a></h2>
+<p>How many active DataCite DOIs do we have in this snapshot?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_overview</span>
+<span class="n">SELECT</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">total_records</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total DataCite Records: </span><span class="si">{</span><span class="n">df_overview</span><span class="p">[</span><span class="s1">&#39;total_records&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="attributes"><a name="attributes">Attributes</a></h2>
+<h3 id="attributestypes"><a name="attributes.types">attributes.types</a></h3>
+<p>What are the most common resource types?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_types</span>
+<span class="n">SELECT</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">resourceTypeGeneral</span> <span class="k">as</span> <span class="nb">type</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">count</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">2</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">20</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_types</span>
+</code></pre></div>
+<p>We can also look at the specific <code>resourceType</code> (free text) vs the controlled <code>resourceTypeGeneral</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_types_detailed</span>
+<span class="n">SELECT</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">resourceTypeGeneral</span> <span class="k">as</span> <span class="n">general_type</span><span class="p">,</span>
+  <span class="n">COALESCE</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">resourceType</span><span class="p">,</span> <span class="s1">&#39;(Not Specified)&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">specific_type</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">count</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="n">count</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">15</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_types_detailed</span>
+</code></pre></div>
+<h3 id="attributespublicationyear"><a name="attributes.publicationYear">attributes.publicationYear</a></h3>
+<p>How has the volume of research outputs grown over time?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_years</span>
+<span class="n">SELECT</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">publicationYear</span> <span class="k">as</span> <span class="n">year</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">count</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+<span class="n">WHERE</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">publicationYear</span> <span class="n">BETWEEN</span> <span class="mi">2010</span> <span class="n">AND</span> <span class="mi">2025</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">1</span> <span class="n">DESC</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_years</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">df_years</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;DataCite Records by Publication Year (2010-2025)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="attributestitles-attributespublisher"><a name="attributes.titles">attributes.titles &amp; attributes.publisher</a></h3>
+<p>What is the basic descriptive metadata for these records?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_core_detailed</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">doi</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">titles</span><span class="p">[</span><span class="n">SAFE_OFFSET</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">title</span> <span class="k">as</span> <span class="n">primary_title</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">publisher</span><span class="o">.</span><span class="n">name</span> <span class="k">as</span> <span class="n">publisher</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">publicationYear</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_core_detailed</span>
+</code></pre></div>
+<h3 id="attributesdescriptions"><a name="attributes.descriptions">attributes.descriptions</a></h3>
+<p>What are these records about? (Extracting abstracts)</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_descriptions</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">doi</span><span class="p">,</span>
+  <span class="n">description_entry</span><span class="o">.</span><span class="n">descriptionType</span><span class="p">,</span>
+  <span class="n">COALESCE</span><span class="p">(</span><span class="n">SUBSTR</span><span class="p">(</span><span class="n">description_entry</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="s1">&#39;(No Description Available)&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">abstract_snippet</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">descriptions</span><span class="p">)</span> <span class="k">as</span> <span class="n">description_entry</span>
+<span class="n">WHERE</span>
+  <span class="n">description_entry</span><span class="o">.</span><span class="n">descriptionType</span> <span class="o">=</span> <span class="s1">&#39;Abstract&#39;</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="n">LENGTH</span><span class="p">(</span><span class="n">description_entry</span><span class="o">.</span><span class="n">description</span><span class="p">)</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_descriptions</span>
+</code></pre></div>
+<h3 id="attributessubjects"><a name="attributes.subjects">attributes.subjects</a></h3>
+<p>What are the most frequent keywords used in the dataset?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_subjects_list</span>
+<span class="n">SELECT</span>
+  <span class="n">subj</span><span class="o">.</span><span class="n">subject</span> <span class="k">as</span> <span class="n">keyword</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">frequency</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">subjects</span><span class="p">)</span> <span class="k">as</span> <span class="n">subj</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">2</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_subjects_list</span>
+</code></pre></div>
+<h3 id="attributesgeolocations"><a name="attributes.geoLocations">attributes.geoLocations</a></h3>
+<p>Where was data collected?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_geoloc</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">doi</span><span class="p">,</span>
+  <span class="n">geo</span><span class="o">.</span><span class="n">geoLocationPlace</span><span class="p">,</span>
+  <span class="n">geo</span><span class="o">.</span><span class="n">geoLocationPoint</span><span class="o">.</span><span class="n">pointLatitude</span> <span class="k">as</span> <span class="n">lat</span><span class="p">,</span>
+  <span class="n">geo</span><span class="o">.</span><span class="n">geoLocationPoint</span><span class="o">.</span><span class="n">pointLongitude</span> <span class="k">as</span> <span class="n">long</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">geoLocations</span><span class="p">)</span> <span class="k">as</span> <span class="n">geo</span>
+<span class="n">WHERE</span>
+  <span class="n">geo</span><span class="o">.</span><span class="n">geoLocationPlace</span> <span class="n">IS</span> <span class="n">NOT</span> <span class="n">NULL</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_geoloc</span>
+</code></pre></div>
+<h3 id="attributesrightslist"><a name="attributes.rightsList">attributes.rightsList</a></h3>
+<p>What are the most common licenses?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_licenses</span>
+<span class="n">SELECT</span>
+  <span class="n">r</span><span class="o">.</span><span class="n">rights</span> <span class="k">as</span> <span class="n">license_name</span><span class="p">,</span>
+  <span class="n">r</span><span class="o">.</span><span class="n">rightsUri</span> <span class="k">as</span> <span class="n">license_url</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">count</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">rightsList</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">3</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_licenses</span>
+</code></pre></div>
+<h3 id="attributescitationcount-attributesviewcount"><a name="attributes.usage">attributes.citationCount &amp; attributes.viewCount</a></h3>
+<p>Which records have citations or views recorded in the record?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_usage</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">doi</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">titles</span><span class="p">[</span><span class="n">SAFE_OFFSET</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">title</span> <span class="k">as</span> <span class="n">title</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">citationCount</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">viewCount</span><span class="p">,</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">downloadCount</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+<span class="n">WHERE</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">citationCount</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">citationCount</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_usage</span>
+</code></pre></div>
+<h2 id="people-organizations"><a name="people_orgs">People &amp; Organizations</a></h2>
+<h3 id="creators-affiliations-ror"><a name="creators">Creators &amp; Affiliations (ROR)</a></h3>
+<p>Who created this work, and what organizations are they affiliated with?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_creators_detailed</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">doi</span><span class="p">,</span>
+  <span class="n">creator</span><span class="o">.</span><span class="n">name</span> <span class="k">as</span> <span class="n">creator_name</span><span class="p">,</span>
+  <span class="p">(</span><span class="n">SELECT</span> <span class="n">nameIdentifier</span> <span class="n">FROM</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">creator</span><span class="o">.</span><span class="n">nameIdentifiers</span><span class="p">)</span> <span class="n">WHERE</span> <span class="n">nameIdentifierScheme</span> <span class="o">=</span> <span class="s1">&#39;ORCID&#39;</span> <span class="n">LIMIT</span> <span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">orcid</span><span class="p">,</span>
+  <span class="n">ARRAY_TO_STRING</span><span class="p">(</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">SELECT</span> <span class="n">name</span> <span class="n">FROM</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">creator</span><span class="o">.</span><span class="n">affiliation</span><span class="p">)),</span> <span class="s1">&#39;; &#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">affiliations</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">creators</span><span class="p">)</span> <span class="k">as</span> <span class="n">creator</span>
+<span class="n">WHERE</span>
+  <span class="n">ARRAY_LENGTH</span><span class="p">(</span><span class="n">creator</span><span class="o">.</span><span class="n">affiliation</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_creators_detailed</span>
+</code></pre></div>
+<p>We can also find works by a specific organization (e.g., CERN) by joining with the <strong>ROR</strong> table.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_org</span>
+<span class="n">SELECT</span>
+
+
+  <span class="n">affiliation</span><span class="o">.</span><span class="n">affiliationIdentifier</span><span class="p">,</span> <span class="n">affiliation</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+
+  <span class="n">count</span><span class="p">(</span><span class="n">distinct</span> <span class="n">dc</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="n">dois</span><span class="p">,</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span> <span class="n">dc</span>
+<span class="n">INNER</span> <span class="n">JOIN</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">creators</span><span class="p">)</span> <span class="k">as</span> <span class="n">creator</span>
+<span class="n">INNER</span> <span class="n">JOIN</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">creator</span><span class="o">.</span><span class="n">affiliation</span><span class="p">)</span> <span class="k">as</span> <span class="n">affiliation</span>
+<span class="n">WHERE</span>
+  <span class="n">affiliation</span><span class="o">.</span><span class="n">affiliationIdentifierScheme</span> <span class="o">=</span> <span class="s1">&#39;ROR&#39;</span>
+  <span class="n">AND</span> <span class="n">dc</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">publicationYear</span> <span class="o">=</span> <span class="mi">2024</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="mi">3</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">df_org</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="pid-adoption-orcid-ror"><a name="pids">PID Adoption (ORCID &amp; ROR)</a></h3>
+<p>How many records include an ORCID iD for creators or contributors?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_orcid_by_type</span>
+
+
+<span class="n">SELECT</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">resourceTypeGeneral</span> <span class="k">as</span> <span class="n">resource_type</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="nb">id</span><span class="p">)</span> <span class="n">allrecords</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">ni</span><span class="o">.</span><span class="n">nameIdentifierScheme</span>  <span class="o">=</span> <span class="s1">&#39;ORCID&#39;</span> <span class="n">THEN</span>  <span class="nb">id</span> <span class="n">END</span><span class="p">)</span> <span class="k">as</span> <span class="n">creator_orcid_count</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">nit</span><span class="o">.</span><span class="n">nameIdentifierScheme</span> <span class="o">=</span> <span class="s1">&#39;ORCID&#39;</span> <span class="n">THEN</span>  <span class="nb">id</span> <span class="n">END</span><span class="p">)</span> <span class="k">as</span> <span class="n">contributor_orcid_count</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+  <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">creators</span><span class="p">)</span> <span class="n">c</span>
+    <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">nameIdentifiers</span><span class="p">)</span> <span class="n">ni</span>
+  <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">contributors</span><span class="p">)</span> <span class="n">ct</span>
+    <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">nameIdentifiers</span><span class="p">)</span> <span class="n">nit</span>
+ <span class="c1">#WHERE  &#39;ORCID&#39; in (ni.nameIdentifierScheme,nit.nameIdentifierScheme)</span>
+
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">2</span> <span class="n">DESC</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_orcid_by_type</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_orcid_by_type_year</span>
+<span class="n">SELECT</span>
+  <span class="n">attributes</span><span class="o">.</span><span class="n">publicationYear</span> <span class="k">as</span> <span class="n">year</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="nb">id</span><span class="p">)</span> <span class="n">allrecords</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">ni</span><span class="o">.</span><span class="n">nameIdentifierScheme</span> <span class="o">=</span>  <span class="s1">&#39;ORCID&#39;</span> <span class="n">THEN</span>  <span class="nb">id</span> <span class="n">END</span><span class="p">)</span> <span class="k">as</span> <span class="n">creator_orcid_count</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">nit</span><span class="o">.</span><span class="n">nameIdentifierScheme</span> <span class="o">=</span> <span class="s1">&#39;ORCID&#39;</span> <span class="n">THEN</span>  <span class="nb">id</span> <span class="n">END</span><span class="p">)</span> <span class="k">as</span> <span class="n">contributor_orcid_count</span><span class="p">,</span>
+  <span class="n">ROUND</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="n">CASE</span> <span class="n">WHEN</span> <span class="s1">&#39;ORCID&#39;</span> <span class="ow">in</span> <span class="p">(</span><span class="n">nit</span><span class="o">.</span><span class="n">nameIdentifierScheme</span><span class="p">,</span><span class="n">ni</span><span class="o">.</span><span class="n">nameIdentifierScheme</span><span class="p">)</span> <span class="n">THEN</span>  <span class="nb">id</span> <span class="n">END</span><span class="p">)</span><span class="o">/</span> <span class="n">COUNT</span><span class="p">(</span><span class="n">distinct</span> <span class="nb">id</span><span class="p">)</span> <span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="n">percentage_with_orcid</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+  <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">creators</span><span class="p">)</span> <span class="n">c</span>
+    <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">nameIdentifiers</span><span class="p">)</span> <span class="n">ni</span>
+  <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">contributors</span><span class="p">)</span> <span class="n">ct</span>
+    <span class="n">LEFT</span> <span class="n">JOIN</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">nameIdentifiers</span><span class="p">)</span> <span class="n">nit</span>
+ <span class="n">WHERE</span>  <span class="n">attributes</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">resourceTypeGeneral</span> <span class="o">=</span> <span class="s1">&#39;Dataset&#39;</span>
+ <span class="ow">and</span> <span class="n">attributes</span><span class="o">.</span><span class="n">publicationYear</span> <span class="n">between</span> <span class="mi">2015</span> <span class="ow">and</span> <span class="mi">2025</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">1</span> <span class="n">ASC</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">df_orcid_by_type_year</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;percentage_with_orcid&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>How many records contain at least one ROR ID in the affiliation metadata?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_ror_count</span>
+<span class="n">SELECT</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="n">DISTINCT</span> <span class="nb">id</span><span class="p">)</span> <span class="k">as</span> <span class="n">records_with_ror_affiliation</span><span class="p">,</span>
+  <span class="n">COUNTIF</span><span class="p">(</span><span class="n">EXISTS</span><span class="p">(</span>
+    <span class="n">SELECT</span> <span class="mi">1</span> <span class="n">FROM</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">creators</span><span class="p">)</span> <span class="n">c</span><span class="p">,</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">affiliation</span><span class="p">)</span> <span class="n">a</span>
+    <span class="n">WHERE</span> <span class="n">a</span><span class="o">.</span><span class="n">affiliationIdentifierScheme</span> <span class="o">=</span> <span class="s1">&#39;ROR&#39;</span>
+  <span class="p">))</span> <span class="k">as</span> <span class="n">records_with_creator_ror</span><span class="p">,</span>
+  <span class="n">COUNTIF</span><span class="p">(</span><span class="n">EXISTS</span><span class="p">(</span>
+    <span class="n">SELECT</span> <span class="mi">1</span> <span class="n">FROM</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">contributors</span><span class="p">)</span> <span class="n">c</span><span class="p">,</span> <span class="n">UNNEST</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">affiliation</span><span class="p">)</span> <span class="n">a</span>
+    <span class="n">WHERE</span> <span class="n">a</span><span class="o">.</span><span class="n">affiliationIdentifierScheme</span> <span class="o">=</span> <span class="s1">&#39;ROR&#39;</span>
+  <span class="p">))</span> <span class="k">as</span> <span class="n">records_with_contributor_ror</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">df_ror_count</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="connections-funding"><a name="connections">Connections &amp; Funding</a></h2>
+<h3 id="attributesrelatedidentifiers-the-pid-graph"><a name="attributes.relatedIdentifiers">attributes.relatedIdentifiers (The PID Graph)</a></h3>
+<p>What other research objects (papers, software, versions) is this record connected to?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_pid_graph</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">source_doi</span><span class="p">,</span>
+  <span class="n">rel</span><span class="o">.</span><span class="n">relationType</span><span class="p">,</span>
+  <span class="n">rel</span><span class="o">.</span><span class="n">relatedIdentifierType</span> <span class="k">as</span> <span class="n">target_type</span><span class="p">,</span>
+  <span class="n">rel</span><span class="o">.</span><span class="n">relatedIdentifier</span> <span class="k">as</span> <span class="n">target_id</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">relatedIdentifiers</span><span class="p">)</span> <span class="k">as</span> <span class="n">rel</span>
+<span class="n">WHERE</span>
+  <span class="n">rel</span><span class="o">.</span><span class="n">relationType</span> <span class="n">IN</span> <span class="p">(</span><span class="s1">&#39;IsSupplementTo&#39;</span><span class="p">,</span> <span class="s1">&#39;Cites&#39;</span><span class="p">,</span> <span class="s1">&#39;IsVersionOf&#39;</span><span class="p">)</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">df_pid_graph</span><span class="p">)</span>
+</code></pre></div>
+<p>Which relationship types are most common?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_relations</span>
+<span class="n">SELECT</span>
+  <span class="n">relation</span><span class="o">.</span><span class="n">relationType</span><span class="p">,</span>
+  <span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">as</span> <span class="n">frequency</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">relatedIdentifiers</span><span class="p">)</span> <span class="k">as</span> <span class="n">relation</span>
+<span class="n">GROUP</span> <span class="n">BY</span>
+  <span class="mi">1</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="mi">2</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">15</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">df_relations</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="attributesfundingreferences"><a name="attributes.fundingReferences">attributes.fundingReferences</a></h3>
+<p>Who paid for this research?</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_funding_refs</span>
+<span class="n">SELECT</span>
+  <span class="nb">id</span> <span class="k">as</span> <span class="n">doi</span><span class="p">,</span>
+  <span class="n">funding</span><span class="o">.</span><span class="n">funderName</span><span class="p">,</span>
+  <span class="n">funding</span><span class="o">.</span><span class="n">awardNumber</span><span class="p">,</span>
+  <span class="n">funding</span><span class="o">.</span><span class="n">awardTitle</span>
+<span class="n">FROM</span>
+  <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span><span class="p">,</span>
+  <span class="n">UNNEST</span><span class="p">(</span><span class="n">attributes</span><span class="o">.</span><span class="n">fundingReferences</span><span class="p">)</span> <span class="k">as</span> <span class="n">funding</span>
+<span class="n">ORDER</span> <span class="n">BY</span>
+  <span class="n">funding</span><span class="o">.</span><span class="n">funderName</span> <span class="n">DESC</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">display</span><span class="p">(</span><span class="n">df_funding_refs</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="advanced-deduplication"><a name="deduplication">Advanced: Deduplication</a></h2>
+<h3 id="handling-versions"><a name="versions">Handling Versions</a></h3>
+<p>When analyzing research outputs, you often want to avoid double-counting. For example, a dataset might have versions 1.0, 1.1, and 2.0, all with different DOIs.</p>
+<p>The following query uses a rigorous filtering strategy to remove superseded versions (<code>IsPreviousVersionOf</code>) and redundant identical copies (<code>IsIdenticalTo</code>), keeping only the most relevant record.</p>
+<div class="highlight"><pre><span></span><code><span class="o">%%</span><span class="n">bigquery</span> <span class="n">df_deduplicated</span>
+<span class="n">WITH</span> <span class="n">dois_to_remove</span> <span class="n">AS</span> <span class="p">(</span>
+    <span class="n">SELECT</span>
+        <span class="n">dc</span><span class="o">.</span><span class="n">id</span>
+    <span class="n">FROM</span>
+        <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span> <span class="n">dc</span>
+    <span class="n">INNER</span> <span class="n">JOIN</span>
+        <span class="n">UNNEST</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">relatedIdentifiers</span><span class="p">)</span> <span class="n">related</span>
+        <span class="n">ON</span> <span class="n">related</span><span class="o">.</span><span class="n">relationType</span> <span class="n">IN</span> <span class="p">(</span><span class="s1">&#39;IsIdenticalTo&#39;</span><span class="p">,</span> <span class="s1">&#39;IsPreviousVersionOf&#39;</span><span class="p">)</span>
+    <span class="o">--</span> <span class="n">Join</span> <span class="k">with</span> <span class="n">the</span> <span class="n">table</span> <span class="n">again</span> <span class="n">to</span> <span class="n">get</span> <span class="n">the</span> <span class="n">related</span> <span class="n">DOI</span><span class="s1">&#39;s metadata (date)</span>
+    <span class="n">INNER</span> <span class="n">JOIN</span>
+        <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span> <span class="n">dc2</span>
+        <span class="n">ON</span> <span class="n">dc2</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">related</span><span class="o">.</span><span class="n">relatedIdentifier</span>
+    <span class="n">WHERE</span>
+        <span class="p">(</span>
+            <span class="o">--</span> <span class="n">Logic</span> <span class="k">for</span> <span class="n">Identical</span> <span class="n">items</span><span class="p">:</span> <span class="n">Remove</span> <span class="n">the</span> <span class="n">one</span> <span class="n">registered</span> <span class="n">LATER</span> <span class="p">(</span><span class="ow">or</span> <span class="n">higher</span> <span class="n">ID</span> <span class="k">if</span> <span class="n">tie</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">related</span><span class="o">.</span><span class="n">relationType</span> <span class="o">=</span> <span class="s1">&#39;IsIdenticalTo&#39;</span>
+            <span class="n">AND</span> <span class="p">(</span>
+                <span class="n">SAFE_CAST</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">registered</span> <span class="n">AS</span> <span class="n">TIMESTAMP</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">SAFE_CAST</span><span class="p">(</span><span class="n">dc2</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">registered</span> <span class="n">AS</span> <span class="n">TIMESTAMP</span><span class="p">)</span>
+                <span class="n">OR</span> <span class="p">(</span>
+                    <span class="n">SAFE_CAST</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">registered</span> <span class="n">AS</span> <span class="n">TIMESTAMP</span><span class="p">)</span> <span class="o">=</span> <span class="n">SAFE_CAST</span><span class="p">(</span><span class="n">dc2</span><span class="o">.</span><span class="n">attributes</span><span class="o">.</span><span class="n">registered</span> <span class="n">AS</span> <span class="n">TIMESTAMP</span><span class="p">)</span>
+                    <span class="n">AND</span> <span class="n">dc</span><span class="o">.</span><span class="n">id</span> <span class="o">&gt;</span> <span class="n">dc2</span><span class="o">.</span><span class="n">id</span>
+                <span class="p">)</span>
+            <span class="p">))</span>
+            <span class="o">--</span> <span class="n">Logic</span> <span class="k">for</span> <span class="n">Versions</span><span class="p">:</span> <span class="n">If</span> <span class="n">dc</span> <span class="ow">is</span> <span class="n">a</span> <span class="s2">&quot;Previous Version Of&quot;</span> <span class="n">something</span> <span class="k">else</span><span class="p">,</span> <span class="n">remove</span> <span class="n">dc</span><span class="o">.</span>
+            <span class="n">OR</span> <span class="p">(</span><span class="n">related</span><span class="o">.</span><span class="n">relationType</span> <span class="o">=</span> <span class="s1">&#39;IsPreviousVersionOf&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="o">--</span> <span class="n">Optional</span><span class="p">:</span> <span class="n">Ensure</span> <span class="n">we</span> <span class="n">only</span> <span class="n">deduplicate</span> <span class="n">items</span> <span class="n">owned</span> <span class="n">by</span> <span class="n">the</span> <span class="n">same</span> <span class="n">client</span><span class="o">/</span><span class="n">repository</span>
+    <span class="n">AND</span> <span class="n">dc2</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">relationships</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">id</span>
+<span class="p">)</span>
+
+<span class="n">SELECT</span>
+    <span class="n">COUNT</span><span class="p">(</span><span class="n">dc</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="k">as</span> <span class="n">unique_records</span>
+<span class="n">FROM</span>
+    <span class="err">`</span><span class="n">ds</span><span class="o">-</span><span class="n">external</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">datacite</span><span class="o">.</span><span class="n">records_2025</span><span class="err">`</span> <span class="n">dc</span>
+<span class="n">LEFT</span> <span class="n">JOIN</span>
+    <span class="n">dois_to_remove</span> <span class="n">dcr</span>
+    <span class="n">ON</span> <span class="n">dcr</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">id</span>
+<span class="n">WHERE</span>
+    <span class="n">dcr</span><span class="o">.</span><span class="n">id</span> <span class="n">IS</span> <span class="n">NULL</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Deduped Records: </span><span class="si">{</span><span class="n">df_deduplicated</span><span class="p">[</span><span class="s1">&#39;unique_records&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../09-orcid/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Exploring the ORCiD dataset on Google Bigquery" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Exploring the ORCiD dataset on Google Bigquery
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../collections/" class="md-footer__link md-footer__link--next" aria-label="Next: About" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              About
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            © Copyright 2021-2024 Digital Science & Research Solutions, Inc. All Rights Reserved | <a href="https://www.dimensions.ai/">About us</a> · <a href="https://www.dimensions.ai/privacy/">Privacy policy</a> · <a href="https://www.dimensions.ai/website-terms/">Legal terms</a>
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
